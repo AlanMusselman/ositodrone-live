@@ -280,6 +280,9 @@
           </h1>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <button type="button" class="osito-action-btn emerald" onclick="switchAdminTab('tab-newsletter')" style="padding:9px 14px; font-size:13px;">
+            NEWSLETTER &amp; INBOX
+          </button>
           <button type="button" class="osito-action-btn dark" onclick="switchAdminTab('tab-security')" style="padding:9px 14px; font-size:13px;">
             CHANGE PASSWORD
           </button>
@@ -304,6 +307,9 @@
         </button>
         <button type="button" id="btn-tab-security" class="dash-tab-btn" onclick="switchAdminTab('tab-security')">
           4. SECURITY &amp; PASSWORD SETTINGS
+        </button>
+        <button type="button" id="btn-tab-newsletter" class="dash-tab-btn" onclick="switchAdminTab('tab-newsletter')">
+          5. NEWSLETTER &amp; CONTACT INBOX
         </button>
       </div>
     </div>
@@ -528,6 +534,292 @@
         </div>
       </div>
     </section>
+
+    <!-- =================================================================
+         TAB 5: NEWSLETTER SUBSCRIBER MANAGER, BROADCAST COMPOSER & CONTACT INBOX
+         ================================================================= -->
+    <section id="tab-newsletter" class="dash-panel">
+      <!-- KPI Strip -->
+      <div class="kpi-grid" id="nl-kpi-strip">
+        <div class="kpi-card">
+          <div class="kpi-label">TOTAL NEWSLETTER SUBSCRIBERS</div>
+          <div class="kpi-val" id="kpi-nl-total">0</div>
+          <div class="kpi-sub">Synced with homepage signup bar</div>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-label">VERIFIED SUBSCRIBERS</div>
+          <div class="kpi-val" id="kpi-nl-verified">0</div>
+          <div class="kpi-sub">Confirmed &amp; ready for broadcast</div>
+        </div>
+        <div class="kpi-card indigo">
+          <div class="kpi-label">PENDING EMAIL VERIFICATION</div>
+          <div class="kpi-val" id="kpi-nl-pending">0</div>
+          <div class="kpi-sub">Awaiting 6-digit code / 1-click confirm</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">NEWSLETTERS DISPATCHED</div>
+          <div class="kpi-val" id="kpi-nl-campaigns">0</div>
+          <div class="kpi-sub">Broadcast campaigns logged</div>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-label">CONTACT INBOX (INFO@OSITODRONE.COM)</div>
+          <div class="kpi-val" id="kpi-nl-inquiries">0</div>
+          <div class="kpi-sub">Bottom-of-site form submissions</div>
+        </div>
+      </div>
+
+      <div id="nl-admin-alert" class="admin-alert" role="status" aria-live="polite"></div>
+
+      <!-- ===============================================================
+           PART A: ADD / EDIT / DELETE / VERIFY NEWSLETTER SUBSCRIBERS
+           =============================================================== -->
+      <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:18px 22px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+        <div>
+          <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#10B981; text-transform:uppercase; letter-spacing:0.05em;">SUBSCRIBER WORKFLOW | ADD, VERIFY, EDIT &amp; DELETE</span>
+          <h2 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:3px 0 4px; text-transform:uppercase;">
+            OSITO DRONE NEWSLETTER SUBSCRIBER LIST &amp; EMAIL VERIFICATION MANAGER
+          </h2>
+          <p style="margin:0; font-size:13.5px; color:#EEF0FA;">
+            Add new subscribers manually, send or resend 6-digit verification emails, approve pending signups with one click, edit subscriber details, or remove addresses.
+          </p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="osito-action-btn emerald" style="padding:9px 14px; font-size:12.5px;" onclick="verifyAllPendingSubscribers()">VERIFY ALL PENDING</button>
+          <button type="button" class="osito-action-btn dark" style="padding:9px 14px; font-size:12.5px;" onclick="exportSubscribersCsv()">EXPORT SUBSCRIBERS (.CSV)</button>
+        </div>
+      </div>
+
+      <!-- Add Subscriber Form Bar -->
+      <div style="background:#FFFFFF; border:2px solid #D0D4E8; padding:18px; margin-bottom:18px;">
+        <h3 style="font-family:'Fjalla One',sans-serif; font-size:16px; color:#232A68; margin:0 0 12px; text-transform:uppercase;">
+          + ADD NEW SUBSCRIBER EMAIL TO BACKEND
+        </h3>
+        <form id="adminAddSubscriberForm" onsubmit="handleAdminAddSubscriber(event)" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; align-items:end;">
+          <div>
+            <label class="form-label" style="color:#232A68;">EMAIL ADDRESS *</label>
+            <input type="email" id="adminSubEmailInput" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#8E93DA;" required placeholder="parent.or.school@domain.com" />
+          </div>
+          <div>
+            <label class="form-label" style="color:#232A68;">NAME / ORGANIZATION</label>
+            <input type="text" id="adminSubNameInput" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#8E93DA;" placeholder="e.g. Maria Gonzalez (PTA)" />
+          </div>
+          <div>
+            <label class="form-label" style="color:#232A68;">SEGMENT / INTEREST TAG</label>
+            <select id="adminSubSegmentInput" class="form-select" style="background:#F6F6F6; color:#161616; border-color:#8E93DA;">
+              <option value="Youth STEM Academy & 25% Off Invites">Youth STEM Academy &amp; 25% Off Invites</option>
+              <option value="Schools & Extended Care">Schools &amp; Extended Care</option>
+              <option value="VIP Drone Birthday Parties">VIP Drone Birthday Parties</option>
+              <option value="Commercial Aerial Inspections">Commercial Aerial Inspections</option>
+              <option value="Corporate & Brewery Race Nights">Corporate &amp; Brewery Race Nights</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label" style="color:#232A68;">VERIFICATION WORKFLOW</label>
+            <select id="adminSubStatusInput" class="form-select" style="background:#F6F6F6; color:#161616; border-color:#8E93DA;">
+              <option value="Pending Verification">Send Verification Email (Pending)</option>
+              <option value="Verified">Verified Immediately (Skip Verify Email)</option>
+            </select>
+          </div>
+          <div>
+            <button type="submit" id="adminAddSubBtn" class="osito-action-btn emerald" style="width:100%; padding:11px 16px;">+ ADD SUBSCRIBER</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Subscriber Filter & Search Toolbar -->
+      <div class="filter-toolbar" style="margin-bottom:14px;">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; flex:1;">
+          <input type="text" id="subSearchInput" class="form-input" style="background:#FFFFFF; color:#161616; border-color:#7077CF; max-width:300px;" placeholder="Search subscriber email, name, segment, or code..." oninput="renderAdminSubscribersTable()" />
+          <select id="subStatusFilter" class="form-select" style="background:#FFFFFF; color:#161616; border-color:#7077CF; width:auto;" onchange="renderAdminSubscribersTable()">
+            <option value="all">Status: All Subscribers</option>
+            <option value="Verified">Verified Only</option>
+            <option value="Pending Verification">Pending Verification Only</option>
+            <option value="Unsubscribed">Unsubscribed</option>
+          </select>
+          <span id="sub-showing-count" style="font-size:13px; font-weight:700; color:#232A68;">Showing 0 subscribers</span>
+        </div>
+      </div>
+
+      <!-- Subscribers Table -->
+      <div class="crm-table-wrap" style="margin-bottom:34px;">
+        <table class="crm-table">
+          <thead>
+            <tr>
+              <th style="width:110px;">ID &amp; SOURCE</th>
+              <th style="width:240px;">SUBSCRIBER EMAIL &amp; NAME</th>
+              <th style="width:200px;">SEGMENT &amp; NOTES</th>
+              <th style="width:210px;">VERIFICATION STATUS &amp; CODE</th>
+              <th style="width:150px;">TIMESTAMPS</th>
+              <th style="width:240px;">ADMIN WORKFLOW ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="admin-subscribers-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ===============================================================
+           PART B: COMPOSE & SEND NEWSLETTER FROM ADMIN PANEL
+           =============================================================== -->
+      <div id="newsletter-composer-section" style="background:#FFFFFF; border:3px solid #232A68; margin-bottom:34px;">
+        <div style="background:#232A68; color:#FFFFFF; padding:18px 22px; border-bottom:2px solid #7077CF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#10B981; text-transform:uppercase; letter-spacing:0.05em;">ADMIN NEWSLETTER BROADCAST ENGINE</span>
+            <h2 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:3px 0 2px; text-transform:uppercase;">
+              COMPOSE &amp; SEND OSITO DRONE NEWSLETTER
+            </h2>
+            <p style="margin:0; font-size:13px; color:#EEF0FA;">
+              Choose a pre-built 25% Off New Year template or write a custom broadcast, preview the branded HTML layout, and dispatch to your subscribers.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="osito-action-btn" style="padding:8px 12px; font-size:12px;" onclick="loadNewsletterTemplate('stem25')">TEMPLATE 1: 25% OFF STEM ACADEMY</button>
+            <button type="button" class="osito-action-btn dark" style="padding:8px 12px; font-size:12px;" onclick="loadNewsletterTemplate('opengym')">TEMPLATE 2: OPEN GYM &amp; AERO-CUB</button>
+            <button type="button" class="osito-action-btn dark" style="padding:8px 12px; font-size:12px;" onclick="loadNewsletterTemplate('commercial')">TEMPLATE 3: COMMERCIAL AERIALS</button>
+          </div>
+        </div>
+
+        <div style="padding:22px; display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:24px;">
+          <!-- Left Column: Composer Form -->
+          <form id="ositoSendNewsletterForm" onsubmit="handleSendNewsletterBroadcast(event)">
+            <div id="nl-broadcast-alert" class="admin-alert" role="status" aria-live="polite"></div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div class="form-group">
+                <label class="form-label" style="color:#232A68;">TARGET RECIPIENT AUDIENCE</label>
+                <select id="nlBroadcastAudience" class="form-select" style="background:#F6F6F6; color:#161616; border-color:#7077CF;" onchange="updateNewsletterLivePreview()">
+                  <option value="verified">All Verified Subscribers (Recommended)</option>
+                  <option value="all">All Active Subscribers (Verified + Pending)</option>
+                  <option value="stem">Youth STEM &amp; Schools Segment Only</option>
+                  <option value="commercial">Commercial Aerials Segment Only</option>
+                  <option value="custom">Custom / Additional Email Addresses Only</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="color:#232A68;">ADDITIONAL / CUSTOM EMAILS (OPTIONAL)</label>
+                <input type="text" id="nlCustomRecipients" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#7077CF;" placeholder="comma-separated emails (optional)" oninput="updateNewsletterLivePreview()" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">NEWSLETTER SUBJECT LINE *</label>
+              <input type="text" id="nlBroadcastSubject" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#7077CF; font-weight:700;" required value="Osito Drone Flight Community: 25% Off Till the New Year STEM Flight Labs &amp; Camp Dates!" oninput="updateNewsletterLivePreview()" />
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div class="form-group">
+                <label class="form-label" style="color:#232A68;">CTA BUTTON TEXT</label>
+                <input type="text" id="nlBroadcastCtaText" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#7077CF;" value="BOOK 25% OFF NEW YEAR SPECIAL" oninput="updateNewsletterLivePreview()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="color:#232A68;">CTA DESTINATION URL</label>
+                <input type="text" id="nlBroadcastCtaUrl" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#7077CF;" value="https://staging.ositodrone.com/index.html#osito-live-sim-estimator-hub" oninput="updateNewsletterLivePreview()" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">NEWSLETTER MESSAGE BODY * (SUPPORTS {{name}} AND {{email}})</label>
+              <textarea id="nlBroadcastBody" class="form-textarea" rows="8" style="background:#F6F6F6; color:#161616; border-color:#7077CF; line-height:1.5;" required oninput="updateNewsletterLivePreview()">Hi {{name}},
+
+Thank you for being part of the Osito Drone Flight Community in San Francisco!
+
+We are excited to announce our upcoming Bay Area Youth STEM Drone Training dates and our 25% Off Till the New Year Special across all programs:
+- 2-Hour 4-Station Indoor STEM Flight Lab: $713 (Reg. $950)
+- 6-Week After-School STEM Academy Cohort: $1,800 (Reg. $2,400)
+- TK-5 Aero-Cub 3D-Printed Glider &amp; Drone Workshop: $450 (Reg. $600)
+- VIP Kids Drone Birthday Party: $371 (Reg. $495)
+- Take-Home 3D-Printed Aero-Cub STEM Kits: $26/kid (Reg. $35)
+
+Reply directly to info@ositodrone.com or click below to lock in your preferred dates!
+
+Blue skies,
+Alan Musselman, Miguel Flores &amp; Jesus "Chuy" Aceves
+Osito Drone Services | San Francisco, CA</textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="submit" id="nlSendBroadcastBtn" class="osito-action-btn emerald" style="flex:1.5; padding:13px 18px; font-size:15px;">
+                SEND NEWSLETTER FROM ADMIN PANEL
+              </button>
+              <button type="button" id="nlDownloadEmlBtn" class="osito-action-btn dark" style="flex:1; padding:13px 14px; font-size:13px;" onclick="downloadNewsletterEmlDraft()">
+                DOWNLOAD OUTLOOK .EML DRAFT
+              </button>
+            </div>
+          </form>
+
+          <!-- Right Column: Live Branded HTML Preview & Campaign History -->
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span class="form-label" style="color:#232A68; margin:0;">LIVE BRANDED HTML EMAIL PREVIEW</span>
+              <span id="nlPreviewRecipientBadge" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:2px 8px;">0 RECIPIENTS SELECTED</span>
+            </div>
+            <div id="nlLivePreviewBox" style="border:2px solid #7077CF; background:#161616; color:#FFFFFF; padding:0; overflow:hidden; margin-bottom:18px;"></div>
+
+            <h4 style="font-family:'Fjalla One',sans-serif; font-size:15px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">
+              SENT NEWSLETTER CAMPAIGN LOG
+            </h4>
+            <div class="crm-table-wrap" style="max-height:220px; overflow-y:auto;">
+              <table class="crm-table" style="min-width:100%; font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>CAMPAIGN ID</th>
+                    <th>SUBJECT &amp; SENDER</th>
+                    <th>RECIPIENTS</th>
+                    <th>SENT AT</th>
+                  </tr>
+                </thead>
+                <tbody id="nl-campaigns-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===============================================================
+           PART C: WEBSITE CONTACT FORM INBOX (SENT TO INFO@OSITODRONE.COM)
+           =============================================================== -->
+      <div id="admin-contact-inbox-section">
+        <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:18px 22px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+          <div>
+            <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#10B981; text-transform:uppercase; letter-spacing:0.05em;">BACKEND CONTACT INBOX | INFO@OSITODRONE.COM</span>
+            <h2 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:3px 0 4px; text-transform:uppercase;">
+              WEBSITE CONTACT FORM SUBMISSIONS (BOTTOM OF HOMEPAGE)
+            </h2>
+            <p style="margin:0; font-size:13.5px; color:#EEF0FA;">
+              Every inquiry submitted via the bottom Contact Us form on `index.html` is automatically routed to <code>info@ositodrone.com</code> and logged below for staff follow-up.
+            </p>
+          </div>
+        </div>
+
+        <div class="filter-toolbar" style="margin-bottom:14px;">
+          <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; flex:1;">
+            <input type="text" id="contactInboxSearchInput" class="form-input" style="background:#FFFFFF; color:#161616; border-color:#7077CF; max-width:300px;" placeholder="Search sender name, email, phone, or message..." oninput="renderAdminContactInboxTable()" />
+            <select id="contactInboxStatusFilter" class="form-select" style="background:#FFFFFF; color:#161616; border-color:#7077CF; width:auto;" onchange="renderAdminContactInboxTable()">
+              <option value="all">Status: All Inquiries</option>
+              <option value="New - Unread">New - Unread</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Replied">Replied</option>
+              <option value="Converted to CRM Lead">Converted to CRM Lead</option>
+            </select>
+            <span id="contact-inbox-showing-count" style="font-size:13px; font-weight:700; color:#232A68;">Showing 0 inquiries</span>
+          </div>
+        </div>
+
+        <div class="crm-table-wrap">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th style="width:125px;">INQUIRY ID &amp; DATE</th>
+                <th style="width:210px;">SENDER NAME &amp; CONTACT</th>
+                <th style="width:340px;">PROJECT / SCHOOL / EVENT MESSAGE</th>
+                <th style="width:210px;">STATUS &amp; STAFF NOTES</th>
+                <th style="width:185px;">WORKFLOW ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="admin-contact-inbox-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- =====================================================================
@@ -692,6 +984,61 @@
     </div>
   </div>
 
+  <!-- =====================================================================
+       MODAL 3: EDIT NEWSLETTER SUBSCRIBER DETAILS & STATUS
+       ===================================================================== -->
+  <div id="osito-edit-subscriber-modal" class="osito-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="edit-sub-modal-title">
+    <div class="osito-modal-box">
+      <div class="osito-modal-header">
+        <div>
+          <span style="font-family:'Fjalla One',sans-serif; font-size:11.5px; color:#10B981; text-transform:uppercase;">SUBSCRIBER WORKFLOW | EDIT RECORD</span>
+          <h2 id="edit-sub-modal-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:2px 0 0; text-transform:uppercase;">
+            EDIT NEWSLETTER SUBSCRIBER
+          </h2>
+        </div>
+        <button type="button" class="osito-action-btn dark" style="padding:6px 12px; font-size:12px;" onclick="closeEditSubscriberModal()">CLOSE</button>
+      </div>
+      <div class="osito-modal-body">
+        <form id="ositoEditSubscriberForm" onsubmit="handleSaveSubscriberEdit(event)">
+          <input type="hidden" id="editSubId" />
+          <div class="form-group">
+            <label class="form-label">SUBSCRIBER EMAIL ADDRESS *</label>
+            <input type="email" id="editSubEmail" class="form-input" required placeholder="subscriber@domain.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">SUBSCRIBER NAME / ORGANIZATION</label>
+            <input type="text" id="editSubName" class="form-input" placeholder="Name or School/Company" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-group">
+              <label class="form-label">SEGMENT / TAG</label>
+              <select id="editSubSegment" class="form-select">
+                <option value="Youth STEM Academy & 25% Off Invites">Youth STEM Academy &amp; 25% Off Invites</option>
+                <option value="Schools & Extended Care">Schools &amp; Extended Care</option>
+                <option value="VIP Drone Birthday Parties">VIP Drone Birthday Parties</option>
+                <option value="Commercial Aerial Inspections">Commercial Aerial Inspections</option>
+                <option value="Corporate & Brewery Race Nights">Corporate &amp; Brewery Race Nights</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">VERIFICATION STATUS</label>
+              <select id="editSubStatus" class="form-select">
+                <option value="Verified">Verified</option>
+                <option value="Pending Verification">Pending Verification</option>
+                <option value="Unsubscribed">Unsubscribed</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">STAFF NOTES</label>
+            <textarea id="editSubNotes" class="form-textarea" rows="3" placeholder="Add notes about this subscriber..."></textarea>
+          </div>
+          <button type="submit" id="saveEditSubscriberBtn" class="osito-action-btn emerald" style="width:100%;">SAVE SUBSCRIBER CHANGES</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer style="background:#161616; color:#B0B5C9; padding:24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
     <div style="max-width:1220px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
@@ -823,7 +1170,11 @@
       PW_OVERRIDES: 'osito_staff_pw_overrides_v1',
       CRM_UPDATES: 'osito_crm_lead_updates_v1',
       CUSTOM_LEADS: 'osito_crm_custom_leads_v1',
-      OTP_STORE: 'osito_staff_otp_reset_v1'
+      OTP_STORE: 'osito_staff_otp_reset_v1',
+      NL_SUBSCRIBERS: 'osito_newsletter_subscribers_v1',
+      NL_CAMPAIGNS: 'osito_newsletter_campaigns_v1',
+      CONTACT_INQUIRIES: 'osito_contact_submissions_v1',
+      OUTBOX_LOG: 'osito_backend_outbox_log_v1'
     };
 
     var activeStaffEmail = null;
@@ -984,6 +1335,10 @@
       renderZipPacksGrid();
       renderCrmLeadsTable();
       renderProposalsGrid();
+      renderAdminSubscribersTable();
+      renderNewsletterCampaignsTable();
+      renderAdminContactInboxTable();
+      updateNewsletterLivePreview();
       switchAdminTab(acct.defaultTab || 'tab-zips');
     }
 
@@ -1000,7 +1355,7 @@
     }
 
     function switchAdminTab(tabId) {
-      var panels = ['tab-zips', 'tab-crm', 'tab-proposals', 'tab-security'];
+      var panels = ['tab-zips', 'tab-crm', 'tab-proposals', 'tab-security', 'tab-newsletter'];
       for (var i = 0; i < panels.length; i++) {
         var p = document.getElementById(panels[i]);
         var b = document.getElementById('btn-' + panels[i]);
@@ -1012,6 +1367,12 @@
           if (panels[i] === tabId) b.classList.add('active');
           else b.classList.remove('active');
         }
+      }
+      if (tabId === 'tab-newsletter') {
+        renderAdminSubscribersTable();
+        renderNewsletterCampaignsTable();
+        renderAdminContactInboxTable();
+        updateNewsletterLivePreview();
       }
     }
 
@@ -1171,6 +1532,46 @@
 
     function cleanDisplayText(str) {
       return String(str || '').replace(/\ufffd/g, '-');
+    }
+
+    function escapeHtmlSafe(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function generateUniqueAdminId(prefix, startNum, list) {
+      var maxNum = startNum - 1;
+      var counters = {};
+      try {
+        var rawC = localStorage.getItem('osito_id_counters_v1');
+        if (rawC) counters = JSON.parse(rawC) || {};
+      } catch (e) {}
+      if (typeof counters[prefix] === 'number' && counters[prefix] > maxNum) {
+        maxNum = counters[prefix];
+      }
+      var pat = new RegExp('^' + prefix + '-(\\d+)$');
+      if (Array.isArray(list)) {
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          if (item && item.id) {
+            var m = String(item.id).match(pat);
+            if (m) {
+              var n = parseInt(m[1], 10);
+              if (n > maxNum) maxNum = n;
+            }
+          }
+        }
+      }
+      var nextNum = maxNum + 1;
+      counters[prefix] = nextNum;
+      try {
+        localStorage.setItem('osito_id_counters_v1', JSON.stringify(counters));
+      } catch (e) {}
+      return prefix + '-' + String(nextNum);
     }
 
     function renderZipPacksGrid() {
@@ -1375,7 +1776,7 @@
         var prioClass = item.isHot ? 'prio-hot' : 'prio-std';
         var prioLabel = item.isHot ? '1-HOT LEAD' : item.normSegment;
 
-        var selHtml = '<select class="crm-status-select" onchange="updateLeadCrmField(\'' + item.id + '\', \'status\', this.value)">';
+        var selHtml = '<select class="crm-status-select" onchange="updateLeadCrmField(\'' + escapeHtmlSafe(item.id) + '\', \'status\', this.value)">';
         for (var s = 0; s < statusOptions.length; s++) {
           var opt = statusOptions[s];
           var isSel = (item.normStatus === opt) ? ' selected' : '';
@@ -1387,24 +1788,24 @@
         if (item.email && item.email.indexOf('@') !== -1) {
           var subj = encodeURIComponent('Osito Drone STEM Flight Lab & Aerial Services (25% Off Till New Year) - ' + item.organization);
           var body = encodeURIComponent('Hi ' + (item.contactName || 'Team') + ',\n\nI am reaching out from Osito Drone Services here in San Francisco regarding ' + item.organization + '.\n\nWe are offering our 25% Off Till the New Year partner rate (' + (item.offerPitch || '2-Hr Indoor 4-Station STEM Flight Lab at $713') + ').\n\nWould you have 10 minutes this week for a quick demo?\n\nBest regards,\nMiguel Flores\nCEO, Osito Drone Services\nmiguel@ositodrone.com');
-          mailHref = 'mailto:' + item.email + qChar + 'subject=' + subj + '&body=' + body;
+          mailHref = 'mailto:' + encodeURIComponent(item.email) + qChar + 'subject=' + subj + '&body=' + body;
         }
 
         var propBtn = '';
         if (item.proposalUrl) {
-          propBtn = '<a href="' + item.proposalUrl + '" download class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%; margin-top:5px;">.DOCX PROPOSAL</a>';
+          propBtn = '<a href="' + escapeHtmlSafe(item.proposalUrl) + '" download class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%; margin-top:5px;">.DOCX PROPOSAL</a>';
         }
 
         rowsHtml += '<tr>'
-          + '<td><strong>' + item.id + '</strong><br/><span class="prio-badge ' + prioClass + '">' + prioLabel + '</span><div style="font-size:11px; color:#5E5E5E; margin-top:4px;">' + (item.owner || '') + '</div></td>'
-          + '<td><strong style="font-size:14px; color:#232A68;">' + item.organization + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + (item.neighborhood || 'SF Bay Area') + '</span><br/><span style="font-size:11.5px; color:#666;">' + (item.address || '') + '</span></td>'
-          + '<td><strong>' + (item.contactName || 'Program / Events Director') + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + (item.contactRole || '') + '</span></td>'
+          + '<td><strong>' + escapeHtmlSafe(item.id) + '</strong><br/><span class="prio-badge ' + prioClass + '">' + escapeHtmlSafe(prioLabel) + '</span><div style="font-size:11px; color:#5E5E5E; margin-top:4px;">' + escapeHtmlSafe(item.owner || '') + '</div></td>'
+          + '<td><strong style="font-size:14px; color:#232A68;">' + escapeHtmlSafe(item.organization) + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + escapeHtmlSafe(item.neighborhood || 'SF Bay Area') + '</span><br/><span style="font-size:11.5px; color:#666;">' + escapeHtmlSafe(item.address || '') + '</span></td>'
+          + '<td><strong>' + escapeHtmlSafe(item.contactName || 'Program / Events Director') + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + escapeHtmlSafe(item.contactRole || '') + '</span></td>'
           + '<td>'
-          + (item.phone ? '<div><a href="tel:' + item.phone + '" style="color:#232A68; font-weight:700; text-decoration:none;">' + item.phone + '</a></div>' : '')
-          + (item.email && item.email.indexOf('@') !== -1 ? '<div style="word-break:break-all; margin-top:3px;"><a href="' + mailHref + '" style="color:#059669; font-weight:600; text-decoration:none;">' + item.email + '</a></div>' : '')
+          + (item.phone ? '<div><a href="tel:' + escapeHtmlSafe(item.phone) + '" style="color:#232A68; font-weight:700; text-decoration:none;">' + escapeHtmlSafe(item.phone) + '</a></div>' : '')
+          + (item.email && item.email.indexOf('@') !== -1 ? '<div style="word-break:break-all; margin-top:3px;"><a href="' + mailHref + '" style="color:#059669; font-weight:600; text-decoration:none;">' + escapeHtmlSafe(item.email) + '</a></div>' : '')
           + '</td>'
-          + '<td><div style="font-weight:700; color:#059669; margin-bottom:3px;">' + (item.estimatedValue || '$713') + '</div><div style="font-size:12px; line-height:1.35;">' + (item.offerPitch || '') + '</div></td>'
-          + '<td>' + selHtml + '<textarea class="crm-notes-input" placeholder="Add call/walk-in notes..." onblur="updateLeadCrmField(\'' + item.id + '\', \'notes\', this.value)">' + (item.liveNotes || '').replace(/</g, '&lt;') + '</textarea></td>'
+          + '<td><div style="font-weight:700; color:#059669; margin-bottom:3px;">' + escapeHtmlSafe(item.estimatedValue || '$713') + '</div><div style="font-size:12px; line-height:1.35;">' + escapeHtmlSafe(item.offerPitch || '') + '</div></td>'
+          + '<td>' + selHtml + '<textarea class="crm-notes-input" placeholder="Add call/walk-in notes..." onblur="updateLeadCrmField(\'' + escapeHtmlSafe(item.id) + '\', \'notes\', this.value)">' + escapeHtmlSafe(item.liveNotes || '') + '</textarea></td>'
           + '<td>'
           + (mailHref !== '#' ? '<a href="' + mailHref + '" class="osito-action-btn emerald" style="padding:6px 8px; font-size:11.5px; width:100%;">EMAIL PITCH</a>' : '')
           + propBtn
@@ -1434,7 +1835,7 @@
     function handleAddNewLead(ev) {
       if (ev) ev.preventDefault();
       var custom = getCustomLeads();
-      var newId = 'NEW-' + String(custom.length + 101);
+      var newId = generateUniqueAdminId('NEW', 101, custom);
       var leadObj = {
         id: newId,
         sourceDeck: 'Staff Portal Custom Lead',
@@ -1516,7 +1917,1095 @@
     }
 
     // =========================================================================
-    // 7. AUTO-RESTORE STAFF SESSION ON PAGE LOAD
+    // 7. TAB 5: NEWSLETTER SUBSCRIBER MANAGER, BROADCAST COMPOSER & CONTACT INBOX
+    // =========================================================================
+    var adminSyncChannel = null;
+    try {
+      if (typeof BroadcastChannel !== 'undefined') {
+        adminSyncChannel = new BroadcastChannel('osito_backend_sync_v1');
+        adminSyncChannel.onmessage = function(ev) {
+          if (ev && ev.data) {
+            renderAdminSubscribersTable();
+            renderNewsletterCampaignsTable();
+            renderAdminContactInboxTable();
+            updateNewsletterLivePreview();
+          }
+        };
+      }
+    } catch (e) {}
+
+    window.addEventListener('storage', function(ev) {
+      if (!ev || !ev.key) return;
+      if (
+        ev.key === STORAGE_KEYS.NL_SUBSCRIBERS ||
+        ev.key === STORAGE_KEYS.NL_CAMPAIGNS ||
+        ev.key === STORAGE_KEYS.CONTACT_INQUIRIES
+      ) {
+        renderAdminSubscribersTable();
+        renderNewsletterCampaignsTable();
+        renderAdminContactInboxTable();
+        updateNewsletterLivePreview();
+      }
+    });
+
+    function notifyAdminBackendSync(eventType, payload) {
+      try {
+        if (adminSyncChannel) {
+          adminSyncChannel.postMessage({ type: eventType, payload: payload, ts: Date.now() });
+        }
+      } catch (e) {}
+    }
+
+    function appendAdminOutboxLog(entry) {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.OUTBOX_LOG);
+        var logs = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(logs)) logs = [];
+        logs.unshift(entry);
+        if (logs.length > 200) logs = logs.slice(0, 200);
+        localStorage.setItem(STORAGE_KEYS.OUTBOX_LOG, JSON.stringify(logs));
+      } catch (e) {}
+    }
+
+    function dispatchAdminBackendRelay(payload) {
+      appendAdminOutboxLog({
+        id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
+        to: payload.to || 'info@ositodrone.com',
+        subject: payload._subject || payload.subject || 'Osito Drone Admin Dispatch',
+        type: payload.actionType || 'admin_dispatch',
+        payload: payload,
+        sentAt: new Date().toISOString()
+      });
+      try {
+        if (typeof fetch === 'function') {
+          fetch('https://formsubmit.co/ajax/info@ositodrone.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          }).catch(function() {});
+        }
+      } catch (e) {}
+    }
+
+    function showNlAdminAlert(msg, type) {
+      var box = document.getElementById('nl-admin-alert');
+      if (!box) return;
+      box.textContent = msg;
+      box.className = 'admin-alert ' + (type || 'success');
+      box.style.display = 'block';
+    }
+
+    function showNlBroadcastAlert(msg, type) {
+      var box = document.getElementById('nl-broadcast-alert');
+      if (!box) return;
+      box.textContent = msg;
+      box.className = 'admin-alert ' + (type || 'success');
+      box.style.display = 'block';
+    }
+
+    function isValidSubscriberEmail(em) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(em || '').trim());
+    }
+
+    function getPublicVerifyUrl(token, email) {
+      var baseUrl = 'https://staging.ositodrone.com/index.html';
+      try {
+        if (window.location && window.location.origin && window.location.origin.indexOf('http') === 0) {
+          baseUrl = window.location.origin + '/index.html';
+        }
+      } catch (e) {}
+      return baseUrl + '?verify_newsletter=' + encodeURIComponent(token || '') + '&email=' + encodeURIComponent(email || '');
+    }
+
+    function getSeedSubscribersList() {
+      return [
+        {
+          id: 'SUB-1001',
+          email: 'sarah.jenkins@sfusd-stem.org',
+          name: 'Sarah Jenkins (SFUSD STEM Coordinator)',
+          segment: 'Schools & Extended Care',
+          status: 'Verified',
+          verifyCode: '741852',
+          verifyToken: 'ositoverify-sub1001',
+          source: 'Website Newsletter Bar',
+          subscribedAt: '2026-11-01T16:20:00.000Z',
+          verifiedAt: '2026-11-01T16:22:15.000Z',
+          notes: 'Interested in 2-Hr 4-Station STEM Flight Lab ($713 New Year Special).'
+        },
+        {
+          id: 'SUB-1002',
+          email: 'm.chen@presidiokids.org',
+          name: 'Marcus Chen (Presidio Youth Camp)',
+          segment: 'Youth STEM Academy & 25% Off Invites',
+          status: 'Verified',
+          verifyCode: '963852',
+          verifyToken: 'ositoverify-sub1002',
+          source: 'Website Newsletter Bar',
+          subscribedAt: '2026-11-02T18:05:00.000Z',
+          verifiedAt: '2026-11-02T18:09:40.000Z',
+          notes: 'Holiday & Thanksgiving Break Camp coordinator.'
+        },
+        {
+          id: 'SUB-1003',
+          email: 'elena.rodriguez@missionmakers.org',
+          name: 'Elena Rodriguez (Mission Makerspace)',
+          segment: 'Youth STEM Academy & 25% Off Invites',
+          status: 'Verified',
+          verifyCode: '159753',
+          verifyToken: 'ositoverify-sub1003',
+          source: 'Website Newsletter Bar',
+          subscribedAt: '2026-11-03T20:12:00.000Z',
+          verifiedAt: '2026-11-03T20:14:02.000Z',
+          notes: 'Bilingual EN/ES Aero-Cub K-5 Workshop subscriber.'
+        },
+        {
+          id: 'SUB-1004',
+          email: 'david.kim@bayarearoofing.com',
+          name: 'David Kim (Bay Area Commercial Roofing)',
+          segment: 'Commercial Aerial Inspections',
+          status: 'Verified',
+          verifyCode: '357951',
+          verifyToken: 'ositoverify-sub1004',
+          source: 'Admin Panel Manual',
+          subscribedAt: '2026-11-04T15:30:00.000Z',
+          verifiedAt: '2026-11-04T15:30:00.000Z',
+          notes: 'Commercial thermal & roof inspection partner.'
+        },
+        {
+          id: 'SUB-1005',
+          email: 'priya.patel@noevalleyparents.com',
+          name: 'Priya Patel (Noe Valley Parent Network)',
+          segment: 'VIP Drone Birthday Parties',
+          status: 'Pending Verification',
+          verifyCode: '849201',
+          verifyToken: 'ositoverify-sub1005',
+          source: 'Website Newsletter Bar',
+          subscribedAt: '2026-11-06T21:10:00.000Z',
+          verifiedAt: null,
+          notes: 'Awaiting email verification click for VIP Birthday Party promos.'
+        }
+      ];
+    }
+
+    function loadAdminSubscribers() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.NL_SUBSCRIBERS);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (e) {}
+      var seed = getSeedSubscribersList();
+      try {
+        localStorage.setItem(STORAGE_KEYS.NL_SUBSCRIBERS, JSON.stringify(seed));
+      } catch (e) {}
+      return seed;
+    }
+
+    function saveAdminSubscribers(list) {
+      try {
+        localStorage.setItem(STORAGE_KEYS.NL_SUBSCRIBERS, JSON.stringify(list));
+      } catch (e) {}
+      notifyAdminBackendSync('subscribers_updated', { count: list.length });
+    }
+
+    function getSeedCampaignsList() {
+      return [
+        {
+          id: 'CAMP-101',
+          subject: 'Welcome to Osito Drone Academy: 25% Off Till the New Year Rates Inside!',
+          audienceLabel: 'All Verified Subscribers',
+          recipientCount: 4,
+          recipients: [
+            'sarah.jenkins@sfusd-stem.org',
+            'm.chen@presidiokids.org',
+            'elena.rodriguez@missionmakers.org',
+            'david.kim@bayarearoofing.com'
+          ],
+          sentBy: 'alan@ositodrone.com',
+          sentAt: '2026-11-05T17:00:00.000Z',
+          status: 'Delivered via Backend'
+        }
+      ];
+    }
+
+    function loadNewsletterCampaigns() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.NL_CAMPAIGNS);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (e) {}
+      var seed = getSeedCampaignsList();
+      try {
+        localStorage.setItem(STORAGE_KEYS.NL_CAMPAIGNS, JSON.stringify(seed));
+      } catch (e) {}
+      return seed;
+    }
+
+    function saveNewsletterCampaigns(list) {
+      try {
+        localStorage.setItem(STORAGE_KEYS.NL_CAMPAIGNS, JSON.stringify(list));
+      } catch (e) {}
+      notifyAdminBackendSync('campaigns_updated', { count: list.length });
+    }
+
+    function getSeedContactInquiriesList() {
+      return [
+        {
+          id: 'INQ-1001',
+          name: 'Principal Rachel Torres',
+          email: 'rtorres@stignatius-sf.org',
+          phone: '(415) 555-0148',
+          message: 'We would love to book the 2-Hour 4-Station STEM Flight Lab ($713 New Year Special) for 24 6th-grade students in December. Please let us know available Friday afternoon dates.',
+          recipient: 'info@ositodrone.com',
+          status: 'New - Unread',
+          deliveryState: 'Sent to info@ositodrone.com',
+          submittedAt: '2026-11-05T19:15:00.000Z',
+          notes: ''
+        },
+        {
+          id: 'INQ-1002',
+          name: 'Kevin Holloway (Apex Property Group)',
+          email: 'kholloway@apexprop-bayarea.com',
+          phone: '(415) 555-0192',
+          message: 'Looking for an FAA Part 107 thermal roof & solar panel inspection across 2 commercial warehouse zones in SoMa ($296/zone special).',
+          recipient: 'info@ositodrone.com',
+          status: 'In Progress',
+          deliveryState: 'Sent to info@ositodrone.com',
+          submittedAt: '2026-11-06T14:40:00.000Z',
+          notes: 'Assigned to Chuy & Alan for thermal flight plan.'
+        }
+      ];
+    }
+
+    function loadAdminContactInquiries() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.CONTACT_INQUIRIES);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (e) {}
+      var seed = getSeedContactInquiriesList();
+      try {
+        localStorage.setItem(STORAGE_KEYS.CONTACT_INQUIRIES, JSON.stringify(seed));
+      } catch (e) {}
+      return seed;
+    }
+
+    function saveAdminContactInquiries(list) {
+      try {
+        localStorage.setItem(STORAGE_KEYS.CONTACT_INQUIRIES, JSON.stringify(list));
+      } catch (e) {}
+      notifyAdminBackendSync('inquiries_updated', { count: list.length });
+    }
+
+    function updateNewsletterKpis() {
+      var subs = loadAdminSubscribers();
+      var camps = loadNewsletterCampaigns();
+      var inqs = loadAdminContactInquiries();
+      var verified = 0;
+      var pending = 0;
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].status === 'Verified') verified++;
+        else if (subs[i].status === 'Pending Verification') pending++;
+      }
+      var elTotal = document.getElementById('kpi-nl-total');
+      var elVer = document.getElementById('kpi-nl-verified');
+      var elPend = document.getElementById('kpi-nl-pending');
+      var elCamp = document.getElementById('kpi-nl-campaigns');
+      var elInq = document.getElementById('kpi-nl-inquiries');
+      if (elTotal) elTotal.textContent = String(subs.length);
+      if (elVer) elVer.textContent = String(verified);
+      if (elPend) elPend.textContent = String(pending);
+      if (elCamp) elCamp.textContent = String(camps.length);
+      if (elInq) elInq.textContent = String(inqs.length);
+    }
+
+    function renderAdminSubscribersTable() {
+      var tbody = document.getElementById('admin-subscribers-tbody');
+      if (!tbody) return;
+      var subs = loadAdminSubscribers();
+      updateNewsletterKpis();
+
+      var q = (document.getElementById('subSearchInput') ? document.getElementById('subSearchInput').value : '').trim().toLowerCase();
+      var statF = document.getElementById('subStatusFilter') ? document.getElementById('subStatusFilter').value : 'all';
+
+      var filtered = [];
+      for (var i = 0; i < subs.length; i++) {
+        var s = subs[i];
+        if (statF !== 'all' && s.status !== statF) continue;
+        if (q) {
+          var hay = ((s.id || '') + ' ' + (s.email || '') + ' ' + (s.name || '') + ' ' + (s.segment || '') + ' ' + (s.verifyCode || '') + ' ' + (s.notes || '')).toLowerCase();
+          if (hay.indexOf(q) === -1) continue;
+        }
+        filtered.push(s);
+      }
+
+      var countEl = document.getElementById('sub-showing-count');
+      if (countEl) countEl.textContent = 'Showing ' + filtered.length + ' of ' + subs.length + ' subscribers';
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:24px; color:#5E5E5E;">No newsletter subscribers matched your filter. Use + ADD NEW SUBSCRIBER above to add emails.</td></tr>';
+        return;
+      }
+
+      var rowsHtml = '';
+      for (var j = 0; j < filtered.length; j++) {
+        var item = filtered[j];
+        var isVer = (item.status === 'Verified');
+        var isPend = (item.status === 'Pending Verification');
+        var badgeClass = isVer ? 'prio-std' : (isPend ? 'prio-warm' : 'prio-hot');
+        var badgeStyle = isVer
+          ? 'background:#D1FAE5; color:#065F46; border:1px solid #10B981;'
+          : (isPend ? 'background:#FEF3C7; color:#92400E; border:1px solid #F59E0B;' : 'background:#FEE2E2; color:#991B1B; border:1px solid #EF4444;');
+
+        var subDate = item.subscribedAt ? item.subscribedAt.slice(0, 10) : '2026-11-07';
+        var verDate = item.verifiedAt ? item.verifiedAt.slice(0, 10) : '-';
+
+        var verifyBtnHtml = '';
+        if (!isVer) {
+          verifyBtnHtml = '<button type="button" class="osito-action-btn emerald" style="padding:5px 9px; font-size:11px;" onclick="verifySubscriberAdmin(\'' + escapeHtmlSafe(item.id) + '\')">VERIFY NOW</button>';
+        }
+        var sendVerifyHtml = '<button type="button" class="osito-action-btn dark" style="padding:5px 9px; font-size:11px;" onclick="sendSubscriberVerifyEmailAdmin(\'' + escapeHtmlSafe(item.id) + '\')">SEND VERIFY EMAIL</button>';
+        var editBtnHtml = '<button type="button" class="osito-action-btn" style="padding:5px 9px; font-size:11px;" onclick="openEditSubscriberModal(\'' + escapeHtmlSafe(item.id) + '\')">EDIT</button>';
+        var delBtnHtml = '<button type="button" class="osito-action-btn danger" style="padding:5px 9px; font-size:11px;" onclick="deleteSubscriberAdmin(\'' + escapeHtmlSafe(item.id) + '\')">DELETE</button>';
+
+        rowsHtml += '<tr data-sub-id="' + escapeHtmlSafe(item.id) + '">'
+          + '<td><strong>' + escapeHtmlSafe(item.id) + '</strong><br/><span style="font-size:11px; color:#5E5E5E;">' + escapeHtmlSafe(item.source || 'Admin Panel') + '</span></td>'
+          + '<td><strong style="font-size:13.5px; color:#232A68;">' + escapeHtmlSafe(item.email) + '</strong><br/><span style="font-size:12px; color:#333333;">' + escapeHtmlSafe(item.name || '-') + '</span></td>'
+          + '<td><span class="prio-badge prio-std">' + escapeHtmlSafe(item.segment || 'General') + '</span>'
+          + (item.notes ? '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px;">' + escapeHtmlSafe(item.notes) + '</div>' : '')
+          + '</td>'
+          + '<td><span class="prio-badge ' + badgeClass + '" style="' + badgeStyle + '">' + escapeHtmlSafe(item.status) + '</span>'
+          + '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px; font-family:monospace;">Code: <strong>' + escapeHtmlSafe(item.verifyCode || 'N/A') + '</strong></div></td>'
+          + '<td><div style="font-size:11.5px;"><strong>Added:</strong> ' + escapeHtmlSafe(subDate) + '</div><div style="font-size:11.5px; color:#059669;"><strong>Verified:</strong> ' + escapeHtmlSafe(verDate) + '</div></td>'
+          + '<td><div style="display:flex; flex-wrap:wrap; gap:5px;">' + verifyBtnHtml + sendVerifyHtml + editBtnHtml + delBtnHtml + '</div></td>'
+          + '</tr>';
+      }
+      tbody.innerHTML = rowsHtml;
+    }
+
+    function handleAdminAddSubscriber(ev) {
+      if (ev) ev.preventDefault();
+      var emailEl = document.getElementById('adminSubEmailInput');
+      var nameEl = document.getElementById('adminSubNameInput');
+      var segEl = document.getElementById('adminSubSegmentInput');
+      var statEl = document.getElementById('adminSubStatusInput');
+
+      var em = (emailEl ? emailEl.value : '').trim().toLowerCase();
+      var nm = (nameEl ? nameEl.value : '').trim();
+      var seg = segEl ? segEl.value : 'Youth STEM Academy & 25% Off Invites';
+      var st = statEl ? statEl.value : 'Pending Verification';
+
+      if (!isValidSubscriberEmail(em)) {
+        showNlAdminAlert('Please enter a valid subscriber email address.', 'error');
+        return;
+      }
+
+      var subs = loadAdminSubscribers();
+      for (var i = 0; i < subs.length; i++) {
+        if (String(subs[i].email || '').toLowerCase() === em) {
+          showNlAdminAlert('Subscriber email ' + em + ' already exists (' + subs[i].id + '). Click EDIT on their row to update.', 'error');
+          return;
+        }
+      }
+
+      if (!nm) {
+        nm = em.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+      }
+      var code = String(Math.floor(100000 + Math.random() * 900000));
+      var token = 'ositoverify-' + Date.now().toString(36) + '-' + code;
+      var nowIso = new Date().toISOString();
+
+      var newSub = {
+        id: generateUniqueAdminId('SUB', 1001, subs),
+        email: em,
+        name: nm,
+        segment: seg,
+        status: st,
+        verifyCode: code,
+        verifyToken: token,
+        source: 'Admin Panel (' + (activeStaffEmail || 'staff') + ')',
+        subscribedAt: nowIso,
+        verifiedAt: (st === 'Verified') ? nowIso : null,
+        notes: (st === 'Verified') ? 'Added & verified directly by staff in Admin Panel.' : 'Added by staff; verification email dispatched.'
+      };
+
+      subs.unshift(newSub);
+      saveAdminSubscribers(subs);
+
+      if (st === 'Pending Verification') {
+        dispatchAdminBackendRelay({
+          actionType: 'admin_subscriber_verification_email',
+          to: em,
+          cc: 'info@ositodrone.com',
+          _subject: 'Please Verify Your Osito Drone Newsletter Subscription (Code: ' + code + ')',
+          subscriber_id: newSub.id,
+          email: em,
+          name: nm,
+          verification_code: code,
+          verification_link: getPublicVerifyUrl(token, em)
+        });
+        showNlAdminAlert('Added ' + em + ' (' + newSub.id + ') as Pending Verification and dispatched verification email (Code: ' + code + ').', 'success');
+      } else {
+        showNlAdminAlert('Added ' + em + ' (' + newSub.id + ') as a Verified Subscriber!', 'success');
+      }
+
+      if (emailEl) emailEl.value = '';
+      if (nameEl) nameEl.value = '';
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+    }
+
+    function verifySubscriberAdmin(subId) {
+      var subs = loadAdminSubscribers();
+      var target = null;
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].id === subId) {
+          subs[i].status = 'Verified';
+          subs[i].verifiedAt = new Date().toISOString();
+          target = subs[i];
+          break;
+        }
+      }
+      if (!target) return;
+      saveAdminSubscribers(subs);
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      showNlAdminAlert('Verified subscriber ' + target.email + ' (' + target.id + '). They will now receive all newsletter broadcasts.', 'success');
+    }
+
+    function sendSubscriberVerifyEmailAdmin(subId) {
+      var subs = loadAdminSubscribers();
+      var target = null;
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].id === subId) {
+          if (!subs[i].verifyCode) {
+            subs[i].verifyCode = String(Math.floor(100000 + Math.random() * 900000));
+          }
+          if (!subs[i].verifyToken) {
+            subs[i].verifyToken = 'ositoverify-' + Date.now().toString(36) + '-' + subs[i].verifyCode;
+          }
+          if (subs[i].status === 'Unsubscribed') {
+            subs[i].status = 'Pending Verification';
+            subs[i].verifiedAt = null;
+          }
+          target = subs[i];
+          break;
+        }
+      }
+      if (!target) return;
+      saveAdminSubscribers(subs);
+      var verifyUrl = getPublicVerifyUrl(target.verifyToken, target.email);
+      dispatchAdminBackendRelay({
+        actionType: 'admin_resend_verification_email',
+        to: target.email,
+        cc: 'info@ositodrone.com',
+        _subject: 'Verify Your Osito Drone Newsletter Subscription (Code: ' + target.verifyCode + ')',
+        subscriber_id: target.id,
+        email: target.email,
+        verification_code: target.verifyCode,
+        verification_link: verifyUrl
+      });
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      showNlAdminAlert('Verification email dispatched to ' + target.email + ' with 6-digit code ' + target.verifyCode + ' and 1-click verification link.', 'success');
+    }
+
+    function verifyAllPendingSubscribers() {
+      var subs = loadAdminSubscribers();
+      var count = 0;
+      var nowIso = new Date().toISOString();
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].status === 'Pending Verification') {
+          subs[i].status = 'Verified';
+          subs[i].verifiedAt = nowIso;
+          count++;
+        }
+      }
+      saveAdminSubscribers(subs);
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      if (count > 0) {
+        showNlAdminAlert('Bulk verified ' + count + ' pending subscriber(s)! All are now active.', 'success');
+      } else {
+        showNlAdminAlert('All subscribers are already verified (0 pending).', 'success');
+      }
+    }
+
+    function openEditSubscriberModal(subId) {
+      var subs = loadAdminSubscribers();
+      var found = null;
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].id === subId) {
+          found = subs[i];
+          break;
+        }
+      }
+      if (!found) return;
+      document.getElementById('editSubId').value = found.id;
+      document.getElementById('editSubEmail').value = found.email || '';
+      document.getElementById('editSubName').value = found.name || '';
+      document.getElementById('editSubSegment').value = found.segment || 'Youth STEM Academy & 25% Off Invites';
+      document.getElementById('editSubStatus').value = found.status || 'Verified';
+      document.getElementById('editSubNotes').value = found.notes || '';
+      document.getElementById('osito-edit-subscriber-modal').style.display = 'flex';
+    }
+
+    function closeEditSubscriberModal() {
+      var modal = document.getElementById('osito-edit-subscriber-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function handleSaveSubscriberEdit(ev) {
+      if (ev) ev.preventDefault();
+      var subId = document.getElementById('editSubId').value;
+      var newEmail = document.getElementById('editSubEmail').value.trim().toLowerCase();
+      var newName = document.getElementById('editSubName').value.trim();
+      var newSeg = document.getElementById('editSubSegment').value;
+      var newStatus = document.getElementById('editSubStatus').value;
+      var newNotes = document.getElementById('editSubNotes').value.trim();
+
+      if (!isValidSubscriberEmail(newEmail)) {
+        showNlAdminAlert('Invalid email format in Edit Subscriber.', 'error');
+        return;
+      }
+
+      var subs = loadAdminSubscribers();
+      for (var k = 0; k < subs.length; k++) {
+        if (subs[k].id !== subId && String(subs[k].email || '').toLowerCase() === newEmail) {
+          showNlAdminAlert('Another subscriber record (' + subs[k].id + ') already uses ' + newEmail + '.', 'error');
+          return;
+        }
+      }
+
+      var updated = null;
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].id === subId) {
+          subs[i].email = newEmail;
+          subs[i].name = newName;
+          subs[i].segment = newSeg;
+          subs[i].status = newStatus;
+          subs[i].notes = newNotes;
+          if (newStatus === 'Verified') {
+            if (!subs[i].verifiedAt) subs[i].verifiedAt = new Date().toISOString();
+          } else {
+            subs[i].verifiedAt = null;
+          }
+          updated = subs[i];
+          break;
+        }
+      }
+
+      saveAdminSubscribers(subs);
+      closeEditSubscriberModal();
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      if (updated) {
+        showNlAdminAlert('Updated subscriber ' + updated.id + ' (' + updated.email + ' - ' + updated.status + ').', 'success');
+      }
+    }
+
+    function deleteSubscriberAdmin(subId) {
+      var subs = loadAdminSubscribers();
+      var removedEmail = '';
+      var nextList = [];
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].id === subId) {
+          removedEmail = subs[i].email;
+        } else {
+          nextList.push(subs[i]);
+        }
+      }
+      saveAdminSubscribers(nextList);
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      showNlAdminAlert('Deleted subscriber ' + (removedEmail || subId) + ' from the Osito Drone backend list.', 'success');
+    }
+
+    function exportSubscribersCsv() {
+      var subs = loadAdminSubscribers();
+      var headers = ['ID', 'Email', 'Name', 'Segment', 'Status', 'VerifyCode', 'Source', 'SubscribedAt', 'VerifiedAt', 'Notes'];
+      var lines = [headers.join(',')];
+      for (var i = 0; i < subs.length; i++) {
+        var s = subs[i];
+        var row = [
+          s.id, s.email, s.name, s.segment, s.status,
+          s.verifyCode, s.source, s.subscribedAt, s.verifiedAt || '', s.notes || ''
+        ];
+        var esc = [];
+        for (var c = 0; c < row.length; c++) {
+          esc.push('"' + String(row[c] || '').replace(/"/g, '""') + '"');
+        }
+        lines.push(esc.join(','));
+      }
+      var blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'Osito_Drone_Newsletter_Subscribers.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // -------------------------------------------------------------------------
+    // PART B: COMPOSE & SEND NEWSLETTER BROADCAST FROM ADMIN PANEL
+    // -------------------------------------------------------------------------
+    var NEWSLETTER_TEMPLATES = {
+      stem25: {
+        subject: 'Osito Drone Flight Community: 25% Off Till the New Year STEM Flight Labs & Camp Dates!',
+        ctaText: 'BOOK 25% OFF NEW YEAR SPECIAL',
+        ctaUrl: 'https://staging.ositodrone.com/index.html#osito-live-sim-estimator-hub',
+        body: 'Hi {{name}},\n\nThank you for being part of the Osito Drone Flight Community in San Francisco!\n\nWe are excited to announce our upcoming Bay Area Youth STEM Drone Training dates and our 25% Off Till the New Year Special across all programs:\n- 2-Hour 4-Station Indoor STEM Flight Lab: $713 (Reg. $950)\n- 6-Week After-School STEM Academy Cohort: $1,800 (Reg. $2,400)\n- TK-5 Aero-Cub 3D-Printed Glider & Drone Workshop: $450 (Reg. $600)\n- VIP Kids Drone Birthday Party: $371 (Reg. $495)\n- Take-Home 3D-Printed Aero-Cub STEM Kits: $26/kid (Reg. $35)\n\nReply directly to info@ositodrone.com or click below to lock in your preferred dates!\n\nBlue skies,\nAlan Musselman, Miguel Flores & Jesus "Chuy" Aceves\nOsito Drone Services | San Francisco, CA'
+      },
+      opengym: {
+        subject: 'Bay Area Open Gym FPV Micro-Drone Race Night & Aero-Cub K-5 Kit Drop!',
+        ctaText: 'RESERVE FLIGHT STATION',
+        ctaUrl: 'https://staging.ositodrone.com/osito-drone-academy.html',
+        body: 'Hi {{name}},\n\nGet ready to fly! This month Osito Drone Services is hosting our indoor netted CUB-75 & SHARD-75 Open Gym Flight Sessions and 4-Tablet 3D Flight Simulator Pod challenges in San Francisco.\n\nHighlights:\n- Sub-250g FAA-compliant ducted CUB-75 trainers (39.5g) & SHARD-75 bumper drones\n- Hands-on Betaflight & ELRS telemetry workshop with CTO Jesus "Chuy" Aceves\n- Take-Home 3D-Printed Aero-Cub Glider Kits ($26/kid w/ 25% Off New Year Special)\n\nClick below or email info@ositodrone.com to reserve spots for your students or family!\n\nBest regards,\nThe Osito Drone Team (Alan, Miguel & Chuy)'
+      },
+      commercial: {
+        subject: 'FAA Part 107 Commercial Roof, Thermal & 4K Aerial Inspections ($296+ Special)',
+        ctaText: 'REQUEST COMMERCIAL QUOTE',
+        ctaUrl: 'https://staging.ositodrone.com/custom-aerial-solutions.html',
+        body: 'Hi {{name}},\n\nNeed high-resolution 4K roof, solar, construction progress, or radiometric HVAC thermal aerial inspections in the San Francisco Bay Area?\n\nThrough the New Year, Osito Drone Services is offering 25% Off our FAA Part 107 insured commercial aerial inspection packages — starting at $296 per zone (Reg. $395) with 24-hour report turnaround.\n\nReply to info@ositodrone.com with your property address or click below for an instant quote.\n\nSincerely,\nAlan Musselman, Miguel Flores & Jesus Aceves\nOsito Drone Services | info@ositodrone.com'
+      }
+    };
+
+    function loadNewsletterTemplate(tplKey) {
+      var tpl = NEWSLETTER_TEMPLATES[tplKey];
+      if (!tpl) return;
+      var subjEl = document.getElementById('nlBroadcastSubject');
+      var ctaTxtEl = document.getElementById('nlBroadcastCtaText');
+      var ctaUrlEl = document.getElementById('nlBroadcastCtaUrl');
+      var bodyEl = document.getElementById('nlBroadcastBody');
+      if (subjEl) subjEl.value = tpl.subject;
+      if (ctaTxtEl) ctaTxtEl.value = tpl.ctaText;
+      if (ctaUrlEl) ctaUrlEl.value = tpl.ctaUrl;
+      if (bodyEl) bodyEl.value = tpl.body;
+      updateNewsletterLivePreview();
+    }
+
+    function getTargetNewsletterRecipients() {
+      var audEl = document.getElementById('nlBroadcastAudience');
+      var custEl = document.getElementById('nlCustomRecipients');
+      var aud = audEl ? audEl.value : 'verified';
+      var custRaw = custEl ? custEl.value : '';
+
+      var subs = loadAdminSubscribers();
+      var chosen = [];
+      var seen = {};
+
+      if (aud !== 'custom') {
+        for (var i = 0; i < subs.length; i++) {
+          var s = subs[i];
+          if (s.status === 'Unsubscribed') continue;
+          if (aud === 'verified' && s.status !== 'Verified') continue;
+          if (aud === 'stem' && (s.status !== 'Verified' || ((s.segment || '').indexOf('STEM') === -1 && (s.segment || '').indexOf('School') === -1))) continue;
+          if (aud === 'commercial' && (s.status !== 'Verified' || (s.segment || '').indexOf('Commercial') === -1)) continue;
+          var emLower = String(s.email || '').toLowerCase();
+          if (emLower && !seen[emLower]) {
+            seen[emLower] = true;
+            chosen.push({ email: emLower, name: s.name || 'Pilot' });
+          }
+        }
+      }
+
+      if (custRaw && custRaw.trim()) {
+        var parts = custRaw.split(/[,;\s]+/);
+        for (var p = 0; p < parts.length; p++) {
+          var cand = parts[p].trim().toLowerCase();
+          if (isValidSubscriberEmail(cand) && !seen[cand]) {
+            seen[cand] = true;
+            chosen.push({ email: cand, name: cand.split('@')[0] });
+          }
+        }
+      }
+
+      return chosen;
+    }
+
+    function buildNewsletterHtmlDocument(subject, bodyText, ctaText, ctaUrl, sampleRecipient) {
+      var recName = (sampleRecipient && sampleRecipient.name) ? sampleRecipient.name : 'Bay Area Drone Pilot';
+      var recEmail = (sampleRecipient && sampleRecipient.email) ? sampleRecipient.email : 'pilot@ositodrone.com';
+      var personalized = String(bodyText || '')
+        .replace(/\{\{\s*name\s*\}\}/gi, recName)
+        .replace(/\{\{\s*email\s*\}\}/gi, recEmail);
+
+      var paragraphs = personalized.split(/\n\n+/);
+      var bodyHtml = '';
+      for (var i = 0; i < paragraphs.length; i++) {
+        var lineHtml = escapeHtmlSafe(paragraphs[i]).replace(/\n/g, '<br/>');
+        bodyHtml += '<p style="margin:0 0 12px; font-size:13.5px; line-height:1.55; color:#161616;">' + lineHtml + '</p>';
+      }
+
+      return '<div style="font-family:Roboto,Arial,sans-serif; background:#FFFFFF; color:#161616;">'
+        + '<div style="background:#232A68; color:#FFFFFF; padding:16px 20px; border-bottom:3px solid #7077CF;">'
+        + '  <div style="font-family:\'Fjalla One\',sans-serif; font-size:11px; color:#10B981; letter-spacing:0.06em; text-transform:uppercase;">OSITO DRONE SERVICES | SAN FRANCISCO, CA</div>'
+        + '  <div style="font-family:\'Fjalla One\',sans-serif; font-size:19px; color:#FFFFFF; margin-top:4px; text-transform:uppercase;">' + escapeHtmlSafe(subject) + '</div>'
+        + '</div>'
+        + '<div style="padding:18px 20px; background:#FFFFFF;">'
+        + bodyHtml
+        + (ctaText ? '<div style="margin:18px 0 10px;"><a href="' + escapeHtmlSafe(ctaUrl || '#') + '" target="_blank" rel="noopener" style="display:inline-block; background:#10B981; color:#161616; font-family:\'Fjalla One\',sans-serif; font-size:13.5px; font-weight:700; text-decoration:none; padding:10px 18px; border:2px solid #059669; text-transform:uppercase;">' + escapeHtmlSafe(ctaText) + '</a></div>' : '')
+        + '</div>'
+        + '<div style="background:#161616; color:#B0B5C9; padding:12px 20px; font-size:11.5px; border-top:2px solid #232A68;">'
+        + '  Sent by Osito Drone Services (<code>info@ositodrone.com</code>) | San Francisco, CA | Verified Subscriber: ' + escapeHtmlSafe(recEmail)
+        + '</div>'
+        + '</div>';
+    }
+
+    function updateNewsletterLivePreview() {
+      var previewBox = document.getElementById('nlLivePreviewBox');
+      var badgeEl = document.getElementById('nlPreviewRecipientBadge');
+      if (!previewBox) return;
+
+      var subj = (document.getElementById('nlBroadcastSubject') ? document.getElementById('nlBroadcastSubject').value : '').trim();
+      var ctaText = (document.getElementById('nlBroadcastCtaText') ? document.getElementById('nlBroadcastCtaText').value : '').trim();
+      var ctaUrl = (document.getElementById('nlBroadcastCtaUrl') ? document.getElementById('nlBroadcastCtaUrl').value : '').trim();
+      var body = (document.getElementById('nlBroadcastBody') ? document.getElementById('nlBroadcastBody').value : '');
+
+      var recipients = getTargetNewsletterRecipients();
+      if (badgeEl) {
+        badgeEl.textContent = recipients.length + (recipients.length === 1 ? ' RECIPIENT SELECTED' : ' RECIPIENTS SELECTED');
+      }
+
+      var sample = recipients.length > 0 ? recipients[0] : { name: 'Sarah Jenkins', email: 'sarah.jenkins@sfusd-stem.org' };
+      previewBox.innerHTML = buildNewsletterHtmlDocument(subj || 'Osito Drone Newsletter', body, ctaText, ctaUrl, sample);
+    }
+
+    function handleSendNewsletterBroadcast(ev) {
+      if (ev) ev.preventDefault();
+      var subj = (document.getElementById('nlBroadcastSubject') ? document.getElementById('nlBroadcastSubject').value : '').trim();
+      var ctaText = (document.getElementById('nlBroadcastCtaText') ? document.getElementById('nlBroadcastCtaText').value : '').trim();
+      var ctaUrl = (document.getElementById('nlBroadcastCtaUrl') ? document.getElementById('nlBroadcastCtaUrl').value : '').trim();
+      var body = (document.getElementById('nlBroadcastBody') ? document.getElementById('nlBroadcastBody').value : '').trim();
+      var audEl = document.getElementById('nlBroadcastAudience');
+      var audLabel = (audEl && audEl.options[audEl.selectedIndex]) ? audEl.options[audEl.selectedIndex].text : 'Verified Subscribers';
+
+      if (!subj || !body) {
+        showNlBroadcastAlert('Please provide both a Newsletter Subject Line and Message Body before sending.', 'error');
+        return;
+      }
+
+      var custEl = document.getElementById('nlCustomRecipients');
+      var custRaw = custEl ? custEl.value.trim() : '';
+      if (custRaw) {
+        var tokens = custRaw.split(/[,;\s]+/);
+        for (var t = 0; t < tokens.length; t++) {
+          var tok = tokens[t].trim();
+          if (tok && !isValidSubscriberEmail(tok)) {
+            showNlBroadcastAlert('Invalid custom recipient email address: "' + tok + '". Please correct it before sending.', 'error');
+            return;
+          }
+        }
+      }
+
+      var recipients = getTargetNewsletterRecipients();
+      if (!recipients.length) {
+        showNlBroadcastAlert('No active recipients matched the selected audience. Verify subscribers or enter custom email addresses first.', 'error');
+        return;
+      }
+
+      var emailList = [];
+      for (var i = 0; i < recipients.length; i++) {
+        emailList.push(recipients[i].email);
+      }
+
+      var camps = loadNewsletterCampaigns();
+      var campId = generateUniqueAdminId('CAMP', 101, camps);
+      var nowIso = new Date().toISOString();
+      var senderEmail = activeStaffEmail || 'alan@ositodrone.com';
+
+      var newCamp = {
+        id: campId,
+        subject: subj,
+        body: body,
+        ctaText: ctaText,
+        ctaUrl: ctaUrl,
+        audienceLabel: audLabel,
+        recipientCount: emailList.length,
+        recipients: emailList,
+        sentBy: senderEmail,
+        sentAt: nowIso,
+        status: 'Delivered via Backend'
+      };
+
+      camps.unshift(newCamp);
+      saveNewsletterCampaigns(camps);
+
+      var compiledHtml = buildNewsletterHtmlDocument(subj, body, ctaText, ctaUrl, recipients[0]);
+      dispatchAdminBackendRelay({
+        actionType: 'newsletter_broadcast_campaign',
+        to: 'info@ositodrone.com',
+        bcc: emailList.join(', '),
+        _subject: '[Osito Newsletter Broadcast ' + campId + '] ' + subj,
+        campaign_id: campId,
+        sent_by: senderEmail,
+        recipient_count: emailList.length,
+        recipients: emailList.join(', '),
+        newsletter_subject: subj,
+        newsletter_body: body,
+        cta_text: ctaText,
+        cta_url: ctaUrl,
+        html_preview: compiledHtml
+      });
+
+      renderNewsletterCampaignsTable();
+      updateNewsletterKpis();
+      showNlBroadcastAlert('NEWSLETTER BROADCAST SENT (' + campId + ')! Dispatched "' + subj + '" to ' + emailList.length + ' subscriber(s) (' + emailList.join(', ') + ').', 'success');
+    }
+
+    function downloadNewsletterEmlDraft() {
+      var subj = (document.getElementById('nlBroadcastSubject') ? document.getElementById('nlBroadcastSubject').value : '').trim() || 'Osito Drone Newsletter';
+      var ctaText = (document.getElementById('nlBroadcastCtaText') ? document.getElementById('nlBroadcastCtaText').value : '').trim();
+      var ctaUrl = (document.getElementById('nlBroadcastCtaUrl') ? document.getElementById('nlBroadcastCtaUrl').value : '').trim();
+      var body = (document.getElementById('nlBroadcastBody') ? document.getElementById('nlBroadcastBody').value : '').trim();
+      var recipients = getTargetNewsletterRecipients();
+      var bccEmails = [];
+      for (var i = 0; i < recipients.length; i++) bccEmails.push(recipients[i].email);
+
+      var htmlDoc = buildNewsletterHtmlDocument(subj, body, ctaText, ctaUrl, { name: 'Valued Pilot & Partner', email: 'info@ositodrone.com' });
+      var emlLines = [
+        'From: Osito Drone Services <info@ositodrone.com>',
+        'To: info@ositodrone.com',
+        'Bcc: ' + bccEmails.join(', '),
+        'Subject: ' + subj,
+        'X-Unsent: 1',
+        'MIME-Version: 1.0',
+        'Content-Type: text/html; charset="UTF-8"',
+        '',
+        '<!DOCTYPE html><html><body>' + htmlDoc + '</body></html>'
+      ];
+      var blob = new Blob([emlLines.join('\r\n')], { type: 'message/rfc822;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'Osito_Drone_Newsletter_Broadcast_Draft.eml';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function renderNewsletterCampaignsTable() {
+      var tbody = document.getElementById('nl-campaigns-tbody');
+      if (!tbody) return;
+      var camps = loadNewsletterCampaigns();
+      updateNewsletterKpis();
+
+      if (!camps.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:16px; color:#5E5E5E;">No newsletter broadcasts sent yet.</td></tr>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < camps.length; i++) {
+        var c = camps[i];
+        var dt = c.sentAt ? c.sentAt.replace('T', ' ').slice(0, 16) : '';
+        var recPreview = (c.recipients || []).slice(0, 3).join(', ');
+        if ((c.recipients || []).length > 3) recPreview += ' (+' + (c.recipients.length - 3) + ' more)';
+        html += '<tr>'
+          + '<td><strong>' + escapeHtmlSafe(c.id) + '</strong><br/><span class="prio-badge prio-std" style="background:#D1FAE5; color:#065F46; border-color:#10B981;">SENT</span></td>'
+          + '<td><strong style="color:#232A68;">' + escapeHtmlSafe(c.subject) + '</strong><br/><span style="font-size:11px; color:#5E5E5E;">By: ' + escapeHtmlSafe(c.sentBy || 'staff@ositodrone.com') + ' | ' + escapeHtmlSafe(c.audienceLabel || '') + '</span></td>'
+          + '<td><strong>' + (c.recipientCount || 0) + ' Subscriber(s)</strong><br/><span style="font-size:11px; color:#5E5E5E;">' + escapeHtmlSafe(recPreview) + '</span></td>'
+          + '<td><span style="font-size:11.5px;">' + escapeHtmlSafe(dt) + '</span></td>'
+          + '</tr>';
+      }
+      tbody.innerHTML = html;
+    }
+
+    // -------------------------------------------------------------------------
+    // PART C: WEBSITE CONTACT FORM INBOX (INFO@OSITODRONE.COM SUBMISSIONS)
+    // -------------------------------------------------------------------------
+    function renderAdminContactInboxTable() {
+      var tbody = document.getElementById('admin-contact-inbox-tbody');
+      if (!tbody) return;
+      var inqs = loadAdminContactInquiries();
+      updateNewsletterKpis();
+
+      var q = (document.getElementById('contactInboxSearchInput') ? document.getElementById('contactInboxSearchInput').value : '').trim().toLowerCase();
+      var statF = document.getElementById('contactInboxStatusFilter') ? document.getElementById('contactInboxStatusFilter').value : 'all';
+
+      var filtered = [];
+      for (var i = 0; i < inqs.length; i++) {
+        var item = inqs[i];
+        if (statF !== 'all' && item.status !== statF) continue;
+        if (q) {
+          var hay = ((item.id || '') + ' ' + (item.name || '') + ' ' + (item.email || '') + ' ' + (item.phone || '') + ' ' + (item.message || '') + ' ' + (item.notes || '')).toLowerCase();
+          if (hay.indexOf(q) === -1) continue;
+        }
+        filtered.push(item);
+      }
+
+      var countEl = document.getElementById('contact-inbox-showing-count');
+      if (countEl) countEl.textContent = 'Showing ' + filtered.length + ' of ' + inqs.length + ' inquiries';
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:24px; color:#5E5E5E;">No website contact form inquiries matched your filter.</td></tr>';
+        return;
+      }
+
+      var statusOpts = ['New - Unread', 'In Progress', 'Replied', 'Converted to CRM Lead'];
+      var qChar = String.fromCharCode(63);
+      var rowsHtml = '';
+
+      for (var j = 0; j < filtered.length; j++) {
+        var inq = filtered[j];
+        var dt = inq.submittedAt ? inq.submittedAt.replace('T', ' ').slice(0, 16) : '';
+        var selHtml = '<select class="crm-status-select" onchange="updateContactInquiryField(\'' + escapeHtmlSafe(inq.id) + '\', \'status\', this.value)">';
+        for (var s = 0; s < statusOpts.length; s++) {
+          var opt = statusOpts[s];
+          var isSel = (inq.status === opt) ? ' selected' : '';
+          selHtml += '<option value="' + opt + '"' + isSel + '>' + opt + '</option>';
+        }
+        selHtml += '</select>';
+
+        var replyHref = 'mailto:' + encodeURIComponent(inq.email || '') + qChar
+          + 'cc=' + encodeURIComponent('info@ositodrone.com')
+          + '&subject=' + encodeURIComponent('Re: Osito Drone Services Inquiry (' + inq.id + ')')
+          + '&body=' + encodeURIComponent('Hi ' + (inq.name || '') + ',\n\nThank you for contacting Osito Drone Services (info@ositodrone.com) regarding:\n"' + (inq.message || '') + '"\n\nBest regards,\nOsito Drone Services Team\nSan Francisco, CA');
+
+        rowsHtml += '<tr data-inq-id="' + escapeHtmlSafe(inq.id) + '">'
+          + '<td><strong>' + escapeHtmlSafe(inq.id) + '</strong><br/><span class="prio-badge prio-std" style="background:#D1FAE5; color:#065F46; border-color:#10B981;">info@ositodrone.com</span><div style="font-size:11px; color:#5E5E5E; margin-top:4px;">' + escapeHtmlSafe(dt) + '</div></td>'
+          + '<td><strong style="font-size:13.5px; color:#232A68;">' + escapeHtmlSafe(inq.name) + '</strong><br/>'
+          + '<a href="' + replyHref + '" style="color:#059669; font-weight:700; text-decoration:none; word-break:break-all;">' + escapeHtmlSafe(inq.email) + '</a><br/>'
+          + '<span style="font-size:12px; color:#5E5E5E;">' + escapeHtmlSafe(inq.phone || 'N/A') + '</span></td>'
+          + '<td><div style="font-size:13px; line-height:1.45; color:#161616; white-space:pre-wrap;">' + escapeHtmlSafe(inq.message) + '</div></td>'
+          + '<td>' + selHtml + '<textarea class="crm-notes-input" placeholder="Staff follow-up notes..." onblur="updateContactInquiryField(\'' + escapeHtmlSafe(inq.id) + '\', \'notes\', this.value)">' + escapeHtmlSafe(inq.notes || '') + '</textarea></td>'
+          + '<td><div style="display:flex; flex-direction:column; gap:5px;">'
+          + '  <a href="' + replyHref + '" class="osito-action-btn emerald" style="padding:5px 8px; font-size:11px; width:100%;">REPLY EMAIL</a>'
+          + '  <button type="button" class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%;" onclick="convertInquiryToCrmLead(\'' + escapeHtmlSafe(inq.id) + '\')">+ ADD TO CRM</button>'
+          + '  <button type="button" class="osito-action-btn" style="padding:5px 8px; font-size:11px; width:100%;" onclick="addInquirySenderToNewsletter(\'' + escapeHtmlSafe(inq.id) + '\')">+ NEWSLETTER</button>'
+          + '  <button type="button" class="osito-action-btn danger" style="padding:5px 8px; font-size:11px; width:100%;" onclick="deleteContactInquiryAdmin(\'' + escapeHtmlSafe(inq.id) + '\')">DELETE</button>'
+          + '</div></td>'
+          + '</tr>';
+      }
+      tbody.innerHTML = rowsHtml;
+    }
+
+    function updateContactInquiryField(inqId, field, value) {
+      var list = loadAdminContactInquiries();
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id === inqId) {
+          list[i][field] = value;
+          break;
+        }
+      }
+      saveAdminContactInquiries(list);
+      showNlAdminAlert('Saved update for website contact inquiry ' + inqId + '.', 'success');
+    }
+
+    function convertInquiryToCrmLead(inqId) {
+      var list = loadAdminContactInquiries();
+      var inq = null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id === inqId) {
+          inq = list[i];
+          list[i].status = 'Converted to CRM Lead';
+          break;
+        }
+      }
+      if (!inq) return;
+      saveAdminContactInquiries(list);
+
+      var custom = getCustomLeads();
+      for (var c = 0; c < custom.length; c++) {
+        if (custom[c].sourceInquiryId === inq.id || String(custom[c].notes || '').indexOf('Website Inquiry (' + inq.id + ')') !== -1) {
+          renderAdminContactInboxTable();
+          showNlAdminAlert('Inquiry ' + inq.id + ' is already in CRM (' + custom[c].id + ').', 'success');
+          return;
+        }
+      }
+
+      var newId = generateUniqueAdminId('WEB', 101, custom);
+      custom.unshift({
+        id: newId,
+        sourceInquiryId: inq.id,
+        sourceDeck: 'Website Contact Form (info@ositodrone.com)',
+        organization: inq.name,
+        neighborhood: 'San Francisco Bay Area',
+        contactName: inq.name,
+        contactRole: 'Website Inquiry',
+        phone: inq.phone || '',
+        email: inq.email || '',
+        segment: 'Schools',
+        priority: '1-Hot (Website Inbound)',
+        owner: 'Miguel Flores (CEO)',
+        offerPitch: '2-Hr STEM Flight Lab ($713 | 25% Off)',
+        estimatedValue: '$713',
+        stage: '2. Contacted / Left VM',
+        notes: 'Website Inquiry (' + inq.id + '): ' + (inq.message || ''),
+        proposalUrl: './downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx'
+      });
+      try {
+        localStorage.setItem(STORAGE_KEYS.CUSTOM_LEADS, JSON.stringify(custom));
+      } catch (e) {}
+
+      renderAdminContactInboxTable();
+      renderCrmLeadsTable();
+      showNlAdminAlert('Converted inquiry ' + inq.id + ' (' + inq.name + ') into CRM Lead ' + newId + ' in Tab 2!', 'success');
+    }
+
+    function addInquirySenderToNewsletter(inqId) {
+      var list = loadAdminContactInquiries();
+      var inq = null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id === inqId) {
+          inq = list[i];
+          break;
+        }
+      }
+      if (!inq || !isValidSubscriberEmail(inq.email)) return;
+
+      var subs = loadAdminSubscribers();
+      var emLower = inq.email.trim().toLowerCase();
+      for (var k = 0; k < subs.length; k++) {
+        if (String(subs[k].email || '').toLowerCase() === emLower) {
+          showNlAdminAlert(emLower + ' is already on the newsletter list (' + subs[k].id + ').', 'success');
+          return;
+        }
+      }
+      var code = String(Math.floor(100000 + Math.random() * 900000));
+      var nowIso = new Date().toISOString();
+      var newSub = {
+        id: generateUniqueAdminId('SUB', 1001, subs),
+        email: emLower,
+        name: inq.name || emLower.split('@')[0],
+        segment: 'Youth STEM Academy & 25% Off Invites',
+        status: 'Verified',
+        verifyCode: code,
+        verifyToken: 'ositoverify-' + Date.now().toString(36),
+        source: 'Website Contact Form (' + inq.id + ')',
+        subscribedAt: nowIso,
+        verifiedAt: nowIso,
+        notes: 'Added from Website Contact Inquiry ' + inq.id
+      };
+      subs.unshift(newSub);
+      saveAdminSubscribers(subs);
+      renderAdminSubscribersTable();
+      updateNewsletterLivePreview();
+      showNlAdminAlert('Added ' + emLower + ' (' + newSub.id + ') to the Verified Newsletter Subscriber list!', 'success');
+    }
+
+    function deleteContactInquiryAdmin(inqId) {
+      var list = loadAdminContactInquiries();
+      var next = [];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id !== inqId) next.push(list[i]);
+      }
+      saveAdminContactInquiries(next);
+      renderAdminContactInboxTable();
+      showNlAdminAlert('Deleted inquiry ' + inqId + ' from the Contact Inbox.', 'success');
+    }
+
+    // =========================================================================
+    // 8. AUTO-RESTORE STAFF SESSION ON PAGE LOAD
     // =========================================================================
     (function initOsitoAdminPortal() {
       try {
