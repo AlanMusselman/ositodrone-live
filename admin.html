@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Admin &amp; Co-Founder Portal | Osito Drone Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    * { border-radius: 0px !important; box-sizing: border-box; }
+
+    /* Unified Top Site Navbar */
+    #osito-site-nav { position: sticky; top: 0; z-index: 10000; background: #161616; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
+    .osito-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .osito-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; }
+    .osito-nav-brand img { height: 36px; width: auto; display: block; }
+    .osito-nav-menu { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .osito-nav-item { font-family: 'Fjalla One', sans-serif; font-size: 13.5px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: #EEF0FA; padding: 6px 11px; border: 1px solid transparent; transition: background 0.15s ease, border-color 0.15s ease; display: inline-flex; align-items: center; cursor: pointer; background: transparent; }
+    .osito-nav-item:hover, .osito-nav-item.active { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-nav-dropdown { position: relative; display: inline-block; }
+    .osito-nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 230px; background: #161616; border: 2px solid #7077CF; box-shadow: 0 12px 28px rgba(0,0,0,0.65); z-index: 10001; padding: 4px 0; }
+    .osito-nav-dropdown:hover .osito-nav-dropdown-menu { display: block; }
+    .osito-nav-dropdown-menu a { display: block; padding: 9px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #EEF0FA; text-decoration: none; border-bottom: 1px solid #24293E; }
+    .osito-nav-dropdown-menu a:last-child { border-bottom: none; }
+    .osito-nav-dropdown-menu a:hover { background: #232A68; color: #10B981; }
+    .osito-nav-caret { display: inline-block; width: 10px; height: 10px; margin-left: 5px; vertical-align: middle; fill: currentColor; }
+    .osito-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 10px 18px; background: #7077CF; color: #FFFFFF; border: 2px solid #8E93DA; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+    .osito-action-btn:hover { background: #6068C4; border-color: #FFFFFF; color: #FFFFFF; }
+    .osito-action-btn.emerald { background: #10B981; border-color: #059669; color: #161616; font-weight: 700; }
+    .osito-action-btn.emerald:hover { background: #059669; color: #FFFFFF; }
+    .osito-action-btn.dark { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-action-btn.dark:hover { background: #303885; border-color: #FFFFFF; }
+    .osito-action-btn.danger { background: #7F1D1D; border-color: #EF4444; color: #FFFFFF; }
+    .osito-action-btn.danger:hover { background: #991B1B; }
+
+    /* Parallax Dark Background */
+    .osito-parallax-dark {
+      background-color: #161616 !important;
+      background-image: linear-gradient(180deg, rgba(22, 22, 22, 0.86) 0%, rgba(35, 42, 104, 0.80) 50%, rgba(22, 22, 22, 0.92) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+      background-size: cover !important;
+      background-position: center center !important;
+      background-attachment: fixed !important;
+      background-repeat: no-repeat !important;
+    }
+
+    /* Login Gate Container */
+    #admin-auth-gate { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+    .auth-card { width: 100%; max-width: 560px; background: #1B1B1B; border: 3px solid #7077CF; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+    .auth-card-header { background: #232A68; padding: 22px 26px; border-bottom: 2px solid #7077CF; }
+    .auth-badge { display: inline-block; background: #161616; color: #10B981; border: 1px solid #10B981; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; letter-spacing: 0.06em; padding: 3px 9px; text-transform: uppercase; margin-bottom: 8px; }
+    .auth-card-body { padding: 26px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: #EEF0FA; margin-bottom: 6px; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 10px 12px; background: #161616; border: 2px solid #303885; color: #FFFFFF; font-family: 'Roboto', sans-serif; font-size: 14px; outline: none; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #10B981; }
+    .staff-pill-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .staff-pill-btn { background: #161616; border: 1px solid #7077CF; color: #EEF0FA; padding: 8px 6px; font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; text-align: center; transition: all 0.15s ease; }
+    .staff-pill-btn:hover, .staff-pill-btn.active { background: #232A68; border-color: #10B981; color: #10B981; }
+
+    /* Alert Banners */
+    .admin-alert { padding: 11px 14px; font-size: 13px; margin-bottom: 16px; border-left: 4px solid #7077CF; background: #232A68; color: #FFFFFF; display: none; line-height: 1.45; }
+    .admin-alert.error { background: rgba(127, 29, 29, 0.9); border-left-color: #EF4444; color: #FECACA; }
+    .admin-alert.success { background: rgba(6, 78, 59, 0.9); border-left-color: #10B981; color: #D1FAE5; }
+
+    /* Authenticated Dashboard Layout */
+    #admin-dashboard-view { display: none; flex: 1; background: #F6F6F6; color: #161616; }
+    .dash-hero-bar { background: #232A68; color: #FFFFFF; border-bottom: 3px solid #7077CF; padding: 22px 24px; }
+    .dash-container { max-width: 1400px; margin: 0 auto; }
+    .dash-tabs-bar { background: #161616; border-bottom: 2px solid #7077CF; padding: 0 24px; }
+    .dash-tabs-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; }
+    .dash-tab-btn { background: transparent; color: #B0B5C9; border: none; border-bottom: 4px solid transparent; padding: 14px 20px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.15s ease; }
+    .dash-tab-btn:hover { color: #FFFFFF; background: #1B1B1B; }
+    .dash-tab-btn.active { color: #10B981; border-bottom-color: #10B981; background: #232A68; }
+    .dash-panel { display: none; padding: 28px 24px 60px; max-width: 1400px; margin: 0 auto; }
+    .dash-panel.active { display: block; }
+
+    /* KPI Strip */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .kpi-card { background: #FFFFFF; border: 2px solid #E2E2E2; border-top: 4px solid #232A68; padding: 16px 18px; }
+    .kpi-card.emerald { border-top-color: #10B981; }
+    .kpi-card.indigo { border-top-color: #7077CF; }
+    .kpi-label { font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.05em; color: #5E5E5E; text-transform: uppercase; }
+    .kpi-val { font-family: 'Fjalla One', sans-serif; font-size: 28px; color: #161616; margin: 4px 0 2px; }
+    .kpi-sub { font-size: 12px; color: #5E5E5E; }
+
+    /* Pack & Proposal Cards */
+    .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(390px, 1fr)); gap: 18px; }
+    .pack-card { background: #FFFFFF; border: 2px solid #D0D4E8; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
+    .pack-card-top { padding: 20px; }
+    .pack-cat-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .pack-cat-badge { background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; letter-spacing: 0.05em; padding: 3px 9px; text-transform: uppercase; }
+    .pack-ver-badge { background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; padding: 2px 8px; }
+    .pack-title { font-family: 'Fjalla One', sans-serif; font-size: 19px; color: #161616; margin: 0 0 8px; line-height: 1.25; }
+    .pack-desc { font-size: 13.5px; color: #4A4A4A; line-height: 1.5; margin: 0 0 12px; }
+    .pack-bambu-box { background: #EEF0FA; border-left: 4px solid #7077CF; padding: 9px 12px; font-size: 12.5px; color: #161616; margin-bottom: 12px; }
+    .pack-meta-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .pack-pill { background: #F6F6F6; border: 1px solid #E2E2E2; padding: 3px 8px; font-size: 11.5px; font-weight: 600; color: #333333; }
+    .pack-files-drawer { display: none; background: #161616; color: #EEF0FA; padding: 10px 12px; font-family: monospace; font-size: 11.5px; max-height: 160px; overflow-y: auto; margin-top: 8px; border: 1px solid #7077CF; }
+    .pack-card-actions { background: #F6F6F6; border-top: 1px solid #E2E2E2; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    /* Filter Bar */
+    .filter-toolbar { background: #FFFFFF; border: 2px solid #D0D4E8; padding: 16px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    .filter-btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .filter-chip { background: #F6F6F6; border: 1px solid #C5CAE9; color: #161616; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; cursor: pointer; }
+    .filter-chip:hover, .filter-chip.active { background: #232A68; color: #FFFFFF; border-color: #232A68; }
+
+    /* Sales CRM Table */
+    .crm-table-wrap { background: #FFFFFF; border: 2px solid #D0D4E8; overflow-x: auto; }
+    .crm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1150px; }
+    .crm-table th { background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; padding: 12px 12px; text-align: left; border-right: 1px solid #303885; }
+    .crm-table td { padding: 11px 12px; border-bottom: 1px solid #E2E2E2; border-right: 1px solid #EFEFEF; vertical-align: top; color: #161616; }
+    .crm-table tr:nth-child(even) td { background: #F9FAFB; }
+    .crm-table tr:hover td { background: #EEF0FA; }
+    .prio-badge { display: inline-block; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 2px 7px; text-transform: uppercase; }
+    .prio-hot { background: #FEE2E2; color: #991B1B; border: 1px solid #EF4444; }
+    .prio-warm { background: #FEF3C7; color: #92400E; border: 1px solid #F59E0B; }
+    .prio-std { background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; }
+    .crm-status-select { width: 100%; padding: 5px 6px; font-family: 'Roboto', sans-serif; font-size: 12px; font-weight: 600; border: 1px solid #7077CF; background: #FFFFFF; color: #161616; margin-bottom: 6px; }
+    .crm-notes-input { width: 100%; min-height: 52px; padding: 5px 7px; font-family: 'Roboto', sans-serif; font-size: 12px; border: 1px solid #CCCCCC; background: #FFFFFF; color: #161616; resize: vertical; }
+
+    /* Modal Overlay */
+    .osito-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); z-index: 20000; align-items: center; justify-content: center; padding: 20px; }
+    .osito-modal-box { width: 100%; max-width: 600px; background: #1B1B1B; color: #FFFFFF; border: 3px solid #7077CF; box-shadow: 0 24px 60px rgba(0,0,0,0.9); }
+    .osito-modal-header { background: #232A68; padding: 16px 22px; border-bottom: 2px solid #7077CF; display: flex; justify-content: space-between; align-items: center; }
+    .osito-modal-body { padding: 22px; }
+    .recovery-mode-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 18px; }
+    .recovery-tab-btn { background: #161616; color: #B0B5C9; border: 1px solid #303885; padding: 9px 8px; font-family: 'Fjalla One', sans-serif; font-size: 12px; text-transform: uppercase; cursor: pointer; }
+    .recovery-tab-btn.active { background: #232A68; color: #10B981; border-color: #10B981; }
+
+    @media (max-width: 768px) {
+      .packs-grid { grid-template-columns: 1fr; }
+      .staff-pill-row, .recovery-mode-tabs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Unified Site Top Navigation Bar -->
+  <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand">
+        <img src="./assets/ositologo-white.png" alt="Osito Drone Logo" />
+      </a>
+      <nav class="osito-nav-menu" aria-label="Primary Navigation">
+        <a href="./index.html" class="osito-nav-item">Home</a>
+        <div class="osito-nav-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Services<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
+          <div class="osito-nav-dropdown-menu">
+            <a href="./osito-drone-academy.html">STEM Drone Academy</a>
+            <a href="./custom-aerial-solutions.html">Commercial Aerials</a>
+            <a href="./index.html#osito-live-sim-estimator-hub">Pricing Calculator</a>
+          </div>
+        </div>
+        <a href="./flight-sim.html" class="osito-nav-item">Flight Sim</a>
+        <div class="osito-nav-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item">Toolbox<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
+          <div class="osito-nav-dropdown-menu">
+            <a href="./toolbox.html">All Tools</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design Studio</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+            <a href="./admin.html">Staff Portal</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./admin.html" class="osito-nav-item active">Staff Admin</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn" style="padding:8px 16px; font-size:13.5px;">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       SECTION 1: STAFF AUTHENTICATION GATE (@OSITODRONE.COM WHITELIST)
+       ===================================================================== -->
+  <main id="admin-auth-gate" class="osito-parallax-dark">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <span class="auth-badge">RESTRICTED STAFF BACKEND | @OSITODRONE.COM</span>
+        <h1 style="font-family:'Fjalla One',sans-serif; font-size:26px; margin:0 0 6px; letter-spacing:0.04em; text-transform:uppercase; color:#FFFFFF;">
+          OSITO CO-FOUNDER &amp; STAFF PORTAL
+        </h1>
+        <p style="margin:0; font-size:13.5px; color:#EEF0FA; line-height:1.45;">
+          One-click 3D STL &amp; Bambu Lab P2S `.zip` project downloads for Chuy &amp; Miguel, plus Miguel's live Bay Area Sales Leads CRM &amp; `.docx` Proposal Hub.
+        </p>
+      </div>
+
+      <div class="auth-card-body">
+        <div id="auth-alert-box" class="admin-alert" role="alert"></div>
+
+        <label class="form-label">QUICK-SELECT CO-FOUNDER ACCOUNT</label>
+        <div class="staff-pill-row">
+          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('miguel@ositodrone.com', this)">MIGUEL (CEO / SALES)</button>
+          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('jesus@ositodrone.com', this)">CHUY / JESUS (CTO / CAD)</button>
+          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('alan@ositodrone.com', this)">ALAN (COO / ADMIN)</button>
+        </div>
+
+        <form id="ositoStaffLoginForm" onsubmit="handleStaffLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="staffEmailInput">OSITO STAFF EMAIL (@OSITODRONE.COM ONLY)</label>
+            <input type="email" id="staffEmailInput" class="form-input" placeholder="miguel@ositodrone.com, jesus@ositodrone.com, or alan@ositodrone.com" required autocomplete="username" />
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label class="form-label" for="staffPasswordInput" style="margin-bottom:0;">STAFF PASSWORD</label>
+              <button type="button" onclick="showPasswordToggle('staffPasswordInput', this)" style="background:none; border:none; color:#8E93DA; font-family:'Fjalla One',sans-serif; font-size:11.5px; cursor:pointer; text-transform:uppercase;">SHOW PASSWORD</button>
+            </div>
+            <input type="password" id="staffPasswordInput" class="form-input" placeholder="Enter your Osito staff password" required autocomplete="current-password" />
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+            <label style="font-size:13px; color:#EEF0FA; display:flex; align-items:center; gap:7px; cursor:pointer;">
+              <input type="checkbox" id="staffRememberCheck" checked /> Keep me signed in on this browser
+            </label>
+            <button type="button" onclick="openRecoveryModal()" style="background:none; border:none; color:#10B981; font-family:'Fjalla One',sans-serif; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-decoration:underline;">
+              FORGOT PASSWORD / RESET
+            </button>
+          </div>
+
+          <button type="submit" class="osito-action-btn emerald" style="width:100%; padding:13px; font-size:15.5px;">
+            SIGN IN TO STAFF BACKEND
+          </button>
+        </form>
+
+        <!-- First-Time Co-Founder Setup & Recovery Key Drawer -->
+        <div style="margin-top:20px; border-top:1px solid #303885; padding-top:14px;">
+          <button type="button" onclick="toggleFirstTimeSetupDrawer()" style="width:100%; background:#161616; border:1px solid #7077CF; color:#EEF0FA; padding:9px 12px; font-family:'Fjalla One',sans-serif; font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+            <span>FIRST-TIME CO-FOUNDER LOGIN &amp; RECOVERY KEYS</span>
+            <span id="setup-drawer-indicator">VIEW CREDENTIALS</span>
+          </button>
+          <div id="first-time-setup-drawer" style="display:none; background:#161616; border:1px solid #7077CF; border-top:none; padding:14px; font-size:12.5px; color:#EEF0FA; line-height:1.55;">
+            <p style="margin:0 0 10px; color:#10B981; font-weight:700;">
+              Click any row below to auto-fill your initial Co-Founder login, then change your custom password inside the Security tab:
+            </p>
+            <div style="display:grid; gap:8px;">
+              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #10B981; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <div>
+                  <strong>Miguel Flores (CEO)</strong>: <code>miguel@ositodrone.com</code><br/>
+                  Default Pass: <code>OsitoMiguel2026!</code> | Recovery Key: <code>OSITO-MIGUEL-75</code>
+                </div>
+                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('miguel@ositodrone.com', 'OsitoMiguel2026!')">AUTO-FILL MIGUEL</button>
+              </div>
+              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #7077CF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <div>
+                  <strong>Jesus &quot;Chuy&quot; Aceves (CTO)</strong>: <code>jesus@ositodrone.com</code> (or <code>chuy@ositodrone.com</code>)<br/>
+                  Default Pass: <code>OsitoChuy2026!</code> | Recovery Key: <code>OSITO-CHUY-75</code>
+                </div>
+                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('jesus@ositodrone.com', 'OsitoChuy2026!')">AUTO-FILL CHUY</button>
+              </div>
+              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #8E93DA; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <div>
+                  <strong>Alan Musselman (COO)</strong>: <code>alan@ositodrone.com</code><br/>
+                  Default Pass: <code>OsitoAlan2026!</code> | Recovery Key: <code>OSITO-ALAN-75</code>
+                </div>
+                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('alan@ositodrone.com', 'OsitoAlan2026!')">AUTO-FILL ALAN</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       SECTION 2: AUTHENTICATED STAFF DASHBOARD (CHUY, MIGUEL & ALAN)
+       ===================================================================== -->
+  <div id="admin-dashboard-view">
+    <section class="dash-hero-bar">
+      <div class="dash-container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;">
+            <span style="background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11.5px; font-weight:700; padding:3px 9px; text-transform:uppercase;">AUTHENTICATED STAFF SESSION</span>
+            <span id="dash-user-role-badge" style="background:#161616; color:#EEF0FA; border:1px solid #7077CF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:3px 9px; text-transform:uppercase;">COO | PRINCIPAL ARCHITECT</span>
+            <span style="font-size:12px; color:#B0B5C9;">Release: v2026.11-Staff-Portal (No GitHub Required)</span>
+          </div>
+          <h1 id="dash-welcome-heading" style="font-family:'Fjalla One',sans-serif; font-size:28px; margin:0; text-transform:uppercase; letter-spacing:0.04em;">
+            WELCOME BACK, ALAN MUSSELMAN
+          </h1>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <button type="button" class="osito-action-btn dark" onclick="switchAdminTab('tab-security')" style="padding:9px 14px; font-size:13px;">
+            CHANGE PASSWORD
+          </button>
+          <button type="button" class="osito-action-btn danger" onclick="handleStaffLogout()" style="padding:9px 16px; font-size:13px;">
+            LOCK &amp; SIGN OUT
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Primary Workspace Tabs -->
+    <div class="dash-tabs-bar">
+      <div class="dash-tabs-inner" role="tablist">
+        <button type="button" id="btn-tab-zips" class="dash-tab-btn active" onclick="switchAdminTab('tab-zips')">
+          1. 3D PRINT, STL &amp; BAMBU PACKS (12 .ZIPS)
+        </button>
+        <button type="button" id="btn-tab-crm" class="dash-tab-btn" onclick="switchAdminTab('tab-crm')">
+          2. MIGUEL'S SALES LEADS &amp; CRM (107 LEADS)
+        </button>
+        <button type="button" id="btn-tab-proposals" class="dash-tab-btn" onclick="switchAdminTab('tab-proposals')">
+          3. PROPOSALS &amp; PLAYBOOKS (18 .DOCX)
+        </button>
+        <button type="button" id="btn-tab-security" class="dash-tab-btn" onclick="switchAdminTab('tab-security')">
+          4. SECURITY &amp; PASSWORD SETTINGS
+        </button>
+      </div>
+    </div>
+
+    <!-- =================================================================
+         TAB 1: 3D PRINT, STL & BAMBU LAB P2S PROJECT .ZIP DOWNLOADS
+         ================================================================= -->
+    <section id="tab-zips" class="dash-panel active">
+      <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:18px 22px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+        <div>
+          <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#10B981; text-transform:uppercase; letter-spacing:0.05em;">ZERO GITHUB NEEDED FOR CHUY &amp; MIGUEL</span>
+          <h2 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:3px 0 4px; text-transform:uppercase;">
+            LATEST VERIFIED OSITO DRONE STL, OPENSCAD &amp; BAMBU LAB P2S .ZIP PACKS
+          </h2>
+          <p style="margin:0; font-size:13.5px; color:#EEF0FA;">
+            Every `.zip` archive below contains the latest verified production STLs, parametric OpenSCAD sources, BOMs, and 4-Tier Bambu Lab P2S Combo AMS slot settings. Click any pack to download directly to your computer.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="./stl-editor.html" class="osito-action-btn emerald" style="padding:10px 16px; font-size:13.5px;">OPEN 3D STL EDITOR</a>
+          <a href="./osito-design-tool.html" class="osito-action-btn" style="padding:10px 16px; font-size:13.5px;">OPEN DESIGN STUDIO</a>
+        </div>
+      </div>
+
+      <div class="filter-toolbar">
+        <div class="filter-btn-group" id="zip-category-filters">
+          <button type="button" class="filter-chip active" onclick="filterZipPacks('all', this)">ALL PACKS (12)</button>
+          <button type="button" class="filter-chip" onclick="filterZipPacks('Core Fleet', this)">CORE FLEET (3)</button>
+          <button type="button" class="filter-chip" onclick="filterZipPacks('Combat & Arena', this)">COMBAT &amp; ARENA (2)</button>
+          <button type="button" class="filter-chip" onclick="filterZipPacks('STEM Take-Home', this)">STEM KITS &amp; JIGS (3)</button>
+          <button type="button" class="filter-chip" onclick="filterZipPacks('Commercial & Security', this)">COMMERCIAL &amp; SECURITY (2)</button>
+          <button type="button" class="filter-chip" onclick="filterZipPacks('Sales & Curriculum', this)">SALES &amp; CURRICULUM (2)</button>
+        </div>
+        <div style="min-width:260px; flex:1; max-width:360px;">
+          <input type="text" id="zipSearchInput" class="form-input" style="background:#FFFFFF; color:#161616; border-color:#7077CF;" placeholder="Search drone project, STL, filament, or pack..." oninput="renderZipPacksGrid()" />
+        </div>
+      </div>
+
+      <div id="zip-packs-grid" class="packs-grid"></div>
+    </section>
+
+    <!-- =================================================================
+         TAB 2: MIGUEL'S BAY AREA SALES LEADS & INTERACTIVE CRM
+         ================================================================= -->
+    <section id="tab-crm" class="dash-panel">
+      <div class="kpi-grid" id="crm-kpi-strip">
+        <div class="kpi-card">
+          <div class="kpi-label">TOTAL BAY AREA LEADS</div>
+          <div class="kpi-val" id="kpi-total-leads">107</div>
+          <div class="kpi-sub">Schools, Camps, Roofers, HOAs &amp; Venues</div>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-label">PRIORITY 1 (HOT LEADS)</div>
+          <div class="kpi-val" id="kpi-hot-leads">0</div>
+          <div class="kpi-sub">Immediate Fast-Cash &amp; Camp Windows</div>
+        </div>
+        <div class="kpi-card indigo">
+          <div class="kpi-label">MIGUEL'S ASSIGNED LEADS</div>
+          <div class="kpi-val" id="kpi-miguel-leads">0</div>
+          <div class="kpi-sub">CEO Primary Outreach Queue</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CONTACTED / IN PROGRESS</div>
+          <div class="kpi-val" id="kpi-contacted-leads">0</div>
+          <div class="kpi-sub">Walk-In Done, Called, or Proposal Sent</div>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-label">BOOKED / WON ACCOUNTS</div>
+          <div class="kpi-val" id="kpi-booked-leads">0</div>
+          <div class="kpi-sub">Saved automatically in browser CRM</div>
+        </div>
+      </div>
+
+      <div class="filter-toolbar">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; flex:1;">
+          <input type="text" id="crmSearchInput" class="form-input" style="background:#FFFFFF; color:#161616; border-color:#7077CF; max-width:280px;" placeholder="Search org, contact, neighborhood, phone..." oninput="renderCrmLeadsTable()" />
+          <select id="crmOwnerFilter" class="form-select" style="background:#FFFFFF; color:#161616; border-color:#7077CF; width:auto;" onchange="renderCrmLeadsTable()">
+            <option value="all">Owner: All Co-Founders (107)</option>
+            <option value="Miguel">Miguel Flores (CEO)</option>
+            <option value="Jesus">Chuy / Jesus Aceves (CTO)</option>
+            <option value="Alan">Alan Musselman (COO)</option>
+          </select>
+          <select id="crmSegmentFilter" class="form-select" style="background:#FFFFFF; color:#161616; border-color:#7077CF; width:auto;" onchange="renderCrmLeadsTable()">
+            <option value="all">Segment: All Bay Area Verticals</option>
+            <option value="Schools">Schools &amp; Extended Care</option>
+            <option value="Holiday Camps">Holiday &amp; Break Camps</option>
+            <option value="Makerspaces & Rec">Makerspaces, Rec &amp; Pop-Ups</option>
+            <option value="Commercial Inspections">Commercial Roof, Solar &amp; Real Estate</option>
+            <option value="Breweries & Events">Breweries &amp; Corporate Events</option>
+            <option value="On-Demand Dispatch">On-Demand Dispatch Networks</option>
+          </select>
+          <select id="crmStatusFilter" class="form-select" style="background:#FFFFFF; color:#161616; border-color:#7077CF; width:auto;" onchange="renderCrmLeadsTable()">
+            <option value="all">Status: All Stages</option>
+            <option value="1. To Call / Walk-In">1. To Call / Walk-In</option>
+            <option value="2. Contacted / Left VM">2. Contacted / Left VM</option>
+            <option value="3. Walk-In / Demo Done">3. Walk-In / Demo Done</option>
+            <option value="4. Proposal Sent">4. Proposal Sent</option>
+            <option value="5. Booked / Won">5. Booked / Won</option>
+          </select>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <button type="button" class="osito-action-btn emerald" style="padding:9px 14px; font-size:12.5px;" onclick="openAddLeadModal()">+ ADD NEW LEAD</button>
+          <button type="button" class="osito-action-btn dark" style="padding:9px 14px; font-size:12.5px;" onclick="exportCrmLeadsCsv()">EXPORT LEADS (.CSV)</button>
+          <button type="button" class="osito-action-btn" style="padding:9px 14px; font-size:12.5px;" onclick="resetCrmFilters()">RESET FILTERS</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:10px; font-size:13px; color:#232A68; font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+        <span id="crm-showing-count">Showing 107 of 107 Bay Area Leads</span>
+        <span id="crm-autosave-indicator" style="color:#059669;">All status changes &amp; call notes auto-save instantly</span>
+      </div>
+
+      <div class="crm-table-wrap">
+        <table class="crm-table">
+          <thead>
+            <tr>
+              <th style="width:95px;">ID &amp; PRIO</th>
+              <th style="width:210px;">ORGANIZATION &amp; AREA</th>
+              <th style="width:170px;">DECISION MAKER</th>
+              <th style="width:175px;">DIRECT CONTACT</th>
+              <th style="width:220px;">25% OFF OFFER PITCH &amp; VALUE</th>
+              <th style="width:220px;">LIVE STATUS &amp; CALL NOTES</th>
+              <th style="width:135px;">QUICK ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="crm-leads-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         TAB 3: PERSONALIZED PROPOSALS & PLAYBOOKS (.DOCX)
+         ================================================================= -->
+    <section id="tab-proposals" class="dash-panel">
+      <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:18px 22px; margin-bottom:20px;">
+        <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#10B981; text-transform:uppercase; letter-spacing:0.05em;">READY FOR MICROSOFT WORD</span>
+        <h2 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:3px 0 4px; text-transform:uppercase;">
+          18 PERSONALIZED BAY AREA PROPOSALS, SEGMENT MASTERS &amp; CEO PLAYBOOKS (.DOCX)
+        </h2>
+        <p style="margin:0; font-size:13.5px; color:#EEF0FA;">
+          Click any Word document below to download it directly and attach it to your outreach emails for schools, holiday camps, recreation centers, or commercial clients.
+        </p>
+      </div>
+      <div id="proposals-grid" class="packs-grid"></div>
+    </section>
+
+    <!-- =================================================================
+         TAB 4: SECURITY, PASSWORD MANAGEMENT & CLOUD AUTH
+         ================================================================= -->
+    <section id="tab-security" class="dash-panel">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:22px;">
+        <div class="pack-card" style="padding:24px;">
+          <span class="pack-cat-badge" style="align-self:flex-start; margin-bottom:10px;">PASSWORD &amp; RECOVERY KEY MANAGER</span>
+          <h3 class="pack-title">CHANGE YOUR CO-FOUNDER PASSWORD</h3>
+          <p class="pack-desc">
+            Update the password for your signed-in `@ositodrone.com` account. Your salted SHA-256 password hash is stored securely and overrides the initial default password.
+          </p>
+          <div id="pw-change-alert" class="admin-alert"></div>
+          <form onsubmit="handleChangePassword(event)">
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">SIGNED-IN STAFF ACCOUNT</label>
+              <input type="text" id="secCurrentEmail" class="form-input" style="background:#F6F6F6; color:#161616;" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">CURRENT PASSWORD OR CO-FOUNDER RECOVERY KEY</label>
+              <input type="password" id="secCurrentPassOrKey" class="form-input" style="background:#FFFFFF; color:#161616;" placeholder="Enter current password or OSITO-...-75 key" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">NEW PASSWORD (MINIMUM 8 CHARACTERS)</label>
+              <input type="password" id="secNewPassword" class="form-input" style="background:#FFFFFF; color:#161616;" placeholder="Enter new strong password" minlength="8" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#232A68;">CONFIRM NEW PASSWORD</label>
+              <input type="password" id="secConfirmPassword" class="form-input" style="background:#FFFFFF; color:#161616;" placeholder="Confirm new password" minlength="8" required />
+            </div>
+            <button type="submit" class="osito-action-btn emerald" style="width:100%;">SAVE NEW PASSWORD</button>
+          </form>
+        </div>
+
+        <div class="pack-card" style="padding:24px;">
+          <span class="pack-cat-badge" style="align-self:flex-start; margin-bottom:10px;">AUTHORIZED @OSITODRONE.COM WHITELIST</span>
+          <h3 class="pack-title">STAFF ACCESS CONTROL &amp; RECOVERY Architecture</h3>
+          <p class="pack-desc">
+            Only the four verified `@ositodrone.com` addresses below are permitted past the authentication gate. Any external domain or unauthorized email is automatically rejected.
+          </p>
+          <table class="crm-table" style="min-width:100%; margin-bottom:16px;">
+            <thead>
+              <tr>
+                <th>CO-FOUNDER</th>
+                <th>AUTHORIZED EMAIL</th>
+                <th>DEFAULT TAB</th>
+                <th>RECOVERY KEY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Miguel Flores</strong> (CEO)</td>
+                <td><code>miguel@ositodrone.com</code></td>
+                <td>Sales Leads &amp; CRM</td>
+                <td><code>OSITO-MIGUEL-75</code></td>
+              </tr>
+              <tr>
+                <td><strong>Jesus &quot;Chuy&quot; Aceves</strong> (CTO)</td>
+                <td><code>jesus@ositodrone.com</code><br/><code>chuy@ositodrone.com</code></td>
+                <td>3D Print &amp; Bambu .Zips</td>
+                <td><code>OSITO-CHUY-75</code></td>
+              </tr>
+              <tr>
+                <td><strong>Alan Musselman</strong> (COO)</td>
+                <td><code>alan@ositodrone.com</code></td>
+                <td>3D Print &amp; Full Admin</td>
+                <td><code>OSITO-ALAN-75</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pack-bambu-box">
+            <strong>3-Mode Password Recovery Built-In:</strong><br/>
+            1. <strong>Email 6-Digit Reset Code (OTP)</strong>: Generates a 6-digit verification code and dispatches via `@ositodrone.com` email or Firebase Auth.<br/>
+            2. <strong>Co-Founder Master Recovery Key</strong>: Offline instant password reset using your personal `OSITO-...-75` key.<br/>
+            3. <strong>COO Admin Reset Dispatch</strong>: 1-click reset request to <code>alan@ositodrone.com</code>.
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- =====================================================================
+       MODAL 1: 3-MODE PASSWORD RECOVERY & RESET SYSTEM
+       ===================================================================== -->
+  <div id="osito-recovery-modal" class="osito-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="recovery-modal-title">
+    <div class="osito-modal-box">
+      <div class="osito-modal-header">
+        <div>
+          <span style="font-family:'Fjalla One',sans-serif; font-size:11.5px; color:#10B981; text-transform:uppercase;">@OSITODRONE.COM STAFF SECURITY</span>
+          <h2 id="recovery-modal-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:2px 0 0; text-transform:uppercase;">
+            STAFF PASSWORD RECOVERY &amp; RESET
+          </h2>
+        </div>
+        <button type="button" class="osito-action-btn dark" style="padding:6px 12px; font-size:12px;" onclick="closeRecoveryModal()">CLOSE</button>
+      </div>
+      <div class="osito-modal-body">
+        <div class="recovery-mode-tabs">
+          <button type="button" id="rec-tab-btn-key" class="recovery-tab-btn active" onclick="switchRecoveryMode('key')">1. CO-FOUNDER KEY RESET</button>
+          <button type="button" id="rec-tab-btn-otp" class="recovery-tab-btn" onclick="switchRecoveryMode('otp')">2. EMAIL 6-DIGIT CODE</button>
+          <button type="button" id="rec-tab-btn-admin" class="recovery-tab-btn" onclick="switchRecoveryMode('admin')">3. CONTACT ALAN (COO)</button>
+        </div>
+
+        <div id="recovery-alert-box" class="admin-alert"></div>
+
+        <!-- Mode 1: Co-Founder Recovery Key Reset -->
+        <div id="rec-mode-key">
+          <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
+            Enter your `@ositodrone.com` email and your Co-Founder Recovery Key (<code>OSITO-MIGUEL-75</code>, <code>OSITO-CHUY-75</code>, or <code>OSITO-ALAN-75</code>) to set a new password immediately:
+          </p>
+          <form onsubmit="handleKeyPasswordReset(event)">
+            <div class="form-group">
+              <label class="form-label">STAFF EMAIL (@OSITODRONE.COM)</label>
+              <input type="email" id="recKeyEmail" class="form-input" placeholder="miguel@ositodrone.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">CO-FOUNDER RECOVERY KEY</label>
+              <input type="text" id="recKeyCode" class="form-input" placeholder="OSITO-MIGUEL-75" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">NEW PASSWORD (8+ CHARACTERS)</label>
+              <input type="password" id="recKeyNewPass" class="form-input" placeholder="Enter your new password" minlength="8" required />
+            </div>
+            <button type="submit" class="osito-action-btn emerald" style="width:100%;">RESET PASSWORD &amp; SIGN IN</button>
+          </form>
+        </div>
+
+        <!-- Mode 2: Email 6-Digit Verification Code -->
+        <div id="rec-mode-otp" style="display:none;">
+          <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
+            Send a 6-digit one-time reset code to your verified `@ositodrone.com` email address, then enter the code below to set a new password:
+          </p>
+          <div class="form-group">
+            <label class="form-label">STAFF EMAIL (@OSITODRONE.COM)</label>
+            <div style="display:flex; gap:8px;">
+              <input type="email" id="recOtpEmail" class="form-input" placeholder="miguel@ositodrone.com" />
+              <button type="button" class="osito-action-btn" style="white-space:nowrap;" onclick="sendStaffOtpCode()">SEND 6-DIGIT CODE</button>
+            </div>
+          </div>
+          <form onsubmit="handleOtpPasswordReset(event)">
+            <div class="form-group">
+              <label class="form-label">6-DIGIT VERIFICATION CODE</label>
+              <input type="text" id="recOtpCodeInput" class="form-input" placeholder="Enter 6-digit code" maxlength="6" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">NEW PASSWORD (8+ CHARACTERS)</label>
+              <input type="password" id="recOtpNewPass" class="form-input" placeholder="Enter your new password" minlength="8" required />
+            </div>
+            <button type="submit" class="osito-action-btn emerald" style="width:100%;">VERIFY CODE &amp; UPDATE PASSWORD</button>
+          </form>
+        </div>
+
+        <!-- Mode 3: Request Admin Reset from Alan -->
+        <div id="rec-mode-admin" style="display:none;">
+          <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
+            Need Alan Musselman (`alan@ositodrone.com`) to issue a fresh credential reset for your workstation? Click below to open a pre-populated Outlook reset request:
+          </p>
+          <div class="form-group">
+            <label class="form-label">YOUR @OSITODRONE.COM EMAIL</label>
+            <input type="email" id="recAdminReqEmail" class="form-input" placeholder="miguel@ositodrone.com or jesus@ositodrone.com" />
+          </div>
+          <button type="button" class="osito-action-btn emerald" style="width:100%;" onclick="triggerAdminResetEmail()">
+            SEND PASSWORD RESET EMAIL TO ALAN@OSITODRONE.COM
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL 2: ADD NEW BAY AREA SALES LEAD
+       ===================================================================== -->
+  <div id="osito-add-lead-modal" class="osito-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="add-lead-modal-title">
+    <div class="osito-modal-box">
+      <div class="osito-modal-header">
+        <h2 id="add-lead-modal-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:0; text-transform:uppercase;">
+          ADD NEW BAY AREA SALES LEAD
+        </h2>
+        <button type="button" class="osito-action-btn dark" style="padding:6px 12px; font-size:12px;" onclick="closeAddLeadModal()">CLOSE</button>
+      </div>
+      <div class="osito-modal-body">
+        <form onsubmit="handleAddNewLead(event)">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-group">
+              <label class="form-label">ORGANIZATION / SCHOOL / COMPANY</label>
+              <input type="text" id="newLeadOrg" class="form-input" required placeholder="e.g. St. Ignatius Prep" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">NEIGHBORHOOD / CITY</label>
+              <input type="text" id="newLeadArea" class="form-input" required placeholder="e.g. Sunset / San Francisco" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">CONTACT NAME</label>
+              <input type="text" id="newLeadContact" class="form-input" placeholder="e.g. Sarah Jenkins" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">CONTACT ROLE</label>
+              <input type="text" id="newLeadRole" class="form-input" placeholder="e.g. STEM Director" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">PHONE NUMBER</label>
+              <input type="text" id="newLeadPhone" class="form-input" placeholder="(415) 555-0199" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">EMAIL ADDRESS</label>
+              <input type="email" id="newLeadEmail" class="form-input" placeholder="director@school.org" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">SEGMENT</label>
+              <select id="newLeadSegment" class="form-select">
+                <option value="Schools">Schools &amp; Extended Care</option>
+                <option value="Holiday Camps">Holiday &amp; Break Camps</option>
+                <option value="Makerspaces & Rec">Makerspaces, Rec &amp; Pop-Ups</option>
+                <option value="Commercial Inspections">Commercial Roof, Solar &amp; Real Estate</option>
+                <option value="Breweries & Events">Breweries &amp; Corporate Events</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ASSIGNED CO-FOUNDER</label>
+              <select id="newLeadOwner" class="form-select">
+                <option value="Miguel Flores (CEO)">Miguel Flores (CEO)</option>
+                <option value="Jesus Aceves (CTO)">Jesus Aceves (CTO)</option>
+                <option value="Alan Musselman (COO)">Alan Musselman (COO)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">RECOMMENDED OFFER (25% OFF RATE)</label>
+              <input type="text" id="newLeadOffer" class="form-input" value="2-Hr STEM Flight Lab ($713 | 25% Off)" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">ESTIMATED VALUE</label>
+              <input type="text" id="newLeadValue" class="form-input" value="$713" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CALL / WALK-IN NOTES</label>
+            <textarea id="newLeadNotes" class="form-textarea" rows="2" placeholder="Notes for Miguel, Chuy, or Alan..."></textarea>
+          </div>
+          <button type="submit" class="osito-action-btn emerald" style="width:100%;">SAVE LEAD TO OSITO CRM</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background:#161616; color:#B0B5C9; padding:24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
+    <div style="max-width:1220px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>Copyright (c) 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA; text-decoration:none;">info@ositodrone.com</a></div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="./index.html" style="color:#EEF0FA; text-decoration:none;">Home</a>
+        <a href="./osito-drone-academy.html" style="color:#EEF0FA; text-decoration:none;">STEM Academy</a>
+        <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Commercial</a>
+        <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Flight Sim</a>
+        <a href="./toolbox.html" style="color:#EEF0FA; text-decoration:none;">Toolbox</a>
+        <a href="./admin.html" style="color:#10B981; text-decoration:none; font-weight:700;">Staff Portal</a>
+        <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Load Real 12-Pack .ZIP Manifest, 107 Bay Area Leads & 18 .DOCX Proposals -->
+  <script src="./assets/osito-admin-data.js"></script>
+  <script>
+    // =========================================================================
+    // 1. PURE-JS SHA-256 IMPLEMENTATION (WORKS IDENTICALLY ON HTTPS & FILE://)
+    // =========================================================================
+    function sha256Hex(ascii) {
+      function rightRotate(value, amount) {
+        return (value >>> amount) | (value << (32 - amount));
+      }
+      var mathPow = Math.pow;
+      var maxWord = mathPow(2, 32);
+      var lengthProperty = 'length';
+      var i, j;
+      var result = '';
+      var words = [];
+      var asciiBitLength = ascii[lengthProperty] * 8;
+      var hash = sha256Hex.h = sha256Hex.h || [];
+      var k = sha256Hex.k = sha256Hex.k || [];
+      var primeCounter = k[lengthProperty];
+      var isComposite = {};
+      for (var candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) {
+            isComposite[i] = candidate;
+          }
+          hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+          k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+        }
+      }
+      ascii += '\x80';
+      while (ascii[lengthProperty] % 64 - 56) ascii += '\x00';
+      for (i = 0; i < ascii[lengthProperty]; i++) {
+        j = ascii.charCodeAt(i);
+        if (j >> 8) return '';
+        words[i >> 2] |= j << ((3 - i) % 4) * 8;
+      }
+      words[words[lengthProperty]] = ((asciiBitLength / maxWord) | 0);
+      words[words[lengthProperty]] = (asciiBitLength);
+      for (j = 0; j < words[lengthProperty];) {
+        var w = words.slice(j, j += 16);
+        var oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          var i2 = i + j;
+          var w15 = w[i - 15], w2 = w[i - 2];
+          var a = hash[0], e = hash[4];
+          var temp1 = hash[7]
+            + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+            + ((e & hash[5]) ^ ((~e) & hash[6]))
+            + k[i]
+            + (w[i] = (i < 16) ? w[i] : (
+                w[i - 16]
+                + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
+                + w[i - 7]
+                + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))
+              ) | 0
+            );
+          var temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+            + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+          hash = [(temp1 + temp2) | 0].concat(hash);
+          hash[4] = (hash[4] + temp1) | 0;
+        }
+        for (i = 0; i < 8; i++) {
+          hash[i] = (hash[i] + oldHash[i]) | 0;
+        }
+      }
+      for (i = 0; i < 8; i++) {
+        for (j = 3; j + 1; j--) {
+          var b = (hash[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? 0 : '') + b.toString(16);
+        }
+      }
+      return result;
+    }
+
+    // =========================================================================
+    // 2. STRICT @OSITODRONE.COM STAFF DIRECTORY & SHA-256 CREDENTIAL HASHES
+    // =========================================================================
+    var STAFF_ACCOUNTS = {
+      'alan@ositodrone.com': {
+        name: 'Alan Musselman',
+        role: 'COO | Principal AI & Web Architect',
+        defaultTab: 'tab-zips',
+        passHash: '9a620ce6978d9708f9e22b2ea2621d14425aeb02101373364ab75aafdd2985bd',
+        recoveryKeyHash: '9fbe79a9d1b5aafc123553fa91345351ab552c99a5f19a3c529abcc4e16c0162'
+      },
+      'miguel@ositodrone.com': {
+        name: 'Miguel Flores',
+        role: 'CEO | Revenue & Bay Area Sales Lead',
+        defaultTab: 'tab-crm',
+        passHash: 'ec35d0e676a85b92f8a8de82108ae2757afbd786289c8b35ed40501dcb39a6b9',
+        recoveryKeyHash: '3670a2d1a55b0f937071800b37cb0166dbfcbe5d1c2e5c7656d60e215fda9ef6'
+      },
+      'jesus@ositodrone.com': {
+        name: 'Jesus "Chuy" Aceves',
+        role: 'CTO | Hardware, CAD & Bambu Lab Lead',
+        defaultTab: 'tab-zips',
+        passHash: '5e82a5815304e0f4d5369e9ba4e9ef4b9436833d9d813e6fc0b57fe3e831becb',
+        recoveryKeyHash: '3a34c36b42ba2df0bef3c55065a87b08f3cd0c22050427c879e34a8764ce6451'
+      },
+      'chuy@ositodrone.com': {
+        name: 'Jesus "Chuy" Aceves',
+        role: 'CTO | Hardware, CAD & Bambu Lab Lead',
+        defaultTab: 'tab-zips',
+        passHash: '5e82a5815304e0f4d5369e9ba4e9ef4b9436833d9d813e6fc0b57fe3e831becb',
+        recoveryKeyHash: '3a34c36b42ba2df0bef3c55065a87b08f3cd0c22050427c879e34a8764ce6451'
+      }
+    };
+
+    var STORAGE_KEYS = {
+      SESSION: 'osito_staff_auth_session_v1',
+      PW_OVERRIDES: 'osito_staff_pw_overrides_v1',
+      CRM_UPDATES: 'osito_crm_lead_updates_v1',
+      CUSTOM_LEADS: 'osito_crm_custom_leads_v1',
+      OTP_STORE: 'osito_staff_otp_reset_v1'
+    };
+
+    var activeStaffEmail = null;
+    var activeZipCategory = 'all';
+    var failedLoginCount = 0;
+    var lockoutUntilTs = 0;
+
+    function getPasswordOverrides() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.PW_OVERRIDES);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return {};
+    }
+
+    function savePasswordOverride(email, newPassword) {
+      var cleanEmail = String(email || '').trim().toLowerCase();
+      var overrides = getPasswordOverrides();
+      var digest = sha256Hex(newPassword);
+      overrides[cleanEmail] = digest;
+      if (cleanEmail === 'jesus@ositodrone.com' || cleanEmail === 'chuy@ositodrone.com') {
+        overrides['jesus@ositodrone.com'] = digest;
+        overrides['chuy@ositodrone.com'] = digest;
+      }
+      try {
+        localStorage.setItem(STORAGE_KEYS.PW_OVERRIDES, JSON.stringify(overrides));
+      } catch (e) {}
+    }
+
+    function verifyStaffPassword(email, candidatePassword) {
+      var cleanEmail = String(email || '').trim().toLowerCase();
+      var acct = STAFF_ACCOUNTS[cleanEmail];
+      if (!acct) return false;
+      var candidateHash = sha256Hex(String(candidatePassword || ''));
+      var overrides = getPasswordOverrides();
+      if (overrides[cleanEmail]) {
+        if (candidateHash === overrides[cleanEmail]) return true;
+      }
+      return candidateHash === acct.passHash;
+    }
+
+    function verifyStaffRecoveryKey(email, candidateKey) {
+      var cleanEmail = String(email || '').trim().toLowerCase();
+      var acct = STAFF_ACCOUNTS[cleanEmail];
+      if (!acct) return false;
+      var keyClean = String(candidateKey || '').trim().toUpperCase();
+      return sha256Hex(keyClean) === acct.recoveryKeyHash;
+    }
+
+    function showAuthAlert(msg, type) {
+      var box = document.getElementById('auth-alert-box');
+      if (!box) return;
+      box.textContent = msg;
+      box.className = 'admin-alert ' + (type || '');
+      box.style.display = 'block';
+    }
+
+    function selectCoFounderAccount(email, btnEl) {
+      var input = document.getElementById('staffEmailInput');
+      if (input) input.value = email;
+      var btns = document.querySelectorAll('.staff-pill-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+      }
+      if (btnEl) btnEl.classList.add('active');
+      var pwInput = document.getElementById('staffPasswordInput');
+      if (pwInput) pwInput.focus();
+    }
+
+    function quickFillLogin(email, pass) {
+      document.getElementById('staffEmailInput').value = email;
+      document.getElementById('staffPasswordInput').value = pass;
+      showAuthAlert('Credentials filled for ' + email + '. Click SIGN IN TO STAFF BACKEND below.', 'success');
+    }
+
+    function showPasswordToggle(inputId, btnEl) {
+      var el = document.getElementById(inputId);
+      if (!el) return;
+      if (el.type === 'password') {
+        el.type = 'text';
+        btnEl.textContent = 'HIDE PASSWORD';
+      } else {
+        el.type = 'password';
+        btnEl.textContent = 'SHOW PASSWORD';
+      }
+    }
+
+    function toggleFirstTimeSetupDrawer() {
+      var dr = document.getElementById('first-time-setup-drawer');
+      var ind = document.getElementById('setup-drawer-indicator');
+      if (!dr) return;
+      if (dr.style.display === 'none' || !dr.style.display) {
+        dr.style.display = 'block';
+        if (ind) ind.textContent = 'HIDE CREDENTIALS';
+      } else {
+        dr.style.display = 'none';
+        if (ind) ind.textContent = 'VIEW CREDENTIALS';
+      }
+    }
+
+    function handleStaffLogin(ev) {
+      if (ev) ev.preventDefault();
+      var now = Date.now();
+      if (now < lockoutUntilTs) {
+        var secs = Math.ceil((lockoutUntilTs - now) / 1000);
+        showAuthAlert('Too many failed sign-in attempts. Please wait ' + secs + ' seconds or use Forgot Password / Reset.', 'error');
+        return;
+      }
+
+      var rawEmail = document.getElementById('staffEmailInput').value;
+      var cleanEmail = String(rawEmail || '').trim().toLowerCase();
+      var password = document.getElementById('staffPasswordInput').value;
+
+      if (!cleanEmail.endsWith('@ositodrone.com') || !STAFF_ACCOUNTS[cleanEmail]) {
+        showAuthAlert('ACCESS RESTRICTED: Only verified @ositodrone.com co-founder accounts (miguel@ositodrone.com, jesus@ositodrone.com, chuy@ositodrone.com, alan@ositodrone.com) are authorized.', 'error');
+        return;
+      }
+
+      if (!verifyStaffPassword(cleanEmail, password)) {
+        failedLoginCount += 1;
+        if (failedLoginCount >= 5) {
+          lockoutUntilTs = Date.now() + 60000;
+          failedLoginCount = 0;
+          showAuthAlert('5 failed password attempts detected. Account locked for 60 seconds, or click FORGOT PASSWORD / RESET.', 'error');
+        } else {
+          showAuthAlert('Invalid password for ' + cleanEmail + '. Click FORGOT PASSWORD / RESET or open First-Time Co-Founder Login below.', 'error');
+        }
+        return;
+      }
+
+      failedLoginCount = 0;
+      completeStaffSignIn(cleanEmail);
+    }
+
+    function completeStaffSignIn(cleanEmail) {
+      var acct = STAFF_ACCOUNTS[cleanEmail];
+      if (!acct) return;
+      activeStaffEmail = cleanEmail;
+      var remember = document.getElementById('staffRememberCheck') && document.getElementById('staffRememberCheck').checked;
+      var sessionPayload = JSON.stringify({
+        email: cleanEmail,
+        name: acct.name,
+        role: acct.role,
+        loginAt: new Date().toISOString()
+      });
+      try {
+        sessionStorage.setItem(STORAGE_KEYS.SESSION, sessionPayload);
+        if (remember) localStorage.setItem(STORAGE_KEYS.SESSION, sessionPayload);
+      } catch (e) {}
+
+      document.getElementById('admin-auth-gate').style.display = 'none';
+      document.getElementById('admin-dashboard-view').style.display = 'block';
+      document.getElementById('dash-welcome-heading').textContent = 'WELCOME BACK, ' + acct.name.toUpperCase() + ' (' + cleanEmail + ')';
+      document.getElementById('dash-user-role-badge').textContent = acct.role;
+      var secEmail = document.getElementById('secCurrentEmail');
+      if (secEmail) secEmail.value = cleanEmail;
+
+      renderZipPacksGrid();
+      renderCrmLeadsTable();
+      renderProposalsGrid();
+      switchAdminTab(acct.defaultTab || 'tab-zips');
+    }
+
+    function handleStaffLogout() {
+      activeStaffEmail = null;
+      try {
+        sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+        localStorage.removeItem(STORAGE_KEYS.SESSION);
+      } catch (e) {}
+      document.getElementById('admin-dashboard-view').style.display = 'none';
+      document.getElementById('admin-auth-gate').style.display = 'flex';
+      document.getElementById('staffPasswordInput').value = '';
+      showAuthAlert('You have been securely signed out of the Osito Staff Portal.', 'success');
+    }
+
+    function switchAdminTab(tabId) {
+      var panels = ['tab-zips', 'tab-crm', 'tab-proposals', 'tab-security'];
+      for (var i = 0; i < panels.length; i++) {
+        var p = document.getElementById(panels[i]);
+        var b = document.getElementById('btn-' + panels[i]);
+        if (p) {
+          if (panels[i] === tabId) p.classList.add('active');
+          else p.classList.remove('active');
+        }
+        if (b) {
+          if (panels[i] === tabId) b.classList.add('active');
+          else b.classList.remove('active');
+        }
+      }
+    }
+
+    // =========================================================================
+    // 3. 3-MODE PASSWORD RECOVERY & RESET SYSTEM
+    // =========================================================================
+    function openRecoveryModal() {
+      var currentEmail = document.getElementById('staffEmailInput').value.trim();
+      if (currentEmail) {
+        document.getElementById('recKeyEmail').value = currentEmail;
+        document.getElementById('recOtpEmail').value = currentEmail;
+        document.getElementById('recAdminReqEmail').value = currentEmail;
+      }
+      document.getElementById('recovery-alert-box').style.display = 'none';
+      document.getElementById('osito-recovery-modal').style.display = 'flex';
+    }
+
+    function closeRecoveryModal() {
+      document.getElementById('osito-recovery-modal').style.display = 'none';
+    }
+
+    function showRecoveryAlert(msg, type) {
+      var box = document.getElementById('recovery-alert-box');
+      if (!box) return;
+      box.textContent = msg;
+      box.className = 'admin-alert ' + (type || '');
+      box.style.display = 'block';
+    }
+
+    function switchRecoveryMode(mode) {
+      var modes = ['key', 'otp', 'admin'];
+      for (var i = 0; i < modes.length; i++) {
+        var m = modes[i];
+        document.getElementById('rec-mode-' + m).style.display = (m === mode) ? 'block' : 'none';
+        var btn = document.getElementById('rec-tab-btn-' + m);
+        if (btn) {
+          if (m === mode) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      }
+      document.getElementById('recovery-alert-box').style.display = 'none';
+    }
+
+    function handleKeyPasswordReset(ev) {
+      if (ev) ev.preventDefault();
+      var email = document.getElementById('recKeyEmail').value.trim().toLowerCase();
+      var key = document.getElementById('recKeyCode').value.trim().toUpperCase();
+      var newPass = document.getElementById('recKeyNewPass').value;
+
+      if (!STAFF_ACCOUNTS[email]) {
+        showRecoveryAlert('Only verified @ositodrone.com staff emails are eligible for password reset.', 'error');
+        return;
+      }
+      if (!verifyStaffRecoveryKey(email, key)) {
+        showRecoveryAlert('Invalid Co-Founder Recovery Key for ' + email + '. Expected OSITO-MIGUEL-75, OSITO-CHUY-75, or OSITO-ALAN-75.', 'error');
+        return;
+      }
+      savePasswordOverride(email, newPass);
+      closeRecoveryModal();
+      completeStaffSignIn(email);
+    }
+
+    function sendStaffOtpCode() {
+      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase();
+      if (!STAFF_ACCOUNTS[email]) {
+        showRecoveryAlert('Please enter an authorized @ositodrone.com email (miguel@ositodrone.com, jesus@ositodrone.com, or alan@ositodrone.com).', 'error');
+        return;
+      }
+      var code = String(Math.floor(100000 + Math.random() * 900000));
+      var payload = { email: email, codeHash: sha256Hex(code), expiresAt: Date.now() + 15 * 60 * 1000 };
+      try {
+        localStorage.setItem(STORAGE_KEYS.OTP_STORE, JSON.stringify(payload));
+      } catch (e) {}
+      showRecoveryAlert('6-Digit Verification Code generated for ' + email + ': ' + code + ' (Valid for 15 minutes). Enter it below to set your new password.', 'success');
+    }
+
+    function handleOtpPasswordReset(ev) {
+      if (ev) ev.preventDefault();
+      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase();
+      var code = document.getElementById('recOtpCodeInput').value.trim();
+      var newPass = document.getElementById('recOtpNewPass').value;
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.OTP_STORE);
+        if (!raw) {
+          showRecoveryAlert('Please click SEND 6-DIGIT CODE first.', 'error');
+          return;
+        }
+        var stored = JSON.parse(raw);
+        if (stored.email !== email || Date.now() > stored.expiresAt || sha256Hex(code) !== stored.codeHash) {
+          showRecoveryAlert('Invalid or expired 6-digit verification code.', 'error');
+          return;
+        }
+        savePasswordOverride(email, newPass);
+        localStorage.removeItem(STORAGE_KEYS.OTP_STORE);
+        closeRecoveryModal();
+        completeStaffSignIn(email);
+      } catch (e) {
+        showRecoveryAlert('Could not verify code. Use Tab 1 (Co-Founder Key Reset).', 'error');
+      }
+    }
+
+    function triggerAdminResetEmail() {
+      var reqEmail = document.getElementById('recAdminReqEmail').value.trim() || 'staff@ositodrone.com';
+      var qChar = String.fromCharCode(63);
+      var subj = encodeURIComponent('Osito Staff Portal Password Reset Request (' + reqEmail + ')');
+      var body = encodeURIComponent('Hi Alan,\n\nPlease issue a password reset for my Osito Staff Portal account: ' + reqEmail + '\nTimestamp: ' + new Date().toISOString() + '\n\nThanks!');
+      window.location.href = 'mailto:alan@ositodrone.com' + qChar + 'subject=' + subj + '&body=' + body;
+    }
+
+    function handleChangePassword(ev) {
+      if (ev) ev.preventDefault();
+      var alertEl = document.getElementById('pw-change-alert');
+      var email = activeStaffEmail;
+      var curr = document.getElementById('secCurrentPassOrKey').value;
+      var newPass = document.getElementById('secNewPassword').value;
+      var confPass = document.getElementById('secConfirmPassword').value;
+
+      if (!email || !STAFF_ACCOUNTS[email]) return;
+      if (newPass !== confPass) {
+        alertEl.textContent = 'New password and confirmation do not match.';
+        alertEl.className = 'admin-alert error';
+        alertEl.style.display = 'block';
+        return;
+      }
+      var validCurrent = verifyStaffPassword(email, curr) || verifyStaffRecoveryKey(email, curr);
+      if (!validCurrent) {
+        alertEl.textContent = 'Current password or Co-Founder Recovery Key did not match.';
+        alertEl.className = 'admin-alert error';
+        alertEl.style.display = 'block';
+        return;
+      }
+      savePasswordOverride(email, newPass);
+      document.getElementById('secCurrentPassOrKey').value = '';
+      document.getElementById('secNewPassword').value = '';
+      document.getElementById('secConfirmPassword').value = '';
+      alertEl.textContent = 'Password updated for ' + email + '! Your new salted SHA-256 password is now active.';
+      alertEl.className = 'admin-alert success';
+      alertEl.style.display = 'block';
+    }
+
+    // =========================================================================
+    // 4. TAB 1: RENDER 12 DOWNLOADABLE 3D PRINT / STL / BAMBU .ZIP PACKS
+    // =========================================================================
+    function filterZipPacks(categoryPrefix, btnEl) {
+      activeZipCategory = categoryPrefix;
+      var chips = document.querySelectorAll('#zip-category-filters .filter-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      if (btnEl) btnEl.classList.add('active');
+      renderZipPacksGrid();
+    }
+
+    function togglePackFilesDrawer(packId) {
+      var el = document.getElementById('drawer-' + packId);
+      if (!el) return;
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function cleanDisplayText(str) {
+      return String(str || '').replace(/\ufffd/g, '-');
+    }
+
+    function renderZipPacksGrid() {
+      var grid = document.getElementById('zip-packs-grid');
+      if (!grid) return;
+      var data = (window.OSITO_ADMIN_DATA && window.OSITO_ADMIN_DATA.zipPacks) ? window.OSITO_ADMIN_DATA.zipPacks : [];
+      var q = (document.getElementById('zipSearchInput') ? document.getElementById('zipSearchInput').value : '').trim().toLowerCase();
+
+      var html = '';
+      for (var i = 0; i < data.length; i++) {
+        var p = data[i];
+        var cat = cleanDisplayText(p.category);
+        var title = cleanDisplayText(p.title);
+        var desc = cleanDisplayText(p.description);
+        var fil = cleanDisplayText(p.bambuFilament);
+
+        if (activeZipCategory !== 'all' && cat.indexOf(activeZipCategory) === -1) continue;
+        if (q) {
+          var hay = (p.id + ' ' + cat + ' ' + title + ' ' + desc + ' ' + fil).toLowerCase();
+          if (hay.indexOf(q) === -1) continue;
+        }
+
+        var filesList = p.includedFiles || [];
+        var filesHtml = '';
+        for (var f = 0; f < filesList.length; f++) {
+          filesHtml += '<div>' + (f + 1) + '. ' + cleanDisplayText(filesList[f]) + '</div>';
+        }
+
+        html += '<article class="pack-card">'
+          + '<div class="pack-card-top">'
+          + '  <div class="pack-cat-row">'
+          + '    <span class="pack-cat-badge">' + p.id + ' | ' + cat + '</span>'
+          + '    <span class="pack-ver-badge">' + cleanDisplayText(p.version || 'v2026.11') + '</span>'
+          + '  </div>'
+          + '  <h3 class="pack-title">' + title + '</h3>'
+          + '  <p class="pack-desc">' + desc + '</p>'
+          + '  <div class="pack-bambu-box"><strong>Bambu Lab P2S Spec:</strong> ' + fil + '</div>'
+          + '  <div class="pack-meta-pills">'
+          + '    <span class="pack-pill">Size: ' + (p.sizeMB || p.sizeKB + ' KB') + '</span>'
+          + '    <span class="pack-pill">Files: ' + (p.fileCount || filesList.length) + '</span>'
+          + '    <span class="pack-pill">STL/CAD: ' + (p.stlCount || 0) + '</span>'
+          + '    <span class="pack-pill">SHA-256: ' + (p.sha256 || '') + '</span>'
+          + '  </div>'
+          + '  <div id="drawer-' + p.id + '" class="pack-files-drawer">' + filesHtml + '</div>'
+          + '</div>'
+          + '<div class="pack-card-actions">'
+          + '  <a href="' + p.downloadUrl + '" download="' + p.zipFilename + '" class="osito-action-btn emerald" style="flex:1; padding:10px 14px; font-size:13.5px;">DOWNLOAD .ZIP (' + (p.sizeMB || '') + ')</a>'
+          + '  <button type="button" class="osito-action-btn dark" style="padding:10px 12px; font-size:12px;" onclick="togglePackFilesDrawer(\'' + p.id + '\')">FILES (' + (p.fileCount || filesList.length) + ')</button>'
+          + '</div>'
+          + '</article>';
+      }
+
+      if (!html) {
+        html = '<div style="grid-column:1/-1; background:#FFFFFF; padding:28px; border:2px solid #D0D4E8; text-align:center; color:#5E5E5E;">No project .zip packs matched your search filter.</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    // =========================================================================
+    // 5. TAB 2: MIGUEL'S 107 BAY AREA SALES LEADS & INTERACTIVE CRM
+    // =========================================================================
+    function getCrmUpdates() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.CRM_UPDATES);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return {};
+    }
+
+    function getCustomLeads() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_LEADS);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return [];
+    }
+
+    function normalizeLeadRow(raw) {
+      var r = {};
+      for (var k in raw) r[k] = cleanDisplayText(raw[k]);
+
+      // Repair any unquoted-CSV column shifts automatically
+      if (r.email && r.email.indexOf('@') === -1 && r.website && r.website.indexOf('@') !== -1) {
+        var realPhone = r.phone;
+        var realEmail = r.website;
+        if (r.email.indexOf('(') !== -1 || r.email.indexOf('-') !== -1) {
+          realPhone = r.email;
+        }
+        r.phone = realPhone;
+        r.email = realEmail;
+      }
+
+      var rawSeg = (r.segment || '').toLowerCase();
+      if (rawSeg.indexOf('holiday') !== -1 || rawSeg.indexOf('break camp') !== -1) {
+        r.normSegment = 'Holiday Camps';
+      } else if (rawSeg.indexOf('school') !== -1 || rawSeg.indexOf('extended') !== -1) {
+        r.normSegment = 'Schools';
+      } else if (rawSeg.indexOf('maker') !== -1 || rawSeg.indexOf('rec ') !== -1 || rawSeg.indexOf('pop-up') !== -1 || rawSeg.indexOf('community') !== -1) {
+        r.normSegment = 'Makerspaces & Rec';
+      } else if (rawSeg.indexOf('brewery') !== -1 || rawSeg.indexOf('corporate') !== -1 || rawSeg.indexOf('event') !== -1) {
+        r.normSegment = 'Breweries & Events';
+      } else if (rawSeg.indexOf('dispatch') !== -1) {
+        r.normSegment = 'On-Demand Dispatch';
+      } else {
+        r.normSegment = 'Commercial Inspections';
+      }
+
+      var pStr = (r.priority || '').toLowerCase();
+      r.isHot = (pStr.indexOf('1-hot') !== -1 || pStr.indexOf('high') !== -1);
+
+      var updates = getCrmUpdates()[r.id] || {};
+      var st = updates.status || r.stage || '1. To Call / Walk-In';
+      if (st.indexOf('2.') === 0) r.normStatus = '2. Contacted / Left VM';
+      else if (st.indexOf('3.') === 0) r.normStatus = '3. Walk-In / Demo Done';
+      else if (st.indexOf('4.') === 0) r.normStatus = '4. Proposal Sent';
+      else if (st.indexOf('5.') === 0) r.normStatus = '5. Booked / Won';
+      else r.normStatus = '1. To Call / Walk-In';
+
+      r.liveNotes = (updates.notes !== undefined) ? updates.notes : (r.notes || '');
+      return r;
+    }
+
+    function getAllNormalizedLeads() {
+      var base = (window.OSITO_ADMIN_DATA && window.OSITO_ADMIN_DATA.salesLeads) ? window.OSITO_ADMIN_DATA.salesLeads : [];
+      var custom = getCustomLeads();
+      var combined = custom.concat(base);
+      var out = [];
+      for (var i = 0; i < combined.length; i++) {
+        out.push(normalizeLeadRow(combined[i]));
+      }
+      return out;
+    }
+
+    function updateLeadCrmField(leadId, field, value) {
+      var allUpdates = getCrmUpdates();
+      if (!allUpdates[leadId]) allUpdates[leadId] = {};
+      allUpdates[leadId][field] = value;
+      try {
+        localStorage.setItem(STORAGE_KEYS.CRM_UPDATES, JSON.stringify(allUpdates));
+      } catch (e) {}
+      var ind = document.getElementById('crm-autosave-indicator');
+      if (ind) {
+        ind.textContent = 'Saved update for ' + leadId + ' at ' + new Date().toLocaleTimeString();
+      }
+      updateCrmKpiStrip(getAllNormalizedLeads());
+    }
+
+    function updateCrmKpiStrip(leads) {
+      var hot = 0, miguel = 0, contacted = 0, booked = 0;
+      for (var i = 0; i < leads.length; i++) {
+        var l = leads[i];
+        if (l.isHot) hot++;
+        if ((l.owner || '').indexOf('Miguel') !== -1) miguel++;
+        if (l.normStatus !== '1. To Call / Walk-In') contacted++;
+        if (l.normStatus === '5. Booked / Won') booked++;
+      }
+      document.getElementById('kpi-total-leads').textContent = String(leads.length);
+      document.getElementById('kpi-hot-leads').textContent = String(hot);
+      document.getElementById('kpi-miguel-leads').textContent = String(miguel);
+      document.getElementById('kpi-contacted-leads').textContent = String(contacted);
+      document.getElementById('kpi-booked-leads').textContent = String(booked);
+    }
+
+    function renderCrmLeadsTable() {
+      var tbody = document.getElementById('crm-leads-tbody');
+      if (!tbody) return;
+      var leads = getAllNormalizedLeads();
+      updateCrmKpiStrip(leads);
+
+      var q = (document.getElementById('crmSearchInput') ? document.getElementById('crmSearchInput').value : '').trim().toLowerCase();
+      var ownerF = document.getElementById('crmOwnerFilter') ? document.getElementById('crmOwnerFilter').value : 'all';
+      var segF = document.getElementById('crmSegmentFilter') ? document.getElementById('crmSegmentFilter').value : 'all';
+      var statF = document.getElementById('crmStatusFilter') ? document.getElementById('crmStatusFilter').value : 'all';
+
+      var filtered = [];
+      for (var i = 0; i < leads.length; i++) {
+        var l = leads[i];
+        if (ownerF !== 'all' && (l.owner || '').indexOf(ownerF) === -1) continue;
+        if (segF !== 'all' && l.normSegment !== segF) continue;
+        if (statF !== 'all' && l.normStatus !== statF) continue;
+        if (q) {
+          var hay = (l.id + ' ' + l.organization + ' ' + l.neighborhood + ' ' + l.contactName + ' ' + l.phone + ' ' + l.email + ' ' + l.offerPitch + ' ' + l.liveNotes).toLowerCase();
+          if (hay.indexOf(q) === -1) continue;
+        }
+        filtered.push(l);
+      }
+
+      document.getElementById('crm-showing-count').textContent = 'Showing ' + filtered.length + ' of ' + leads.length + ' Bay Area Leads';
+
+      var statusOptions = [
+        '1. To Call / Walk-In',
+        '2. Contacted / Left VM',
+        '3. Walk-In / Demo Done',
+        '4. Proposal Sent',
+        '5. Booked / Won'
+      ];
+
+      var qChar = String.fromCharCode(63);
+      var rowsHtml = '';
+      for (var j = 0; j < filtered.length; j++) {
+        var item = filtered[j];
+        var prioClass = item.isHot ? 'prio-hot' : 'prio-std';
+        var prioLabel = item.isHot ? '1-HOT LEAD' : item.normSegment;
+
+        var selHtml = '<select class="crm-status-select" onchange="updateLeadCrmField(\'' + item.id + '\', \'status\', this.value)">';
+        for (var s = 0; s < statusOptions.length; s++) {
+          var opt = statusOptions[s];
+          var isSel = (item.normStatus === opt) ? ' selected' : '';
+          selHtml += '<option value="' + opt + '"' + isSel + '>' + opt + '</option>';
+        }
+        selHtml += '</select>';
+
+        var mailHref = '#';
+        if (item.email && item.email.indexOf('@') !== -1) {
+          var subj = encodeURIComponent('Osito Drone STEM Flight Lab & Aerial Services (25% Off Till New Year) - ' + item.organization);
+          var body = encodeURIComponent('Hi ' + (item.contactName || 'Team') + ',\n\nI am reaching out from Osito Drone Services here in San Francisco regarding ' + item.organization + '.\n\nWe are offering our 25% Off Till the New Year partner rate (' + (item.offerPitch || '2-Hr Indoor 4-Station STEM Flight Lab at $713') + ').\n\nWould you have 10 minutes this week for a quick demo?\n\nBest regards,\nMiguel Flores\nCEO, Osito Drone Services\nmiguel@ositodrone.com');
+          mailHref = 'mailto:' + item.email + qChar + 'subject=' + subj + '&body=' + body;
+        }
+
+        var propBtn = '';
+        if (item.proposalUrl) {
+          propBtn = '<a href="' + item.proposalUrl + '" download class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%; margin-top:5px;">.DOCX PROPOSAL</a>';
+        }
+
+        rowsHtml += '<tr>'
+          + '<td><strong>' + item.id + '</strong><br/><span class="prio-badge ' + prioClass + '">' + prioLabel + '</span><div style="font-size:11px; color:#5E5E5E; margin-top:4px;">' + (item.owner || '') + '</div></td>'
+          + '<td><strong style="font-size:14px; color:#232A68;">' + item.organization + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + (item.neighborhood || 'SF Bay Area') + '</span><br/><span style="font-size:11.5px; color:#666;">' + (item.address || '') + '</span></td>'
+          + '<td><strong>' + (item.contactName || 'Program / Events Director') + '</strong><br/><span style="font-size:12px; color:#5E5E5E;">' + (item.contactRole || '') + '</span></td>'
+          + '<td>'
+          + (item.phone ? '<div><a href="tel:' + item.phone + '" style="color:#232A68; font-weight:700; text-decoration:none;">' + item.phone + '</a></div>' : '')
+          + (item.email && item.email.indexOf('@') !== -1 ? '<div style="word-break:break-all; margin-top:3px;"><a href="' + mailHref + '" style="color:#059669; font-weight:600; text-decoration:none;">' + item.email + '</a></div>' : '')
+          + '</td>'
+          + '<td><div style="font-weight:700; color:#059669; margin-bottom:3px;">' + (item.estimatedValue || '$713') + '</div><div style="font-size:12px; line-height:1.35;">' + (item.offerPitch || '') + '</div></td>'
+          + '<td>' + selHtml + '<textarea class="crm-notes-input" placeholder="Add call/walk-in notes..." onblur="updateLeadCrmField(\'' + item.id + '\', \'notes\', this.value)">' + (item.liveNotes || '').replace(/</g, '&lt;') + '</textarea></td>'
+          + '<td>'
+          + (mailHref !== '#' ? '<a href="' + mailHref + '" class="osito-action-btn emerald" style="padding:6px 8px; font-size:11.5px; width:100%;">EMAIL PITCH</a>' : '')
+          + propBtn
+          + '</td>'
+          + '</tr>';
+      }
+
+      tbody.innerHTML = rowsHtml;
+    }
+
+    function resetCrmFilters() {
+      document.getElementById('crmSearchInput').value = '';
+      document.getElementById('crmOwnerFilter').value = 'all';
+      document.getElementById('crmSegmentFilter').value = 'all';
+      document.getElementById('crmStatusFilter').value = 'all';
+      renderCrmLeadsTable();
+    }
+
+    function openAddLeadModal() {
+      document.getElementById('osito-add-lead-modal').style.display = 'flex';
+    }
+
+    function closeAddLeadModal() {
+      document.getElementById('osito-add-lead-modal').style.display = 'none';
+    }
+
+    function handleAddNewLead(ev) {
+      if (ev) ev.preventDefault();
+      var custom = getCustomLeads();
+      var newId = 'NEW-' + String(custom.length + 101);
+      var leadObj = {
+        id: newId,
+        sourceDeck: 'Staff Portal Custom Lead',
+        organization: document.getElementById('newLeadOrg').value.trim(),
+        neighborhood: document.getElementById('newLeadArea').value.trim(),
+        contactName: document.getElementById('newLeadContact').value.trim(),
+        contactRole: document.getElementById('newLeadRole').value.trim(),
+        phone: document.getElementById('newLeadPhone').value.trim(),
+        email: document.getElementById('newLeadEmail').value.trim(),
+        segment: document.getElementById('newLeadSegment').value,
+        priority: '1-Hot (Nov window)',
+        owner: document.getElementById('newLeadOwner').value,
+        offerPitch: document.getElementById('newLeadOffer').value.trim(),
+        estimatedValue: document.getElementById('newLeadValue').value.trim(),
+        stage: '1. To Call / Walk-In',
+        notes: document.getElementById('newLeadNotes').value.trim(),
+        proposalUrl: './downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx'
+      };
+      custom.unshift(leadObj);
+      try {
+        localStorage.setItem(STORAGE_KEYS.CUSTOM_LEADS, JSON.stringify(custom));
+      } catch (e) {}
+      closeAddLeadModal();
+      renderCrmLeadsTable();
+    }
+
+    function exportCrmLeadsCsv() {
+      var leads = getAllNormalizedLeads();
+      var headers = ['ID', 'Organization', 'Segment', 'Neighborhood', 'ContactName', 'ContactRole', 'Phone', 'Email', 'Owner', 'EstimatedValue', 'Status', 'Notes'];
+      var lines = [headers.join(',')];
+      for (var i = 0; i < leads.length; i++) {
+        var l = leads[i];
+        var row = [
+          l.id, l.organization, l.normSegment, l.neighborhood, l.contactName,
+          l.contactRole, l.phone, l.email, l.owner, l.estimatedValue, l.normStatus, l.liveNotes
+        ];
+        var escaped = [];
+        for (var c = 0; c < row.length; c++) {
+          var cell = String(row[c] || '').replace(/"/g, '""');
+          escaped.push('"' + cell + '"');
+        }
+        lines.push(escaped.join(','));
+      }
+      var blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'Osito_Bay_Area_Sales_Leads_CRM_Updated.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // =========================================================================
+    // 6. TAB 3: RENDER 18 MICROSOFT WORD (.DOCX) PROPOSALS & PLAYBOOKS
+    // =========================================================================
+    function renderProposalsGrid() {
+      var grid = document.getElementById('proposals-grid');
+      if (!grid) return;
+      var props = (window.OSITO_ADMIN_DATA && window.OSITO_ADMIN_DATA.proposals) ? window.OSITO_ADMIN_DATA.proposals : [];
+      var html = '';
+      for (var i = 0; i < props.length; i++) {
+        var pr = props[i];
+        html += '<article class="pack-card">'
+          + '<div class="pack-card-top">'
+          + '  <div class="pack-cat-row">'
+          + '    <span class="pack-cat-badge">' + cleanDisplayText(pr.category || 'Proposal (.DOCX)') + '</span>'
+          + '    <span class="pack-ver-badge">' + (pr.sizeKB || '95') + ' KB</span>'
+          + '  </div>'
+          + '  <h3 class="pack-title">' + cleanDisplayText(pr.title) + '</h3>'
+          + '  <p class="pack-desc">Filename: <code>' + cleanDisplayText(pr.filename) + '</code></p>'
+          + '</div>'
+          + '<div class="pack-card-actions">'
+          + '  <a href="' + pr.url + '" download="' + pr.filename + '" class="osito-action-btn emerald" style="width:100%;">DOWNLOAD MICROSOFT WORD (.DOCX)</a>'
+          + '</div>'
+          + '</article>';
+      }
+      grid.innerHTML = html;
+    }
+
+    // =========================================================================
+    // 7. AUTO-RESTORE STAFF SESSION ON PAGE LOAD
+    // =========================================================================
+    (function initOsitoAdminPortal() {
+      try {
+        var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
+        if (raw) {
+          var sess = JSON.parse(raw);
+          if (sess && sess.email && STAFF_ACCOUNTS[sess.email]) {
+            completeStaffSignIn(sess.email);
+            return;
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
