@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Aerial Solutions | FAA Part 107 Commercial Inspections & Mapping - Osito Drone Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; }
+    * { border-radius: 0px !important; box-sizing: border-box; }
+        /* Unified Top Navigation Bar (#osito-site-nav) */
+    #osito-site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: rgba(22, 22, 22, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 2px solid #7077CF;
+      padding: 10px 24px;
+    }
+    #osito-site-nav * {
+      border-radius: 0px !important;
+      box-sizing: border-box;
+    }
+    .osito-nav-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .osito-nav-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .osito-nav-brand img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .osito-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .osito-nav-item {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #EEF0FA;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-bottom: 2px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .osito-nav-item:hover,
+    .osito-nav-item.active {
+      background: #232A68;
+      border-color: #7077CF;
+      border-bottom: 2px solid #FFFFFF;
+      color: #FFFFFF;
+    }
+    .osito-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .osito-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: #1B1B1B;
+      border: 1px solid #7077CF;
+      z-index: 10001;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+    }
+    .osito-dropdown:hover .osito-dropdown-menu {
+      display: block;
+    }
+    .osito-dropdown-menu a {
+      display: block;
+      padding: 10px 14px;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      color: #EEF0FA;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid #232A68;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .osito-dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+    .osito-dropdown-menu a:hover {
+      background: #232A68;
+      color: #FFFFFF;
+    }
+    /* Scrolling Aerial Parallax Dark Containers */
+    .osito-parallax-dark {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .osito-parallax-dark-alt {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .osito-parallax-dark-sunset {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .osito-action-btn { display: inline-block; text-align: center; background: #7077CF; color: #FFFFFF !important; text-decoration: none; font-family: 'Fjalla One', sans-serif; font-size: 15px; padding: 12px 20px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #8E93DA; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+    .osito-action-btn:hover { background: #444FB6 !important; border-color: #FFFFFF !important; }
+    .osito-action-btn.dark { background: #232A68; border: 1px solid #303885; }
+  </style>
+</head>
+<body>
+    <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand"><img src="./assets/ositologo-white.png" alt="Osito Drone" style="height:38px; width:auto; display:block;" /></a>
+      <nav class="osito-nav-menu" aria-label="Main Navigation">
+        <a href="./index.html" class="osito-nav-item">Home</a>
+        <div class="osito-dropdown">
+          <a href="./index.html#osito-bookable-job-packages" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html">Drone Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+            <a href="./index.html#osito-maker-faire-gallery">Photo Gallery</a>
+            <a href="./index.html#osito-youtube-channel-theater">Video Theater</a>
+          </div>
+        </div>
+        <a href="./osito-drone-academy.html" class="osito-nav-item">Academy</a>
+        <a href="./custom-aerial-solutions.html" class="osito-nav-item active">Aerial Solutions</a>
+        <a href="./flight-sim.html" class="osito-nav-item">Flight Sim</a>
+        <div class="osito-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item">Toolbox <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./toolbox.html">Toolbox Hub</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design &amp; Flowchart</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn" style="padding:8px 16px; font-size:13.5px;">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="osito-parallax-dark-alt" style="background:#232A68; color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:36px; align-items:center;">
+      <div>
+        <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:5px 12px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">FAA PART 107 CERTIFIED & INSURED | SAN FRANCISCO BAY AREA</span>
+        <h1 style="font-family:'Fjalla One',sans-serif; font-size:42px; margin:14px 0 12px; letter-spacing:0.04em; text-transform:uppercase;">PRECISION FROM ABOVE. TAILORED FOR YOUR MISSION.</h1>
+        <p style="font-size:16.5px; color:#EEF0FA; line-height:1.6; margin:0 0 20px;">
+          From complex industrial inspections and progress mapping to cinematic aerial cinematography and bespoke engineering payloads, Osito Drone Services delivers FAA Part 107 compliant, enterprise-grade aerial solutions across the San Francisco Bay Area.
+        </p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="./index.html#osito-live-sim-estimator-hub" class="osito-action-btn">GET QUOTE</a>
+          <a href="mailto:info@ositodrone.com?subject=Commercial%20Aerial%20Mission%20Inquiry" class="osito-action-btn dark" style="border-color:#7077CF;">CONTACT US</a>
+        </div>
+      </div>
+      <div style="border:2px solid #7077CF; background:#090D16;">
+        <img src="./assets/live-custom-aerial-hero.jpg" onerror="this.src='./assets/dji-sf-sutro-moon-flight.jpg'" alt="Team assembling and testing drones in a modern workspace" style="width:100%; height:360px; object-fit:cover; display:block;" />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF; color:#161616; padding:56px 24px; border-bottom:4px solid #232A68;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div style="background:#EEF0FA; border:2px solid #232A68; padding:28px; margin-bottom:40px;">
+        <h2 style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#232A68; margin:0 0 10px; text-transform:uppercase;">WHY CHOOSE OSITO'S CUSTOM AERIAL SOLUTIONS?</h2>
+        <p style="font-size:15px; color:#333333; line-height:1.65; margin:0 0 16px;">
+          Every mission is unique. Off-the-shelf drone packages rarely meet the rigorous demands of modern commercial, construction, or technical operations. At Osito Drone Services, we combine advanced hardware configuration, expert flight planning, and rigorous safety protocols to build aerial workflows designed around your exact objectives.
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+          <div style="background:#FFFFFF; border:1px solid #8E93DA; padding:16px;">
+            <strong style="color:#232A68; display:block; margin-bottom:4px;">FAA Part 107 Certified & Insured</strong>
+            <span style="font-size:13.5px; color:#5E5E5E;">Fully compliant commercial pilots with strict adherence to airspace authorizations and safety redundancies.</span>
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #8E93DA; padding:16px;">
+            <strong style="color:#232A68; display:block; margin-bottom:4px;">Mission-Specific Payload Integration</strong>
+            <span style="font-size:13.5px; color:#5E5E5E;">Custom camera goggle setups, high-resolution orthomosaics, thermal imaging, and agile FPV navigation.</span>
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #8E93DA; padding:16px;">
+            <strong style="color:#232A68; display:block; margin-bottom:4px;">End-to-End Execution</strong>
+            <span style="font-size:13.5px; color:#5E5E5E;">From initial site risk assessment and airspace clearance to raw data delivery or cinematic post-production.</span>
+          </div>
+        </div>
+      </div>
+
+            <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:22px 26px; margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div>
+          <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:4px 10px; letter-spacing:0.05em; text-transform:uppercase;">NEW YEAR SPECIAL | 25% OFF TILL JAN 1</span>
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#FFFFFF; margin:8px 0 4px; text-transform:uppercase;">FAA PART 107 AERIAL &amp; THERMAL MISSIONS STARTING AT $296+ (REG. $395+)</h3>
+          <p style="font-size:14px; color:#EEF0FA; margin:0;">Beat Bay Area commercial drone minimums ($395-$750) by 25% to 60% with 24-hour turnaround on 4K roof, thermal, orthomosaic, and real estate flights.</p>
+        </div>
+        <a href="./index.html#osito-live-sim-estimator-hub" class="osito-action-btn" style="white-space:nowrap;">GET QUOTE ($296+)</a>
+      </div>
+      <h2 style="font-family:'Fjalla One',sans-serif; font-size:32px; color:#232A68; text-align:center; margin:0 0 28px; text-transform:uppercase;">CORE AERIAL SERVICE PILLARS</h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(460px, 1fr)); gap:24px; margin-bottom:44px;">
+        <div style="background:#F6F6F6; border:2px solid #232A68; padding:26px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">1. CONSTRUCTION PROGRESS & SITE MAPPING</h3>
+          <p style="font-size:14px; color:#5E5E5E; margin:0 0 12px;">Keep stakeholders informed and projects on schedule with millimeter-accurate aerial intelligence.</p>
+          <ul style="font-size:14px; color:#161616; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>High-Resolution Orthomosaics:</strong> 2D and 3D terrain modeling for precise site surveying.</li>
+            <li><strong>Volume & Stockpile Calculations:</strong> Accurate earthwork and material measurement.</li>
+            <li><strong>Progress Timelapses:</strong> Regular scheduled flights to document milestones from groundbreaking to completion.</li>
+          </ul>
+        </div>
+
+        <div style="background:#F6F6F6; border:2px solid #7077CF; padding:26px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">2. COMMERCIAL REAL ESTATE & CINEMATIC CINEMATOGRAPHY</h3>
+          <p style="font-size:14px; color:#5E5E5E; margin:0 0 12px;">Showcase properties and spaces from breathtaking, perspective-shifting angles.</p>
+          <ul style="font-size:14px; color:#161616; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>4K/6K Aerial Video & Photography:</strong> Crisp, stabilized exterior and neighborhood overviews.</li>
+            <li><strong>Interior/Exterior FPV Tours:</strong> Immersive, continuous flight paths through commercial spaces, open houses, or sprawling grounds using custom micro-FPV drones.</li>
+            <li><strong>Marketing-Ready Edits:</strong> Professionally graded footage ready for your website, listings, and social media.</li>
+          </ul>
+        </div>
+
+        <div style="background:#F6F6F6; border:2px solid #232A68; padding:26px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">3. INDUSTRIAL & INFRASTRUCTURE INSPECTION</h3>
+          <p style="font-size:14px; color:#5E5E5E; margin:0 0 12px;">Reduce downtime and eliminate worker safety risks with close-up aerial assessments.</p>
+          <ul style="font-size:14px; color:#161616; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>Roof, Facade, & Tower Checks:</strong> High-zoom detail capture to identify wear, damage, or maintenance needs.</li>
+            <li><strong>Thermal & Infrared Analysis:</strong> Detect heat loss, electrical inefficiencies, or structural anomalies.</li>
+            <li><strong>Hard-to-Reach Areas:</strong> Safe navigation around complex architectural or industrial geometries.</li>
+          </ul>
+        </div>
+
+        <div style="background:#F6F6F6; border:2px solid #232A68; padding:26px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">4. CUSTOM R&D & BESPOKE CLIENT SOLUTIONS</h3>
+          <p style="font-size:14px; color:#5E5E5E; margin:0 0 12px;">Have a unique operational challenge? We engineer custom solutions.</p>
+          <ul style="font-size:14px; color:#161616; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>Specialized Payloads:</strong> Integration of custom sensors or 3D-printed carbon-nylon equipment mounts.</li>
+            <li><strong>Proof-of-Concept Testing:</strong> Rapid prototyping and controlled test flights for tech companies, event organizers, and municipal partners.</li>
+          </ul>
+        </div>
+      </div>
+
+      
+      <h2 style="font-family:'Fjalla One',sans-serif; font-size:32px; color:#232A68; text-align:center; margin:0 0 8px; text-transform:uppercase;">RECENT SAN FRANCISCO &amp; BAY AREA AERIAL MISSIONS</h2>
+      <p style="text-align:center; font-size:15px; color:#5E5E5E; max-width:780px; margin:0 auto 26px;">
+        Captured directly by the Osito Drone Services flight crew across San Francisco, Treasure Island, Twin Peaks, and the Hunters Point waterfront:
+      </p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:20px; margin-bottom:44px;">
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-sf-ferry-building-night.jpg" alt="Port of San Francisco Ferry Building at Night" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">NIGHT CINEMATOGRAPHY | EMBARCADERO</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">Port of San Francisco Ferry Building &amp; Skyline</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">Low-noise night aerial capture of the illuminated Ferry Building clock tower and Financial District.</p>
+          </div>
+        </div>
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-sf-skatepark-nadir-ortho.jpg" alt="90-Degree Nadir Skatepark Orthomosaic Survey" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">90-DEG NADIR ORTHOMOSAIC | SITE MAPPING</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">Top-Down Concrete &amp; Drainage Geometry Survey</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">Vertical 90-degree photogrammetry and surface inspection of San Francisco skatepark bowls.</p>
+          </div>
+        </div>
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-boxshop-mural-compound-pano.jpg" alt="120MP Hunters Point Box Shop Mural Compound" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">120MP PANORAMIC SURVEY | HUNTERS POINT</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">Industrial Yard &amp; Waterfront Mural Compound</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">Ultra-high-resolution 120-megapixel panoramic inspection of San Francisco industrial arts yards.</p>
+          </div>
+        </div>
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-treasure-island-bay-bridge.jpg" alt="Treasure Island to Bay Bridge Aerial" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">CORRIDOR &amp; WATERFRONT | TREASURE ISLAND</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">Treasure Island &amp; SF-Oakland Bay Bridge</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">Wide-horizon infrastructure and development progress view across the Bay Bridge to Downtown SF.</p>
+          </div>
+        </div>
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-sf-sutro-fog-daytime.jpg" alt="Sutro Tower and Twin Peaks Coastal Fog" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">TOWER &amp; ELEVATION | TWIN PEAKS</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">Sutro Tower &amp; Hillside Residential Roofscapes</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">High-clarity daytime aerial over Twin Peaks and San Francisco hillside neighborhoods.</p>
+          </div>
+        </div>
+        <div style="background:#161616; color:#FFFFFF; border:2px solid #232A68;">
+          <img src="./assets/d-sf-night-corridor-bay-bridge.jpg" alt="San Francisco Night Grid and Bay Bridge" style="width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:16px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#8E93DA; letter-spacing:0.05em;">URBAN ILLUMINATION | SAN FRANCISCO</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:19px; margin:4px 0 6px; text-transform:uppercase;">San Francisco Arterial Night Grid &amp; Bay Bridge</h3>
+            <p style="font-size:13px; color:#EEF0FA; margin:0;">High-altitude night flight documenting municipal lighting corridors and downtown visibility.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:32px;">
+        <h2 style="font-family:'Fjalla One',sans-serif; font-size:28px; margin:0 0 10px; text-transform:uppercase;">OUR SAFETY & COMPLIANCE GUARANTEE</h2>
+        <p style="font-size:15px; color:#EEF0FA; margin:0 0 18px;">At Osito Drone Services, safety isn't an afterthought - it's our operational baseline. Every flight follows a strict protocol:</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:16px;">
+            <strong style="color:#FFFFFF; display:block; margin-bottom:4px;">Pre-Flight Airspace & Weather Analysis</strong>
+            <span style="font-size:13px; color:#EEF0FA;">Checking LAANC, NOTAMs, wind shear, and solar activity before every deployment.</span>
+          </div>
+          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:16px;">
+            <strong style="color:#FFFFFF; display:block; margin-bottom:4px;">Comprehensive Site Risk Assessment</strong>
+            <span style="font-size:13px; color:#EEF0FA;">Identifying obstacles, pedestrian zones, and emergency abort paths.</span>
+          </div>
+          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:16px;">
+            <strong style="color:#FFFFFF; display:block; margin-bottom:4px;">Equipment Redundancy Checks</strong>
+            <span style="font-size:13px; color:#EEF0FA;">Routine telemetry, battery health logs, and fail-safe return-to-home verification.</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; border-top:1px solid rgba(255,255,255,0.2); padding-top:20px;">
+          <div>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:0 0 4px; text-transform:uppercase;">LET'S BUILD YOUR NEXT AERIAL MISSION</h3>
+            <p style="font-size:14px; color:#EEF0FA; margin:0;">Whether you need a one-time promotional shoot or a recurring infrastructure mapping contract, Osito Drone Services is ready to deliver precision from above.</p>
+          </div>
+          <a href="mailto:info@ositodrone.com?subject=Custom%20Aerial%20Solutions%20Quote" class="osito-action-btn">REQUEST QUOTE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#161616; color:#B0B5C9; padding:28px 24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
+    <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>Copyright © 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA;">info@ositodrone.com</a></div>
+      <div style="display:flex; gap:16px;">
+        <a href="./index.html" style="color:#EEF0FA; text-decoration:none;">Home</a>
+        <a href="./osito-drone-academy.html" style="color:#EEF0FA; text-decoration:none;">Osito Drone Academy</a>
+        <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Custom Aerial Solutions</a>
+        <a href="./about.html" style="color:#EEF0FA; text-decoration:none;">About</a>
+        <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Osito Flight Sim</a>
+        <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  (function() {
+    var parallaxSections = document.querySelectorAll('.osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset');
+    if (!parallaxSections.length) return;
+    function updateOsitoParallax() {
+      var vh = window.innerHeight || 800;
+      for (var i = 0; i < parallaxSections.length; i++) {
+        var el = parallaxSections[i];
+        var rect = el.getBoundingClientRect();
+        if (rect.bottom >= -200 && rect.top <= vh + 200) {
+          var offset = Math.round((rect.top - vh * 0.5) * -0.18);
+          el.style.backgroundPosition = 'center calc(50% + ' + offset + 'px)';
+        }
+      }
+    }
+    window.addEventListener('scroll', updateOsitoParallax, { passive: true });
+    window.addEventListener('resize', updateOsitoParallax, { passive: true });
+    updateOsitoParallax();
+  })();
+  </script>
+</body>
+</html>

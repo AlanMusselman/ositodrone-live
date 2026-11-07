@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osito Toolbox | 3D STL Editor, Design Studio &amp; STEM Coloring Books | Osito Drone Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; }
+    * { border-radius: 0px !important; box-sizing: border-box; }
+    #osito-site-nav { position: sticky; top: 0; z-index: 10000; background: #161616; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
+    #osito-site-nav * { border-radius: 0px !important; box-sizing: border-box; }
+    .osito-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .osito-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; }
+    .osito-nav-brand img { height: 36px; width: auto; display: block; }
+    .osito-nav-menu { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .osito-nav-item { font-family: 'Fjalla One', sans-serif; font-size: 13.5px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: #EEF0FA; padding: 6px 11px; border: 1px solid transparent; transition: background 0.15s ease, border-color 0.15s ease; display: inline-flex; align-items: center; }
+    .osito-nav-item:hover, .osito-nav-item.active { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-nav-item.sim-link { background: #232A68; border: 1px solid #7077CF; color: #FFFFFF; }
+    .osito-nav-item.sim-link:hover { background: #444FB6; border-color: #FFFFFF; }
+    .osito-nav-caret { display: inline-block !important; vertical-align: middle; margin-left: 5px; }
+    .osito-dropdown { position: relative; display: inline-block; }
+    .osito-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 240px; background: #1B1B1B; border: 1px solid #7077CF; z-index: 20000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+    .osito-dropdown:hover .osito-dropdown-menu { display: block; }
+    .osito-dropdown-menu a { display: block; padding: 10px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; color: #EEF0FA; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid #232A68; }
+    .osito-dropdown-menu a:hover { background: #232A68; color: #FFFFFF; }
+    .osito-action-btn { display: inline-block; text-align: center; background: #7077CF; color: #FFFFFF !important; text-decoration: none; font-family: 'Fjalla One', sans-serif; font-size: 14px; padding: 11px 18px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #8E93DA; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+    .osito-action-btn:hover { background: #444FB6 !important; border-color: #FFFFFF !important; }
+    .osito-action-btn.dark { background: #232A68; border: 1px solid #303885; }
+    .osito-action-btn.emerald { background: #059669; border: 1px solid #10B981; }
+    .osito-action-btn.emerald:hover { background: #047857 !important; border-color: #FFFFFF !important; }
+
+    /* Coloring Book Cards */
+    .cb-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+    .cb-filter-btn { background: #FFFFFF; color: #232A68; border: 2px solid #232A68; padding: 9px 16px; font-family: 'Fjalla One', sans-serif; font-size: 13.5px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: all 0.15s ease; }
+    .cb-filter-btn:hover, .cb-filter-btn.active { background: #232A68; color: #FFFFFF; border-color: #7077CF; }
+    .cb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 24px; }
+    .cb-card { background: #FFFFFF; border: 2px solid #232A68; display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .cb-card:hover { border-color: #7077CF; box-shadow: 0 8px 24px rgba(35, 42, 104, 0.14); }
+    .cb-card-top { display: grid; grid-template-columns: 128px 1fr; gap: 16px; padding: 18px; border-bottom: 1px solid #E2E2E2; align-items: start; }
+    .cb-cover-wrap { position: relative; border: 2px solid #232A68; background: #161616; overflow: hidden; }
+    .cb-cover-wrap img { width: 100%; height: 168px; object-fit: cover; display: block; }
+    .cb-rank-tag { position: absolute; top: 0; left: 0; background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 3px 8px; letter-spacing: 0.05em; border-right: 1px solid #7077CF; border-bottom: 1px solid #7077CF; }
+    .cb-meta-cat { display: inline-block; background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 3px 8px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .cb-title { font-family: 'Fjalla One', sans-serif; font-size: 19px; color: #161616; margin: 0 0 6px; line-height: 1.25; text-transform: uppercase; letter-spacing: 0.02em; }
+    .cb-desc { font-size: 13px; color: #5E5E5E; line-height: 1.5; margin: 0 0 10px; }
+    .cb-spec-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cb-spec-pill { background: #F6F6F6; border: 1px solid #D5D8EC; color: #232A68; font-size: 11.5px; font-weight: 700; padding: 3px 7px; }
+    .cb-card-actions { padding: 12px 18px; background: #F6F6F6; display: flex; gap: 8px; flex-wrap: wrap; }
+    .cb-btn-dl { flex: 1.3; text-align: center; background: #7077CF; color: #FFFFFF !important; text-decoration: none; font-family: 'Fjalla One', sans-serif; font-size: 13.5px; padding: 10px 12px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #444FB6; cursor: pointer; }
+    .cb-btn-dl:hover { background: #232A68 !important; }
+    .cb-btn-docx { flex: 1; text-align: center; background: #FFFFFF; color: #232A68 !important; text-decoration: none; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; padding: 10px 10px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #232A68; cursor: pointer; }
+    .cb-btn-docx:hover { background: #EEF0FA !important; }
+    .cb-btn-preview { flex: 0.9; text-align: center; background: #232A68; color: #FFFFFF !important; font-family: 'Fjalla One', sans-serif; font-size: 13px; padding: 10px 10px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #232A68; cursor: pointer; }
+    .cb-btn-preview:hover { background: #444FB6 !important; }
+  </style>
+</head>
+<body>
+  <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand"><img src="./assets/ositologo-white.png" alt="Osito Drone" style="height:36px; width:auto; display:block;" /></a>
+      <nav class="osito-nav-menu" aria-label="Main Navigation">
+        <a href="./index.html" class="osito-nav-item">Home</a>
+        <div class="osito-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html">Drone Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+            <a href="./index.html#osito-maker-faire-gallery">Photo Gallery</a>
+            <a href="./index.html#osito-youtube-channel-theater">Video Theater</a>
+          </div>
+        </div>
+        <a href="./osito-drone-academy.html" class="osito-nav-item">Academy</a>
+        <a href="./custom-aerial-solutions.html" class="osito-nav-item">Aerial Solutions</a>
+        <a href="./flight-sim.html" class="osito-nav-item sim-link">Flight Sim</a>
+        <div class="osito-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item active">Toolbox <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./toolbox.html">Toolbox Hub</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design &amp; Flowchart</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn" style="padding:8px 16px; font-size:13.5px;">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section style="background: linear-gradient(180deg, rgba(14, 16, 26, 0.85) 0%, rgba(22, 22, 22, 0.92) 100%), url('./assets/d-sf-ferry-building-night.jpg'); background-attachment: fixed; background-size: cover; background-position: center; color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:5px 12px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">OSITO IN-HOUSE ENGINEERING &amp; PROTOTYPING SUITE</span>
+      <h1 style="font-family:'Fjalla One',sans-serif; font-size:42px; margin:14px 0 12px; letter-spacing:0.04em; text-transform:uppercase;">OSITO TOOLBOX: IN-HOUSE 3D STL CAD EDITOR &amp; PROTOTYPING / FLOWCHART STUDIO</h1>
+      <p style="font-size:16.5px; color:#EEF0FA; max-width:860px; line-height:1.6; margin:0 0 22px;">
+        Launch the in-house engineering tools we built at Osito Drone Services to sculpt parametric 3D CAD parts for our <strong>2x Bambu Lab P2S Combo</strong> print farm, design interactive UI prototypes and magnetic flowcharts, or download our 10-volume STEM Coloring Books library.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="./stl-editor.html" class="osito-action-btn">OPEN STL EDITOR</a>
+        <a href="./osito-design-tool.html" class="osito-action-btn emerald">OPEN DESIGN TOOL</a>
+        <a href="#osito-coloring-books-downloads" class="osito-action-btn dark" style="border-color:#7077CF;">COLORING BOOKS</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF; color:#161616; padding:56px 24px; border-bottom:4px solid #232A68;">
+    <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(460px, 1fr)); gap:32px;">
+
+      <!-- Tool Card 1: Osito In-House 3D STL Editor -->
+      <article style="background:#F6F6F6; border:3px solid #232A68; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="background:#232A68; color:#FFFFFF; padding:16px 22px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #7077CF;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:13px; letter-spacing:0.06em; color:#8E93DA; text-transform:uppercase;">TOOLBOX #01 | IN-HOUSE 3D CAD &amp; BAMBU P2S SLICER</span>
+            <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:11px; padding:3px 9px;">PARAMETRIC 3D CAD</span>
+          </div>
+          <div style="padding:26px;">
+            <div style="width:100%; height:230px; background:#0B0E17; border:2px solid #232A68; margin-bottom:18px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="background:#232A68; border:1px solid #7077CF; color:#EEF0FA; font-family:'Fjalla One',sans-serif; font-size:11px; padding:3px 8px;">OSITO IN-HOUSE 3D STL CAD | 256X256X256 MM</span>
+                <span style="color:#34D399; font-family:monospace; font-size:11px;">Z_min = 0.000mm | Manifold</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-around; gap:10px;">
+                <div style="background:#16192B; border:2px solid #7077CF; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  1. IMPORT / GENERATE<br><span style="font-size:10px; color:#8E93DA; font-family:Roboto;">Custom .STL or 8 Primitives</span>
+                </div>
+                <div style="color:#7077CF; font-family:monospace; font-weight:700; font-size:15px;">---&gt;</div>
+                <div style="background:#232A68; border:2px solid #38BDF8; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  2. SCULPT &amp; ORIENT<br><span style="font-size:10px; color:#EEF0FA; font-family:Roboto;">Mirror | Rotate 90 | Array</span>
+                </div>
+                <div style="color:#34D399; font-family:monospace; font-weight:700; font-size:15px;">---&gt;</div>
+                <div style="background:#064E3B; border:2px solid #10B981; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  3. SLICER &amp; EXPORT<br><span style="font-size:10px; color:#A7F3D0; font-family:Roboto;">Binary .STL + P2S Cost</span>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:#94A3B8; font-family:monospace;">
+                <span>8 High-Res ($fn=64) Generators | Overhang DFM View | 2x2 Batch Array</span>
+                <span style="color:#8E93DA;">Zero Proprietary Leak</span>
+              </div>
+            </div>
+            <h2 style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#161616; margin:0 0 10px; text-transform:uppercase;">OSITO IN-HOUSE 3D STL EDITOR</h2>
+            <p style="font-size:15px; color:#333333; line-height:1.6; margin:0 0 16px;">
+              Our standalone in-house 3D CAD &amp; Bambu Lab P2S Combo (<code>256x256x256 mm</code>) build-plate studio. Import and inspect your own binary or ASCII <code>.STL</code> files, generate high-resolution (<code>$fn=64</code>) parametric 3D CAD primitives, run Mirror/Rotate-90/2x2 Array mesh operations, verify support-free overhangs, and export binary <code>.STL</code> plates.
+            </p>
+            <ul style="font-size:13.5px; color:#232A68; font-weight:700; line-height:1.75; margin:0 0 20px; padding-left:18px;">
+              <li>Custom Binary &amp; ASCII <code>.STL</code> Drag-and-Drop Inspector &amp; Auto-Bed Orientation (<code>Z=0.00mm</code>)</li>
+              <li>8 High-Resolution Parametric 3D CAD Generators (Venturi Ducts, NACA 2412 Wings, Involute Gears, Canopies)</li>
+              <li>In-House Mesh Engineering Tools (Mirror X/Y/Z, Rotate 90, 2x2 Batch Array, Overhang DFM X-Ray)</li>
+              <li>Real-Time Bambu Lab P2S Print Time, Spool Gram Weight, Cost Telemetry &amp; Binary <code>.STL</code> Export</li>
+            </ul>
+          </div>
+        </div>
+        <div style="padding:18px 26px; background:#EEF0FA; border-top:2px solid #D5D8EC; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="./stl-editor.html" class="osito-action-btn" style="flex:1.4;">OPEN STL EDITOR</a>
+          <a href="./toolbox/Osito_Design_STL_Editor.html" target="_blank" class="osito-action-btn dark" style="flex:1;">FULLSCREEN</a>
+        </div>
+      </article>
+
+      <!-- Tool Card 2: The Osito Design & Flowchart Tool (Osito Studio 4.0) -->
+      <article style="background:#F6F6F6; border:3px solid #232A68; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="background:#232A68; color:#FFFFFF; padding:16px 22px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #7077CF;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:13px; letter-spacing:0.06em; color:#34D399; text-transform:uppercase;">TOOLBOX #02 | PROTOTYPING, WIREFRAMES &amp; FLOWCHARTS</span>
+            <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:11px; padding:3px 9px;">125+ JS AUTOSHAPES</span>
+          </div>
+          <div style="padding:26px;">
+            <div style="width:100%; height:230px; background:#0F172A; border:2px solid #232A68; margin-bottom:18px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="background:#232A68; border:1px solid #7077CF; color:#EEF0FA; font-family:'Fjalla One',sans-serif; font-size:11px; padding:3px 8px;">OSITO STUDIO 4.0 | IN-HOUSE VECTOR, BITMAP &amp; FLOW ENGINE</span>
+                <span style="color:#38BDF8; font-family:monospace; font-size:11px;">1px Pixel Snap | Bezier + Flow</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-around; gap:10px;">
+                <div style="background:#1E293B; border:2px solid #38BDF8; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  1. UI WIREFRAME<br><span style="font-size:10px; color:#94A3B8; font-family:Roboto;">125+ AutoShapes (U)</span>
+                </div>
+                <div style="color:#F59E0B; font-family:monospace; font-weight:700; font-size:15px;">---&gt;</div>
+                <div style="background:#232A68; border:2px solid #F59E0B; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  2. FLOWCHART NODE<br><span style="font-size:10px; color:#EEF0FA; font-family:Roboto;">Smart Connector (X)</span>
+                </div>
+                <div style="color:#10B981; font-family:monospace; font-weight:700; font-size:15px;">---&gt;</div>
+                <div style="background:#064E3B; border:2px solid #10B981; padding:10px 14px; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13px; text-align:center;">
+                  3. LIVE PROTOTYPE<br><span style="font-size:10px; color:#A7F3D0; font-family:Roboto;">Preview Mode (F12)</span>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:#94A3B8; font-family:monospace;">
+                <span>Keys: [X] Magnetic Flowchart Connector | [U] AutoShapes | [Ctrl+K] AI Omnibar</span>
+                <span style="color:#34D399;">6 Built-In Presets</span>
+              </div>
+            </div>
+            <h2 style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#161616; margin:0 0 10px; text-transform:uppercase;">OSITO DESIGN &amp; FLOWCHART TOOL (OSITO STUDIO 4.0)</h2>
+            <p style="font-size:15px; color:#333333; line-height:1.6; margin:0 0 16px;">
+              Our in-house hybrid bitmap, cubic Bezier vector, UI prototyping, and magnetic flowchart studio. Connect system architecture diagrams with magnetic N/E/S/W ports (<code>X</code>), morph <code>125+</code> programmable JavaScript AutoShapes via yellow control handles, test <code>:hover</code>/<code>:active</code> states live (<code>F12</code>), or import/export CSV/Markdown sitemaps and <code>.STL</code> plates.
+            </p>
+            <ul style="font-size:13.5px; color:#232A68; font-weight:700; line-height:1.75; margin:0 0 20px; padding-left:18px;">
+              <li>Magnetic Flowchart &amp; System Architecture Connector Tool (Press <code>X</code> or Load Preset #6)</li>
+              <li>125+ Programmable JS AutoShapes with Yellow Control Handles &amp; Live JS Editor (<code>F9</code>)</li>
+              <li>Interactive Prototype Preview (<code>F12</code>) with <code>:default</code>, <code>:hover</code>, and <code>:active</code> Component States</li>
+              <li>Multi-Scale Retina Slice Exporter (<code>@1x/@2x/@3x</code> WebP/SVG/PNG) + Bambu P2S 3D Extrusion</li>
+            </ul>
+          </div>
+        </div>
+        <div style="padding:18px 26px; background:#EEF0FA; border-top:2px solid #D5D8EC; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="./osito-design-tool.html" class="osito-action-btn emerald" style="flex:1.4;">OPEN DESIGN TOOL</a>
+          <a href="./toolbox/The_Osito_Tool_Bambu_P2S_Combo_3D.html" target="_blank" class="osito-action-btn dark" style="flex:1;">FULLSCREEN</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- TOOLBOX #03 | STEM COLORING BOOKS & PRINTABLES (10 VOLUMES / 280 PAGES) -->
+  <section id="osito-coloring-books-downloads" style="background:#F6F6F6; color:#161616; padding:60px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:28px 32px; margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+        <div style="max-width:700px;">
+          <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:12px; padding:4px 10px; letter-spacing:0.05em; text-transform:uppercase; display:inline-block; margin-bottom:10px;">TOOLBOX #03 | STEM COLORING BOOKS &amp; PRINTABLES (10 VOLUMES / 280 PAGES)</span>
+          <h2 style="font-family:'Fjalla One',sans-serif; font-size:34px; margin:0 0 8px; letter-spacing:0.04em; text-transform:uppercase;">FREE OSITO DRONE STEM COLORING BOOKS (DOWNLOAD &amp; PRINT)</h2>
+          <p style="font-size:15px; color:#EEF0FA; margin:0; line-height:1.55;">
+            Download our flagship 28-page storybooks (<strong>A Boy and His Drone</strong> &amp; <strong>A Girl and Her Drone</strong>) plus 8 curated K-6 STEM activity workbooks covering rotor math, 3D-print blueprints, bilingual Spanish/English aviation terms, adaptive controllers, coding mazes, and the 4 forces of flight.
+          </p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; min-width:260px;">
+          <a href="./downloads/coloring-books/Osito_All_10_STEM_Coloring_Books_280_Pages.zip" download="Osito_All_10_STEM_Coloring_Books_280_Pages.zip" class="osito-action-btn emerald" style="font-size:15px; padding:14px 20px;">
+            DOWNLOAD ALL (.ZIP)
+          </a>
+          <span style="font-size:12px; color:#EEF0FA; text-align:center;">Includes all 10 US-Letter 8.5&quot;x11&quot; Print-Ready PDFs (7.6 MB)</span>
+        </div>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="cb-filter-bar" role="tablist" aria-label="Filter Coloring Books">
+        <button type="button" class="cb-filter-btn active" onclick="filterColoringBooks('all', this)">ALL BOOKS (10)</button>
+        <button type="button" class="cb-filter-btn" onclick="filterColoringBooks('flagship', this)">STORYBOOKS (2)</button>
+        <button type="button" class="cb-filter-btn" onclick="filterColoringBooks('math-code', this)">MATH &amp; CODING (4)</button>
+        <button type="button" class="cb-filter-btn" onclick="filterColoringBooks('bilingual-aero', this)">BILINGUAL &amp; AERO (4)</button>
+      </div>
+
+      <!-- On-Demand PDF Preview Drawer (Hidden until user clicks Preview) -->
+      <div id="osito-pdf-preview-drawer" style="display:none; background:#161616; color:#FFFFFF; border:3px solid #7077CF; margin-bottom:32px;">
+        <div style="background:#232A68; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:2px solid #7077CF;">
+          <div>
+            <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#8E93DA; text-transform:uppercase; letter-spacing:0.05em;">INTERACTIVE 28-PAGE BOOK PREVIEW</span>
+            <h3 id="osito-pdf-preview-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:2px 0 0; color:#FFFFFF; text-transform:uppercase;">01 | A Boy and His Drone (28 Pages)</h3>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a id="osito-pdf-preview-dl" href="./downloads/coloring-books/01_Osito_A_Boy_and_His_Drone_28p.pdf" download class="osito-action-btn emerald" style="padding:8px 16px; font-size:13.5px;">DOWNLOAD PDF</a>
+            <button type="button" onclick="closeOsitoPdfPreview()" class="osito-action-btn dark" style="padding:8px 14px; font-size:13.5px; border-color:#FFFFFF;">CLOSE</button>
+          </div>
+        </div>
+        <iframe id="osito-pdf-preview-frame" title="Osito Drone Coloring Book PDF Preview" style="width:100%; height:620px; border:0; background:#2B2B2B; display:block;"></iframe>
+      </div>
+
+      <!-- 10 Coloring Book Cards Grid -->
+      <div class="cb-grid" id="osito-cb-grid">
+        <!-- 01: A Boy and His Drone -->
+        <article class="cb-card" data-cb-cat="flagship">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #01</span>
+              <img src="./downloads/coloring-books/01_cover.jpg" alt="A Boy and His Drone Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">FLAGSHIP STORYBOOK EDITION</span>
+              <h3 class="cb-title">A Boy and His Drone</h3>
+              <p class="cb-desc">Leo's backyard discovery of the ducted CUB-75 micro-drone, learning propeller safety, stick control, and his first neighborhood flight adventure.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Leo</span>
+                <span class="cb-spec-pill">Ages 4-10</span>
+                <span class="cb-spec-pill">28 Pages (PDF + DOCX)</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/01_Osito_A_Boy_and_His_Drone_28p.pdf" download="01_Osito_A_Boy_and_His_Drone_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <a href="./downloads/coloring-books/A_Boy_and_His_Drone_Coloring_Book.docx" download="A_Boy_and_His_Drone_Coloring_Book.docx" class="cb-btn-docx">WORD (.DOCX)</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/01_Osito_A_Boy_and_His_Drone_28p.pdf', '01 | A Boy and His Drone (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 02: A Girl and Her Drone -->
+        <article class="cb-card" data-cb-cat="flagship">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #02</span>
+              <img src="./downloads/coloring-books/02_cover.jpg" alt="A Girl and Her Drone Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">FLAGSHIP STORYBOOK EDITION</span>
+              <h3 class="cb-title">A Girl and Her Drone</h3>
+              <p class="cb-desc">Sofia's aerial engineering lab journey, building a 3D-printed frame, mastering FPV goggles, and winning her school STEM science fair.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Sofia</span>
+                <span class="cb-spec-pill">Ages 4-10</span>
+                <span class="cb-spec-pill">28 Pages (PDF + DOCX)</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/02_Osito_A_Girl_and_Her_Drone_28p.pdf" download="02_Osito_A_Girl_and_Her_Drone_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <a href="./downloads/coloring-books/A_Girl_and_Her_Drone_Coloring_Book.docx" download="A_Girl_and_Her_Drone_Coloring_Book.docx" class="cb-btn-docx">WORD (.DOCX)</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/02_Osito_A_Girl_and_Her_Drone_28p.pdf', '02 | A Girl and Her Drone (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 03: Maya Count the 4 Propellers -->
+        <article class="cb-card" data-cb-cat="math-code">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #03</span>
+              <img src="./downloads/coloring-books/03_cover.jpg" alt="Maya Count the 4 Propellers Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 1 | COLOR-BY-NUMBER</span>
+              <h3 class="cb-title">Maya: Count the 4 Propellers</h3>
+              <p class="cb-desc">Early-learner counting and Color-by-Number workbook teaching quadcopter symmetry, clockwise vs. counter-clockwise props, and ducted safety rings.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Maya</span>
+                <span class="cb-spec-pill">Ages 4-7 (TK-2)</span>
+                <span class="cb-spec-pill">28 Pages | 1.0 MB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/03_Book_001_Maya_Count_the_4_Propellers_28p.pdf" download="03_Book_001_Maya_Count_the_4_Propellers_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/03_Book_001_Maya_Count_the_4_Propellers_28p.pdf', '03 | Maya: Count the 4 Propellers (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 04: Mateo Dual Drone Rotor Addition -->
+        <article class="cb-card" data-cb-cat="math-code">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #04</span>
+              <img src="./downloads/coloring-books/04_cover.jpg" alt="Mateo Dual Drone Rotor Addition Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 1 | DRONE ADDITION MATH</span>
+              <h3 class="cb-title">Mateo: Dual Drone Rotor Addition</h3>
+              <p class="cb-desc">Hands-on aviation math workbook where students add rotors, battery cells, and gate laps (4 + 4 = 8) to unlock color palettes for each flight scene.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Mateo</span>
+                <span class="cb-spec-pill">Ages 5-8</span>
+                <span class="cb-spec-pill">28 Pages | 1.1 MB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/04_Book_052_Mateo_Dual_Drone_Rotor_Addition_28p.pdf" download="04_Book_052_Mateo_Dual_Drone_Rotor_Addition_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/04_Book_052_Mateo_Dual_Drone_Rotor_Addition_28p.pdf', '04 | Mateo: Dual Drone Rotor Addition (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 05: Aarav Decelerating Airspeed Math -->
+        <article class="cb-card" data-cb-cat="math-code">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #05</span>
+              <img src="./downloads/coloring-books/05_cover.jpg" alt="Aarav Decelerating Airspeed Math Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 2 | SUBTRACTION &amp; 4X MULTIPLIERS</span>
+              <h3 class="cb-title">Aarav: Decelerating Airspeed Math</h3>
+              <p class="cb-desc">Upper-elementary STEM math challenges covering airspeed braking subtraction, 4-motor RPM multipliers, and battery timer countdowns.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Aarav</span>
+                <span class="cb-spec-pill">Ages 6-10</span>
+                <span class="cb-spec-pill">28 Pages | 955 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/05_Book_105_Aarav_Decelerating_Airspeed_Math_28p.pdf" download="05_Book_105_Aarav_Decelerating_Airspeed_Math_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/05_Book_105_Aarav_Decelerating_Airspeed_Math_28p.pdf', '05 | Aarav: Decelerating Airspeed Math (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 06: Mei Connect the Dots Octocopter -->
+        <article class="cb-card" data-cb-cat="math-code">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #06</span>
+              <img src="./downloads/coloring-books/06_cover.jpg" alt="Mei Connect the Dots Heavy-Lift Octocopter Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 3 | 3D-PRINT BLUEPRINTS</span>
+              <h3 class="cb-title">Mei: Connect-the-Dots Heavy-Lift Octocopter</h3>
+              <p class="cb-desc">Engineering blueprint dot-to-dot puzzles (1-50) revealing CAD airframes, 8-rotor heavy-lift cargo drones, and 3D-printed protective canopies.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Mei</span>
+                <span class="cb-spec-pill">Ages 4-9</span>
+                <span class="cb-spec-pill">28 Pages | 1.1 MB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/06_Book_204_Mei_Connect_the_Dots_Octocopter_28p.pdf" download="06_Book_204_Mei_Connect_the_Dots_Octocopter_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/06_Book_204_Mei_Connect_the_Dots_Octocopter_28p.pdf', '06 | Mei: Connect-the-Dots Heavy-Lift Octocopter (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 07: Mateo Bilingual Colores del Cielo -->
+        <article class="cb-card" data-cb-cat="bilingual-aero">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #07</span>
+              <img src="./downloads/coloring-books/07_cover.jpg" alt="Mateo Bilingual Colores del Cielo Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 4 | BILINGUAL SPANISH / ENGLISH</span>
+              <h3 class="cb-title">Mateo: Colores del Cielo / Sky Colors</h3>
+              <p class="cb-desc">Dual-language Spanish &amp; English aviation vocabulary coloring book teaching drone parts (helice, bateria, control) and San Francisco flight missions.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Bilingual EN/ES</span>
+                <span class="cb-spec-pill">Ages 4-10</span>
+                <span class="cb-spec-pill">28 Pages | 1.0 MB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/07_Book_302_Mateo_Bilingual_Colores_del_Cielo_28p.pdf" download="07_Book_302_Mateo_Bilingual_Colores_del_Cielo_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/07_Book_302_Mateo_Bilingual_Colores_del_Cielo_28p.pdf', '07 | Mateo: Bilingual Colores del Cielo / Sky Colors (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 08: Liam Adaptive Controller & Wheelchair Flight -->
+        <article class="cb-card" data-cb-cat="bilingual-aero">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #08</span>
+              <img src="./downloads/coloring-books/08_cover.jpg" alt="Liam Adaptive STEM Pilot Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 4 | INCLUSIVE &amp; ADAPTIVE STEM</span>
+              <h3 class="cb-title">Liam: Adaptive Controller &amp; Wheelchair Flight</h3>
+              <p class="cb-desc">Celebrates accessible aviation, showing how FPV goggles and adaptive gimbal controllers let every student pilot soar through indoor race gates on equal footing.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Liam</span>
+                <span class="cb-spec-pill">Ages 5-11</span>
+                <span class="cb-spec-pill">28 Pages | 957 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/08_Book_353_Liam_Adaptive_STEM_Pilot_28p.pdf" download="08_Book_353_Liam_Adaptive_STEM_Pilot_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/08_Book_353_Liam_Adaptive_STEM_Pilot_28p.pdf', '08 | Liam: Adaptive Controller &amp; Wheelchair Flight (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 09: Zara Looping Command Sequence & Grids -->
+        <article class="cb-card" data-cb-cat="bilingual-aero">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #09</span>
+              <img src="./downloads/coloring-books/09_cover.jpg" alt="Zara Coding Grids and Mazes Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 5 | CODING GRIDS &amp; MAZES</span>
+              <h3 class="cb-title">Zara: Looping Command Sequence &amp; Grids</h3>
+              <p class="cb-desc">Unplugged computer science puzzles where kids trace autonomous flight paths (TAKEOFF -&gt; FORWARD 3 -&gt; YAW 90 -&gt; LAND) through obstacle mazes.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Zara</span>
+                <span class="cb-spec-pill">Ages 6-11</span>
+                <span class="cb-spec-pill">28 Pages | 900 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/09_Book_406_Zara_Coding_Grids_and_Mazes_28p.pdf" download="09_Book_406_Zara_Coding_Grids_and_Mazes_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/09_Book_406_Zara_Coding_Grids_and_Mazes_28p.pdf', '09 | Zara: Looping Command Sequence &amp; Grids (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+
+        <!-- 10: Elena Lift Force Balance & Aerodynamics -->
+        <article class="cb-card" data-cb-cat="bilingual-aero">
+          <div class="cb-card-top">
+            <div class="cb-cover-wrap">
+              <span class="cb-rank-tag">BOOK #10</span>
+              <img src="./downloads/coloring-books/10_cover.jpg" alt="Elena Lift Force Aerodynamics Coloring Book Cover" loading="lazy" />
+            </div>
+            <div>
+              <span class="cb-meta-cat">SERIES 5 | 4 FORCES OF FLIGHT</span>
+              <h3 class="cb-title">Elena: Lift Force Balance &amp; Aerodynamics</h3>
+              <p class="cb-desc">Visualizes Lift, Weight (Gravity), Thrust, and Drag plus roll/pitch/yaw axes and FAA TRUST youth safety checkpoints in fun coloring diagrams.</p>
+              <div class="cb-spec-pills">
+                <span class="cb-spec-pill">Pilot: Elena</span>
+                <span class="cb-spec-pill">Ages 7-12</span>
+                <span class="cb-spec-pill">28 Pages | 988 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-card-actions">
+            <a href="./downloads/coloring-books/10_Book_501_Elena_Lift_Force_Aerodynamics_28p.pdf" download="10_Book_501_Elena_Lift_Force_Aerodynamics_28p.pdf" class="cb-btn-dl">DOWNLOAD PDF</a>
+            <button type="button" class="cb-btn-preview" onclick="openOsitoPdfPreview('./downloads/coloring-books/10_Book_501_Elena_Lift_Force_Aerodynamics_28p.pdf', '10 | Elena: Lift Force Balance &amp; Aerodynamics (28 Pages)')">PREVIEW</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#161616; color:#B0B5C9; padding:28px 24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
+    <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>Copyright (c) 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA;">info@ositodrone.com</a></div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="./index.html" style="color:#EEF0FA; text-decoration:none;">Home</a>
+        <a href="./osito-drone-academy.html" style="color:#EEF0FA; text-decoration:none;">Drone Academy</a>
+        <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Aerial Solutions</a>
+        <a href="./about.html" style="color:#EEF0FA; text-decoration:none;">About</a>
+        <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Flight Sim</a>
+        <a href="./toolbox.html" style="color:#EEF0FA; text-decoration:none;">Toolbox</a>
+        <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterColoringBooks(cat, btn) {
+      var buttons = document.querySelectorAll('.cb-filter-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      if (btn) btn.classList.add('active');
+      var cards = document.querySelectorAll('#osito-cb-grid .cb-card');
+      for (var j = 0; j < cards.length; j++) {
+        var c = cards[j];
+        if (cat === 'all' || c.getAttribute('data-cb-cat') === cat) {
+          c.style.display = 'flex';
+        } else {
+          c.style.display = 'none';
+        }
+      }
+    }
+
+    function openOsitoPdfPreview(pdfUrl, titleText) {
+      var drawer = document.getElementById('osito-pdf-preview-drawer');
+      var frame = document.getElementById('osito-pdf-preview-frame');
+      var titleEl = document.getElementById('osito-pdf-preview-title');
+      var dlEl = document.getElementById('osito-pdf-preview-dl');
+      titleEl.textContent = titleText;
+      dlEl.href = pdfUrl;
+      frame.src = pdfUrl;
+      drawer.style.display = 'block';
+      drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeOsitoPdfPreview() {
+      var drawer = document.getElementById('osito-pdf-preview-drawer');
+      var frame = document.getElementById('osito-pdf-preview-frame');
+      frame.src = 'about:blank';
+      drawer.style.display = 'none';
+    }
+
+    // Backwards-compatible aliases
+    var previewColoringBook = openOsitoPdfPreview;
+    var closeColoringBookPreview = closeOsitoPdfPreview;
+  </script>
+</body>
+</html>

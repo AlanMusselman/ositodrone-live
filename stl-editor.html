@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osito In-House 3D STL Editor | Parametric 3D CAD, Custom STL Inspector &amp; Bambu Lab P2S Slicer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; border-radius: 0px !important; user-select: none; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #161616;
+      color: #FFFFFF;
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      background: #161616;
+      border-bottom: 2px solid #7077CF;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-badge {
+      background: #232A68;
+      border: 1px solid #7077CF;
+      color: #EEF0FA;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      text-transform: uppercase;
+    }
+    .brand h1 {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 19px;
+      letter-spacing: 0.04em;
+      margin: 0;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+    .btn {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 7px 12px;
+      border: 1px solid #7077CF;
+      background: #232A68;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn:hover { background: #444FB6; border-color: #FFFFFF; }
+    .btn-primary { background: #7077CF; border-color: #8E93DA; }
+    .btn-primary:hover { background: #444FB6; border-color: #FFFFFF; }
+    .btn-emerald { background: #059669; border-color: #10B981; }
+    .btn-emerald:hover { background: #047857; border-color: #FFFFFF; }
+    .btn-danger { background: #3A1D28; border-color: #9E3B5A; }
+    .btn-danger:hover { background: #6E243B; }
+
+    .workspace {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 310px 1fr 340px;
+      min-height: 0;
+    }
+    .sidebar {
+      background: #1B1B1B;
+      border-right: 1px solid #2E3468;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .sidebar-right {
+      background: #1B1B1B;
+      border-left: 1px solid #2E3468;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .sec-head {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #8E93DA;
+      border-bottom: 1px solid #2E3468;
+      padding-bottom: 5px;
+      margin: 0 0 8px 0;
+    }
+    .preset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .preset-btn {
+      font-family: 'Roboto', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 7px 9px;
+      background: #232329;
+      border: 1px solid #383E70;
+      color: #EEF0FA;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .preset-btn:hover { background: #232A68; border-color: #7077CF; }
+    .preset-btn strong {
+      display: block;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+    .viewport-wrap {
+      position: relative;
+      background: #0B0E17;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    #stlCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    #stlCanvas:active { cursor: grabbing; }
+    .hud-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(22, 22, 22, 0.90);
+      border: 1px solid #7077CF;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #EEF0FA;
+      pointer-events: none;
+    }
+    .hud-bottom {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hud-bottom > div {
+      pointer-events: auto;
+      background: rgba(22, 22, 22, 0.92);
+      border: 1px solid #303885;
+      padding: 6px 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .control-row {
+      display: grid;
+      grid-template-columns: 74px 1fr 56px;
+      gap: 7px;
+      align-items: center;
+      margin-bottom: 7px;
+      font-size: 12px;
+    }
+    .control-row input[type="range"] {
+      width: 100%;
+      accent-color: #7077CF;
+      cursor: pointer;
+    }
+    .control-row input[type="number"] {
+      width: 100%;
+      background: #11131C;
+      border: 1px solid #383E70;
+      color: #FFFFFF;
+      padding: 4px 6px;
+      font-size: 12px;
+      font-family: monospace;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      background: #11131C;
+      border: 1px solid #7077CF;
+      color: #FFFFFF;
+      padding: 7px 9px;
+      font-size: 12px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .stat-box {
+      background: #121521;
+      border: 1px solid #303885;
+      padding: 9px 11px;
+    }
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 3.5px 0;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.15);
+    }
+    .stat-line:last-child { border-bottom: none; }
+    .part-list {
+      max-height: 135px;
+      overflow-y: auto;
+      border: 1px solid #2E3468;
+      background: #11131C;
+    }
+    .part-item {
+      padding: 6px 9px;
+      font-size: 11.5px;
+      border-bottom: 1px solid #232A68;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .part-item.active {
+      background: #232A68;
+      color: #FFFFFF;
+      border-left: 3px solid #7077CF;
+    }
+    .mini-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
+      margin-bottom: 6px;
+    }
+    .mini-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+  
+        #osito-site-nav { position: sticky; top: 0; z-index: 10000; background: #161616; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
+    #osito-site-nav * { border-radius: 0px !important; box-sizing: border-box; }
+    .osito-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .osito-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; }
+    .osito-nav-brand img { height: 36px; width: auto; display: block; }
+    .osito-nav-menu { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .osito-nav-item { font-family: 'Fjalla One', sans-serif; font-size: 13.5px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: #EEF0FA; padding: 6px 11px; border: 1px solid transparent; transition: background 0.15s ease, border-color 0.15s ease; display: inline-flex; align-items: center; }
+    .osito-nav-item:hover, .osito-nav-item.active { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-nav-item.sim-link { background: #232A68; border: 1px solid #7077CF; color: #FFFFFF; }
+    .osito-nav-item.sim-link:hover { background: #444FB6; border-color: #FFFFFF; }
+    .osito-nav-caret { display: inline-block !important; vertical-align: middle; margin-left: 5px; }
+    .osito-dropdown { position: relative; display: inline-block; }
+    .osito-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 240px; background: #1B1B1B; border: 1px solid #7077CF; z-index: 20000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+    .osito-dropdown:hover .osito-dropdown-menu { display: block; }
+    .osito-dropdown-menu a { display: block; padding: 10px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; color: #EEF0FA; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid #232A68; }
+    .osito-dropdown-menu a:hover { background: #232A68; color: #FFFFFF; }
+    .osito-action-btn { display: inline-block; text-align: center; background: #7077CF; color: #FFFFFF !important; text-decoration: none; font-family: 'Fjalla One', sans-serif; font-size: 14px; padding: 11px 18px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #8E93DA; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+    .osito-action-btn:hover { background: #444FB6 !important; border-color: #FFFFFF !important; }
+    .osito-action-btn.dark { background: #232A68; border: 1px solid #303885; }
+    .osito-action-btn.emerald { background: #059669; border: 1px solid #10B981; }
+    .osito-action-btn.emerald:hover { background: #047857 !important; border-color: #FFFFFF !important; }
+  </style>
+</head>
+<body>
+    <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand"><img src="./assets/ositologo-white.png" alt="Osito Drone" style="height:36px; width:auto; display:block;" /></a>
+      <nav class="osito-nav-menu" aria-label="Main Navigation">
+        <a href="./index.html" class="osito-nav-item">Home</a>
+        <div class="osito-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html">Drone Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+            <a href="./index.html#osito-maker-faire-gallery">Photo Gallery</a>
+            <a href="./index.html#osito-youtube-channel-theater">Video Theater</a>
+          </div>
+        </div>
+        <a href="./osito-drone-academy.html" class="osito-nav-item">Academy</a>
+        <a href="./custom-aerial-solutions.html" class="osito-nav-item">Aerial Solutions</a>
+        <a href="./flight-sim.html" class="osito-nav-item sim-link">Flight Sim</a>
+        <div class="osito-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item active">Toolbox <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./toolbox.html">Toolbox Hub</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design &amp; Flowchart</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn" style="padding:8px 16px; font-size:13.5px;">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-badge">OSITO IN-HOUSE 3D CAD STUDIO | 256X256X256 MM</span>
+      <h1>OSITO IN-HOUSE 3D STL EDITOR | PARAMETRIC CAD &amp; SLICER STUDIO</h1>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+      <label class="btn" for="stlFileInput" style="cursor:pointer;">IMPORT .STL</label>
+      <input id="stlFileInput" type="file" accept=".stl" style="display:none;" />
+      <button class="btn btn-emerald" type="button" onclick="autoPackPlateSupportSafe()">AUTO-PACK (SUPPORT-SAFE)</button>
+      <button class="btn" type="button" onclick="centerAndDropSelected()">DROP TO BED (Z=0)</button>
+      <button class="btn" type="button" onclick="array2x2Selected()">2X2 ARRAY</button>
+      <button class="btn" type="button" onclick="clearPlate()">CLEAR PLATE</button>
+      <button class="btn btn-primary" type="button" onclick="exportBinarySTL()">EXPORT BINARY .STL</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      
+      <!-- 0. Custom .STL Upload & Drag-and-Drop Inspector (Public Website Edition - Zero Proprietary STLs) -->
+      <div style="background:#16192B; border:1px solid #7077CF; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <h2 class="sec-head" style="margin:0; border:none; padding:0; color:#EEF0FA;">0. IMPORT &amp; INSPECT YOUR .STL</h2>
+          <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:10px; padding:2px 6px;">BINARY &amp; ASCII</span>
+        </div>
+        <p style="font-size:11.5px; color:#CBD5E1; margin:0 0 8px 0; line-height:1.45;">
+          Open any binary or ASCII <code>.STL</code> mesh from your computer, or build custom parts below using our in-house parametric 3D CAD generators.
+        </p>
+        <label class="btn btn-primary" for="stlFileInput" style="width:100%; justify-content:center; padding:9px; font-size:12px; cursor:pointer; margin-bottom:6px;">
+          OPEN .STL FILE
+        </label>
+        <div style="background:#0E1017; border:1px dashed #444FB6; padding:7px 8px; font-size:10.5px; color:#8E93DA; text-align:center;">
+          Or drag &amp; drop any <code>.stl</code> file directly onto the 3D build plate
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">1. STARTER PARAMETRIC TEMPLATES</h2>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="addPublicTemplate('quad_duct')">
+            <strong>PROP DUCT GUARD</strong>
+            80mm Venturi Shroud
+          </button>
+          <button class="preset-btn" onclick="addPublicTemplate('test_wing')">
+            <strong>NACA TEST WING</strong>
+            Cambered Foil Section
+          </button>
+          <button class="preset-btn" onclick="addPublicTemplate('enclosure')">
+            <strong>AVIONICS BOX</strong>
+            Chamfered Electronics Tray
+          </button>
+          <button class="preset-btn" onclick="addPublicTemplate('spur_gear')">
+            <strong>24T SPUR GEAR</strong>
+            Involute Drive Wheel
+          </button>
+          <button class="preset-btn" onclick="addPublicTemplate('sensor_dome')">
+            <strong>SENSOR CANOPY</strong>
+            Vented Protective Hood
+          </button>
+          <button class="preset-btn" onclick="addPublicTemplate('cal_cube')">
+            <strong>20MM CAL CUBE</strong>
+            XYZ Dimensional Check
+          </button>
+        </div>
+      </div>
+
+
+      <div>
+        <h2 class="sec-head">2. IN-HOUSE 3D CAD GENERATORS ($FN=64)</h2>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="addPrimitive('duct')">
+            <strong>VENTURI DUCT RING</strong>
+            Bellmouth Lip + Struts
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('wing')">
+            <strong>NACA 2412 WING</strong>
+            Cambered Airfoil Rib
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('box')">
+            <strong>CHAMFERED BOX</strong>
+            Avionics / Battery Tray
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('dome')">
+            <strong>CANOPY DOME</strong>
+            Vented Camera Hood
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('cylinder')">
+            <strong>HEX STANDOFF</strong>
+            M2 / M3 Spacer Column
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('gear')">
+            <strong>INVOLUTE GEAR</strong>
+            24-Tooth Spur Wheel
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('torus')">
+            <strong>360 BUMPER RING</strong>
+            Tubular Impact Guard
+          </button>
+          <button class="preset-btn" onclick="addPrimitive('calcube')">
+            <strong>20MM CAL CUBE</strong>
+            Precision Test Block
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">3. SCENE OBJECTS ON BUILD PLATE</h2>
+        <div id="partList" class="part-list"></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; margin-top:7px;">
+          <button class="btn" style="justify-content:center; padding:6px; font-size:11px;" onclick="duplicateSelected()">CLONE</button>
+          <button class="btn" style="justify-content:center; padding:6px; font-size:11px;" onclick="array2x2Selected()">2X2 ARRAY</button>
+          <button class="btn btn-danger" style="justify-content:center; padding:6px; font-size:11px;" onclick="deleteSelected()">DELETE</button>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">4. BAMBU P2S 4-TIER FILAMENT</h2>
+        <select id="filamentSelect" onchange="updateStats()">
+          <option value="petgcf" data-density="1.29" data-rate="0.035">Slot 1: Bambu PETG-CF (Airframes &amp; Stands)</option>
+          <option value="pahtcf" data-density="1.23" data-rate="0.065">Slot 2: Bambu PAHT-CF (High-Impact / Thermal)</option>
+          <option value="plaplus" data-density="1.24" data-rate="0.022">Slot 3: eSUN PLA+ / PLA Tough (Kits &amp; Jigs)</option>
+          <option value="tpu95a" data-density="1.21" data-rate="0.042">Ext/Slot 4: Bambu TPU 95A HF / AMS 68D (Bumpers)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Center 3D Build Plate Viewport -->
+    <div class="viewport-wrap" id="dropZone">
+      <canvas id="stlCanvas"></canvas>
+      <div class="hud-overlay">
+        <div><strong>BUILD VOLUME:</strong> 256 x 256 x 256 mm (Bambu Lab P2S Combo | Textured PEI Plate)</div>
+        <div style="color:#8E93DA; margin-top:3px;">Left-Drag: Orbit 3D | Right-Drag / Shift-Drag: Pan | Scroll: Zoom | Drag &amp; Drop any .STL file</div>
+      </div>
+      <div class="hud-bottom">
+        <div>
+          <button class="btn" style="padding:5px 9px; font-size:11px;" onclick="setCameraView('iso')">ISO 3D</button>
+          <button class="btn" style="padding:5px 9px; font-size:11px;" onclick="setCameraView('top')">TOP (XY)</button>
+          <button class="btn" style="padding:5px 9px; font-size:11px;" onclick="setCameraView('front')">FRONT (XZ)</button>
+          <button class="btn" style="padding:5px 9px; font-size:11px;" onclick="setCameraView('side')">SIDE (YZ)</button>
+          <button class="btn" style="padding:5px 9px; font-size:11px;" onclick="cycleRenderMode()" id="wireBtn">VIEW: STUDIO SOLID</button>
+        </div>
+        <div style="font-family:monospace; font-size:11.5px; color:#EEF0FA;" id="hudDimensions">
+          SELECTED: PART (0.0 x 0.0 x 0.0 mm)
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Sidebar: Precision XYZ Dimensions, Mesh Operations & Slicer Telemetry -->
+    <div class="sidebar-right">
+      <div>
+        <h2 class="sec-head">SELECTED PART DIMENSIONS (MM)</h2>
+        <div class="mini-grid-5">
+          <button class="btn" style="justify-content:center; padding:4px; font-size:10.5px;" onclick="scaleUniform(0.5)">50%</button>
+          <button class="btn" style="justify-content:center; padding:4px; font-size:10.5px;" onclick="scaleUniform(0.9)">90%</button>
+          <button class="btn" style="justify-content:center; padding:4px; font-size:10.5px;" onclick="scaleUniform(1.0)">RESET</button>
+          <button class="btn" style="justify-content:center; padding:4px; font-size:10.5px;" onclick="scaleUniform(1.1)">110%</button>
+          <button class="btn" style="justify-content:center; padding:4px; font-size:10.5px;" onclick="scaleUniform(1.25)">125%</button>
+        </div>
+        <div class="control-row">
+          <span>Width (X)</span>
+          <input type="range" id="dimXRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" />
+          <input type="number" id="dimXNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" />
+        </div>
+        <div class="control-row">
+          <span>Depth (Y)</span>
+          <input type="range" id="dimYRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" />
+          <input type="number" id="dimYNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" />
+        </div>
+        <div class="control-row">
+          <span>Height (Z)</span>
+          <input type="range" id="dimZRange" min="1" max="250" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" />
+          <input type="number" id="dimZNum" min="1" max="256" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" />
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">IN-HOUSE CAD MESH OPERATIONS</h2>
+        <div class="mini-grid-3">
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="rotateMeshAxis('x')">ROT X 90</button>
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="rotateMeshAxis('y')">ROT Y 90</button>
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="rotateMeshAxis('z')">ROT Z 90</button>
+        </div>
+        <div class="mini-grid-3">
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="mirrorMeshAxis('x')">MIRROR X</button>
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="mirrorMeshAxis('y')">MIRROR Y</button>
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="mirrorMeshAxis('z')">MIRROR Z</button>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px;">
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="centerAndDropSelected()">CENTER &amp; Z=0.00MM</button>
+          <button class="btn" style="justify-content:center; padding:5px; font-size:10.5px;" onclick="exportSinglePartSTL()">EXPORT SELECTED .STL</button>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">POSITION &amp; YAW ON BUILD PLATE</h2>
+        <div class="control-row">
+          <span>Pos X (mm)</span>
+          <input type="range" id="posXRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" />
+          <input type="number" id="posXNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" />
+        </div>
+        <div class="control-row">
+          <span>Pos Y (mm)</span>
+          <input type="range" id="posYRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" />
+          <input type="number" id="posYNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" />
+        </div>
+        <div class="control-row">
+          <span>Lift Z (mm)</span>
+          <input type="range" id="posZRange" min="0" max="150" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" />
+          <input type="number" id="posZNum" min="0" max="200" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" />
+        </div>
+        <div class="control-row">
+          <span>Rot Z (Yaw)</span>
+          <input type="range" id="rotZRange" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" />
+          <input type="number" id="rotZNum" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" />
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec-head">SLICER &amp; BAMBU P2S TELEMETRY</h2>
+        <div class="control-row">
+          <span>Infill (%)</span>
+          <input type="range" id="infillRange" min="10" max="100" step="5" value="25" oninput="document.getElementById('infillVal').textContent=this.value+'%'; updateStats();" />
+          <span id="infillVal" style="font-family:monospace; text-align:right;">25%</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-line"><span>Total Mesh Triangles:</span><strong id="statTris">0</strong></div>
+          <div class="stat-line"><span>Selected BBox (mm):</span><strong id="statBbox">80 x 80 x 16</strong></div>
+          <div class="stat-line"><span>Est. Filament Weight:</span><strong id="statWeight">12.4 g</strong></div>
+          <div class="stat-line"><span>Est. P2S Print Time:</span><strong id="statTime">24 min</strong></div>
+          <div class="stat-line"><span>Material Spool Cost:</span><strong id="statCost" style="color:#8E93DA;">$0.43</strong></div>
+          <div class="stat-line"><span>256mm Plate Check:</span><strong id="statFit" style="color:#34D399;">FITS 256MM PLATE</strong></div>
+        </div>
+      </div>
+
+      <div style="margin-top:auto;">
+        <button class="btn btn-primary" style="width:100%; justify-content:center; padding:11px;" onclick="exportBinarySTL()">
+          DOWNLOAD PLATE BINARY .STL FILE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+    var canvas = document.getElementById('stlCanvas');
+    var ctx = canvas.getContext('2d');
+    var parts = [];
+    var selectedIdx = 0;
+    var renderMode = 'solid'; // 'solid', 'wireframe', 'overhang'
+
+    var cam = { yaw: 0.65, pitch: 0.52, dist: 300, panX: 0, panY: 0 };
+    var drag = { active: false, mode: 'orbit', lastX: 0, lastY: 0 };
+
+    // High-Resolution Parametric 3D CAD Mesh Generators (local normalized coords: X,Y in [-0.5..0.5], Z in [0..1])
+    function makeBoxTris() {
+      var p = [
+        [-0.5,-0.5,0],[0.5,-0.5,0],[0.5,0.5,0],[-0.5,0.5,0],
+        [-0.5,-0.5,1],[0.5,-0.5,1],[0.5,0.5,1],[-0.5,0.5,1]
+      ];
+      var idx = [
+        [0,2,1],[0,3,2],[4,5,6],[4,6,7],
+        [0,1,5],[0,5,4],[1,2,6],[1,6,5],
+        [2,3,7],[2,7,6],[3,0,4],[3,4,7]
+      ];
+      return idx.map(function(t){ return [p[t[0]], p[t[1]], p[t[2]]]; });
+    }
+
+    function makeCylinderTris(segs, innerRatio) {
+      segs = segs || 64;
+      innerRatio = innerRatio || 0;
+      var tris = [];
+      for (var i = 0; i < segs; i++) {
+        var a0 = (i / segs) * Math.PI * 2;
+        var a1 = ((i + 1) / segs) * Math.PI * 2;
+        var c0 = Math.cos(a0) * 0.5, s0 = Math.sin(a0) * 0.5;
+        var c1 = Math.cos(a1) * 0.5, s1 = Math.sin(a1) * 0.5;
+        if (innerRatio <= 0.01) {
+          tris.push([[0,0,1],[c0,s0,1],[c1,s1,1]]);
+          tris.push([[0,0,0],[c1,s1,0],[c0,s0,0]]);
+          tris.push([[c0,s0,0],[c1,s1,0],[c1,s1,1]]);
+          tris.push([[c0,s0,0],[c1,s1,1],[c0,s0,1]]);
+        } else {
+          var ic0 = c0 * innerRatio, is0 = s0 * innerRatio;
+          var ic1 = c1 * innerRatio, is1 = s1 * innerRatio;
+          tris.push([[ic0,is0,1],[c0,s0,1],[c1,s1,1]]);
+          tris.push([[ic0,is0,1],[c1,s1,1],[ic1,is1,1]]);
+          tris.push([[ic0,is0,0],[c1,s1,0],[c0,s0,0]]);
+          tris.push([[ic0,is0,0],[ic1,is1,0],[c1,s1,0]]);
+          tris.push([[c0,s0,0],[c1,s1,0],[c1,s1,1]]);
+          tris.push([[c0,s0,0],[c1,s1,1],[c0,s0,1]]);
+          tris.push([[ic0,is0,0],[ic1,is1,1],[ic1,is1,0]]);
+          tris.push([[ic0,is0,0],[ic0,is0,1],[ic1,is1,1]]);
+        }
+      }
+      return tris;
+    }
+
+    function transformTris(tris, sx, sy, sz, ox, oy, oz) {
+      return tris.map(function(t) {
+        return t.map(function(v) {
+          return [v[0] * sx + ox, v[1] * sy + oy, v[2] * sz + oz];
+        });
+      });
+    }
+
+    function makeVenturiDuctTris() {
+      var all = [];
+      var segs = 64, rings = 8;
+      for (var r = 0; r < rings; r++) {
+        var z0 = r / rings, z1 = (r + 1) / rings;
+        var flare0 = Math.sin(z0 * Math.PI) * 0.035;
+        var flare1 = Math.sin(z1 * Math.PI) * 0.035;
+        var ro0 = 0.50 - flare0 * 0.3, ri0 = 0.43 - flare0;
+        var ro1 = 0.50 - flare1 * 0.3, ri1 = 0.43 - flare1;
+        for (var i = 0; i < segs; i++) {
+          var a0 = (i / segs) * Math.PI * 2, a1 = ((i + 1) / segs) * Math.PI * 2;
+          var c0 = Math.cos(a0), s0 = Math.sin(a0), c1 = Math.cos(a1), s1 = Math.sin(a1);
+          all.push([[c0*ro0,s0*ro0,z0],[c1*ro0,s1*ro0,z0],[c1*ro1,s1*ro1,z1]]);
+          all.push([[c0*ro0,s0*ro0,z0],[c1*ro1,s1*ro1,z1],[c0*ro1,s0*ro1,z1]]);
+          all.push([[c0*ri0,s0*ri0,z0],[c1*ri1,s1*ri1,z1],[c1*ri0,s1*ri0,z0]]);
+          all.push([[c0*ri0,s0*ri0,z0],[c0*ri1,s0*ri1,z1],[c1*ri1,s1*ri1,z1]]);
+          if (r === 0) {
+            all.push([[c0*ri0,s0*ri0,0],[c1*ro0,s1*ro0,0],[c0*ro0,s0*ro0,0]]);
+            all.push([[c0*ri0,s0*ri0,0],[c1*ri0,s1*ri0,0],[c1*ro0,s1*ro0,0]]);
+          }
+          if (r === rings - 1) {
+            all.push([[c0*ri1,s0*ri1,1],[c0*ro1,s0*ro1,1],[c1*ro1,s1*ro1,1]]);
+            all.push([[c0*ri1,s0*ri1,1],[c1*ro1,s1*ro1,1],[c1*ri1,s1*ri1,1]]);
+          }
+        }
+      }
+      // Center motor ring + 4 X-struts
+      all = all.concat(transformTris(makeCylinderTris(32, 0.45), 0.24, 0.24, 0.22, 0, 0, 0));
+      all = all.concat(transformTris(makeBoxTris(), 0.88, 0.05, 0.18, 0, 0, 0));
+      all = all.concat(transformTris(makeBoxTris(), 0.05, 0.88, 0.18, 0, 0, 0));
+      return all;
+    }
+
+    function makeNacaWingTris() {
+      var all = [];
+      var nChord = 24, nSpan = 16;
+      function nacaPt(s) {
+        var m = 0.04, p = 0.4, t = 0.14;
+        var yt = 5 * t * (0.2969*Math.sqrt(s) - 0.1260*s - 0.3516*s*s + 0.2843*s*s*s - 0.1015*s*s*s*s);
+        var yc = (s < p) ? (m/(p*p))*(2*p*s - s*s) : (m/((1-p)*(1-p)))*((1-2*p) + 2*p*s - s*s);
+        return [yc, yt];
+      }
+      var ringPts = [];
+      for (var i = 0; i <= nChord; i++) {
+        var s = i / nChord;
+        var r = nacaPt(s);
+        ringPts.push([s - 0.5, Math.min(1.0, Math.max(0.0, 0.35 + (r[0] + r[1]) * 3.2))]);
+      }
+      for (var j = nChord - 1; j >= 1; j--) {
+        var s2 = j / nChord;
+        var r2 = nacaPt(s2);
+        ringPts.push([s2 - 0.5, Math.min(1.0, Math.max(0.0, 0.35 + (r2[0] - r2[1]) * 3.2))]);
+      }
+      var mLen = ringPts.length;
+      for (var k = 0; k < nSpan; k++) {
+        var x0 = -0.5 + k / nSpan, x1 = -0.5 + (k + 1) / nSpan;
+        for (var q = 0; q < mLen; q++) {
+          var p0 = ringPts[q], p1 = ringPts[(q + 1) % mLen];
+          all.push([[x0, p0[0], p0[1]], [x1, p0[0], p0[1]], [x1, p1[0], p1[1]]]);
+          all.push([[x0, p0[0], p0[1]], [x1, p1[0], p1[1]], [x0, p1[0], p1[1]]]);
+        }
+      }
+      return all;
+    }
+
+    function makeCanopyDomeTris() {
+      var all = [];
+      var nLat = 14, nLon = 48;
+      for (var i = 0; i < nLat; i++) {
+        var v0 = (i / nLat) * (Math.PI * 0.5);
+        var v1 = ((i + 1) / nLat) * (Math.PI * 0.5);
+        var r0 = Math.cos(v0) * 0.48, z0 = Math.sin(v0) * 0.85 + 0.15;
+        var r1 = Math.cos(v1) * 0.48, z1 = Math.sin(v1) * 0.85 + 0.15;
+        for (var j = 0; j < nLon; j++) {
+          var u0 = (j / nLon) * Math.PI * 2, u1 = ((j + 1) / nLon) * Math.PI * 2;
+          var p00 = [Math.cos(u0)*r0, Math.sin(u0)*r0, z0];
+          var p10 = [Math.cos(u1)*r0, Math.sin(u1)*r0, z0];
+          var p01 = [Math.cos(u0)*r1, Math.sin(u0)*r1, z1];
+          var p11 = [Math.cos(u1)*r1, Math.sin(u1)*r1, z1];
+          all.push([p00, p10, p11]);
+          all.push([p00, p11, p01]);
+        }
+      }
+      all = all.concat(transformTris(makeCylinderTris(48, 0.84), 0.98, 0.98, 0.16, 0, 0, 0));
+      return all;
+    }
+
+    function makeSpurGearTris() {
+      var all = [];
+      var teeth = 24, segs = teeth * 4;
+      for (var i = 0; i < segs; i++) {
+        var a0 = (i / segs) * Math.PI * 2, a1 = ((i + 1) / segs) * Math.PI * 2;
+        var r0 = ((i % 4 < 2) ? 0.50 : 0.41);
+        var r1 = (((i + 1) % 4 < 2) ? 0.50 : 0.41);
+        var ri = 0.16;
+        var c0 = Math.cos(a0), s0 = Math.sin(a0), c1 = Math.cos(a1), s1 = Math.sin(a1);
+        all.push([[c0*ri,s0*ri,1],[c0*r0,s0*r0,1],[c1*r1,s1*r1,1]]);
+        all.push([[c0*ri,s0*ri,1],[c1*r1,s1*r1,1],[c1*ri,s1*ri,1]]);
+        all.push([[c0*ri,s0*ri,0],[c1*r1,s1*r1,0],[c0*r0,s0*r0,0]]);
+        all.push([[c0*ri,s0*ri,0],[c1*ri,s1*ri,0],[c1*r1,s1*r1,0]]);
+        all.push([[c0*r0,s0*r0,0],[c1*r1,s1*r1,0],[c1*r1,s1*r1,1]]);
+        all.push([[c0*r0,s0*r0,0],[c1*r1,s1*r1,1],[c0*r0,s0*r0,1]]);
+        all.push([[c0*ri,s0*ri,0],[c1*ri,s1*ri,1],[c1*ri,s1*ri,0]]);
+        all.push([[c0*ri,s0*ri,0],[c0*ri,s0*ri,1],[c1*ri,s1*ri,1]]);
+      }
+      return all;
+    }
+
+    function makeTorusTris() {
+      var all = [];
+      var nMaj = 48, nMin = 18;
+      var R = 0.42, r = 0.08;
+      for (var i = 0; i < nMaj; i++) {
+        var u0 = (i / nMaj) * Math.PI * 2, u1 = ((i + 1) / nMaj) * Math.PI * 2;
+        for (var j = 0; j < nMin; j++) {
+          var v0 = (j / nMin) * Math.PI * 2, v1 = ((j + 1) / nMin) * Math.PI * 2;
+          function pt(u, v) {
+            var rr = R + r * Math.cos(v);
+            return [rr * Math.cos(u), rr * Math.sin(u), 0.5 + 0.5 * Math.sin(v)];
+          }
+          var p00 = pt(u0, v0), p10 = pt(u1, v0), p01 = pt(u0, v1), p11 = pt(u1, v1);
+          all.push([p00, p10, p11]);
+          all.push([p00, p11, p01]);
+        }
+      }
+      return all;
+    }
+
+    function makeChamferBoxTris() {
+      var all = [];
+      // Outer tray + recessed rim
+      all = all.concat(transformTris(makeCylinderTris(32, 0.86), 1.0, 1.0, 0.82, 0, 0, 0.18));
+      all = all.concat(transformTris(makeCylinderTris(32, 0.0), 0.96, 0.96, 0.18, 0, 0, 0));
+      return all;
+    }
+
+    function addPrimitive(kind) {
+      var name = '20mm_XYZ_Calibration_Cube', tris = null, sx = 20, sy = 20, sz = 20, color = '#7077CF';
+      if (kind === 'duct') {
+        tris = makeVenturiDuctTris(); name = 'Venturi_Duct_Ring'; sx = 80; sy = 80; sz = 16; color = '#7077CF';
+      } else if (kind === 'wing') {
+        tris = makeNacaWingTris(); name = 'NACA2412_Airfoil_Wing'; sx = 140; sy = 42; sz = 9; color = '#5A8DEE';
+      } else if (kind === 'box') {
+        tris = makeChamferBoxTris(); name = 'Avionics_Enclosure_Tray'; sx = 68; sy = 48; sz = 16; color = '#7077CF';
+      } else if (kind === 'dome') {
+        tris = makeCanopyDomeTris(); name = 'Sculpted_Canopy_Dome'; sx = 42; sy = 42; sz = 18; color = '#8E93DA';
+      } else if (kind === 'cylinder') {
+        tris = makeCylinderTris(64, 0.42); name = 'M3_Standoff_Column'; sx = 8; sy = 8; sz = 25; color = '#8E93DA';
+      } else if (kind === 'gear') {
+        tris = makeSpurGearTris(); name = 'Involute_24T_Spur_Gear'; sx = 48; sy = 48; sz = 8; color = '#34D399';
+      } else if (kind === 'torus') {
+        tris = makeTorusTris(); name = '360_Impact_Bumper_Ring'; sx = 96; sy = 96; sz = 8; color = '#F59E0B';
+      } else {
+        tris = makeBoxTris(); name = '20mm_XYZ_Calibration_Cube'; sx = 20; sy = 20; sz = 20; color = '#7077CF';
+      }
+      var spawn = findSupportSafeSpawnSlot(sx, sy, 0, -1);
+      parts.push({ name: name, tris: tris, fullTrisCount: tris.length, sx: sx, sy: sy, sz: sz, px: spawn.px, py: spawn.py, pz: 0, rz: 0, color: color });
+      selectedIdx = parts.length - 1;
+      enforceBedAndSupportSafety(selectedIdx);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function addPublicTemplate(tpl) {
+      // Never wipe existing parts on the plate - spawn next to existing objects with support clearance
+      if (tpl === 'quad_duct') addPrimitive('duct');
+      else if (tpl === 'test_wing') addPrimitive('wing');
+      else if (tpl === 'enclosure') addPrimitive('box');
+      else if (tpl === 'spur_gear') addPrimitive('gear');
+      else if (tpl === 'sensor_dome') addPrimitive('dome');
+      else addPrimitive('calcube');
+    }
+
+    // === SUPPORT-SAFE NON-OVERLAPPING BUILD PLATE PLACEMENT ENGINE ===
+    var SUPPORT_CLEARANCE_MM = 8.0; // 4.0mm support/brim skirt per part = 8.0mm minimum part-to-part gap
+    var PLATE_SAFE_HALF = 124.0;    // 256x256mm plate with 4mm outer brim guard (-124..+124mm)
+
+    function getEffectiveFootprint(sx, sy, rz) {
+      var rad = (rz || 0) * Math.PI / 180;
+      var c = Math.abs(Math.cos(rad)), s = Math.abs(Math.sin(rad));
+      return {
+        w: sx * c + sy * s,
+        d: sx * s + sy * c
+      };
+    }
+
+    function clampToPlateBounds(val, span) {
+      var maxPos = Math.max(0, PLATE_SAFE_HALF - span * 0.5);
+      return Math.max(-maxPos, Math.min(maxPos, val));
+    }
+
+    function isWithinPlateBounds(cx, cy, w, d) {
+      var limW = Math.max(PLATE_SAFE_HALF, w * 0.5);
+      var limD = Math.max(PLATE_SAFE_HALF, d * 0.5);
+      return (Math.abs(cx) + w * 0.5 <= limW + 0.5) && (Math.abs(cy) + d * 0.5 <= limD + 0.5);
+    }
+
+    function hasSupportCollision(cx, cy, w, d, ignoreIdx) {
+      if (!isWithinPlateBounds(cx, cy, w, d)) return true;
+      for (var i = 0; i < parts.length; i++) {
+        if (i === ignoreIdx) continue;
+        var other = parts[i];
+        var fp = getEffectiveFootprint(other.sx, other.sy, other.rz);
+        var minSepX = (w + fp.w) * 0.5 + SUPPORT_CLEARANCE_MM;
+        var minSepY = (d + fp.d) * 0.5 + SUPPORT_CLEARANCE_MM;
+        if (Math.abs(cx - other.px) < minSepX - 0.1 && Math.abs(cy - other.py) < minSepY - 0.1) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function findSupportSafeSpawnSlot(sx, sy, rz, ignoreIdx) {
+      var fp = getEffectiveFootprint(sx, sy, rz);
+      var w = fp.w, d = fp.d;
+      if (parts.length === 0 || (parts.length === 1 && ignoreIdx === 0)) {
+        return { px: 0, py: 0, pz: 0 };
+      }
+      if (!hasSupportCollision(0, 0, w, d, ignoreIdx)) {
+        return { px: 0, py: 0, pz: 0 };
+      }
+      // 1. Check cardinal & diagonal adjacent slots around every existing part (with exact 8mm support gap)
+      var candidates = [];
+      for (var i = 0; i < parts.length; i++) {
+        if (i === ignoreIdx) continue;
+        var ref = parts[i];
+        var rfp = getEffectiveFootprint(ref.sx, ref.sy, ref.rz);
+        var stepX = Math.ceil((w + rfp.w) * 0.5 + SUPPORT_CLEARANCE_MM);
+        var stepY = Math.ceil((d + rfp.d) * 0.5 + SUPPORT_CLEARANCE_MM);
+        candidates.push([ref.px + stepX, ref.py]);
+        candidates.push([ref.px - stepX, ref.py]);
+        candidates.push([ref.px, ref.py + stepY]);
+        candidates.push([ref.px, ref.py - stepY]);
+        candidates.push([ref.px + stepX, ref.py + stepY]);
+        candidates.push([ref.px - stepX, ref.py + stepY]);
+        candidates.push([ref.px + stepX, ref.py - stepY]);
+        candidates.push([ref.px - stepX, ref.py - stepY]);
+      }
+      // Sort candidates by distance to center (0,0) so parts cluster neatly near the plate center
+      candidates.sort(function(a, b) {
+        return (a[0]*a[0] + a[1]*a[1]) - (b[0]*b[0] + b[1]*b[1]);
+      });
+      for (var c = 0; c < candidates.length; c++) {
+        var cx = Math.round(candidates[c][0]);
+        var cy = Math.round(candidates[c][1]);
+        if (!hasSupportCollision(cx, cy, w, d, ignoreIdx)) {
+          return { px: cx, py: cy, pz: 0 };
+        }
+      }
+      // 2. Fine outward spiral search across the 256x256mm build plate (step = 4mm)
+      for (var rad = 4; rad <= 124; rad += 4) {
+        for (var dx = -rad; dx <= rad; dx += 4) {
+          var tryPts = [[dx, -rad], [dx, rad], [-rad, dx], [rad, dx]];
+          for (var t = 0; t < tryPts.length; t++) {
+            var tx = tryPts[t][0], ty = tryPts[t][1];
+            if (!hasSupportCollision(tx, ty, w, d, ignoreIdx)) {
+              return { px: tx, py: ty, pz: 0 };
+            }
+          }
+        }
+      }
+      return { px: clampToPlateBounds(40, w), py: clampToPlateBounds(40, d), pz: 0 };
+    }
+
+    function enforceBedAndSupportSafety(idx) {
+      var p = parts[idx];
+      if (!p) return;
+      // Never allow object to sink below print bed (Z_min = 0.000mm)
+      p.pz = Math.max(0, Number((p.pz || 0).toFixed(1)));
+      var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
+      p.px = Math.round(clampToPlateBounds(p.px, fp.w));
+      p.py = Math.round(clampToPlateBounds(p.py, fp.d));
+      if (parts.length > 1 && hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
+        var safe = findSupportSafeSpawnSlot(p.sx, p.sy, p.rz, idx);
+        p.px = safe.px;
+        p.py = safe.py;
+        if (hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
+          autoPackPlateSupportSafe();
+        }
+      }
+    }
+
+    function autoPackPlateSupportSafe() {
+      if (parts.length === 0) return;
+      if (parts.length === 1) {
+        parts[0].px = 0; parts[0].py = 0; parts[0].pz = 0;
+        syncUIFromSelected();
+        updateStats();
+        return;
+      }
+      // 2D Shelf Bin-Packing centered on the 256x256mm Bambu P2S Plate with SUPPORT_CLEARANCE_MM (8mm) gap
+      var totalArea = 0;
+      var footprints = parts.map(function(p) {
+        var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
+        var w = fp.w + SUPPORT_CLEARANCE_MM;
+        var d = fp.d + SUPPORT_CLEARANCE_MM;
+        totalArea += w * d;
+        return { w: w, d: d, rawW: fp.w, rawD: fp.d };
+      });
+      var targetRowWidth = Math.min(248, Math.max(140, Math.ceil(Math.sqrt(totalArea) * 1.15)));
+      var rows = [];
+      var curRow = { items: [], width: 0, depth: 0 };
+      parts.forEach(function(p, i) {
+        var fp = footprints[i];
+        if (curRow.items.length > 0 && curRow.width + fp.w > targetRowWidth) {
+          rows.push(curRow);
+          curRow = { items: [], width: 0, depth: 0 };
+        }
+        curRow.items.push({ idx: i, w: fp.w, d: fp.d, rawW: fp.rawW, rawD: fp.rawD });
+        curRow.width += fp.w;
+        if (fp.d > curRow.depth) curRow.depth = fp.d;
+      });
+      if (curRow.items.length > 0) rows.push(curRow);
+
+      var totalDepth = rows.reduce(function(acc, r) { return acc + r.depth; }, 0);
+      var curY = -totalDepth * 0.5;
+      rows.forEach(function(r) {
+        var curX = -r.width * 0.5;
+        var rowCenterY = curY + r.depth * 0.5;
+        r.items.forEach(function(item) {
+          var part = parts[item.idx];
+          part.px = Math.round(clampToPlateBounds(curX + item.w * 0.5, item.rawW));
+          part.py = Math.round(clampToPlateBounds(rowCenterY, item.rawD));
+          part.pz = 0;
+          curX += item.w;
+        });
+        curY += r.depth;
+      });
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    // In-House Mesh Operations: Mirror X/Y/Z, Rotate 90 X/Y/Z, Uniform Scale, 2x2 Array
+    function scaleUniform(factor) {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      if (factor === 1.0 && p.origDims) {
+        p.sx = p.origDims[0]; p.sy = p.origDims[1]; p.sz = p.origDims[2];
+      } else {
+        if (!p.origDims) p.origDims = [p.sx, p.sy, p.sz];
+        p.sx = Number(Math.max(2, Math.min(248, p.sx * factor)).toFixed(1));
+        p.sy = Number(Math.max(2, Math.min(248, p.sy * factor)).toFixed(1));
+        p.sz = Number(Math.max(1, Math.min(256, p.sz * factor)).toFixed(1));
+      }
+      enforceBedAndSupportSafety(selectedIdx);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function mirrorMeshAxis(axis) {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      p.tris = p.tris.map(function(t) {
+        var m = t.map(function(v) {
+          if (axis === 'x') return [-v[0], v[1], v[2]];
+          if (axis === 'y') return [v[0], -v[1], v[2]];
+          return [v[0], v[1], 1.0 - v[2]];
+        });
+        return [m[0], m[2], m[1]];
+      });
+      updateStats();
+    }
+
+    function rotateMeshAxis(axis) {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      if (axis === 'z') {
+        p.rz = ((p.rz || 0) + 90) % 360;
+        if (p.rz > 180) p.rz -= 360;
+        enforceBedAndSupportSafety(selectedIdx);
+        syncUIFromSelected();
+        updateStats();
+        return;
+      }
+      var raw = p.tris.map(function(t) {
+        return t.map(function(v) {
+          var x = v[0] * p.sx, y = v[1] * p.sy, z = (v[2] - 0.5) * p.sz;
+          if (axis === 'x') return [x, -z, y];
+          return [z, y, -x];
+        });
+      });
+      normalizePartTriangles(p, raw);
+      enforceBedAndSupportSafety(selectedIdx);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function normalizePartTriangles(part, rawTris) {
+      var minX = Infinity, minY = Infinity, minZ = Infinity;
+      var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+      rawTris.forEach(function(t) {
+        t.forEach(function(v) {
+          if (v[0] < minX) minX = v[0]; if (v[0] > maxX) maxX = v[0];
+          if (v[1] < minY) minY = v[1]; if (v[1] > maxY) maxY = v[1];
+          if (v[2] < minZ) minZ = v[2]; if (v[2] > maxZ) maxZ = v[2];
+        });
+      });
+      var sx = Math.max(1, maxX - minX);
+      var sy = Math.max(1, maxY - minY);
+      var sz = Math.max(1, maxZ - minZ);
+      var cx = (minX + maxX) * 0.5;
+      var cy = (minY + maxY) * 0.5;
+      part.sx = Number(sx.toFixed(1));
+      part.sy = Number(sy.toFixed(1));
+      part.sz = Number(sz.toFixed(1));
+      part.pz = 0;
+      part.tris = rawTris.map(function(t) {
+        return t.map(function(v) {
+          return [(v[0] - cx) / sx, (v[1] - cy) / sy, (v[2] - minZ) / sz];
+        });
+      });
+    }
+
+    function array2x2Selected() {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
+      var dx = Math.min(62, Math.max(16, Math.ceil((fp.w + SUPPORT_CLEARANCE_MM) * 0.5)));
+      var dy = Math.min(62, Math.max(16, Math.ceil((fp.d + SUPPORT_CLEARANCE_MM) * 0.5)));
+      var coords = [[-dx, -dy], [dx, -dy], [-dx, dy], [dx, dy]];
+      var baseName = p.name.replace(/_Unit\d+$/, '');
+      parts = [];
+      coords.forEach(function(c, i) {
+        var clone = JSON.parse(JSON.stringify(p));
+        clone.name = baseName + '_Unit' + (i + 1);
+        clone.px = clampToPlateBounds(c[0], fp.w);
+        clone.py = clampToPlateBounds(c[1], fp.d);
+        clone.pz = 0;
+        parts.push(clone);
+      });
+      autoPackPlateSupportSafe();
+      selectedIdx = 0;
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    // Parse imported ASCII or Binary .STL file
+    document.getElementById('stlFileInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (file) importSTLFile(file);
+    });
+
+    var dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', function(e) { e.preventDefault(); });
+    dropZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        importSTLFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    function importSTLFile(file) {
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        var buf = ev.target.result;
+        var tris = parseSTLBuffer(buf);
+        if (!tris || tris.length === 0) {
+          alert('Could not parse triangles from STL file.');
+          return;
+        }
+        var newPart = {
+          name: file.name.replace(/\.stl$/i, ''),
+          tris: [],
+          fullTrisCount: tris.length,
+          sx: 10, sy: 10, sz: 10,
+          px: 0, py: 0, pz: 0, rz: 0,
+          color: '#7077CF'
+        };
+        normalizePartTriangles(newPart, tris);
+        var spawn = findSupportSafeSpawnSlot(newPart.sx, newPart.sy, 0, -1);
+        newPart.px = spawn.px;
+        newPart.py = spawn.py;
+        newPart.pz = 0;
+        parts.push(newPart);
+        selectedIdx = parts.length - 1;
+        enforceBedAndSupportSafety(selectedIdx);
+        syncUIFromSelected();
+        renderPartList();
+        updateStats();
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function parseSTLBuffer(buf) {
+      var dv = new DataView(buf);
+      if (buf.byteLength > 84) {
+        var triCount = dv.getUint32(80, true);
+        if (84 + triCount * 50 === buf.byteLength && triCount > 0 && triCount < 600000) {
+          var tris = [];
+          var offset = 84;
+          for (var i = 0; i < triCount; i++) {
+            var v0 = [dv.getFloat32(offset + 12, true), dv.getFloat32(offset + 16, true), dv.getFloat32(offset + 20, true)];
+            var v1 = [dv.getFloat32(offset + 24, true), dv.getFloat32(offset + 28, true), dv.getFloat32(offset + 32, true)];
+            var v2 = [dv.getFloat32(offset + 36, true), dv.getFloat32(offset + 40, true), dv.getFloat32(offset + 44, true)];
+            tris.push([v0, v1, v2]);
+            offset += 50;
+          }
+          return tris;
+        }
+      }
+      var text = new TextDecoder().decode(buf);
+      var re = /vertex\s+([-\d.eE+]+)\s+([-\d.eE+]+)\s+([-\d.eE+]+)/g;
+      var verts = [], m;
+      while ((m = re.exec(text)) !== null) {
+        verts.push([parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])]);
+      }
+      var asciiTris = [];
+      for (var j = 0; j + 2 < verts.length; j += 3) {
+        asciiTris.push([verts[j], verts[j+1], verts[j+2]]);
+      }
+      return asciiTris;
+    }
+
+    function getWorldTriangles(part) {
+      var rad = (part.rz || 0) * Math.PI / 180;
+      var c = Math.cos(rad), s = Math.sin(rad);
+      return part.tris.map(function(t) {
+        return t.map(function(v) {
+          var lx = v[0] * part.sx;
+          var ly = v[1] * part.sy;
+          var lz = v[2] * part.sz;
+          var rx = lx * c - ly * s + part.px;
+          var ry = lx * s + ly * c + part.py;
+          var rz = lz + part.pz;
+          return [rx, ry, rz];
+        });
+      });
+    }
+
+    function writeBinarySTLDownload(allTris, filenameBase) {
+      if (allTris.length === 0) {
+        alert('Add or import at least one 3D part before exporting.');
+        return;
+      }
+      var buf = new ArrayBuffer(84 + allTris.length * 50);
+      var dv = new DataView(buf);
+      var header = 'OSITO IN-HOUSE 3D STL EDITOR - BAMBU LAB P2S COMBO READY';
+      for (var i = 0; i < 80; i++) {
+        dv.setUint8(i, i < header.length ? header.charCodeAt(i) : 32);
+      }
+      dv.setUint32(80, allTris.length, true);
+      var offset = 84;
+      allTris.forEach(function(t) {
+        var ux = t[1][0] - t[0][0], uy = t[1][1] - t[0][1], uz = t[1][2] - t[0][2];
+        var vx = t[2][0] - t[0][0], vy = t[2][1] - t[0][1], vz = t[2][2] - t[0][2];
+        var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+        var len = Math.hypot(nx, ny, nz) || 1;
+        dv.setFloat32(offset, nx / len, true);
+        dv.setFloat32(offset + 4, ny / len, true);
+        dv.setFloat32(offset + 8, nz / len, true);
+        for (var k = 0; k < 3; k++) {
+          dv.setFloat32(offset + 12 + k * 12, t[k][0], true);
+          dv.setFloat32(offset + 16 + k * 12, t[k][1], true);
+          dv.setFloat32(offset + 20 + k * 12, t[k][2], true);
+        }
+        dv.setUint16(offset + 48, 0, true);
+        offset += 50;
+      });
+      var blob = new Blob([buf], { type: 'application/octet-stream' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filenameBase + '.stl';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function exportBinarySTL() {
+      var allTris = [];
+      parts.forEach(function(p) {
+        allTris = allTris.concat(getWorldTriangles(p));
+      });
+      var selName = parts.length === 1 && parts[0] ? parts[0].name : 'Osito_Bambu_P2S_BuildPlate';
+      writeBinarySTLDownload(allTris, selName);
+    }
+
+    function exportSinglePartSTL() {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      writeBinarySTLDownload(getWorldTriangles(p), p.name);
+    }
+
+    function syncUIFromSelected() {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      document.getElementById('dimXRange').value = p.sx; document.getElementById('dimXNum').value = p.sx;
+      document.getElementById('dimYRange').value = p.sy; document.getElementById('dimYNum').value = p.sy;
+      document.getElementById('dimZRange').value = p.sz; document.getElementById('dimZNum').value = p.sz;
+      document.getElementById('posXRange').value = p.px; document.getElementById('posXNum').value = p.px;
+      document.getElementById('posYRange').value = p.py; document.getElementById('posYNum').value = p.py;
+      document.getElementById('posZRange').value = p.pz; document.getElementById('posZNum').value = p.pz;
+      document.getElementById('rotZRange').value = p.rz; document.getElementById('rotZNum').value = p.rz;
+      document.getElementById('hudDimensions').textContent = 'SELECTED: ' + p.name.toUpperCase() + ' (' + p.sx + ' x ' + p.sy + ' x ' + p.sz + ' mm)';
+    }
+
+    function updateTransformFromUI(field, val) {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      var num = parseFloat(val) || 0;
+      if (field === 'pz') num = Math.max(0, num);
+      p[field] = num;
+      enforceBedAndSupportSafety(selectedIdx);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function renderPartList() {
+      var listEl = document.getElementById('partList');
+      if (parts.length === 0) {
+        listEl.innerHTML = '<div style="padding:10px; color:#888; font-size:12px;">Plate empty. Add a CAD primitive or import an .STL file.</div>';
+        return;
+      }
+      listEl.innerHTML = parts.map(function(p, idx) {
+        return '<div class="part-item ' + (idx === selectedIdx ? 'active' : '') + '" onclick="selectPart(' + idx + ')">' +
+          '<span>' + (idx + 1) + '. ' + p.name + ' <span style="color:#34D399; font-size:10px;">(' + p.px + ',' + p.py + ')</span></span>' +
+          '<span style="font-family:monospace; color:#8E93DA;">' + p.sx + 'x' + p.sy + 'x' + p.sz + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    function selectPart(idx) {
+      selectedIdx = idx;
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function duplicateSelected() {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      var copy = JSON.parse(JSON.stringify(p));
+      copy.name = p.name + '_Copy';
+      var spawn = findSupportSafeSpawnSlot(copy.sx, copy.sy, copy.rz, -1);
+      copy.px = spawn.px;
+      copy.py = spawn.py;
+      copy.pz = 0;
+      parts.push(copy);
+      selectedIdx = parts.length - 1;
+      enforceBedAndSupportSafety(selectedIdx);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function deleteSelected() {
+      if (parts.length === 0) return;
+      parts.splice(selectedIdx, 1);
+      selectedIdx = Math.max(0, parts.length - 1);
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function centerAndDropSelected() {
+      var p = parts[selectedIdx];
+      if (!p) return;
+      p.pz = 0;
+      var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
+      if (!hasSupportCollision(0, 0, fp.w, fp.d, selectedIdx)) {
+        p.px = 0; p.py = 0;
+      } else {
+        var safe = findSupportSafeSpawnSlot(p.sx, p.sy, p.rz, selectedIdx);
+        p.px = safe.px; p.py = safe.py;
+      }
+      syncUIFromSelected();
+      renderPartList();
+      updateStats();
+    }
+
+    function clearPlate() {
+      parts = [];
+      selectedIdx = 0;
+      renderPartList();
+      updateStats();
+    }
+
+    function setCameraView(v) {
+      if (v === 'iso') { cam.yaw = 0.65; cam.pitch = 0.52; cam.panX = 0; cam.panY = 0; }
+      else if (v === 'top') { cam.yaw = 0; cam.pitch = 1.55; cam.panX = 0; cam.panY = 0; }
+      else if (v === 'front') { cam.yaw = 0; cam.pitch = 0.05; cam.panX = 0; cam.panY = 0; }
+      else if (v === 'side') { cam.yaw = 1.57; cam.pitch = 0.05; cam.panX = 0; cam.panY = 0; }
+    }
+
+    function cycleRenderMode() {
+      if (renderMode === 'solid') renderMode = 'wireframe';
+      else if (renderMode === 'wireframe') renderMode = 'overhang';
+      else renderMode = 'solid';
+      var labels = { solid: 'VIEW: STUDIO SOLID', wireframe: 'VIEW: WIREFRAME', overhang: 'VIEW: OVERHANG DFM' };
+      document.getElementById('wireBtn').textContent = labels[renderMode];
+    }
+
+    function updateStats() {
+      var totalTris = 0;
+      var volMm3 = 0;
+      var fits = true;
+      parts.forEach(function(p) {
+        totalTris += (p.fullTrisCount || p.tris.length);
+        volMm3 += (p.sx * p.sy * p.sz) * 0.28;
+        if (Math.abs(p.px) + p.sx / 2 > 128 || Math.abs(p.py) + p.sy / 2 > 128 || p.pz + p.sz > 256) {
+          fits = false;
+        }
+      });
+      var sel = parts[selectedIdx];
+      var infill = parseInt(document.getElementById('infillRange').value, 10) / 100;
+      var filEl = document.getElementById('filamentSelect');
+      var opt = filEl.options[filEl.selectedIndex];
+      var density = parseFloat(opt.getAttribute('data-density')) || 1.25;
+      var rate = parseFloat(opt.getAttribute('data-rate')) || 0.035;
+
+      var effFactor = 0.35 + infill * 0.65;
+      var weightG = (volMm3 / 1000) * density * effFactor;
+      var mins = parts.length === 0 ? 0 : Math.max(4, Math.round(weightG * 1.9));
+      var cost = weightG * rate;
+
+      document.getElementById('statTris').textContent = totalTris.toLocaleString();
+      document.getElementById('statBbox').textContent = sel ? (sel.sx + ' x ' + sel.sy + ' x ' + sel.sz) : '0 x 0 x 0';
+      document.getElementById('statWeight').textContent = weightG.toFixed(1) + ' g';
+      document.getElementById('statTime').textContent = mins + ' min';
+      document.getElementById('statCost').textContent = '$' + cost.toFixed(2);
+      var fitEl = document.getElementById('statFit');
+      fitEl.textContent = fits ? 'FITS 256MM PLATE' : 'EXCEEDS 256MM PLATE';
+      fitEl.style.color = fits ? '#34D399' : '#F87171';
+    }
+
+    // Mouse camera controls
+    canvas.addEventListener('mousedown', function(e) {
+      drag.active = true;
+      drag.mode = (e.button === 2 || e.shiftKey) ? 'pan' : 'orbit';
+      drag.lastX = e.clientX;
+      drag.lastY = e.clientY;
+    });
+    window.addEventListener('mouseup', function() { drag.active = false; });
+    window.addEventListener('mousemove', function(e) {
+      if (!drag.active) return;
+      var dx = e.clientX - drag.lastX;
+      var dy = e.clientY - drag.lastY;
+      drag.lastX = e.clientX;
+      drag.lastY = e.clientY;
+      if (drag.mode === 'orbit') {
+        cam.yaw -= dx * 0.008;
+        cam.pitch = Math.max(0.05, Math.min(1.55, cam.pitch + dy * 0.008));
+      } else {
+        cam.panX += dx * 0.4;
+        cam.panY += dy * 0.4;
+      }
+    });
+    canvas.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    canvas.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      cam.dist = Math.max(80, Math.min(680, cam.dist + e.deltaY * 0.25));
+    }, { passive: false });
+
+    function project3D(x, y, z, W, H) {
+      var cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw);
+      var cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+      var x1 = x * cy - y * sy;
+      var y1 = x * sy + y * cy;
+      var z2 = y1 * cp - z * sp + cam.dist;
+      var y2 = y1 * sp + z * cp;
+      var fov = 560 / Math.max(20, z2);
+      return [W / 2 + cam.panX + x1 * fov, H * 0.56 + cam.panY - y2 * fov, z2];
+    }
+
+    function renderLoop() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      if (canvas.width !== Math.floor(rect.width) || canvas.height !== Math.floor(rect.height)) {
+        canvas.width = Math.floor(rect.width);
+        canvas.height = Math.floor(rect.height);
+      }
+      var W = canvas.width, H = canvas.height;
+      ctx.fillStyle = '#0B0E17';
+      ctx.fillRect(0, 0, W, H);
+
+      // Draw Bambu Lab P2S 256x256mm build plate grid
+      ctx.lineWidth = 1;
+      for (var g = -128; g <= 128; g += 16) {
+        ctx.strokeStyle = (g === 0 || Math.abs(g) === 128) ? 'rgba(112,119,207,0.55)' : 'rgba(112,119,207,0.16)';
+        var pA = project3D(g, -128, 0, W, H);
+        var pB = project3D(g, 128, 0, W, H);
+        ctx.beginPath(); ctx.moveTo(pA[0], pA[1]); ctx.lineTo(pB[0], pB[1]); ctx.stroke();
+
+        var pC = project3D(-128, g, 0, W, H);
+        var pD = project3D(128, g, 0, W, H);
+        ctx.beginPath(); ctx.moveTo(pC[0], pC[1]); ctx.lineTo(pD[0], pD[1]); ctx.stroke();
+      }
+
+      // Draw each object's Z=0 Support & Brim Clearance Skirt (4mm per side = 8mm part-to-part clearance)
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      parts.forEach(function(part, pIdx) {
+        var fp = getEffectiveFootprint(part.sx, part.sy, part.rz);
+        var hw = fp.w * 0.5 + SUPPORT_CLEARANCE_MM * 0.5;
+        var hd = fp.d * 0.5 + SUPPORT_CLEARANCE_MM * 0.5;
+        var c0 = project3D(part.px - hw, part.py - hd, 0, W, H);
+        var c1 = project3D(part.px + hw, part.py - hd, 0, W, H);
+        var c2 = project3D(part.px + hw, part.py + hd, 0, W, H);
+        var c3 = project3D(part.px - hw, part.py + hd, 0, W, H);
+        ctx.strokeStyle = (pIdx === selectedIdx) ? 'rgba(52,211,153,0.75)' : 'rgba(112,119,207,0.45)';
+        ctx.lineWidth = (pIdx === selectedIdx) ? 1.5 : 1.0;
+        ctx.beginPath();
+        ctx.moveTo(c0[0], c0[1]);
+        ctx.lineTo(c1[0], c1[1]);
+        ctx.lineTo(c2[0], c2[1]);
+        ctx.lineTo(c3[0], c3[1]);
+        ctx.closePath();
+        ctx.stroke();
+      });
+      ctx.restore();
+
+      var drawList = [];
+      parts.forEach(function(part, pIdx) {
+        var worldTris = getWorldTriangles(part);
+        var isSel = (pIdx === selectedIdx);
+        worldTris.forEach(function(t) {
+          var p0 = project3D(t[0][0], t[0][1], t[0][2], W, H);
+          var p1 = project3D(t[1][0], t[1][1], t[1][2], W, H);
+          var p2 = project3D(t[2][0], t[2][1], t[2][2], W, H);
+          var avgZ = (p0[2] + p1[2] + p2[2]) / 3;
+          var ux = t[1][0] - t[0][0], uy = t[1][1] - t[0][1], uz = t[1][2] - t[0][2];
+          var vx = t[2][0] - t[0][0], vy = t[2][1] - t[0][1], vz = t[2][2] - t[0][2];
+          var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+          var nl = Math.hypot(nx, ny, nz) || 1;
+          var nzn = nz / nl;
+          var shade = Math.max(0.28, Math.min(1.0, (nx / nl * 0.35 + ny / nl * -0.45 + nzn * 0.82) * 0.5 + 0.55));
+          var minVertZ = Math.min(t[0][2], t[1][2], t[2][2]);
+          drawList.push({ p0: p0, p1: p1, p2: p2, z: avgZ, shade: shade, isSel: isSel, nz: nzn, minZ: minVertZ });
+        });
+      });
+
+      drawList.sort(function(a, b) { return b.z - a.z; });
+      drawList.forEach(function(d) {
+        ctx.beginPath();
+        ctx.moveTo(d.p0[0], d.p0[1]);
+        ctx.lineTo(d.p1[0], d.p1[1]);
+        ctx.lineTo(d.p2[0], d.p2[1]);
+        ctx.closePath();
+        if (renderMode !== 'wireframe') {
+          if (renderMode === 'overhang' && d.nz < -0.55 && d.minZ > 0.6) {
+            var or = Math.round(239 * d.shade), og = Math.round(68 * d.shade), ob = Math.round(68 * d.shade);
+            ctx.fillStyle = 'rgb(' + or + ',' + og + ',' + ob + ')';
+          } else {
+            var r = Math.round((d.isSel ? 112 : 72) * d.shade);
+            var g = Math.round((d.isSel ? 119 : 82) * d.shade);
+            var b = Math.round((d.isSel ? 207 : 155) * d.shade);
+            ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+          }
+          ctx.fill();
+        }
+        ctx.strokeStyle = (renderMode === 'wireframe') ? '#7077CF' : (d.isSel ? 'rgba(238,240,250,0.32)' : 'rgba(22,22,22,0.42)');
+        ctx.lineWidth = (renderMode === 'wireframe') ? 1.1 : 0.55;
+        ctx.stroke();
+      });
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    
+    // Public Website Edition boots with Parametric Venturi Duct Ring (100% Proprietary-Free)
+    addPublicTemplate('quad_duct');
+
+
+    requestAnimationFrame(renderLoop);
+  </script>
+</body>
+</html>

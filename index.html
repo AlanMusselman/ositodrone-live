@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drone Training Programs for Kids and Businesses, after school programs, birthdays, and other events | Osito Drone Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; }
+    * { border-radius: 0px !important; box-sizing: border-box; }
+    [contenteditable="true"]:focus { background: rgba(112, 119, 207, 0.16); outline: 1px dashed #7077CF; }
+
+        /* Unified Top Navigation Bar (#osito-site-nav) */
+    #osito-site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: rgba(22, 22, 22, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 2px solid #7077CF;
+      padding: 10px 24px;
+    }
+    #osito-site-nav * {
+      border-radius: 0px !important;
+      box-sizing: border-box;
+    }
+    .osito-nav-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .osito-nav-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .osito-nav-brand img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .osito-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .osito-nav-item {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #EEF0FA;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-bottom: 2px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .osito-nav-item:hover,
+    .osito-nav-item.active {
+      background: #232A68;
+      border-color: #7077CF;
+      border-bottom: 2px solid #FFFFFF;
+      color: #FFFFFF;
+    }
+    .osito-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .osito-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: #1B1B1B;
+      border: 1px solid #7077CF;
+      z-index: 10001;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+    }
+    .osito-dropdown:hover .osito-dropdown-menu {
+      display: block;
+    }
+    .osito-dropdown-menu a {
+      display: block;
+      padding: 10px 14px;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      color: #EEF0FA;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid #232A68;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .osito-dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+    .osito-dropdown-menu a:hover {
+      background: #232A68;
+      color: #FFFFFF;
+    }
+
+    /* Scrolling Aerial Parallax Dark Containers */
+    .osito-parallax-dark {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .osito-parallax-dark-alt {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .osito-parallax-dark-sunset {
+      background-color: #161616;
+      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Standard Action Buttons */
+    .osito-action-btn {
+      display: block;
+      text-align: center;
+      background: #7077CF;
+      color: #FFFFFF !important;
+      text-decoration: none;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 15px;
+      padding: 12px 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid #8E93DA;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .osito-action-btn:hover {
+      background: #444FB6 !important;
+      border-color: #FFFFFF !important;
+    }
+    .osito-action-btn.dark {
+      background: #232A68;
+      border: 1px solid #303885;
+    }
+    .osito-action-btn.dark:hover {
+      background: #444FB6 !important;
+    }
+
+    /* Photo Showcase & Thumbnails */
+    .osito-thumb-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .osito-thumb-btn {
+      padding: 0;
+      border: 2px solid #303885;
+      background: #090D16;
+      cursor: pointer;
+      height: 46px;
+      overflow: hidden;
+      opacity: 0.65;
+      transition: opacity 0.15s ease, border-color 0.15s ease;
+    }
+    .osito-thumb-btn:hover,
+    .osito-thumb-btn.active {
+      opacity: 1;
+      border-color: #7077CF;
+    }
+    .osito-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Gallery Grid Cards */
+    .osito-gallery-card {
+      background: #1B1B1B;
+      border: 1px solid #303885;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .osito-gallery-card:hover {
+      border-color: #7077CF;
+    }
+    .osito-filter-btn {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      background: #1B1B1B;
+      color: #EEF0FA;
+      border: 1px solid #303885;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .osito-filter-btn.active,
+    .osito-filter-btn:hover {
+      background: #7077CF;
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Menu (Retains 100% of Live ositodrone.com Links + Dedicated Osito Flight Sim) -->
+    <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand"><img src="./assets/ositologo-white.png" alt="Osito Drone" style="height:38px; width:auto; display:block;" /></a>
+      <nav class="osito-nav-menu" aria-label="Main Navigation">
+        <a href="./index.html" class="osito-nav-item active">Home</a>
+        <div class="osito-dropdown">
+          <a href="./index.html#osito-bookable-job-packages" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html">Drone Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+            <a href="./index.html#osito-maker-faire-gallery">Photo Gallery</a>
+            <a href="./index.html#osito-youtube-channel-theater">Video Theater</a>
+          </div>
+        </div>
+        <a href="./osito-drone-academy.html" class="osito-nav-item">Academy</a>
+        <a href="./custom-aerial-solutions.html" class="osito-nav-item">Aerial Solutions</a>
+        <a href="./flight-sim.html" class="osito-nav-item">Flight Sim</a>
+        <div class="osito-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item">Toolbox <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:5px; vertical-align:middle; display:inline-block;"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./toolbox.html">Toolbox Hub</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design &amp; Flowchart</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn" style="padding:8px 16px; font-size:13.5px;">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 75% Off Year-1 Founding Partner Announcement Banner -->
+  <div id="osito-75off-promo-banner" style="background:#232A68; color:#FFFFFF; font-family:Roboto,sans-serif; padding:12px 20px; text-align:center; border-bottom:2px solid #7077CF;">
+    <span class="osito-editable" style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 10px; font-size:12px; letter-spacing:0.06em; margin-right:10px; text-transform:uppercase;">NEW YEAR SPECIAL | 25% OFF TILL JAN 1</span>
+    <strong class="osito-editable" style="font-size:14.5px; letter-spacing:0.02em;">ALL OSITO DRONE STEM SCHOOLS, VIP PARTIES, BREWERY ARENAS &amp; COMMERCIAL INSPECTIONS ARE 25% OFF TILL THE NEW YEAR.</strong>
+    <span class="osito-editable" style="font-size:13px; color:#EEF0FA; margin-left:8px;">Includes 3 Certified Trainers (1-Hr Setup + 2-Hr Live Flight + 1-Hr Pack-Up).</span>
+  </div>
+
+  <!-- Live ositodrone.com Hero Headline & FPV Bear Emblem Bar -->
+  <section class="osito-parallax-dark" style="background:#1B1B1B; color:#FFFFFF; padding:28px 24px; border-bottom:2px solid #232A68;">
+    <div style="max-width:1220px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <div style="display:flex; align-items:center; gap:20px; flex:1; min-width:300px;">
+        <img src="./assets/live-osito-fpv-bear-hero.jpg" alt="A bear wearing Drone FPV goggles representing Osito Drone Services" style="width:88px; height:88px; object-fit:cover; border:2px solid #7077CF; flex-shrink:0;" />
+        <div>
+          <h1 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:32px; margin:0 0 6px; letter-spacing:0.04em; color:#FFFFFF; text-transform:uppercase;">
+            DRONE TRAINING PROGRAMS AVAILABLE NOW
+          </h1>
+          <p class="osito-editable" style="font-size:15px; color:#EEF0FA; margin:0; max-width:780px; line-height:1.5;">
+            Our aerial photography services will capture breathtaking views, highlighting the expertise of our drone experts. We also provide tailored drone solutions for businesses and offer engaging drone training for kids.
+          </p>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="./osito-drone-academy.html" class="osito-action-btn dark" style="padding:10px 16px; font-size:13.5px;">DRONE ACADEMY</a>
+        <a href="./custom-aerial-solutions.html" class="osito-action-btn dark" style="padding:10px 16px; font-size:13.5px;">AERIAL SOLUTIONS</a>
+        <a href="./flight-sim.html" class="osito-action-btn" style="padding:10px 16px; font-size:13.5px;">FLIGHT SIM</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Split: Left = Maker Faire & Drone Flights Showcase | Right = Instant Quote Estimator -->
+  <section id="osito-live-sim-estimator-hub" class="osito-parallax-dark" style="background:#161616; color:#FFFFFF; font-family:Roboto,sans-serif; padding:40px 20px; border-bottom:4px solid #232A68; max-width:100%;">
+    <div style="max-width:1220px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(380px, 1fr)); gap:28px; align-items:stretch;">
+      
+      <!-- Left Card: Maker Faire & Real Drone Flights Photo Showcase -->
+      <div style="background:#1B1B1B; border:2px solid #7077CF; padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span id="ositoHeroPhotoBadge" style="background:#232A68; color:#EEF0FA; border:1px solid #7077CF; padding:4px 10px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">BAY AREA MAKER FAIRE | LIVE HOVER STATION</span>
+              <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:26px; margin:8px 0 2px; letter-spacing:0.04em; color:#FFFFFF; text-transform:uppercase;">MAKER FAIRE & BAY AREA DRONE FLIGHTS</h2>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button id="ositoPhotoPrevBtn" type="button" class="osito-action-btn dark" style="padding:6px 12px; font-size:12px;">PREV</button>
+              <button id="ositoPhotoNextBtn" type="button" class="osito-action-btn" style="padding:6px 12px; font-size:12px;">NEXT</button>
+            </div>
+          </div>
+
+          <!-- Featured Photo Frame -->
+          <div style="position:relative; width:100%; height:330px; background:#090D16; overflow:hidden; border:1px solid #303885;">
+            <img id="ositoHeroMainImg" src="./assets/maker-faire-hover-station.jpg" alt="Osito Drone Services Live Netted Hover Station at Maker Faire" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(16,18,35,0.94), rgba(16,18,35,0.65) 75%, transparent); padding:18px 14px 10px; color:#FFFFFF;">
+              <div id="ositoHeroPhotoTitle" style="font-family:'Fjalla One',sans-serif; font-size:17px; letter-spacing:0.03em; text-transform:uppercase; color:#FFFFFF;">
+                10x10 Netted Hover Station & Glowing LED Cube Arena at Maker Faire
+              </div>
+              <div id="ositoHeroPhotoDesc" style="font-size:12.5px; color:#EEF0FA; margin-top:2px;">
+                Students fly ducted sub-250g training drones inside our enclosed turf flight cage with LED gates and landing pads.
+              </div>
+            </div>
+          </div>
+
+          <!-- 12-Photo Thumbnail Selector Strip (2 rows of 6) -->
+          <div id="ositoThumbStrip" class="osito-thumb-strip" aria-label="Select Maker Faire or Drone Flight Photo"></div>
+        </div>
+
+        <!-- Dedicated Osito Flight Sim Callout Bar -->
+        <div style="margin-top:14px; background:#232A68; border:1px solid #7077CF; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-family:'Fjalla One',sans-serif; font-size:15px; letter-spacing:0.04em; color:#FFFFFF; text-transform:uppercase;">
+              WANT TO FLY OUR 3D SAN FRANCISCO SIMULATOR?
+            </div>
+            <div style="font-size:12px; color:#EEF0FA;">
+              Fly the AcroBee65 through Golden Gate Bridge, BART Subway & Coit Tower on its dedicated page.
+            </div>
+          </div>
+          <a href="./flight-sim.html" class="osito-action-btn" style="padding:8px 14px; font-size:13px; white-space:nowrap;">
+            OPEN FLIGHT SIM
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Card: Instant Quote & Job Estimator -->
+      <div style="background:#FFFFFF; color:#161616; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">
+              INSTANT QUOTE & JOB ESTIMATOR
+            </span>
+            <span class="osito-editable" style="background:#232A68; color:#FFFFFF; padding:4px 10px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">
+              25% OFF TILL THE NEW YEAR
+            </span>
+          </div>
+          <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:25px; margin:0 0 6px; letter-spacing:0.04em; color:#232A68; text-transform:uppercase;">
+            BUILD YOUR DRONE EXPERIENCE & QUOTE
+          </h2>
+          <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">
+            Every mobile event includes <strong>3 Certified Osito Trainers</strong> and our full 4-hour deployment (1-hr setup + 2-hr live flight + 1-hr pack-up):
+          </p>
+
+          <label for="ositoEstType" style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:5px;">1. Select Osito Drone Program / Service</label>
+          <select id="ositoEstType" style="width:100%; padding:10px 12px; border:1.5px solid #8E93DA; font-size:13.5px; font-weight:600; color:#161616; background:#F6F6F6; margin-bottom:12px; cursor:pointer;">
+            <option value="party">VIP Kids Drone Birthday Party &amp; LED Race Arena ($371 w/ 25% Off | Reg. $495)</option>
+            <option value="aerocub">TK-5 Aero-Cub 3D-Print &amp; Glider Workshop ($450 w/ 25% Off | Reg. $600)</option>
+            <option value="lab4">2-Hr Indoor 4-Station School/Camp STEM Flight Lab ($713 w/ 25% Off | Reg. $950)</option>
+            <option value="school6">6-Week After-School STEM Drone Academy Cohort ($1,800 w/ 25% Off | Reg. $2,400)</option>
+            <option value="brewery">Corporate Team-Building / Brewery Race Night ($900 w/ 25% Off | Reg. $1,200)</option>
+            <option value="commercial">Commercial Roof, HVAC Thermal &amp; Real Estate Aerials ($296+ w/ 25% Off | Reg. $395+)</option>
+          </select>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+            <label id="ositoEstCountLabel" for="ositoEstCount" style="font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase;">2. Slide to Adjust Number of Pilots / Units</label>
+            <span id="ositoEstCountVal" style="font-family:'Fjalla One',sans-serif; font-size:19px; color:#7077CF; background:#EEF0FA; padding:2px 8px; border:1px solid #8E93DA;">12 Pilots</span>
+          </div>
+          <input id="ositoEstCount" type="range" min="1" max="30" step="1" value="12" style="width:100%; height:24px; accent-color:#7077CF; margin-bottom:12px; cursor:pointer;" />
+
+          <label style="display:flex; align-items:center; gap:10px; background:#EEF0FA; border:1px solid #8E93DA; padding:9px 12px; font-size:12.5px; font-weight:600; color:#232A68; cursor:pointer; margin-bottom:8px;">
+            <input id="ositoEstKit" type="checkbox" style="width:16px; height:16px; accent-color:#7077CF; cursor:pointer;" />
+            <span class="osito-editable">Add Take-Home 3D-Printed <strong>Aero-Cub STEM Kits</strong> (<s style="color:#888;">$35</s> <strong style="color:#059669;">$26/kid</strong> w/ 25% Off)</span>
+          </label>
+
+          <label style="display:flex; align-items:center; gap:10px; background:#F6F6F6; border:1px solid #232A68; padding:9px 12px; font-size:12.5px; font-weight:700; color:#232A68; cursor:pointer; margin-bottom:14px;">
+            <input id="ositoEstDiscount" type="checkbox" checked style="width:16px; height:16px; accent-color:#232A68; cursor:pointer;" />
+            <span class="osito-editable">Apply <strong>25% OFF New Year Special (Valid Till Jan 1)</strong></span>
+          </label>
+        </div>
+
+        <div style="background:#232A68; color:#FFFFFF; padding:16px; text-align:center;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.18); padding-bottom:10px; margin-bottom:10px;">
+            <div style="text-align:left;">
+              <div style="font-size:11px; color:#EEF0FA; text-transform:uppercase; letter-spacing:0.06em;">Estimated Total (Reg. <span id="ositoEstRegStrike" style="text-decoration:line-through; color:#CBD5E1;">$495</span>)</div>
+              <div style="display:flex; align-items:baseline; gap:10px;">
+                <span id="ositoEstTotal" style="font-family:'Fjalla One',sans-serif; font-size:34px; color:#10B981;">$371</span>
+                <span id="ositoEstSavingsBadge" style="background:#059669; color:#FFFFFF; font-size:11px; font-weight:700; padding:3px 8px;">SAVE $124 (25% OFF)</span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:11px; color:#EEF0FA; text-transform:uppercase; letter-spacing:0.06em;">Per Pilot / Unit</div>
+              <div id="ositoEstPerKid" style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#10B981;">$31 / pilot</div>
+            </div>
+          </div>
+          <div id="ositoEstIncludes" style="font-size:12px; color:#EEF0FA; margin-bottom:12px; text-align:left;">
+            Includes 3 Certified Osito Trainers (1-Hr Setup + 2-Hr Live Flight + 1-Hr Pack-Up), Ducted CUB-75 Fleet, 4-Tablet Sim Pod & LED Race Gates.
+          </div>
+          <a id="ositoEstBookBtn" class="osito-action-btn" href="mailto:info@ositodrone.com?subject=Osito%20Drone%20Quote%20Request">
+            GET QUOTE
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Retained from Live ositodrone.com: OUR MISSION Section -->
+  <section id="osito-our-mission" style="background:#FFFFFF; color:#161616; padding:52px 24px; border-bottom:4px solid #232A68;">
+    <div style="max-width:1220px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:32px; align-items:center;">
+      <div>
+        <span style="background:#232A68; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 12px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">OUR MISSION | SAN FRANCISCO BAY AREA</span>
+        <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:34px; color:#232A68; margin:12px 0 12px; letter-spacing:0.04em; text-transform:uppercase;">
+          HELPING PEOPLE SEE THE WORLD FROM A NEW PERSPECTIVE
+        </h2>
+        <p class="osito-editable" style="font-size:15.5px; color:#333333; line-height:1.65; margin:0 0 14px;">
+          At Osito Drone Services, we're dedicated to helping people see the world from a new perspective. We achieve this by offering comprehensive drone training for kids in after-school programs, empowering the next generation of pilots with valuable skills in technology and flight.
+        </p>
+        <p class="osito-editable" style="font-size:15.5px; color:#333333; line-height:1.65; margin:0 0 20px;">
+          Additionally, we elevate businesses with our professional drone solutions for businesses. Our aerial photography services capture stunning visuals for real estate, create dynamic marketing videos, enhance security, and conduct detailed surveys. Our mission is to deliver exceptional aerial services that are safe, reliable, and innovative.
+        </p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="./osito-drone-academy.html" class="osito-action-btn" style="display:inline-block; padding:12px 20px;">DRONE ACADEMY</a>
+          <a href="./custom-aerial-solutions.html" class="osito-action-btn dark" style="display:inline-block; padding:12px 20px;">AERIAL SOLUTIONS</a>
+          <a href="./about.html" class="osito-action-btn dark" style="display:inline-block; padding:12px 20px;">OUR TEAM</a>
+        </div>
+      </div>
+      <div style="background:#EEF0FA; border:2px solid #232A68; padding:24px;">
+        <img src="./assets/live-about-founders.jpg" alt="Osito Drone Services Co-Founders at Maker Faire" style="width:100%; height:280px; object-fit:cover; display:block; border:1px solid #232A68; margin-bottom:14px;" />
+        <div style="font-family:'Fjalla One',sans-serif; font-size:19px; color:#232A68; text-transform:uppercase; margin-bottom:4px;">
+          3 CO-FOUNDERS | MODULAR POP-UP FLIGHT LABS & PART 107 COMMERCIAL FLEET
+        </div>
+        <div style="font-size:13.5px; color:#5E5E5E;">
+          We bring floor-to-ceiling netted drone arenas directly to schools, community centers, maker spaces, and events across San Francisco.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retained from Live ositodrone.com + Expanded: EXPLORE BREATHTAKING AERIAL VIEWS AND MOMENTS -->
+  <section id="osito-maker-faire-gallery" class="osito-parallax-dark-alt" style="background:#161616; color:#FFFFFF; font-family:Roboto,sans-serif; padding:48px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1220px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+        <div>
+          <span class="osito-editable" style="background:#232A68; color:#EEF0FA; border:1px solid #7077CF; padding:4px 12px; font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">MAKER FAIRE & COMMERCIAL AERIAL PORTFOLIO</span>
+          <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:32px; color:#FFFFFF; margin:10px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">EXPLORE BREATHTAKING AERIAL VIEWS AND MOMENTS</h2>
+          <p class="osito-editable" style="font-size:14.5px; color:#B0B5C9; margin:0;">Featuring all photos from live ositodrone.com, our 3-tent Maker Faire Youth Flight Arena, and San Francisco DJI drone flights.</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="osito-filter-btn active" data-filter="all">ALL (24)</button>
+          <button type="button" class="osito-filter-btn" data-filter="aerial">AERIAL (12)</button>
+          <button type="button" class="osito-filter-btn" data-filter="maker">MAKER FAIRE (8)</button>
+          <button type="button" class="osito-filter-btn" data-filter="murals">MURALS &amp; CREW (4)</button>
+        </div>
+      </div>
+
+      <div id="ositoGalleryGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:18px;"></div>
+    </div>
+  </section>
+
+  <!-- 6 Bookable Job Packages -->
+  <section id="osito-bookable-job-packages" style="background:#F6F6F6; color:#161616; font-family:Roboto,sans-serif; padding:52px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1220px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:32px;">
+        <span class="osito-editable" style="background:#059669; color:#FFFFFF; padding:5px 14px; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">NEW YEAR SPECIAL | 25% OFF ALL BOOKINGS TILL JAN 1</span>
+        <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:36px; color:#232A68; margin:12px 0 8px; letter-spacing:0.04em; text-transform:uppercase;">COMPETITIVE BAY AREA STEM, EVENT &amp; AERIAL PACKAGES</h2>
+        <p class="osito-editable" style="font-size:15.5px; color:#5E5E5E; max-width:860px; margin:0 auto;">Lock in our <strong>25% Off New Year Special</strong> through December 31. Priced below traditional Bay Area STEM franchises and national drone curriculum vendors because we design, 3D-print, and maintain our entire brushless drone fleet in-house in San Francisco.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:22px;">
+        <!-- Card 1: 2-Hr 4-Station STEM Flight Lab ($713 w/ 25% Off | Reg. $950) -->
+        <div style="background:#FFFFFF; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700;">SCHOOLS &amp; CAMPS | 25% OFF TILL NEW YEAR</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$950</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$713</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">1. 2-HR 4-STATION STEM FLIGHT LAB</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">Turnkey indoor gym or camp rotation for up to 15-30 students: 4-Tablet 3D Flight Sim Pod, RadioMaster ELRS controllers, and 10x10 netted Ducted CUB-75 live flight.</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $237 (25% Off):</strong> Includes 3 Certified Trainers &amp; Full Mobile Arena
+            </div>
+          </div>
+          <a class="osito-action-btn" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%202-Hr%204-Station%20STEM%20Flight%20Lab%20(%24713%20New%20Year%20Special)">BOOK LAB</a>
+        </div>
+
+        <!-- Card 2: 6-Week STEM Academy Cohort ($1,800 w/ 25% Off | Reg. $2,400) -->
+        <div style="background:#FFFFFF; border:2px solid #7077CF; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#232A68; color:#FFFFFF; padding:4px 10px; font-size:11px; font-weight:700;">6-WEEK SERIES | $300 / WEEK</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$2,400</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$1,800</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">2. 6-WEEK AFTER-SCHOOL STEM ACADEMY</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">NGSS-aligned 6-week youth aviation, 3D printing &amp; flight curriculum (Grades 3-10, English &amp; Spanish editions). Just <strong>$120/student</strong> for all 6 weeks (15 students).</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $600 (25% Off):</strong> ELO-P &amp; PTA Ready - All Drones &amp; Simulators Included
+            </div>
+          </div>
+          <a class="osito-action-btn dark" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%206-Week%20After-School%20STEM%20Academy%20(%241%2C800%20New%20Year%20Special)">BOOK ACADEMY</a>
+        </div>
+
+        <!-- Card 3: TK-5 Aero-Cub Workshop ($450 w/ 25% Off | Reg. $600) -->
+        <div style="background:#FFFFFF; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700;">GRADES TK-5 | $30 / STUDENT</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$600</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$450</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">3. TK-5 AERO-CUB 3D-PRINT &amp; GLIDER LAB</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">Hands-on Paper-to-Prop-to-Drone aeronautics clinic. Kids build airfoil gliders, test 3D-printed prop planes, and fly ducted micro-drones (+<strong>$26/kid</strong> take-home 3D kit).</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $150 (25% Off):</strong> Beats $500-$650 Bay Area LEGO &amp; Science Workshops
+            </div>
+          </div>
+          <a class="osito-action-btn" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%20TK-5%20Aero-Cub%20Workshop%20(%24450%20New%20Year%20Special)">BOOK WORKSHOP</a>
+        </div>
+
+        <!-- Card 4: VIP Kids Drone Birthday Party ($371 w/ 25% Off | Reg. $495) -->
+        <div style="background:#FFFFFF; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700;">BIRTHDAY PARTIES | ~$31 / KID</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$495</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$371</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">4. VIP KIDS DRONE BIRTHDAY &amp; RACE ARENA</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">2-Hour private pop-up drone race party for up to 12 pilots. Includes netted hover cage, glowing LED FPV gates, 4-Tablet Sim Pod &amp; ducted CUB-75 micro-drone races.</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $124 (25% Off):</strong> Beats $495-$695 Bay Area Mobile Game Trucks
+            </div>
+          </div>
+          <a class="osito-action-btn" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%20VIP%20Kids%20Drone%20Birthday%20Party%20(%24371%20New%20Year%20Special)">BOOK PARTY</a>
+        </div>
+
+        <!-- Card 5: Corporate & Brewery Race Night ($900 w/ 25% Off | Reg. $1,200) -->
+        <div style="background:#FFFFFF; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700;">CORPORATE &amp; BREWERIES | $60 / PERSON</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$1,200</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$900</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">5. CORPORATE &amp; TAPROOM BUMPER-DRONE NIGHT</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">Turnkey 2-hour interactive SHARD-75 Bumper-Drone Tournament &amp; Dual-Monitor FPV Race Track with live bracket leaderboard for up to 15 challengers.</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $300 (25% Off):</strong> Ideal for SF Breweries, Team Offsites &amp; Holiday Events
+            </div>
+          </div>
+          <a class="osito-action-btn dark" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%20Corporate%20%26%20Brewery%20Race%20Night%20(%24900%20New%20Year%20Special)">BOOK EVENT</a>
+        </div>
+
+        <!-- Card 6: Commercial Roof, Thermal & Real Estate ($296+ w/ 25% Off | Reg. $395+) -->
+        <div style="background:#FFFFFF; border:2px solid #232A68; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span class="osito-editable" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; padding:4px 10px; font-size:11px; font-weight:700;">B2B COMMERCIAL | PART 107 INSURED</span>
+              <div>
+                <span class="osito-editable" style="font-size:14px; color:#9CA3AF; text-decoration:line-through; margin-right:6px;">$395+</span>
+                <span class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:28px; color:#059669;">$296+</span>
+              </div>
+            </div>
+            <h3 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#161616; margin:0 0 8px; text-transform:uppercase;">6. ROOF, HVAC THERMAL &amp; REAL ESTATE FPV</h3>
+            <p class="osito-editable" style="font-size:13.5px; color:#5E5E5E; margin:0 0 14px;">FAA Part 107 insured roof moisture &amp; solar thermal inspections, construction orthomosaics, and 4K indoor/outdoor real estate fly-through tours.</p>
+            <div class="osito-editable" style="font-size:12px; color:#232A68; background:#EEF0FA; padding:8px 10px; margin-bottom:16px;">
+              <strong>Save $99 (25% Off):</strong> 24-Hr Turnaround on High-Res Aerial &amp; Thermal Reports
+            </div>
+          </div>
+          <a class="osito-action-btn dark" href="mailto:info@ositodrone.com?subject=Quote%20Request%3A%20Commercial%20Roof%2FThermal%2FFPV%20Inspection%20(%24296%2B%20New%20Year%20Special)">BOOK INSPECTION</a>
+        </div>
+      </div>
+
+      <!-- Bay Area STEM Competitor Comparison Table -->
+      <div id="osito-bay-area-competitor-table" style="margin-top:32px; background:#FFFFFF; border:2px solid #232A68; padding:26px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <div>
+            <span style="background:#232A68; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:4px 10px; letter-spacing:0.05em; text-transform:uppercase;">SAN FRANCISCO BAY AREA MARKET BENCHMARK</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#232A68; margin:8px 0 2px; text-transform:uppercase;">HOW OSITO DRONE COMPARES TO LOCAL BAY AREA STEM COMPETITORS</h3>
+          </div>
+          <span style="background:#EEF0FA; color:#059669; border:1px solid #059669; font-family:'Fjalla One',sans-serif; font-size:12.5px; padding:6px 12px; text-transform:uppercase;">25% OFF NEW YEAR SPECIAL TILL JAN 1</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:13.5px; text-align:left;">
+            <thead>
+              <tr style="background:#232A68; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13.5px; letter-spacing:0.04em; text-transform:uppercase;">
+                <th style="padding:12px 14px; border:1px solid #303885;">Program Category</th>
+                <th style="padding:12px 14px; border:1px solid #303885;">Typical Bay Area STEM Providers</th>
+                <th style="padding:12px 14px; border:1px solid #303885;">National Drone Franchises</th>
+                <th style="padding:12px 14px; border:1px solid #303885; background:#059669;">Osito 25% Off New Year Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#FFFFFF; border-bottom:1px solid #E2E2E2;">
+                <td style="padding:11px 14px; font-weight:700; color:#232A68;">Single School / Camp STEM Workshop (90-120 Min)</td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$550 - $850 <span style="font-size:12px;">(Mad Science, Play-Well, TechKnowHow)</span></td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$950 - $1,500+</td>
+                <td style="padding:11px 14px; font-weight:700; color:#059669; background:#EEF0FA;">$450 - $713 <span style="color:#232A68; font-weight:600;">($30-$48 / student)</span></td>
+              </tr>
+              <tr style="background:#F6F6F6; border-bottom:1px solid #E2E2E2;">
+                <td style="padding:11px 14px; font-weight:700; color:#232A68;">6-Week After-School STEM Enrichment Cohort</td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$2,400 - $3,600 <span style="font-size:12px;">($180-$260 per child)</span></td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$3,495 - $5,995+ <span style="font-size:12px;">(Drone Legends / NextWave)</span></td>
+                <td style="padding:11px 14px; font-weight:700; color:#059669; background:#EEF0FA;">$1,800 Total <span style="color:#232A68; font-weight:600;">($300/wk | $120 / student)</span></td>
+              </tr>
+              <tr style="background:#FFFFFF; border-bottom:1px solid #E2E2E2;">
+                <td style="padding:11px 14px; font-weight:700; color:#232A68;">Kids Birthday Party (2-Hr Interactive Tech Arena)</td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$495 - $695 <span style="font-size:12px;">(Mobile Game Trucks / LEGO Parties)</span></td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$650 - $900+</td>
+                <td style="padding:11px 14px; font-weight:700; color:#059669; background:#EEF0FA;">$371 Total <span style="color:#232A68; font-weight:600;">(~$31 / kid for 12 pilots)</span></td>
+              </tr>
+              <tr style="background:#F6F6F6;">
+                <td style="padding:11px 14px; font-weight:700; color:#232A68;">Take-Home STEM Kit / Classroom Hardware</td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$35 - $55 / kit</td>
+                <td style="padding:11px 14px; color:#5E5E5E;">$249 - $315 / drone <span style="font-size:12px;">(CoDrone EDU)</span></td>
+                <td style="padding:11px 14px; font-weight:700; color:#059669; background:#EEF0FA;">$26 / kid Aero-Cub Kit <span style="color:#232A68; font-weight:600;">(Reg. $35 | 3D-Printed in SF)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Customer-Facing Kids Drone Academy & Community Newsletter Signup Bar -->
+      <div id="osito-public-newsletter-bar" style="margin-top:28px; background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:24px 28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+        <div style="max-width:640px;">
+          <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 10px; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">JOIN THE OSITO DRONE FLIGHT COMMUNITY</span>
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#FFFFFF; margin:8px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">GET KIDS DRONE TRAINING DATES &amp; 25%-OFF NEW YEAR INVITES</h3>
+          <p style="font-size:13.5px; color:#EEF0FA; margin:0;">Subscribe for upcoming Bay Area Youth STEM Flight Labs, Open Gym Races, and Seasonal Camp Drops.</p>
+        </div>
+        <form id="ositoPublicSubscribeForm" style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
+          <input id="ositoSubscriberEmail" type="email" required placeholder="Enter your email address..." style="flex:1; min-width:220px; padding:12px 14px; border:1px solid #8E93DA; background:#FFFFFF; color:#161616; font-family:Roboto,sans-serif; font-size:14px;" />
+          <button id="ositoSubscriberBtn" type="submit" class="osito-action-btn" style="padding:12px 22px; white-space:nowrap;">SUBSCRIBE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retained from Live ositodrone.com: CONTACT US, HOURS & CONNECT WITH US -->
+  <section id="osito-contact-section" class="osito-parallax-dark-sunset" style="background:#1B1B1B; color:#FFFFFF; padding:52px 24px; border-bottom:4px solid #232A68;">
+    <div style="max-width:1220px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:36px;">
+      <div>
+        <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 12px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">CONTACT US</span>
+        <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:34px; color:#FFFFFF; margin:12px 0 8px; text-transform:uppercase;">WE'D LOVE TO HEAR FROM YOU!</h2>
+        <p class="osito-editable" style="font-size:15px; color:#EEF0FA; line-height:1.65; margin:0 0 24px;">
+          Do you have a question about our aerial photography services or our drone solutions for businesses? Please share the details of the project you're interested in, and we'll gladly respond with a free quote and more information about our offerings, including drone training for kids.
+        </p>
+
+        <div style="background:#161616; border:1px solid #303885; padding:20px; margin-bottom:20px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#7077CF; margin:0 0 6px; text-transform:uppercase;">OSITO DRONE SERVICES</h3>
+          <p style="font-size:14.5px; color:#FFFFFF; margin:0 0 4px;">San Francisco, CA</p>
+          <p style="font-size:14.5px; margin:0 0 16px;"><a href="mailto:info@ositodrone.com" style="color:#8E93DA; font-weight:700; text-decoration:none;">info@ositodrone.com</a></p>
+
+          <h4 style="font-family:'Fjalla One',sans-serif; font-size:16px; color:#FFFFFF; margin:0 0 4px; text-transform:uppercase;">HOURS</h4>
+          <p style="font-size:14px; color:#EEF0FA; margin:0;">Open Monday - Sunday: <strong>09:00 am - 05:00 pm</strong></p>
+        </div>
+
+        <div style="background:#161616; border:1px solid #303885; padding:20px;">
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#FFFFFF; margin:0 0 12px; text-transform:uppercase;">CONNECT WITH US</h3>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://www.facebook.com/profile.php?id=61588329698167" target="_blank" rel="noopener" class="osito-action-btn dark" style="display:inline-block; padding:10px 18px; font-size:13.5px;">FACEBOOK</a>
+            <a href="https://www.youtube.com/@OSITODroneServices" target="_blank" rel="noopener" class="osito-action-btn" style="display:inline-block; padding:10px 18px; font-size:13.5px;">YOUTUBE</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Project Inquiry Form (Sends to info@ositodrone.com) -->
+      <div style="background:#FFFFFF; color:#161616; border:2px solid #7077CF; padding:28px;">
+        <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#232A68; margin:0 0 6px; text-transform:uppercase;">SEND US A MESSAGE OR QUOTE INQUIRY</h3>
+        <p style="font-size:13.5px; color:#5E5E5E; margin:0 0 18px;">Fill out your project or event details below to send directly to our San Francisco team (<strong style="color:#232A68;">info@ositodrone.com</strong>):</p>
+        <form id="ositoContactForm" onsubmit="return false;">
+          <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Name *</label>
+          <input id="ositoContactName" type="text" required placeholder="Name" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; margin-bottom:12px;" />
+
+          <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Email *</label>
+          <input id="ositoContactEmail" type="email" required placeholder="Email address" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; margin-bottom:12px;" />
+
+          <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Phone (Optional)</label>
+          <input id="ositoContactPhone" type="tel" placeholder="Phone number" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; margin-bottom:12px;" />
+
+          <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Project, School, or Event Details *</label>
+          <textarea id="ositoContactMsg" rows="4" required placeholder="Tell us about your Youth STEM event, birthday party, or commercial aerial project..." style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; font-family:Roboto,sans-serif; margin-bottom:16px;"></textarea>
+
+          <button type="submit" class="osito-action-btn" style="width:100%;">SEND MESSAGE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- OSITO DRONE YOUTUBE CHANNEL VIDEO THEATER (@OSITODroneServices) -->
+  <section id="osito-youtube-channel-theater" class="osito-parallax-dark" style="background:#0F121C; color:#FFFFFF; font-family:Roboto,sans-serif; padding:54px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1220px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+        <div>
+          <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 12px; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase;">OFFICIAL YOUTUBE CHANNEL | @OSITODRONESERVICES</span>
+          <h2 style="font-family:'Fjalla One',sans-serif; font-size:34px; color:#FFFFFF; margin:10px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">FEATURED OSITO DRONE VIDEOS | WATCH DIRECTLY ON OUR SITE</h2>
+          <p style="font-size:14.5px; color:#B0B5C9; margin:0;">Watch our top 3 flagship videos from <strong style="color:#EEF0FA;">@OSITODroneServices</strong> right here in our built-in HD theater player.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="https://www.youtube.com/@OSITODroneServices" target="_blank" rel="noopener" class="osito-action-btn" style="padding:10px 18px; font-size:13.5px; background:#CC0000; border-color:#FF4444;">YOUTUBE CHANNEL</a>
+        </div>
+      </div>
+
+      <!-- Main Embedded Video Theater Stage -->
+      <div id="osito-yt-stage-box" style="background:#161616; border:2px solid #7077CF; margin-bottom:28px;">
+        <div style="background:#232A68; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:2px solid #7077CF;">
+          <div>
+            <span id="ositoYtActiveMeta" style="font-family:'Fjalla One',sans-serif; font-size:11.5px; color:#8E93DA; letter-spacing:0.06em; text-transform:uppercase;">FEATURED VIDEO #1 | PUBLISHED 2026-07-17</span>
+            <h3 id="ositoYtActiveTitle" style="font-family:'Fjalla One',sans-serif; font-size:22px; color:#FFFFFF; margin:2px 0 0; text-transform:uppercase;">San Francisco at Night in 4K | Cinematic Drone Aerials</h3>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <button type="button" id="ositoYtModeNativeBtn" onclick="setYtPlayerMode('native')" class="osito-filter-btn active" style="padding:7px 13px; font-size:12px;">HD STREAM</button>
+            <button type="button" id="ositoYtModeEmbedBtn" onclick="setYtPlayerMode('embed')" class="osito-filter-btn" style="padding:7px 13px; font-size:12px;">YOUTUBE PLAYER</button>
+            <a id="ositoYtDirectLink" href="https://www.youtube.com/watch?v=3YSUOEueryg" target="_blank" rel="noopener" class="osito-action-btn dark" style="padding:7px 14px; font-size:12px; border-color:#7077CF;">OPEN YOUTUBE</a>
+          </div>
+        </div>
+
+        <div style="position:relative; width:100%; background:#000000; aspect-ratio:16/9; max-height:560px; overflow:hidden;">
+          <video id="ositoYtNativeVideo" controls playsinline preload="metadata" poster="./assets/yt-thumbs/3YSUOEueryg.jpg" style="width:100%; height:100%; object-fit:contain; display:block; background:#000000;">
+            <source id="ositoYtNativeSource" src="./assets/yt-videos/3YSUOEueryg.mp4" type="video/mp4" />
+          </video>
+          <iframe id="ositoYtEmbedFrame" title="Osito Drone Services YouTube Video Player" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%; height:100%; border:0; display:none; background:#000000;"></iframe>
+        </div>
+
+        <div style="padding:12px 20px; background:#1B1B1B; border-top:1px solid #303885; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <p id="ositoYtActiveDesc" style="font-size:13.5px; color:#EEF0FA; margin:0;">The quiet streets of the city by the bay - captured in 4K by Osito Drone Services.</p>
+          <span style="font-size:12px; color:#8E93DA; font-family:monospace;">Select any of the 3 featured videos below to play</span>
+        </div>
+      </div>
+
+      <!-- Top 3 YouTube Video Cards Grid -->
+      <div id="ositoYtGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:22px;"></div>
+    </div>
+  </section>
+
+  <!-- Footer (Retains Copyright & Privacy Policy Link from Live ositodrone.com) -->
+  <footer style="background:#161616; color:#B0B5C9; padding:28px 24px; border-top:2px solid #232A68; font-size:13px;">
+    <div style="max-width:1220px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>Copyright © 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA;">info@ositodrone.com</a></div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="./index.html" style="color:#EEF0FA; text-decoration:none;">Home</a>
+        <a href="./osito-drone-academy.html" style="color:#EEF0FA; text-decoration:none;">Osito Drone Academy</a>
+        <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Custom Aerial Solutions</a>
+        <a href="./about.html" style="color:#EEF0FA; text-decoration:none;">About</a>
+        <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Osito Flight Sim</a>
+        <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    var photos = [
+      {
+        src: './assets/maker-faire-hover-station.jpg',
+        cat: 'maker',
+        badge: 'BAY AREA MAKER FAIRE | LIVE HOVER STATION',
+        title: '10x10 Netted Hover Station & Glowing LED Cube Arena',
+        desc: 'Students fly ducted sub-250g training drones inside our enclosed turf flight cage with LED gates and landing pads.'
+      },
+      {
+        src: './assets/maker-faire-kid-coaching.jpg',
+        cat: 'maker',
+        badge: 'MAKER FAIRE | 1-ON-1 YOUTH PILOT COACHING',
+        title: 'Hands-On Stick Control & Flight Coaching',
+        desc: 'Our certified Osito Drone trainers work 1-on-1 with young pilots to build confidence on Mode-2 controllers.'
+      },
+      {
+        src: './assets/maker-faire-crash-build-repeat.jpg',
+        cat: 'maker',
+        badge: 'MAKER FAIRE | MULTI-PILOT YOUTH FLIGHT LINE',
+        title: 'Crash, Build, Repeat - Multi-Pilot Youth Flight Line',
+        desc: 'Three young pilots fly side-by-side inside the netted arena while our crew manages safe takeoffs and battery swaps.'
+      },
+      {
+        src: './assets/maker-faire-led-cube-arena.jpg',
+        cat: 'maker',
+        badge: 'MAKER FAIRE | RAINBOW LED CUBE & HOOP COURSE',
+        title: 'Inside the 3-Tent Maker Faire Obstacle Course',
+        desc: 'Equipped with a glowing rainbow LED cube, suspended NewBeeDrone hoops, and precision landing pads.'
+      },
+      {
+        src: './assets/maker-faire-hoop-racing.jpg',
+        cat: 'maker',
+        badge: 'MAKER FAIRE | YOUTH HOOP RACING',
+        title: 'Students Racing Through Suspended Obstacle Hoops',
+        desc: 'Kids and parents cheering on live micro-drone flights through our dual-tent obstacle course.'
+      },
+      {
+        src: './assets/maker-faire-drones-pavilion.jpg',
+        cat: 'maker',
+        badge: 'MAKER FAIRE | DRONES PAVILION CROWD',
+        title: 'Packed Crowds at the Maker Faire Drones Pavilion',
+        desc: 'Hundreds of Bay Area families experienced free youth drone training across our three connected flight tents.'
+      },
+      {
+        src: './assets/live-maker-faire-2.jpg',
+        cat: 'maker',
+        badge: 'LIVE ON OSITODRONE.COM | MAKER FAIRE FLIGHT CREW',
+        title: 'Osito Flight Crew & Netted Arena Lineup',
+        desc: 'Featured on live ositodrone.com: families and young pilots flying with our trainers at Maker Faire.'
+      },
+      {
+        src: './assets/live-maker-faire-3.jpg',
+        cat: 'maker',
+        badge: 'LIVE ON OSITODRONE.COM | YOUTH STEM DISPLAY',
+        title: 'Hands-On STEM Hardware & Spherical Cage Drones',
+        desc: 'Featured on live ositodrone.com: demonstrating ducted and caged drone engineering to students and parents.'
+      },
+      {
+        src: './assets/d-sf-ferry-building-night.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | PORT OF SAN FRANCISCO AT NIGHT',
+        title: 'Port of San Francisco Ferry Building & Downtown Skyline',
+        desc: 'Nighttime commercial DJI aerial flight over the illuminated Port of San Francisco Ferry Building and Financial District towers.'
+      },
+      {
+        src: './assets/d-sf-sutro-crimson-sunset.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | SUTRO TOWER CRIMSON SUNSET',
+        title: 'Sutro Tower & Twin Peaks at Fiery Sunset',
+        desc: 'Dramatic golden-hour and crimson sunset aerial capture of Sutro Tower overlooking San Francisco.'
+      },
+      {
+        src: './assets/d-sf-sutro-fog-daytime.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | SUTRO TOWER & COASTAL FOG',
+        title: 'Sutro Tower & Pacific Fog Rolling Over Twin Peaks',
+        desc: 'Crystal-clear daytime aerial view of Sutro Tower and coastal fog blanket over San Francisco hillside neighborhoods.'
+      },
+      {
+        src: './assets/d-treasure-island-bay-bridge.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | TREASURE ISLAND & BAY BRIDGE',
+        title: 'Treasure Island to San Francisco-Oakland Bay Bridge',
+        desc: 'Wide-angle commercial aerial survey from Treasure Island across the Bay Bridge to the San Francisco skyline.'
+      },
+      {
+        src: './assets/d-sf-night-corridor-bay-bridge.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | SF NIGHT CORRIDOR & BAY BRIDGE',
+        title: 'San Francisco Illuminated Night Grid & Bay Bridge',
+        desc: 'High-altitude night flight looking down San Francisco arterial corridors toward Downtown and the Bay Bridge.'
+      },
+      {
+        src: './assets/d-sf-skatepark-nadir-ortho.jpg',
+        cat: 'aerial',
+        badge: 'OSITO ORTHOMOSAIC SURVEY | 90-DEG TOP-DOWN MAPPING',
+        title: '90-Degree Nadir Skatepark Orthomosaic & Mapping Mission',
+        desc: 'Precision vertical top-down aerial survey of San Francisco skatepark bowls and street course geometry.'
+      },
+      {
+        src: './assets/d-sf-freeway-skyline-twilight.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL MISSION | US-101 & DOWNTOWN DUSK',
+        title: 'San Francisco Highway Corridor & Dusk Skyline',
+        desc: 'Twilight aerial view tracking traffic flow into the downtown San Francisco skyline and Bay Bridge.'
+      },
+      {
+        src: './assets/d-sierra-expedition-aerial.jpg',
+        cat: 'aerial',
+        badge: 'OSITO ENVIRONMENTAL SURVEY | HIGH SIERRA TIMBERLINE',
+        title: 'High-Sierra Meadow & Forestry Aerial Survey',
+        desc: 'Wide-area environmental, forestry, and watershed aerial mapping flight in the Sierra Nevada.'
+      },
+      {
+        src: './assets/d-boxshop-mural-compound-pano.jpg',
+        cat: 'murals',
+        badge: '120MP PANORAMA | HUNTERS POINT BOX SHOP MURALS',
+        title: '120-Megapixel Waterfront Industrial Mural Compound',
+        desc: 'Ultra-high-resolution panoramic aerial capture of San Francisco waterfront mural containers and studio yards.'
+      },
+      {
+        src: './assets/d-familia-mural-osito-crew.jpg',
+        cat: 'murals',
+        badge: 'SAN FRANCISCO COMMUNITY ART | FAMILIA MURAL',
+        title: 'FAMILIA Community Mural & Osito Drone Flight Crew',
+        desc: 'Aerial capture of the vibrant geometric FAMILIA mural in San Francisco with the Osito Drone team on site.'
+      },
+      {
+        src: './assets/d-you-me-heart-cat-mural.jpg',
+        cat: 'murals',
+        badge: 'SF WATERFRONT ART | YOU & ME HEART SCULPTURES',
+        title: 'YOU / ME Heart Sculptures & Painted Container Mural',
+        desc: 'Low-altitude precision drone photography showcasing San Francisco murals and waterfront sculptures.'
+      },
+      {
+        src: './assets/d-osito-field-station-crew.jpg',
+        cat: 'murals',
+        badge: 'OSITO DRONE CREW | FIELD FLIGHT STATION',
+        title: 'Osito Co-Founders Prepping at the Mobile Flight Station',
+        desc: 'Our San Francisco flight crew configuring controllers, goggles, and batteries under our mobile field canopy.'
+      },
+      {
+        src: './assets/dji-sf-sutro-moon-flight.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL FLIGHT | SAN FRANCISCO & SUTRO TOWER',
+        title: 'Twilight Commercial Aerial Flight Over San Francisco',
+        desc: 'High-resolution DJI aerial mission capturing Sutro Tower, the crescent moon, and San Francisco neighborhoods.'
+      },
+      {
+        src: './assets/dji-sf-bay-bridge-flight.jpg',
+        cat: 'aerial',
+        badge: 'OSITO AERIAL FLIGHT | DOWNTOWN SF & BAY BRIDGE',
+        title: 'San Francisco Skyline & Bay Bridge Night Mission',
+        desc: 'FAA Part 107 commercial aerial photography and roof/corridor inspection flight looking toward Downtown SF and the Bay Bridge.'
+      },
+      {
+        src: './assets/live-dji-flight-1.jpg',
+        cat: 'aerial',
+        badge: 'LIVE ON OSITODRONE.COM | 360-DEG TINY PLANET AERIAL',
+        title: '360-DEG Tiny Planet Mountain & Valley Aerial Panorama',
+        desc: 'Featured on live ositodrone.com: spherical aerial panorama captured by Osito Drone Services.'
+      },
+      {
+        src: './assets/live-dji-flight-2.jpg',
+        cat: 'aerial',
+        badge: 'LIVE ON OSITODRONE.COM | WIDE HORIZON AERIAL',
+        title: 'High-Altitude Horizon & Terrain Survey',
+        desc: 'Featured on live ositodrone.com: wide-angle aerial photography showcasing expansive terrain visibility.'
+      }
+    ];
+
+    var currentIdx = 0;
+    var mainImg = document.getElementById('ositoHeroMainImg');
+    var badgeEl = document.getElementById('ositoHeroPhotoBadge');
+    var titleEl = document.getElementById('ositoHeroPhotoTitle');
+    var descEl = document.getElementById('ositoHeroPhotoDesc');
+    var thumbStrip = document.getElementById('ositoThumbStrip');
+    var galleryGrid = document.getElementById('ositoGalleryGrid');
+
+    function setPhoto(idx) {
+      currentIdx = (idx + photos.length) % photos.length;
+      var p = photos[currentIdx];
+      if (mainImg) {
+        mainImg.src = p.src;
+        mainImg.alt = p.title;
+      }
+      if (badgeEl) badgeEl.textContent = p.badge;
+      if (titleEl) titleEl.textContent = p.title;
+      if (descEl) descEl.textContent = p.desc;
+
+      if (thumbStrip) {
+        var btns = thumbStrip.querySelectorAll('.osito-thumb-btn');
+        for (var i = 0; i < btns.length; i++) {
+          if (i === currentIdx) btns[i].classList.add('active');
+          else btns[i].classList.remove('active');
+        }
+      }
+    }
+
+    if (thumbStrip) {
+      photos.forEach(function(p, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'osito-thumb-btn' + (idx === 0 ? ' active' : '');
+        btn.title = p.title;
+        var img = document.createElement('img');
+        img.src = p.src;
+        img.alt = p.title;
+        img.loading = 'lazy';
+        btn.appendChild(img);
+        btn.onclick = function() { setPhoto(idx); };
+        thumbStrip.appendChild(btn);
+      });
+    }
+
+    var prevBtn = document.getElementById('ositoPhotoPrevBtn');
+    var nextBtn = document.getElementById('ositoPhotoNextBtn');
+    if (prevBtn) prevBtn.onclick = function() { setPhoto(currentIdx - 1); };
+    if (nextBtn) nextBtn.onclick = function() { setPhoto(currentIdx + 1); };
+
+    function renderGallery(filter) {
+      if (!galleryGrid) return;
+      galleryGrid.innerHTML = '';
+      photos.forEach(function(p, idx) {
+        if (filter !== 'all' && p.cat !== filter) return;
+        var card = document.createElement('div');
+        card.className = 'osito-gallery-card';
+        card.onclick = function() {
+          setPhoto(idx);
+          var hero = document.getElementById('osito-live-sim-estimator-hub');
+          if (hero && hero.scrollIntoView) hero.scrollIntoView({ behavior: 'smooth' });
+        };
+        card.innerHTML =
+          '<div style="height:200px; background:#090D16; overflow:hidden; border-bottom:1px solid #303885;">' +
+            '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;" />' +
+          '</div>' +
+          '<div style="padding:14px;">' +
+            '<div style="font-size:10.5px; font-weight:700; color:#8E93DA; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;">' + p.badge + '</div>' +
+            '<div style="font-family:\'Fjalla One\',sans-serif; font-size:17px; color:#FFFFFF; text-transform:uppercase; margin-bottom:6px;">' + p.title + '</div>' +
+            '<div style="font-size:12.5px; color:#B0B5C9; line-height:1.45;">' + p.desc + '</div>' +
+          '</div>';
+        galleryGrid.appendChild(card);
+      });
+    }
+
+    var filterBtns = document.querySelectorAll('.osito-filter-btn');
+    for (var f = 0; f < filterBtns.length; f++) {
+      filterBtns[f].onclick = function() {
+        for (var j = 0; j < filterBtns.length; j++) filterBtns[j].classList.remove('active');
+        this.classList.add('active');
+        renderGallery(this.getAttribute('data-filter') || 'all');
+      };
+    }
+    renderGallery('all');
+
+    // Top 3 Flagship @OSITODroneServices YouTube Channel Videos
+    var ytVideos = [
+      {
+        id: '3YSUOEueryg',
+        rank: 'FEATURED VIDEO #1 | 4K NIGHT AERIALS',
+        date: '2026-07-17',
+        title: 'San Francisco at Night in 4K | Cinematic Drone Aerials',
+        desc: 'The quiet streets of the city by the bay - 4K nighttime commercial aerial cinematography across San Francisco.',
+        url: 'https://www.youtube.com/watch?v=3YSUOEueryg'
+      },
+      {
+        id: 'bFoY1OwzeEA',
+        rank: 'FEATURED VIDEO #2 | TWIN PEAKS & CASTRO FOG',
+        date: '2026-06-16',
+        title: 'The Fog Rolls In: Cinematic Drone Flight Over Twin Peaks',
+        desc: 'Watch as San Francisco fog gracefully spills over Twin Peaks and blankets the vibrant Castro district.',
+        url: 'https://www.youtube.com/watch?v=bFoY1OwzeEA'
+      },
+      {
+        id: '5pn3bvwz8P0',
+        rank: 'FEATURED VIDEO #3 | STEM ACADEMY & 3D SIMULATOR',
+        date: '2026-10-22',
+        title: 'Osito Drone Academy 3D Flight Simulator Showcase',
+        desc: 'Inside our San Francisco 3D Flight Simulator and hands-on Youth STEM pilot training curriculum.',
+        url: 'https://www.youtube.com/watch?v=5pn3bvwz8P0'
+      }
+    ];
+
+    var currentYtVideo = ytVideos[0];
+    var currentYtMode = 'native';
+
+    window.setYtPlayerMode = function(mode) {
+      currentYtMode = mode;
+      var nativeVid = document.getElementById('ositoYtNativeVideo');
+      var embedFrame = document.getElementById('ositoYtEmbedFrame');
+      var nativeBtn = document.getElementById('ositoYtModeNativeBtn');
+      var embedBtn = document.getElementById('ositoYtModeEmbedBtn');
+      if (mode === 'embed') {
+        if (nativeVid) { nativeVid.pause(); nativeVid.style.display = 'none'; }
+        if (embedFrame) {
+          embedFrame.style.display = 'block';
+          embedFrame.src = 'https://www.youtube.com/embed/' + currentYtVideo.id + '?autoplay=1&rel=0';
+        }
+        if (nativeBtn) nativeBtn.classList.remove('active');
+        if (embedBtn) embedBtn.classList.add('active');
+      } else {
+        if (embedFrame) { embedFrame.src = 'about:blank'; embedFrame.style.display = 'none'; }
+        if (nativeVid) {
+          nativeVid.style.display = 'block';
+          nativeVid.poster = './assets/yt-thumbs/' + currentYtVideo.id + '.jpg';
+          var srcEl = document.getElementById('ositoYtNativeSource');
+          if (srcEl) srcEl.src = './assets/yt-videos/' + currentYtVideo.id + '.mp4';
+          nativeVid.load();
+          nativeVid.play().catch(function(){});
+        }
+        if (embedBtn) embedBtn.classList.remove('active');
+        if (nativeBtn) nativeBtn.classList.add('active');
+      }
+    };
+
+    window.playOsitoYtVideo = function(vidId) {
+      for (var i = 0; i < ytVideos.length; i++) {
+        if (ytVideos[i].id === vidId) {
+          currentYtVideo = ytVideos[i];
+          break;
+        }
+      }
+      var metaEl = document.getElementById('ositoYtActiveMeta');
+      var titleEl = document.getElementById('ositoYtActiveTitle');
+      var descEl = document.getElementById('ositoYtActiveDesc');
+      var linkEl = document.getElementById('ositoYtDirectLink');
+      if (metaEl) metaEl.textContent = currentYtVideo.rank + ' | PUBLISHED ' + currentYtVideo.date;
+      if (titleEl) titleEl.textContent = currentYtVideo.title;
+      if (descEl) descEl.textContent = currentYtVideo.desc;
+      if (linkEl) linkEl.href = currentYtVideo.url;
+      window.setYtPlayerMode(currentYtMode);
+      var stage = document.getElementById('osito-yt-stage-box');
+      if (stage && stage.scrollIntoView) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    window.renderTop3YtVideos = function() {
+      var grid = document.getElementById('ositoYtGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      ytVideos.forEach(function(v) {
+        var card = document.createElement('div');
+        card.className = 'osito-gallery-card';
+        card.innerHTML =
+          '<div style="position:relative; height:210px; background:#000000; overflow:hidden; border-bottom:2px solid #7077CF;" onclick="playOsitoYtVideo('' + v.id + '')">' +
+            '<img src="./assets/yt-thumbs/' + v.id + '.jpg" alt="' + v.title + '" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;" />' +
+            '<div style="position:absolute; inset:0; background:rgba(15,18,28,0.28); display:flex; align-items:center; justify-content:center;">' +
+              '<span style="background:rgba(112,119,207,0.95); border:2px solid #FFFFFF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:13.5px; padding:9px 18px; letter-spacing:0.05em;">PLAY VIDEO</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding:18px; display:flex; flex-direction:column; justify-content:space-between; flex:1;">' +
+            '<div>' +
+              '<div style="font-size:11px; font-weight:700; color:#8E93DA; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">' + v.rank + '</div>' +
+              '<div style="font-family:'Fjalla One',sans-serif; font-size:19px; color:#FFFFFF; text-transform:uppercase; margin-bottom:8px; line-height:1.25;">' + v.title + '</div>' +
+              '<div style="font-size:13.5px; color:#B0B5C9; line-height:1.5; margin-bottom:16px;">' + v.desc + '</div>' +
+            '</div>' +
+            '<div style="display:flex; gap:8px;">' +
+              '<button type="button" onclick="playOsitoYtVideo('' + v.id + '')" class="osito-action-btn" style="flex:1.4; padding:10px 12px; font-size:13px;">PLAY VIDEO</button>' +
+              '<a href="' + v.url + '" target="_blank" rel="noopener" class="osito-action-btn dark" style="flex:0.9; padding:10px 12px; font-size:12.5px;">YOUTUBE</a>' +
+            '</div>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+    };
+    window.renderTop3YtVideos();
+
+
+    // Instant Quote Estimator Logic
+    var typeEl = document.getElementById('ositoEstType');
+    var countEl = document.getElementById('ositoEstCount');
+    var kitEl = document.getElementById('ositoEstKit');
+    var discEl = document.getElementById('ositoEstDiscount');
+    var countValEl = document.getElementById('ositoEstCountVal');
+    var totalEl = document.getElementById('ositoEstTotal');
+    var strikeEl = document.getElementById('ositoEstRegStrike');
+    var saveBadgeEl = document.getElementById('ositoEstSavingsBadge');
+    var perKidEl = document.getElementById('ositoEstPerKid');
+    var incEl = document.getElementById('ositoEstIncludes');
+    var bookBtn = document.getElementById('ositoEstBookBtn');
+
+    function updateEstimator() {
+      if (!typeEl || !countEl) return;
+      var mode = typeEl.value;
+      var count = parseInt(countEl.value, 10) || 12;
+      var addKits = kitEl && kitEl.checked;
+      var use25Off = discEl ? discEl.checked : true;
+      var regTotal = 0;
+      var unitLabel = 'pilot';
+      var desc = '';
+      var kitRegPerKid = 35; // $35 reg -> $26/kid w/ 25% Off New Year Special
+
+      if (mode === 'party') {
+        countValEl.textContent = count + (count === 1 ? ' Pilot' : ' Pilots');
+        var extraParty = Math.max(0, count - 12);
+        regTotal = 495 + (extraParty * 20) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'pilot';
+        desc = 'Includes 2-Hr Pop-Up Drone Race Party (up to 12 pilots base), Netted Hover Cage, Ducted CUB-75 Fleet, 4-Tablet Sim Pod & LED FPV Gates.';
+      } else if (mode === 'lab4') {
+        countValEl.textContent = count + (count === 1 ? ' Student Pilot' : ' Student Pilots');
+        var extraLab = Math.max(0, count - 15);
+        regTotal = 950 + (extraLab * 24) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'student';
+        desc = 'Includes 2-Hour School/Camp 4-Station STEM Flight Lab (up to 15 students base), 4-Tablet 3D Sim Pod, ELRS Radios & Netted Drone Flight.';
+      } else if (mode === 'school6') {
+        countValEl.textContent = count + (count === 1 ? ' Student (6-Wk Cohort)' : ' Students (6-Wk Cohort)');
+        var extraCohort = Math.max(0, count - 15);
+        regTotal = 2400 + (extraCohort * 80) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'student (6 wks)';
+        desc = 'Full 6-Week After-School STEM Curriculum ($300/wk New Year Special, EN/ES): All Drones, 3D Simulators, Waivers & FAA TRUST Wings Included.';
+      } else if (mode === 'aerocub') {
+        countValEl.textContent = count + (count === 1 ? ' TK-5 Student' : ' TK-5 Students');
+        var extraAero = Math.max(0, count - 15);
+        regTotal = 600 + (extraAero * 20) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'student';
+        desc = 'TK-5 Aero-Cub Paper-to-Prop-to-3D-Drone Workshop (up to 15 students base): Airfoil gliders, 3D-printed prop planes & ducted micro-drones.';
+      } else if (mode === 'brewery') {
+        countValEl.textContent = count + (count === 1 ? ' Event Challenger' : ' Event Challengers');
+        var extraBrew = Math.max(0, count - 15);
+        regTotal = 1200 + (extraBrew * 32) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'challenger';
+        desc = '2-Hour Corporate / Brewery Taproom Race Night (up to 15 challengers base): SHARD-75 Bumper-Drone Arena, Dual-Monitor FPV Track & Live Leaderboard.';
+      } else {
+        countValEl.textContent = count + (count === 1 ? ' Inspection Zone' : ' Inspection Zones');
+        regTotal = 395 + ((count - 1) * 160);
+        unitLabel = 'zone';
+        desc = 'FAA Part 107 Insured Commercial Roof, HVAC Thermal & 4K Indoor/Outdoor Aerial Report delivered within 24 hours ($296/zone w/ 25% Off).';
+      }
+
+      var finalTotal = use25Off ? Math.round(regTotal * 0.75) : regTotal;
+      var savings = regTotal - finalTotal;
+
+      if (strikeEl) strikeEl.textContent = '$' + regTotal.toLocaleString();
+      if (totalEl) totalEl.textContent = '$' + finalTotal.toLocaleString();
+      if (saveBadgeEl) {
+        saveBadgeEl.style.display = use25Off ? 'inline-block' : 'none';
+        saveBadgeEl.textContent = 'SAVE $' + savings.toLocaleString() + ' (25% OFF)';
+      }
+      if (perKidEl) perKidEl.textContent = '$' + Math.max(1, Math.round(finalTotal / count)) + ' / ' + unitLabel;
+      if (incEl) incEl.textContent = desc;
+
+      if (bookBtn) {
+        var subj = encodeURIComponent('Osito Drone Quote Request: ' + typeEl.options[typeEl.selectedIndex].text + ' (' + countValEl.textContent + ' - $' + finalTotal + ')');
+        var body = encodeURIComponent('Hi Osito Drone Team (Alan, Miguel & Jesus),\n\nI used the Instant Quote Estimator on ositodrone.com and would like to lock in our 25% Off New Year Special:\n\n- Program: ' + typeEl.options[typeEl.selectedIndex].text + '\n- Group Size: ' + countValEl.textContent + '\n- Take-Home 3D Aero-Cub Kits: ' + (addKits ? 'Yes ($26/kid w/ 25% Off)' : 'No') + '\n- Regular Rate: $' + regTotal.toLocaleString() + '\n- 25% Off New Year Quote: $' + finalTotal.toLocaleString() + '\n\nPlease reply with available dates.\n');
+        bookBtn.href = 'mailto:info@ositodrone.com?subject=' + subj + '&body=' + body;
+      }
+    }
+
+    [typeEl, countEl, kitEl, discEl].forEach(function(el) {
+      if (el) {
+        el.addEventListener('input', updateEstimator);
+        el.addEventListener('change', updateEstimator);
+      }
+    });
+    updateEstimator();
+
+    var subForm = document.getElementById('ositoPublicSubscribeForm');
+    var subEmail = document.getElementById('ositoSubscriberEmail');
+    var subBtn = document.getElementById('ositoSubscriberBtn');
+    if (subForm && subEmail && subBtn) {
+      subForm.onsubmit = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var em = (subEmail.value || '').trim();
+        if (!em) return false;
+        subBtn.textContent = 'SUBSCRIBED - THANK YOU';
+        subEmail.value = '';
+        window.location.href = 'mailto:info@ositodrone.com?subject=' + encodeURIComponent('Osito Drone Newsletter Subscription: ' + em) + '&body=' + encodeURIComponent('Please add ' + em + ' to the Osito Drone Youth Flight Academy & 75%-Off Charter Newsletter list.');
+        return false;
+      };
+    }
+
+    var contactForm = document.getElementById('ositoContactForm');
+    if (contactForm) {
+      contactForm.onsubmit = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var n = (document.getElementById('ositoContactName').value || '').trim();
+        var em = (document.getElementById('ositoContactEmail').value || '').trim();
+        var ph = (document.getElementById('ositoContactPhone').value || '').trim();
+        var msg = (document.getElementById('ositoContactMsg').value || '').trim();
+        var subj = encodeURIComponent('Osito Drone Website Inquiry from ' + n);
+        var body = encodeURIComponent('Name: ' + n + '\nEmail: ' + em + '\nPhone: ' + (ph || 'N/A') + '\n\nProject / Event Details:\n' + msg);
+        window.location.href = 'mailto:info@ositodrone.com?subject=' + subj + '&body=' + body;
+        return false;
+      };
+    }
+  })();
+  </script>
+  <script>
+  (function() {
+    var parallaxSections = document.querySelectorAll('.osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset');
+    if (!parallaxSections.length) return;
+    function updateOsitoParallax() {
+      var vh = window.innerHeight || 800;
+      for (var i = 0; i < parallaxSections.length; i++) {
+        var el = parallaxSections[i];
+        var rect = el.getBoundingClientRect();
+        if (rect.bottom >= -200 && rect.top <= vh + 200) {
+          var offset = Math.round((rect.top - vh * 0.5) * -0.18);
+          el.style.backgroundPosition = 'center calc(50% + ' + offset + 'px)';
+        }
+      }
+    }
+    window.addEventListener('scroll', updateOsitoParallax, { passive: true });
+    window.addEventListener('resize', updateOsitoParallax, { passive: true });
+    updateOsitoParallax();
+  })();
+  </script>
+</body>
+</html>
