@@ -933,7 +933,7 @@ Osito Drone Services | San Francisco, CA</textarea>
             </div>
             <div class="form-group">
               <label class="form-label">CONTACT NAME</label>
-              <input type="text" id="newLeadContact" class="form-input" placeholder="e.g. Sarah Jenkins" />
+              <input type="text" id="newLeadContact" class="form-input" placeholder="e.g. Program Director" />
             </div>
             <div class="form-group">
               <label class="form-label">CONTACT ROLE</label>
@@ -1586,15 +1586,23 @@ Osito Drone Services | San Francisco, CA</textarea>
         var cat = cleanDisplayText(p.category);
         var title = cleanDisplayText(p.title);
         var desc = cleanDisplayText(p.description);
-        var fil = cleanDisplayText(p.bambuFilament);
+        var fil = cleanDisplayText(p.bambuFilament || (p.bambuSlot ? (p.bambuSlot + (p.nozzleBed ? ' (' + p.nozzleBed + ')' : '')) : ''));
+        var dlFile = p.zipFilename || p.filename || 'Osito_Pack.zip';
+        var dlUrl = p.downloadUrl || p.url || ('./downloads/admin-zips/' + dlFile);
+        var sizeStr = String(p.sizeMB !== undefined ? p.sizeMB : (p.sizeKB ? p.sizeKB + ' KB' : ''));
+        if (sizeStr && sizeStr.indexOf('MB') === -1 && sizeStr.indexOf('KB') === -1) {
+          sizeStr = sizeStr + ' MB';
+        }
 
         if (activeZipCategory !== 'all' && cat.indexOf(activeZipCategory) === -1) continue;
         if (q) {
-          var hay = (p.id + ' ' + cat + ' ' + title + ' ' + desc + ' ' + fil).toLowerCase();
+          var hay = (p.id + ' ' + cat + ' ' + title + ' ' + desc + ' ' + fil + ' ' + dlFile).toLowerCase();
           if (hay.indexOf(q) === -1) continue;
         }
 
-        var filesList = p.includedFiles || [];
+        var filesList = p.includedFiles || p.sampleFiles || [];
+        var totalFileCount = p.fileCount || p.totalFiles || filesList.length;
+        var shaStr = p.sha256 || p.sha256Short || '';
         var filesHtml = '';
         for (var f = 0; f < filesList.length; f++) {
           filesHtml += '<div>' + (f + 1) + '. ' + cleanDisplayText(filesList[f]) + '</div>';
@@ -1610,16 +1618,16 @@ Osito Drone Services | San Francisco, CA</textarea>
           + '  <p class="pack-desc">' + desc + '</p>'
           + '  <div class="pack-bambu-box"><strong>Bambu Lab P2S Spec:</strong> ' + fil + '</div>'
           + '  <div class="pack-meta-pills">'
-          + '    <span class="pack-pill">Size: ' + (p.sizeMB || p.sizeKB + ' KB') + '</span>'
-          + '    <span class="pack-pill">Files: ' + (p.fileCount || filesList.length) + '</span>'
+          + '    <span class="pack-pill">Size: ' + escapeHtmlSafe(sizeStr) + '</span>'
+          + '    <span class="pack-pill">Files: ' + totalFileCount + '</span>'
           + '    <span class="pack-pill">STL/CAD: ' + (p.stlCount || 0) + '</span>'
-          + '    <span class="pack-pill">SHA-256: ' + (p.sha256 || '') + '</span>'
+          + '    <span class="pack-pill">SHA-256: ' + escapeHtmlSafe(shaStr) + '</span>'
           + '  </div>'
           + '  <div id="drawer-' + p.id + '" class="pack-files-drawer">' + filesHtml + '</div>'
           + '</div>'
           + '<div class="pack-card-actions">'
-          + '  <a href="' + p.downloadUrl + '" download="' + p.zipFilename + '" class="osito-action-btn emerald" style="flex:1; padding:10px 14px; font-size:13.5px;">DOWNLOAD .ZIP (' + (p.sizeMB || '') + ')</a>'
-          + '  <button type="button" class="osito-action-btn dark" style="padding:10px 12px; font-size:12px;" onclick="togglePackFilesDrawer(\'' + p.id + '\')">FILES (' + (p.fileCount || filesList.length) + ')</button>'
+          + '  <a href="' + escapeHtmlSafe(dlUrl) + '" download="' + escapeHtmlSafe(dlFile) + '" class="osito-action-btn emerald" style="flex:1; padding:10px 14px; font-size:13.5px;">DOWNLOAD .ZIP (' + escapeHtmlSafe(sizeStr) + ')</a>'
+          + '  <button type="button" class="osito-action-btn dark" style="padding:10px 12px; font-size:12px;" onclick="togglePackFilesDrawer(\'' + p.id + '\')">FILES (' + totalFileCount + ')</button>'
           + '</div>'
           + '</article>';
       }
@@ -1793,7 +1801,8 @@ Osito Drone Services | San Francisco, CA</textarea>
 
         var propBtn = '';
         if (item.proposalUrl) {
-          propBtn = '<a href="' + escapeHtmlSafe(item.proposalUrl) + '" download class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%; margin-top:5px;">.DOCX PROPOSAL</a>';
+          var propFn = String(item.proposalUrl).split('/').pop() || 'Osito_Proposal.docx';
+          propBtn = '<a href="' + escapeHtmlSafe(item.proposalUrl) + '" download="' + escapeHtmlSafe(propFn) + '" class="osito-action-btn dark" style="padding:5px 8px; font-size:11px; width:100%; margin-top:5px;">.DOCX PROPOSAL</a>';
         }
 
         rowsHtml += '<tr>'
@@ -1899,6 +1908,8 @@ Osito Drone Services | San Francisco, CA</textarea>
       var html = '';
       for (var i = 0; i < props.length; i++) {
         var pr = props[i];
+        var prFn = pr.filename || 'Osito_Proposal.docx';
+        var prUrl = pr.url || pr.downloadUrl || ('./downloads/admin-proposals/' + prFn);
         html += '<article class="pack-card">'
           + '<div class="pack-card-top">'
           + '  <div class="pack-cat-row">'
@@ -1906,10 +1917,10 @@ Osito Drone Services | San Francisco, CA</textarea>
           + '    <span class="pack-ver-badge">' + (pr.sizeKB || '95') + ' KB</span>'
           + '  </div>'
           + '  <h3 class="pack-title">' + cleanDisplayText(pr.title) + '</h3>'
-          + '  <p class="pack-desc">Filename: <code>' + cleanDisplayText(pr.filename) + '</code></p>'
+          + '  <p class="pack-desc">Filename: <code>' + cleanDisplayText(prFn) + '</code></p>'
           + '</div>'
           + '<div class="pack-card-actions">'
-          + '  <a href="' + pr.url + '" download="' + pr.filename + '" class="osito-action-btn emerald" style="width:100%;">DOWNLOAD MICROSOFT WORD (.DOCX)</a>'
+          + '  <a href="' + escapeHtmlSafe(prUrl) + '" download="' + escapeHtmlSafe(prFn) + '" class="osito-action-btn emerald" style="width:100%;">DOWNLOAD MICROSOFT WORD (.DOCX)</a>'
           + '</div>'
           + '</article>';
       }
@@ -2020,74 +2031,68 @@ Osito Drone Services | San Francisco, CA</textarea>
       return baseUrl + '?verify_newsletter=' + encodeURIComponent(token || '') + '&email=' + encodeURIComponent(email || '');
     }
 
-    function getSeedSubscribersList() {
-      return [
-        {
-          id: 'SUB-1001',
-          email: 'sarah.jenkins@sfusd-stem.org',
-          name: 'Sarah Jenkins (SFUSD STEM Coordinator)',
-          segment: 'Schools & Extended Care',
-          status: 'Verified',
-          verifyCode: '741852',
-          verifyToken: 'ositoverify-sub1001',
-          source: 'Website Newsletter Bar',
-          subscribedAt: '2026-11-01T16:20:00.000Z',
-          verifiedAt: '2026-11-01T16:22:15.000Z',
-          notes: 'Interested in 2-Hr 4-Station STEM Flight Lab ($713 New Year Special).'
-        },
-        {
-          id: 'SUB-1002',
-          email: 'm.chen@presidiokids.org',
-          name: 'Marcus Chen (Presidio Youth Camp)',
-          segment: 'Youth STEM Academy & 25% Off Invites',
-          status: 'Verified',
-          verifyCode: '963852',
-          verifyToken: 'ositoverify-sub1002',
-          source: 'Website Newsletter Bar',
-          subscribedAt: '2026-11-02T18:05:00.000Z',
-          verifiedAt: '2026-11-02T18:09:40.000Z',
-          notes: 'Holiday & Thanksgiving Break Camp coordinator.'
-        },
-        {
-          id: 'SUB-1003',
-          email: 'elena.rodriguez@missionmakers.org',
-          name: 'Elena Rodriguez (Mission Makerspace)',
-          segment: 'Youth STEM Academy & 25% Off Invites',
-          status: 'Verified',
-          verifyCode: '159753',
-          verifyToken: 'ositoverify-sub1003',
-          source: 'Website Newsletter Bar',
-          subscribedAt: '2026-11-03T20:12:00.000Z',
-          verifiedAt: '2026-11-03T20:14:02.000Z',
-          notes: 'Bilingual EN/ES Aero-Cub K-5 Workshop subscriber.'
-        },
-        {
-          id: 'SUB-1004',
-          email: 'david.kim@bayarearoofing.com',
-          name: 'David Kim (Bay Area Commercial Roofing)',
-          segment: 'Commercial Aerial Inspections',
-          status: 'Verified',
-          verifyCode: '357951',
-          verifyToken: 'ositoverify-sub1004',
-          source: 'Admin Panel Manual',
-          subscribedAt: '2026-11-04T15:30:00.000Z',
-          verifiedAt: '2026-11-04T15:30:00.000Z',
-          notes: 'Commercial thermal & roof inspection partner.'
-        },
-        {
-          id: 'SUB-1005',
-          email: 'priya.patel@noevalleyparents.com',
-          name: 'Priya Patel (Noe Valley Parent Network)',
-          segment: 'VIP Drone Birthday Parties',
-          status: 'Pending Verification',
-          verifyCode: '849201',
-          verifyToken: 'ositoverify-sub1005',
-          source: 'Website Newsletter Bar',
-          subscribedAt: '2026-11-06T21:10:00.000Z',
-          verifiedAt: null,
-          notes: 'Awaiting email verification click for VIP Birthday Party promos.'
+    var LEGACY_SAMPLE_IDS = {
+      'SUB-1001': true,
+      'SUB-1002': true,
+      'SUB-1003': true,
+      'SUB-1004': true,
+      'SUB-1005': true,
+      'CAMP-101': true,
+      'INQ-1001': true,
+      'INQ-1002': true
+    };
+
+    var LEGACY_SAMPLE_DOMAINS = [
+      '@sfusd-stem.org',
+      '@presidiokids.org',
+      '@missionmakers.org',
+      '@bayarearoofing.com',
+      '@noevalleyparents.com',
+      '@stignatius-sf.org',
+      '@apexprop-bayarea.com'
+    ];
+
+    function isLegacySampleEmail(emailStr) {
+      var em = String(emailStr || '').trim().toLowerCase();
+      if (!em) return false;
+      for (var i = 0; i < LEGACY_SAMPLE_DOMAINS.length; i++) {
+        if (em.indexOf(LEGACY_SAMPLE_DOMAINS[i]) !== -1) return true;
+      }
+      return false;
+    }
+
+    function isLegacySampleRecord(item) {
+      if (!item || typeof item !== 'object') return true;
+      var idStr = String(item.id || '').trim();
+      if (LEGACY_SAMPLE_IDS[idStr]) return true;
+      if (item.verifyToken && String(item.verifyToken).indexOf('ositoverify-sub100') === 0) return true;
+      if (item.email && isLegacySampleEmail(item.email)) return true;
+      if (Array.isArray(item.recipients)) {
+        for (var r = 0; r < item.recipients.length; r++) {
+          if (isLegacySampleEmail(item.recipients[r])) return true;
         }
-      ];
+      }
+      return false;
+    }
+
+    function purgeLegacySampleAdminData() {
+      var keys = [STORAGE_KEYS.NL_SUBSCRIBERS, STORAGE_KEYS.NL_CAMPAIGNS, STORAGE_KEYS.CONTACT_INQUIRIES];
+      for (var k = 0; k < keys.length; k++) {
+        try {
+          var raw = localStorage.getItem(keys[k]);
+          if (!raw) continue;
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(keys[k], JSON.stringify(cleaned));
+            }
+          }
+        } catch (e) {}
+      }
     }
 
     function loadAdminSubscribers() {
@@ -2095,14 +2100,19 @@ Osito Drone Services | San Francisco, CA</textarea>
         var raw = localStorage.getItem(STORAGE_KEYS.NL_SUBSCRIBERS);
         if (raw) {
           var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(STORAGE_KEYS.NL_SUBSCRIBERS, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
         }
       } catch (e) {}
-      var seed = getSeedSubscribersList();
-      try {
-        localStorage.setItem(STORAGE_KEYS.NL_SUBSCRIBERS, JSON.stringify(seed));
-      } catch (e) {}
-      return seed;
+      return [];
     }
 
     function saveAdminSubscribers(list) {
@@ -2112,39 +2122,24 @@ Osito Drone Services | San Francisco, CA</textarea>
       notifyAdminBackendSync('subscribers_updated', { count: list.length });
     }
 
-    function getSeedCampaignsList() {
-      return [
-        {
-          id: 'CAMP-101',
-          subject: 'Welcome to Osito Drone Academy: 25% Off Till the New Year Rates Inside!',
-          audienceLabel: 'All Verified Subscribers',
-          recipientCount: 4,
-          recipients: [
-            'sarah.jenkins@sfusd-stem.org',
-            'm.chen@presidiokids.org',
-            'elena.rodriguez@missionmakers.org',
-            'david.kim@bayarearoofing.com'
-          ],
-          sentBy: 'alan@ositodrone.com',
-          sentAt: '2026-11-05T17:00:00.000Z',
-          status: 'Delivered via Backend'
-        }
-      ];
-    }
-
     function loadNewsletterCampaigns() {
       try {
         var raw = localStorage.getItem(STORAGE_KEYS.NL_CAMPAIGNS);
         if (raw) {
           var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(STORAGE_KEYS.NL_CAMPAIGNS, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
         }
       } catch (e) {}
-      var seed = getSeedCampaignsList();
-      try {
-        localStorage.setItem(STORAGE_KEYS.NL_CAMPAIGNS, JSON.stringify(seed));
-      } catch (e) {}
-      return seed;
+      return [];
     }
 
     function saveNewsletterCampaigns(list) {
@@ -2154,48 +2149,24 @@ Osito Drone Services | San Francisco, CA</textarea>
       notifyAdminBackendSync('campaigns_updated', { count: list.length });
     }
 
-    function getSeedContactInquiriesList() {
-      return [
-        {
-          id: 'INQ-1001',
-          name: 'Principal Rachel Torres',
-          email: 'rtorres@stignatius-sf.org',
-          phone: '(415) 555-0148',
-          message: 'We would love to book the 2-Hour 4-Station STEM Flight Lab ($713 New Year Special) for 24 6th-grade students in December. Please let us know available Friday afternoon dates.',
-          recipient: 'info@ositodrone.com',
-          status: 'New - Unread',
-          deliveryState: 'Sent to info@ositodrone.com',
-          submittedAt: '2026-11-05T19:15:00.000Z',
-          notes: ''
-        },
-        {
-          id: 'INQ-1002',
-          name: 'Kevin Holloway (Apex Property Group)',
-          email: 'kholloway@apexprop-bayarea.com',
-          phone: '(415) 555-0192',
-          message: 'Looking for an FAA Part 107 thermal roof & solar panel inspection across 2 commercial warehouse zones in SoMa ($296/zone special).',
-          recipient: 'info@ositodrone.com',
-          status: 'In Progress',
-          deliveryState: 'Sent to info@ositodrone.com',
-          submittedAt: '2026-11-06T14:40:00.000Z',
-          notes: 'Assigned to Chuy & Alan for thermal flight plan.'
-        }
-      ];
-    }
-
     function loadAdminContactInquiries() {
       try {
         var raw = localStorage.getItem(STORAGE_KEYS.CONTACT_INQUIRIES);
         if (raw) {
           var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(STORAGE_KEYS.CONTACT_INQUIRIES, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
         }
       } catch (e) {}
-      var seed = getSeedContactInquiriesList();
-      try {
-        localStorage.setItem(STORAGE_KEYS.CONTACT_INQUIRIES, JSON.stringify(seed));
-      } catch (e) {}
-      return seed;
+      return [];
     }
 
     function saveAdminContactInquiries(list) {
@@ -2324,7 +2295,7 @@ Osito Drone Services | San Francisco, CA</textarea>
       var nowIso = new Date().toISOString();
 
       var newSub = {
-        id: generateUniqueAdminId('SUB', 1001, subs),
+        id: generateUniqueAdminId('SUB', 1006, subs),
         email: em,
         name: nm,
         segment: seg,
@@ -2676,7 +2647,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         badgeEl.textContent = recipients.length + (recipients.length === 1 ? ' RECIPIENT SELECTED' : ' RECIPIENTS SELECTED');
       }
 
-      var sample = recipients.length > 0 ? recipients[0] : { name: 'Sarah Jenkins', email: 'sarah.jenkins@sfusd-stem.org' };
+      var sample = recipients.length > 0 ? recipients[0] : { name: 'Valued Pilot & Partner', email: 'info@ositodrone.com' };
       previewBox.innerHTML = buildNewsletterHtmlDocument(subj || 'Osito Drone Newsletter', body, ctaText, ctaUrl, sample);
     }
 
@@ -2719,7 +2690,7 @@ Osito Drone Services | San Francisco, CA</textarea>
       }
 
       var camps = loadNewsletterCampaigns();
-      var campId = generateUniqueAdminId('CAMP', 101, camps);
+      var campId = generateUniqueAdminId('CAMP', 102, camps);
       var nowIso = new Date().toISOString();
       var senderEmail = activeStaffEmail || 'alan@ositodrone.com';
 
@@ -2974,7 +2945,7 @@ Osito Drone Services | San Francisco, CA</textarea>
       var code = String(Math.floor(100000 + Math.random() * 900000));
       var nowIso = new Date().toISOString();
       var newSub = {
-        id: generateUniqueAdminId('SUB', 1001, subs),
+        id: generateUniqueAdminId('SUB', 1006, subs),
         email: emLower,
         name: inq.name || emLower.split('@')[0],
         segment: 'Youth STEM Academy & 25% Off Invites',
@@ -3008,6 +2979,7 @@ Osito Drone Services | San Francisco, CA</textarea>
     // 8. AUTO-RESTORE STAFF SESSION ON PAGE LOAD
     // =========================================================================
     (function initOsitoAdminPortal() {
+      purgeLegacySampleAdminData();
       try {
         var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
         if (raw) {

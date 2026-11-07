@@ -11,19 +11,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-01",
       "title": "CUB-75 Kids STEM Trainer Drone — Production STL & Gen-2 Modular Pack",
       "filename": "01_CUB75_Kids_Training_Drone_STL_Bambu_Pack.zip",
+      "zipFilename": "01_CUB75_Kids_Training_Drone_STL_Bambu_Pack.zip",
       "url": "./downloads/admin-zips/01_CUB75_Kids_Training_Drone_STL_Bambu_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/01_CUB75_Kids_Training_Drone_STL_Bambu_Pack.zip",
       "category": "Core Fleet CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 1: Bambu PETG-CF (Frame) + Slot 4: TPU 68D (Canopy) + P2S #2 Ext: TPU 95A HF (Bumpers)",
+      "bambuFilament": "P2S #1 AMS Slot 1: Bambu PETG-CF (Frame) + Slot 4: TPU 68D (Canopy) + P2S #2 Ext: TPU 95A HF (Bumpers) (0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C)",
       "nozzleBed": "0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C",
       "version": "v2026.11.07",
-      "sizeMB": 19.32,
+      "sizeMB": "19.32 MB",
+      "sizeMBNum": 19.32,
       "totalFiles": 74,
+      "fileCount": 74,
       "stlCount": 21,
       "docCount": 26,
-      "sha256Short": "8b4168b8a7",
+      "sha256Short": "e222541742",
+      "sha256": "e222541742",
       "description": "Complete 39.5g FAA-compliant sub-250g ducted trainer airframe STLs, Gen-2 modular arm/canopy upgrades, OpenSCAD parametric sources, and release readiness engineering docs.",
       "sampleFiles": [
+        "Kids Training Drone/cad/CUB75_Canopy_FPV_Pod.stl",
+        "Kids Training Drone/cad/CUB75_TPU_Bumper_Ring.stl",
+        "Kids Training Drone/cad/CUB75_Canopy_LOS_CubDome.stl",
+        "Kids Training Drone/cad/CUB75_Frame_KidSafe_75mm.stl",
+        "Kids Training Drone/cad/CUB75_Parametric_Master.scad",
+        "Kids Training Drone/cad/CUB75_550mAh_Trainer_Skids.stl",
+        "Kids Training Drone/cad/CUB75_Motor_Prop_Press_Jig.stl",
+        "Kids Training Drone/Osito_CUB75_Visual_Anatomy_and_Features_Guide.docx",
+        "2026-10-31_CUB75_SHARD75_Release_Readiness/rnd_parking/RnD_Parking_Note.docx",
+        "2026-10-31_CUB75_and_SHARD75_Gen2_Modular_Upgrades/osito_pogo_snap_deck_mount.scad",
+        "Kids Training Drone/CUB75_30Min_QuickBuild_STEM_Kit/cad/CUB75_QB_TPU_Bumper_Ring.stl",
+        "Kids Training Drone/CUB75_30Min_QuickBuild_STEM_Kit/cad/CUB75_QB_Thumb_Lock_Nuts.stl"
+      ],
+      "includedFiles": [
         "Kids Training Drone/cad/CUB75_Canopy_FPV_Pod.stl",
         "Kids Training Drone/cad/CUB75_TPU_Bumper_Ring.stl",
         "Kids Training Drone/cad/CUB75_Canopy_LOS_CubDome.stl",
@@ -42,19 +62,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-02",
       "title": "LILBEAR-65 SnapLite (23.8g) — Tool-Free In-House 1S Airframe STL Pack",
       "filename": "02_LILBEAR65_SnapLite_InHouse_STL_Bambu_Pack.zip",
+      "zipFilename": "02_LILBEAR65_SnapLite_InHouse_STL_Bambu_Pack.zip",
       "url": "./downloads/admin-zips/02_LILBEAR65_SnapLite_InHouse_STL_Bambu_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/02_LILBEAR65_SnapLite_InHouse_STL_Bambu_Pack.zip",
       "category": "Core Fleet CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 1: Bambu PETG-CF + P2S #2 Ext: TPU 95A HF (23.8g Tool-Free JST Airframe)",
+      "bambuFilament": "P2S #1 AMS Slot 1: Bambu PETG-CF + P2S #2 Ext: TPU 95A HF (23.8g Tool-Free JST Airframe) (0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C)",
       "nozzleBed": "0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C",
       "version": "v2026.11.07",
-      "sizeMB": 1.17,
+      "sizeMB": "1.17 MB",
+      "sizeMBNum": 1.17,
       "totalFiles": 42,
+      "fileCount": 42,
       "stlCount": 12,
       "docCount": 20,
-      "sha256Short": "92d798543b",
+      "sha256Short": "aa374cdec0",
+      "sha256": "aa374cdec0",
       "description": "Ultra-light 23.8g tool-free snap-fit 65mm indoor trainer airframe with plug-and-play JST motor harness routing, canopy STLs, and BOM cost breakdown.",
       "sampleFiles": [
+        "cad/OSITO_LILBEAR65_Canopy_LOS_Lite.stl",
+        "cad/OSITO_FC29_PCB_Mechanical_Mockup.stl",
+        "cad/OSITO_FC29_Pogo_Flashing_Test_Jig.stl",
+        "cad/OSITO_FC29_SMT_Stencil_Printer_Jig.stl",
+        "cad/OSITO_LILBEAR65_Parametric_Master.scad",
+        "cad/OSITO_LILBEAR65_Canopy_FPV_MicroCam.stl",
+        "cad/OSITO_LILBEAR65_Frame_65mm_6mmBrushed.stl",
+        "hover_station_cad/OSITO_HoverStation_Base_Pad.stl",
+        "hover_station_cad/OSITO_HoverStation_Parametric_Master.scad",
+        "hover_station_cad/OSITO_HoverStation_Top_Stopper_Bridge.stl",
+        "hover_station_cad/OSITO_HoverStation_Drone_Slider_Collar.stl",
+        "hover_station_cad/OSITO_HoverStation_Altitude_Target_Clips.stl"
+      ],
+      "includedFiles": [
         "cad/OSITO_LILBEAR65_Canopy_LOS_Lite.stl",
         "cad/OSITO_FC29_PCB_Mechanical_Mockup.stl",
         "cad/OSITO_FC29_Pogo_Flashing_Test_Jig.stl",
@@ -73,19 +113,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-03",
       "title": "SHARD-75 & KODIAK-75 Combat Bumper Drones — Core 45 STL & Horn Pack",
       "filename": "03_SHARD75_KODIAK75_Bumper_Drones_STL_Bambu_Pack.zip",
+      "zipFilename": "03_SHARD75_KODIAK75_Bumper_Drones_STL_Bambu_Pack.zip",
       "url": "./downloads/admin-zips/03_SHARD75_KODIAK75_Bumper_Drones_STL_Bambu_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/03_SHARD75_KODIAK75_Bumper_Drones_STL_Bambu_Pack.zip",
       "category": "Combat & Arena CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 2: Bambu PAHT-CF (Dried <12% RH) + Slot 4: TPU for AMS 68D + P2S #2 Ext: TPU 95A HF",
+      "bambuFilament": "P2S #1 AMS Slot 2: Bambu PAHT-CF (Dried <12% RH) + Slot 4: TPU for AMS 68D + P2S #2 Ext: TPU 95A HF (0.4mm Hardened Steel | PAHT-CF: 290°C / 100°C | TPU 68D: 240°C / 45°C | TPU 95A HF: 230°C / 35°C)",
       "nozzleBed": "0.4mm Hardened Steel | PAHT-CF: 290°C / 100°C | TPU 68D: 240°C / 45°C | TPU 95A HF: 230°C / 35°C",
       "version": "v2026.11.07",
-      "sizeMB": 4.12,
+      "sizeMB": "4.12 MB",
+      "sizeMBNum": 4.12,
       "totalFiles": 101,
+      "fileCount": 101,
       "stlCount": 63,
       "docCount": 24,
-      "sha256Short": "b4a350dcca",
+      "sha256Short": "e471ce6af8",
+      "sha256": "e471ce6af8",
       "description": "45.5g SHARD-75 optical-flow combat platform & KODIAK-75 3-layer composite sandwich horns, 360° TPU 95A impact bumper cages, OpenSCAD generators, and arena rules.",
       "sampleFiles": [
+        "cad/KODIAK75_Horns_v1.stl",
+        "cad/KODIAK75_Wave4_Belly.scad",
+        "cad/KODIAK75_Wave4_Master.scad",
+        "cad/KODIAK75_Wave5_Master.scad",
+        "cad/KODIAK75_Mega1000_Belly.scad",
+        "cad/KODIAK75_Top_UnicornHorn.stl",
+        "cad/KODIAK75_Top_VikingHorns.stl",
+        "cad/KODIAK75_Wave4_Cheeks_A.scad",
+        "cad/KODIAK75_Wave4_Cheeks_B.scad",
+        "cad/KODIAK75_Wave4_Crowns_A.scad",
+        "cad/KODIAK75_Wave4_Crowns_B.scad",
+        "cad/KODIAK75_Crown_PlasmaHorn.stl"
+      ],
+      "includedFiles": [
         "cad/KODIAK75_Horns_v1.stl",
         "cad/KODIAK75_Wave4_Belly.scad",
         "cad/KODIAK75_Wave4_Master.scad",
@@ -104,19 +164,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-04",
       "title": "Aero-Cub K–5 6-Part Snap-Fit Glider & Aeronautics Classroom Kit",
       "filename": "04_AeroCub_K5_6Part_Glider_STL_Bambu_Pack.zip",
+      "zipFilename": "04_AeroCub_K5_6Part_Glider_STL_Bambu_Pack.zip",
       "url": "./downloads/admin-zips/04_AeroCub_K5_6Part_Glider_STL_Bambu_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/04_AeroCub_K5_6Part_Glider_STL_Bambu_Pack.zip",
       "category": "STEM Take-Home Kits & Jigs",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 3: Bambu PLA Tough / eSUN PLA+ (6-Part Snap-Fit Glider & Prop Kit)",
+      "bambuFilament": "P2S #1 AMS Slot 3: Bambu PLA Tough / eSUN PLA+ (6-Part Snap-Fit Glider & Prop Kit) (0.4mm Hardened Steel | PLA+ / PLA Tough: 220°C Nozzle / 55°C Textured PEI Bed (Batch Plate of 12))",
       "nozzleBed": "0.4mm Hardened Steel | PLA+ / PLA Tough: 220°C Nozzle / 55°C Textured PEI Bed (Batch Plate of 12)",
       "version": "v2026.11.07",
-      "sizeMB": 6.8,
+      "sizeMB": "6.8 MB",
+      "sizeMBNum": 6.8,
       "totalFiles": 49,
+      "fileCount": 49,
       "stlCount": 21,
       "docCount": 19,
-      "sha256Short": "7fdb1cec7e",
+      "sha256Short": "a6fdad42dd",
+      "sha256": "a6fdad42dd",
       "description": "TK–5 6-part snap-fit 3D-printed glider & rubber-band/micro-prop aeronautics kit ($9/kid Year-1 Charter Rate), batch build plate STLs, and K–5 teacher lesson guides.",
       "sampleFiles": [
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/Osito_ZeroWire_PogoPin_CTO_Engineering_Spec.docx",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/03_AeroCub_Modular_Fuselage_Spine.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/OpenSCAD_Source/AeroCub_K5_Parametric_Master.scad",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/01_AeroCub_ClipOn_Nose_Bearing_Block.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/02_AeroCub_HighThrust_80mm_Propeller.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/OpenSCAD_Source/AeroCub_ZeroWire_SnapQuad_Master.scad",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/08_AeroCub_5to1_Gear_RubberBand_Winder.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/05_AeroCub_Protractor_Catapult_Launcher.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/06_AeroCub_Crease_Ruler_and_Airfoil_Jig.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/09_AeroCub_Modular_6Slot_Squad_Caddy_Tray.stl",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/OpenSCAD_Source/AeroCub_K5_4Student_Squad_Batch_Plate.scad",
+        "AeroCub_K5_3DPrint_Aeronautics_Kit/Osito_AeroCub_K5_3DPrint_Manufacturing_and_CAD_Manual.docx"
+      ],
+      "includedFiles": [
         "AeroCub_K5_3DPrint_Aeronautics_Kit/Osito_ZeroWire_PogoPin_CTO_Engineering_Spec.docx",
         "AeroCub_K5_3DPrint_Aeronautics_Kit/STL_Models/03_AeroCub_Modular_Fuselage_Spine.stl",
         "AeroCub_K5_3DPrint_Aeronautics_Kit/OpenSCAD_Source/AeroCub_K5_Parametric_Master.scad",
@@ -135,19 +215,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-05",
       "title": "Hover-65, MiniCub-65 BNF & 1S ELRS AIO Turnkey Fleet STL Pack",
       "filename": "05_Hover65_and_MiniCub65_1S_Fleet_STL_Pack.zip",
+      "zipFilename": "05_Hover65_and_MiniCub65_1S_Fleet_STL_Pack.zip",
       "url": "./downloads/admin-zips/05_Hover65_and_MiniCub65_1S_Fleet_STL_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/05_Hover65_and_MiniCub65_1S_Fleet_STL_Pack.zip",
       "category": "Core Fleet CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 1: Bambu PETG-CF (65mm 1S Ducted Whoop Airframes)",
+      "bambuFilament": "P2S #1 AMS Slot 1: Bambu PETG-CF (65mm 1S Ducted Whoop Airframes) (0.4mm Hardened Steel | PETG-CF: 265°C Nozzle / 70°C Bed (0.16mm Optimal Layer Height))",
       "nozzleBed": "0.4mm Hardened Steel | PETG-CF: 265°C Nozzle / 70°C Bed (0.16mm Optimal Layer Height)",
       "version": "v2026.11.07",
-      "sizeMB": 12.82,
+      "sizeMB": "11.57 MB",
+      "sizeMBNum": 11.57,
       "totalFiles": 88,
+      "fileCount": 88,
       "stlCount": 32,
       "docCount": 31,
-      "sha256Short": "8c9457c413",
+      "sha256Short": "8931f5c409",
+      "sha256": "8931f5c409",
       "description": "Turnkey 65mm 1S 300mAh BT2.0 fleet airframes (Hover-65, MiniCub-65 BNF, and 65mm ELRS AIO), Betaflight 4.5 CLI dumps, and battery/charger station specs.",
       "sampleFiles": [
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Canopy_LOS_Lite.stl",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Canopy_BeeEye_FPV.stl",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Parametric_Master.scad",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Frame_65mm_6mmBrushed.stl",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_FC29_Pogo_Flashing_Test_Jig.stl",
+        "Osito_MiniCub65_BNF/cad/OSITO_MINICUB65_Parametric_Master.scad",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_FC29_SMT_Stencil_Printer_Jig.stl",
+        "Osito_MiniCub65_BNF/cad/OSITO_MINICUB65_CubBrain65_AIO_Mockup.stl",
+        "Osito_MiniCub65_BNF/cad/OSITO_MINICUB65_CubCap_BearEar_Canopy.stl",
+        "Osito_65_1S_ELRS_AIO/OSITO_65_1S_ELRS_Engineering_and_T8L_Guide.docx",
+        "Osito_65_1S_ELRS_AIO/cad/OSITO_65_FC29_1S_ELRS_Mechanical_Mockup.stl",
+        "Osito_MiniCub65_BNF/cad/OSITO_MINICUB65_GrizzlyRing65_Frame_Brushed0615.stl"
+      ],
+      "includedFiles": [
         "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Canopy_LOS_Lite.stl",
         "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Canopy_BeeEye_FPV.stl",
         "Osito_65_1S_ELRS_AIO/cad/OSITO_65_Parametric_Master.scad",
@@ -166,19 +266,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-06",
       "title": "TurboPaw Dual-Monitor FPV RaceTrack, Firefly-65 & Titan-85 Arena Pack",
       "filename": "06_TurboPaw_DualMonitor_FPV_RaceTrack_STL_Pack.zip",
+      "zipFilename": "06_TurboPaw_DualMonitor_FPV_RaceTrack_STL_Pack.zip",
       "url": "./downloads/admin-zips/06_TurboPaw_DualMonitor_FPV_RaceTrack_STL_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/06_TurboPaw_DualMonitor_FPV_RaceTrack_STL_Pack.zip",
       "category": "Combat & Arena CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 1: Bambu PETG-CF (Gates & Stands) + P2S #2 Ext: TPU 95A HF (2 walls, 15% gyroid)",
+      "bambuFilament": "P2S #1 AMS Slot 1: Bambu PETG-CF (Gates & Stands) + P2S #2 Ext: TPU 95A HF (2 walls, 15% gyroid) (0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C (2 walls + 15% gyroid))",
       "nozzleBed": "0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | TPU 95A HF: 230°C / 35°C (2 walls + 15% gyroid)",
       "version": "v2026.11.07",
-      "sizeMB": 4.24,
+      "sizeMB": "4.24 MB",
+      "sizeMBNum": 4.24,
       "totalFiles": 32,
+      "fileCount": 32,
       "stlCount": 15,
       "docCount": 9,
-      "sha256Short": "9c7b485c8a",
+      "sha256Short": "02c86a1885",
+      "sha256": "02c86a1885",
       "description": "Pop-up LED race gates, dual-monitor spectator kiosk mounts, Firefly-65 micro racer, and Titan-85 heavy arena drone STLs for corporate/brewery race nights.",
       "sampleFiles": [
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Chassis_Main_Deck.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Parametric_Master.scad",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Slick_Tire_TPU_Set4.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Wheel_Rim_18mm_Set4.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Track_Apex_Curb_90Deg.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_360_Spring_Bumper_Ring.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Aero_Body_Shell_OsitoGT.stl",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_FPV_Cockpit_Turret_Mount.stl",
+        "2026-10-31_Firefly65_and_Titan85_STEM_Arena_Drones/osito_titan85_heavy_lift_frame.scad",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Full_DualCar_Gate_Assembly.stl",
+        "2026-10-31_Firefly65_and_Titan85_STEM_Arena_Drones/osito_firefly65_led_halo_shroud.scad",
+        "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Monitor_Top_VRX_Dock_Bracket.stl"
+      ],
+      "includedFiles": [
         "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Chassis_Main_Deck.stl",
         "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Parametric_Master.scad",
         "Osito_TurboPaw_DualMonitor_FPV_RaceTrack/cad/TURBOPAW64_Slick_Tire_TPU_Set4.stl",
@@ -197,19 +317,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-07",
       "title": "THERMO-95 HVAC, Crawlspace & 140°F Attic Thermal Inspection Drone Pack",
       "filename": "07_THERMO95_HVAC_and_Attic_Inspection_STL_Pack.zip",
+      "zipFilename": "07_THERMO95_HVAC_and_Attic_Inspection_STL_Pack.zip",
       "url": "./downloads/admin-zips/07_THERMO95_HVAC_and_Attic_Inspection_STL_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/07_THERMO95_HVAC_and_Attic_Inspection_STL_Pack.zip",
       "category": "Commercial & Security CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 2: Bambu PAHT-CF (140F Attic HDT Structural Carbon Airframe)",
+      "bambuFilament": "P2S #1 AMS Slot 2: Bambu PAHT-CF (140F Attic HDT Structural Carbon Airframe) (0.4mm Hardened Steel | Bambu PAHT-CF (Dried <12% RH): 290°C Nozzle / 100°C Bed)",
       "nozzleBed": "0.4mm Hardened Steel | Bambu PAHT-CF (Dried <12% RH): 290°C Nozzle / 100°C Bed",
       "version": "v2026.11.07",
-      "sizeMB": 2.46,
+      "sizeMB": "2.46 MB",
+      "sizeMBNum": 2.46,
       "totalFiles": 26,
+      "fileCount": 26,
       "stlCount": 11,
       "docCount": 11,
-      "sha256Short": "cf70d4b2b5",
+      "sha256Short": "82ef69fb5b",
+      "sha256": "82ef69fb5b",
       "description": "High-temp PAHT-CF caged commercial inspection airframe with radiometric thermal sensor mount, LED floodlight bays, and confined-space bump cage STLs.",
       "sampleFiles": [
+        "cad/THERMO95_Frame_95mm_Ducted.stl",
+        "cad/THERMO95_Parametric_Master.scad",
+        "cad/THERMO95_TPU_360_Bumper_Belt.stl",
+        "cad/THERMO95_2S_Battery_ToF_Skids.stl",
+        "cad/THERMO95_Attic_Truss_RollCage.stl",
+        "cad/THERMO95_DualSpectrum_Gimbal_Pod.stl",
+        "cad/THERMO95_Full_Prototype_Assembly.stl",
+        "cad/THERMO95_Magnetic_RTU_Perch_Skids.stl",
+        "cad/THERMO95_Bench_Prop_and_Gimbal_Jig.stl",
+        "cad/THERMO95_Lens_Dust_Cap_and_Cal_Target.stl",
+        "README.md",
+        "THERMO95_3D_Viewer.html"
+      ],
+      "includedFiles": [
         "cad/THERMO95_Frame_95mm_Ducted.stl",
         "cad/THERMO95_Parametric_Master.scad",
         "cad/THERMO95_TPU_360_Bumper_Belt.stl",
@@ -228,19 +368,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-08",
       "title": "SF Warehouse 0615 Brushed & 2207 BLDC Motor Assembly Jigs & Tooling",
       "filename": "08_SF_Warehouse_0615_and_2207_Motor_Jigs_STL_Pack.zip",
+      "zipFilename": "08_SF_Warehouse_0615_and_2207_Motor_Jigs_STL_Pack.zip",
       "url": "./downloads/admin-zips/08_SF_Warehouse_0615_and_2207_Motor_Jigs_STL_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/08_SF_Warehouse_0615_and_2207_Motor_Jigs_STL_Pack.zip",
       "category": "STEM Take-Home Kits & Jigs",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 3: eSUN PLA+ / Bambu PLA Tough (Press Jigs, N52 Magnet Wands & Fixtures)",
+      "bambuFilament": "P2S #1 AMS Slot 3: eSUN PLA+ / Bambu PLA Tough (Press Jigs, N52 Magnet Wands & Fixtures) (0.4mm Hardened Steel | eSUN PLA+ / Bambu PLA Tough: 220°C Nozzle / 55°C Bed (4 Walls, 35% Infill))",
       "nozzleBed": "0.4mm Hardened Steel | eSUN PLA+ / Bambu PLA Tough: 220°C Nozzle / 55°C Bed (4 Walls, 35% Infill)",
       "version": "v2026.11.07",
-      "sizeMB": 1.7,
+      "sizeMB": "1.7 MB",
+      "sizeMBNum": 1.7,
       "totalFiles": 38,
+      "fileCount": 38,
       "stlCount": 23,
       "docCount": 7,
-      "sha256Short": "603675ba98",
+      "sha256Short": "85f2949acf",
+      "sha256": "85f2949acf",
       "description": "Precision shop press jigs, N52 magnet polarity wands, stator winding fixtures, and prop depth-stop tools for 0615 6mm coreless and 2207 5-inch brushless motors.",
       "sampleFiles": [
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/OSITO_SF_0615_Motor_Factory_Master.scad",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/7_PLAPlus_0615_Quad_Retail_Clamshell_Tray.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/8_PLAPlus_0615_Quad_Retail_Clamshell_SnapLid.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/9_PETGCF_20Quad_SF_Warehouse_WIP_Kanban_Tote.stl",
+        "2026-11-01_SF_Warehouse_2207_5in_BLDC_Motor_Line/cad/OSITO_SF_2207_5in_Motor_Factory_Master.scad",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/OSITO_SF_Warehouse_0615_6mm_Motor_Manufacturing_SOP.docx",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/1_PAHTCF_0615_5Lobe_Rhombic_Coil_Winding_Mandrel.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/2_PLAPlus_0615_4Up_Can_and_Endbell_Press_Fixture.stl",
+        "2026-11-01_SF_Warehouse_2207_5in_BLDC_Motor_Line/cad/7_PLAPlus_2207_NDAA_Quad_Set_Clamshell_Tray.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/5_PETGCF_4Channel_BreakIn_and_Laser_KV_Test_Stand.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/11_PAHTCF_12P_14P_N52SH_Magnet_Bell_Gluing_Spiders.stl",
+        "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/3_PLAPlus_0615_Brush_Spreader_Fork_and_Shaft_Gauge.stl"
+      ],
+      "includedFiles": [
         "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/OSITO_SF_0615_Motor_Factory_Master.scad",
         "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/7_PLAPlus_0615_Quad_Retail_Clamshell_Tray.stl",
         "2026-10-31_SF_Warehouse_0615_6mm_Motor_Line/cad/8_PLAPlus_0615_Quad_Retail_Clamshell_SnapLid.stl",
@@ -259,19 +419,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-09",
       "title": "Pelican V525 Fleet Case Inserts, Silicone Solder Mat & 4-Tablet Sim Pod",
       "filename": "09_Pelican_V525_Case_Foam_and_4Tablet_Sim_Pod_Pack.zip",
+      "zipFilename": "09_Pelican_V525_Case_Foam_and_4Tablet_Sim_Pod_Pack.zip",
       "url": "./downloads/admin-zips/09_Pelican_V525_Case_Foam_and_4Tablet_Sim_Pod_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/09_Pelican_V525_Case_Foam_and_4Tablet_Sim_Pod_Pack.zip",
       "category": "STEM Take-Home Kits & Jigs",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 1: PETG-CF (4-Tablet Sim Pod Stand) + Slot 3: PLA+ (Case Dividers)",
+      "bambuFilament": "P2S #1 AMS Slot 1: PETG-CF (4-Tablet Sim Pod Stand) + Slot 3: PLA+ (Case Dividers) (0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | PLA+: 220°C / 55°C)",
       "nozzleBed": "0.4mm Hardened Steel | PETG-CF: 265°C / 70°C | PLA+: 220°C / 55°C",
       "version": "v2026.11.07",
-      "sizeMB": 12.55,
+      "sizeMB": "12.55 MB",
+      "sizeMBNum": 12.55,
       "totalFiles": 19,
+      "fileCount": 19,
       "stlCount": 4,
       "docCount": 7,
-      "sha256Short": "a9f4f9df4a",
+      "sha256Short": "47c0a1533c",
+      "sha256": "47c0a1533c",
       "description": "Pelican V525 mobile classroom foam/divider DXF & STL templates, AcroBee65 silicone repair mat layout, and foldable 4-Tablet Flight Simulator Pod stands.",
       "sampleFiles": [
+        "AcroBee65_Silicone_Mat/Osito_AcroBee65_Silicone_Mat_Spec_Sheet.docx",
+        "2026-10-31_4_Tablet_Sim_Pod/Osito_4_Tablet_Sim_Pod_Transport_Logistics.docx",
+        "AcroBee65_Silicone_Mat/3D_Print_Files/Osito_Solder_Cradle_Insert_PAHT_CF.stl",
+        "AcroBee65_Silicone_Mat/3D_Print_Files/Osito_Bench_Mat_P2S_SinglePlate_246x196mm.stl",
+        "AcroBee65_Silicone_Mat/3D_Print_Files/Osito_Liquid_Silicone_Pour_Mold_246x196mm.stl",
+        "Pelican Fleet Case Foam/Pelican_Foam_CAD_Designer.html",
+        "Pelican Fleet Case Foam/Pelican_1560_Fleet_Foam_1to1.svg",
+        "Pelican Fleet Case Foam/PELICAN_FOAM_INSERT_SPECIFICATION.md",
+        "AcroBee65_Silicone_Mat/Osito_AcroBee65_Silicone_Mat_Render.jpg",
+        "AcroBee65_Silicone_Mat/Osito_Silicone_Mat_3D_Corner_Render.jpg",
+        "2026-10-31_4_Tablet_Sim_Pod/Osito_4_Tablet_Sim_Setup_Angle2.jpg",
+        "2026-10-31_4_Tablet_Sim_Pod/Osito_4_Tablet_Sim_Setup_Angle3.jpg"
+      ],
+      "includedFiles": [
         "AcroBee65_Silicone_Mat/Osito_AcroBee65_Silicone_Mat_Spec_Sheet.docx",
         "2026-10-31_4_Tablet_Sim_Pod/Osito_4_Tablet_Sim_Pod_Transport_Logistics.docx",
         "AcroBee65_Silicone_Mat/3D_Print_Files/Osito_Solder_Cradle_Insert_PAHT_CF.stl",
@@ -290,19 +470,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-10",
       "title": "Smart Disc Golf Telemetry & Autonomous Security Drone R&D STL Pack",
       "filename": "10_Smart_Disc_Golf_and_Security_Drone_RnD_STL_Pack.zip",
+      "zipFilename": "10_Smart_Disc_Golf_and_Security_Drone_RnD_STL_Pack.zip",
       "url": "./downloads/admin-zips/10_Smart_Disc_Golf_and_Security_Drone_RnD_STL_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/10_Smart_Disc_Golf_and_Security_Drone_RnD_STL_Pack.zip",
       "category": "Commercial & Security CAD & STL",
       "owner": "Chuy / Jesus (CTO)",
       "bambuSlot": "P2S #1 AMS Slot 2: Bambu PAHT-CF + P2S #2 Ext: TPU 95A HF",
+      "bambuFilament": "P2S #1 AMS Slot 2: Bambu PAHT-CF + P2S #2 Ext: TPU 95A HF (0.4mm Hardened Steel | PAHT-CF: 290°C / 100°C | TPU 95A HF: 230°C / 35°C)",
       "nozzleBed": "0.4mm Hardened Steel | PAHT-CF: 290°C / 100°C | TPU 95A HF: 230°C / 35°C",
       "version": "v2026.11.07",
-      "sizeMB": 2.18,
+      "sizeMB": "2.18 MB",
+      "sizeMBNum": 2.18,
       "totalFiles": 45,
+      "fileCount": 45,
       "stlCount": 8,
       "docCount": 16,
-      "sha256Short": "0d455848c0",
+      "sha256Short": "5ee9d87913",
+      "sha256": "5ee9d87913",
       "description": "R&D enclosure STLs and avionics architecture for the Smart Disc Golf flight-tracker module and autonomous perimeter patrol Security Drone.",
       "sampleFiles": [
+        "smart_disc_golf/cad/01_Bayonet_Base_Ring_PAHT_CF.stl",
+        "smart_disc_golf/cad/06_Battery_Shock_Cradle_TPU95A.stl",
+        "smart_disc_golf/cad/05_Qi_Base_Station_Dock_PETG_CF.stl",
+        "smart_disc_golf/cad/04_Concentric_Bonding_Jig_PLA_Plus.stl",
+        "smart_disc_golf/OSITO_Smart_Disc_Prototype_Build_Manual.docx",
+        "smart_disc_golf/cad/02_Weathervaning_Pod_Housing_PAHT_CF.stl",
+        "smart_disc_golf/cad/03_Dual_NACA0010_Micro_Elevons_PAHT_CF.stl",
+        "Osito_Security_Services/OSITO_INT_95_Interceptor/OSITO_Interceptor_95mm_Frame.stl",
+        "Osito_Security_Services/OSITO_INT_95_Interceptor/OSITO_INT_95_PRD_and_Build_Manual.docx",
+        "smart_disc_golf/test/__init__.py",
+        "smart_disc_golf/avionics/__init__.py",
+        "smart_disc_golf/test/disc_physics.py"
+      ],
+      "includedFiles": [
         "smart_disc_golf/cad/01_Bayonet_Base_Ring_PAHT_CF.stl",
         "smart_disc_golf/cad/06_Battery_Shock_Cradle_TPU95A.stl",
         "smart_disc_golf/cad/05_Qi_Base_Station_Dock_PETG_CF.stl",
@@ -321,19 +521,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-11",
       "title": "Miguel CEO Sales Blitz v2 — 12 Personalized Proposals, Call Sheets & Rate Cards",
       "filename": "11_Miguel_Sales_Playbooks_Proposals_and_CallSheets_Pack.zip",
+      "zipFilename": "11_Miguel_Sales_Playbooks_Proposals_and_CallSheets_Pack.zip",
       "url": "./downloads/admin-zips/11_Miguel_Sales_Playbooks_Proposals_and_CallSheets_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/11_Miguel_Sales_Playbooks_Proposals_and_CallSheets_Pack.zip",
       "category": "Sales & Curriculum Packs",
       "owner": "Miguel (CEO)",
       "bambuSlot": "Microsoft Word (.DOCX) + Excel (.XLSX/.CSV) Ready for Miguel & Alan",
+      "bambuFilament": "Microsoft Word (.DOCX) + Excel (.XLSX/.CSV) Ready for Miguel & Alan (N/A — Editable Microsoft Word (.DOCX) & CSV/XLSX Revenue Operations Pack)",
       "nozzleBed": "N/A — Editable Microsoft Word (.DOCX) & CSV/XLSX Revenue Operations Pack",
       "version": "v2026.11.07",
-      "sizeMB": 21.8,
-      "totalFiles": 230,
+      "sizeMB": "22.07 MB",
+      "sizeMBNum": 22.07,
+      "totalFiles": 233,
+      "fileCount": 233,
       "stlCount": 0,
-      "docCount": 216,
-      "sha256Short": "41347a2875",
+      "docCount": 219,
+      "sha256Short": "fd80c9e27c",
+      "sha256": "fd80c9e27c",
       "description": "Complete SF Bay Area sales war-room bundle: 12 personalized school/camp proposals, 4 segment masters, 5-day walk-in action orders, and commercial inspection rate cards.",
       "sampleFiles": [
+        "Team_Playbooks_and_Operations/Osito_7000_IRL_Drones_Manual.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-02.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-03.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-04.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-05.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-06.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-09.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-10.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-12.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-13.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-16.docx",
+        "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-17.docx"
+      ],
+      "includedFiles": [
         "Team_Playbooks_and_Operations/Osito_7000_IRL_Drones_Manual.docx",
         "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-02.docx",
         "2026-10-31_Blitz_Machine_v2/call_sheets/CallSheet_2026-11-03.docx",
@@ -352,19 +572,39 @@ window.OSITO_ADMIN_DATA = {
       "id": "PACK-12",
       "title": "Complete 6–8 Week STEM Academy Curriculum, Bilingual Español Kit & Part 107 Ops Binder",
       "filename": "12_Complete_STEM_Curriculum_and_Ops_Binder_Pack.zip",
+      "zipFilename": "12_Complete_STEM_Curriculum_and_Ops_Binder_Pack.zip",
       "url": "./downloads/admin-zips/12_Complete_STEM_Curriculum_and_Ops_Binder_Pack.zip",
+      "downloadUrl": "./downloads/admin-zips/12_Complete_STEM_Curriculum_and_Ops_Binder_Pack.zip",
       "category": "Sales & Curriculum Packs",
       "owner": "Miguel (CEO)",
       "bambuSlot": "NGSS/CTE 6-8 Week Curriculum (.DOCX) + Bilingual Español + MOUs & Waivers",
+      "bambuFilament": "NGSS/CTE 6-8 Week Curriculum (.DOCX) + Bilingual Español + MOUs & Waivers (N/A — Print-Ready Classroom Curriculum, ELOP/DCYF Grant Kit & Legal Waivers (.DOCX/.PDF))",
       "nozzleBed": "N/A — Print-Ready Classroom Curriculum, ELOP/DCYF Grant Kit & Legal Waivers (.DOCX/.PDF)",
       "version": "v2026.11.07",
-      "sizeMB": 3.1,
+      "sizeMB": "3.1 MB",
+      "sizeMBNum": 3.1,
       "totalFiles": 47,
+      "fileCount": 47,
       "stlCount": 0,
       "docCount": 47,
-      "sha256Short": "708795d28c",
+      "sha256Short": "84c9351819",
+      "sha256": "84c9351819",
       "description": "Full NGSS/CTE-aligned 6–8 week youth drone curriculum, Academia de Drones Osito bilingual Spanish kit, ELOP/DCYF grant templates, and school MOU/waiver binder.",
       "sampleFiles": [
+        "2026-10-31_ELOP_and_DCYF_Grant_Kit/Osito_CA_ELOP_and_SF_DCYF_Grant_Proposal.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/02_Osito_CUB75_Student_Workbook.docx",
+        "2026-10-31_ELOP_and_DCYF_Grant_Kit/Osito_Vendor_Onboarding_and_Sole_Source_Packet.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/04_Osito_CUB75_Parent_Handout_EN_ES.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/03_Osito_CUB75_Coach_Quick_Start_Card.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/06_Osito_Grant_Pitch_OnePager_Template.docx",
+        "2026-10-31_Academia_de_Drones_Osito_Espanol_Kit/Folleto_Padres_Academia_de_Drones_Osito.docx",
+        "2026-10-31_Contracts_MOU_and_Part107_Ops_Binder/Osito_Commercial_B2B_Inspection_and_FPV_MSA.docx",
+        "2026-10-31_Contracts_MOU_and_Part107_Ops_Binder/Osito_School_and_Camp_Service_Agreement_MOU.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/01_Manual_del_Instructor_CUB75_10_Sesiones_ES.docx",
+        "2026-10-31_Complete_Academy_Curriculum_Pack_v2/04_Guia_para_Padres_y_Familias_Bilingue_ES_EN.docx",
+        "2026-10-31_Academia_de_Drones_Osito_Espanol_Kit/Propuesta_Escolar_Bilingue_Osito_Drone_Academy.docx"
+      ],
+      "includedFiles": [
         "2026-10-31_ELOP_and_DCYF_Grant_Kit/Osito_CA_ELOP_and_SF_DCYF_Grant_Proposal.docx",
         "2026-10-31_Complete_Academy_Curriculum_Pack_v2/02_Osito_CUB75_Student_Workbook.docx",
         "2026-10-31_ELOP_and_DCYF_Grant_Kit/Osito_Vendor_Onboarding_and_Sole_Source_Packet.docx",
@@ -1259,7 +1499,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$5",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": "./downloads/admin-proposals/07_Mission_Science_Workshop_Bilingual_Drone_Lab_Proposal.docx"
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Makerspaces_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-003",
@@ -1279,7 +1519,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$10",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": "./downloads/admin-proposals/08_Tinkering_School_Co_Hosted_Drone_Workshop_Proposal.docx"
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-004",
@@ -1619,7 +1859,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$6",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-021",
@@ -1679,7 +1919,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$9",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-024",
@@ -1719,7 +1959,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$12",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-026",
@@ -1739,7 +1979,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$11",
       "stage": "High",
       "notes": "400",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-027",
@@ -1759,7 +1999,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$8",
       "stage": "Medium-High",
       "notes": "000",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-028",
@@ -1779,7 +2019,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$15",
       "stage": "High",
       "notes": "000",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-029",
@@ -1799,7 +2039,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "PKG-5B Corporate Gala Activation ($3,200) & Festival Booths",
       "stage": "000",
       "notes": "600 - $25",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx"
     },
     {
       "id": "OS-030",
@@ -1839,7 +2079,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$175 - $550/mission",
       "stage": "Not Started",
       "notes": "Register on FlyGuys Pilot Portal today; call (888) 837-0940 to notify dispatch of 3 Part 107 pilots in SF ready for immediate November jobs.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-02",
@@ -1859,7 +2099,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$100 - $350/mission",
       "stage": "Not Started",
       "notes": "Complete Zeitview Pilot registration; enable mobile push notifications for all 415/650 zip codes and accept first November dispatch within 5 mins.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-03",
@@ -1879,7 +2119,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$85 - $225/roof ($350-$800/day stacked)",
       "stage": "Not Started",
       "notes": "Email flythehive@bees360.com and accounting@bees360.com with W9 + Part 107; download BeesPilot app for immediate November roof underwriting routes.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-04",
@@ -1919,7 +2159,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$100 - $275/scan",
       "stage": "Not Started",
       "notes": "Complete online IMGING 3rd-Party Inspection Certification; call (385) 498-0800 (Press 1) to activate SF Bay Area radius for November roof scans.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-06",
@@ -1939,7 +2179,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$300 - $550/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 592-5187 & email Production Manager pitching Osito as their white-label SF Indoor Cinewhoop FPV subcontractor ($350 wholesale); offer 1 free 30-sec spec shoot this week.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-07",
@@ -1959,7 +2199,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$350 - $650/shoot",
       "stage": "Not Started",
       "notes": "Call (650) 241-0095 & email hello@aerialcanvas.com offering SF-local (941xx) indoor FPV cinewhoop & twilight drone subcontracting so their Peninsula crew skips city traffic.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-08",
@@ -1979,7 +2219,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$250 - $500/shoot",
       "stage": "Not Started",
       "notes": "Call (855) 595-6113 (Mon-Fri 6am-5pm) and ask for Bay Area Field Manager to onboard Osito as local SF Part 107 & indoor FPV contractor.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-09",
@@ -1999,7 +2239,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$450 - $850/shoot",
       "stage": "Not Started",
       "notes": "Walk into 2501 Mission St with Osito One-Pager & tablet reel; pitch Marketing Director on a free 30-sec Indoor FPV spec fly-through on one flagship November listing.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-10",
@@ -2019,7 +2259,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$500 - $850/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 531-5033 & email malin@sfproperties.com offering a complimentary 30-sec FPV spec fly-through on an active listing to convert into $495+ paid shoots.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-11",
@@ -2039,7 +2279,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$550 - $950/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 901-1700 and ask for Listing Marketing Coordinator; pitch the November Stale-Listing Refresher (45-sec FPV fly-through for listings 30+ days on market).",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-12",
@@ -2059,7 +2299,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$250 - $550/roof",
       "stage": "Not Started",
       "notes": "Call (415) 285-1661 & email lrc@lawsonroofing.com pitching $295 flat ($195 first trial) no-ladder drone inspection on steep 3-4 story SF Victorians & commercial roofs.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-13",
@@ -2079,7 +2319,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$250 - $500/roof",
       "stage": "Not Started",
       "notes": "Call (650) 832-9995 and speak to Estimating Manager; offer 24-hr high-res roof & parapet photo packages so estimators quote 3x more roofs before November rains.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-14",
@@ -2099,7 +2339,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$300 - $650/roof",
       "stage": "Not Started",
       "notes": "Call (888) 763-7663 & email info@wedgeroofing.com pitching before/after commercial roof documentation and pre-storm ponding/scupper inspections in SF.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-15",
@@ -2119,7 +2359,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$250 - $500/site",
       "stage": "Not Started",
       "notes": "Visit 10 Carolina St or call (415) 641-4000; pitch rapid drone orthomosaic & 3D roof modeling for November commercial/residential solar surveys.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-16",
@@ -2139,7 +2379,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$350 - $750/building",
       "stage": "Not Started",
       "notes": "Call (415) 401-2000 for Director of HOA Management; pitch a $395 November Pre-Storm Roof & Gutter Visual Audit approvable out of operating maintenance funds.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-17",
@@ -2159,7 +2399,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$450 - $850/month",
       "stage": "Not Started",
       "notes": "Call (415) 367-9399 for Project Manager/Superintendent; pitch a $395 November Trial Progress Shoot (orthomosaic + 15 high-res angles) for monthly lender draw packages.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-18",
@@ -2179,7 +2419,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$350 - $700/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 626-3338 & email info@cci-gc.com pitching exterior facade, roof mechanicals, and monthly progress drone documentation for downtown SF projects.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-19",
@@ -2199,7 +2439,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$300 - $650/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 969-6915 & email info@currentcon.com offering a $350 pre-winter exterior waterproofing verification & site progress flight on active SF builds.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-20",
@@ -2219,7 +2459,7 @@ window.OSITO_ADMIN_DATA = {
       "estimatedValue": "$300 - $600/shoot",
       "stage": "Not Started",
       "notes": "Call (415) 571-0823 or visit 2949 Mission St (4 blocks from Vanguard); pitch a $395 construction progress shoot OR an indoor-to-outdoor FPV showcase of a newly finished project.",
-      "proposalUrl": ""
+      "proposalUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx"
     },
     {
       "id": "NV-21",
@@ -2527,6 +2767,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Children's Day School (CDS) — Extended Program 8-Week Flight Lab Proposal (Tanner Taylor)",
       "filename": "01_CDS_Tanner_Taylor_Extended_Program_Proposal.docx",
       "url": "./downloads/admin-proposals/01_CDS_Tanner_Taylor_Extended_Program_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/01_CDS_Tanner_Taylor_Extended_Program_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 115.9
     },
@@ -2534,6 +2775,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Live Oak School — Extended Day & Summer Oaks Camp Proposal (Dorothy Martinez)",
       "filename": "02_Live_Oak_Dorothy_Martinez_ExtendedDay_and_SummerOaks_Proposal.docx",
       "url": "./downloads/admin-proposals/02_Live_Oak_Dorothy_Martinez_ExtendedDay_and_SummerOaks_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/02_Live_Oak_Dorothy_Martinez_ExtendedDay_and_SummerOaks_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 115.9
     },
@@ -2541,6 +2783,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "03 SF Day Nicole Lane AEP Proposal",
       "filename": "03_SF_Day_Nicole_Lane_AEP_Proposal.docx",
       "url": "./downloads/admin-proposals/03_SF_Day_Nicole_Lane_AEP_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/03_SF_Day_Nicole_Lane_AEP_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 115.9
     },
@@ -2548,6 +2791,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "STEMful San Francisco — Veterans Day / Holiday Guest Block & 70/30 Pop-Up Proposal (Kim Nguyen-Ehrenreich)",
       "filename": "04_STEMful_Kim_Holiday_Guest_Block_and_PopUp_Proposal.docx",
       "url": "./downloads/admin-proposals/04_STEMful_Kim_Holiday_Guest_Block_and_PopUp_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/04_STEMful_Kim_Holiday_Guest_Block_and_PopUp_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.1
     },
@@ -2555,6 +2799,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "05 JCCSF Mitch Sanchez Half Day Vacation Block Proposal",
       "filename": "05_JCCSF_Mitch_Sanchez_Half_Day_Vacation_Block_Proposal.docx",
       "url": "./downloads/admin-proposals/05_JCCSF_Mitch_Sanchez_Half_Day_Vacation_Block_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/05_JCCSF_Mitch_Sanchez_Half_Day_Vacation_Block_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.1
     },
@@ -2562,20 +2807,23 @@ window.OSITO_ADMIN_DATA = {
       "title": "06 Celsius and Beyond Holiday Science Camp Guest Block Proposal",
       "filename": "06_Celsius_and_Beyond_Holiday_Science_Camp_Guest_Block_Proposal.docx",
       "url": "./downloads/admin-proposals/06_Celsius_and_Beyond_Holiday_Science_Camp_Guest_Block_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/06_Celsius_and_Beyond_Holiday_Science_Camp_Guest_Block_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
     {
-      "title": "Mission Science Workshop — Bilingual (EN/ES) Community Drone & Soldering Lab Proposal (Sonia & Paul)",
+      "title": "07 Mission Science Workshop Bilingual Drone Lab Proposal",
       "filename": "07_Mission_Science_Workshop_Bilingual_Drone_Lab_Proposal.docx",
       "url": "./downloads/admin-proposals/07_Mission_Science_Workshop_Bilingual_Drone_Lab_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/07_Mission_Science_Workshop_Bilingual_Drone_Lab_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
     {
-      "title": "Tinkering School (Presidio) — Co-Hosted 4-Station Drone Repair & Flight Workshop Proposal (Gever Tulley)",
+      "title": "08 Tinkering School Co Hosted Drone Workshop Proposal",
       "filename": "08_Tinkering_School_Co_Hosted_Drone_Workshop_Proposal.docx",
       "url": "./downloads/admin-proposals/08_Tinkering_School_Co_Hosted_Drone_Workshop_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/08_Tinkering_School_Co_Hosted_Drone_Workshop_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
@@ -2583,6 +2831,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "09 CYC STEAM Maker Lab Richmond Series Proposal",
       "filename": "09_CYC_STEAM_Maker_Lab_Richmond_Series_Proposal.docx",
       "url": "./downloads/admin-proposals/09_CYC_STEAM_Maker_Lab_Richmond_Series_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/09_CYC_STEAM_Maker_Lab_Richmond_Series_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
@@ -2590,6 +2839,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "10 SF Rec and Parks COI PreFile and Party Proposal",
       "filename": "10_SF_Rec_and_Parks_COI_PreFile_and_Party_Proposal.docx",
       "url": "./downloads/admin-proposals/10_SF_Rec_and_Parks_COI_PreFile_and_Party_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/10_SF_Rec_and_Parks_COI_PreFile_and_Party_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
@@ -2597,6 +2847,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "11 Boys and Girls Clubs SF Tone Moreno Clubhouse Series Proposal",
       "filename": "11_Boys_and_Girls_Clubs_SF_Tone_Moreno_Clubhouse_Series_Proposal.docx",
       "url": "./downloads/admin-proposals/11_Boys_and_Girls_Clubs_SF_Tone_Moreno_Clubhouse_Series_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/11_Boys_and_Girls_Clubs_SF_Tone_Moreno_Clubhouse_Series_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.1
     },
@@ -2604,6 +2855,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "12 YMCA of SF Marissa Cowan Multi Branch Lab Proposal",
       "filename": "12_YMCA_of_SF_Marissa_Cowan_Multi_Branch_Lab_Proposal.docx",
       "url": "./downloads/admin-proposals/12_YMCA_of_SF_Marissa_Cowan_Multi_Branch_Lab_Proposal.docx",
+      "downloadUrl": "./downloads/admin-proposals/12_YMCA_of_SF_Marissa_Cowan_Multi_Branch_Lab_Proposal.docx",
       "category": "Personalized Org Proposal",
       "sizeKB": 116.0
     },
@@ -2611,6 +2863,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Segment Master — Holiday & Summer Camps Turnkey Drone Track Proposal",
       "filename": "Osito_Academy_Proposal_Holiday_Camps_SEGMENT_MASTER.docx",
       "url": "./downloads/admin-proposals/Osito_Academy_Proposal_Holiday_Camps_SEGMENT_MASTER.docx",
+      "downloadUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Holiday_Camps_SEGMENT_MASTER.docx",
       "category": "Segment Master Proposal",
       "sizeKB": 115.9
     },
@@ -2618,6 +2871,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Segment Master — Makerspaces & Community STEM Hubs 4-Station Proposal",
       "filename": "Osito_Academy_Proposal_Makerspaces_SEGMENT_MASTER.docx",
       "url": "./downloads/admin-proposals/Osito_Academy_Proposal_Makerspaces_SEGMENT_MASTER.docx",
+      "downloadUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Makerspaces_SEGMENT_MASTER.docx",
       "category": "Segment Master Proposal",
       "sizeKB": 115.8
     },
@@ -2625,6 +2879,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Segment Master — Rec Departments, Youth Clubs & Pop-Up Venues Proposal",
       "filename": "Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx",
       "url": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx",
+      "downloadUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Rec_Departments_SEGMENT_MASTER.docx",
       "category": "Segment Master Proposal",
       "sizeKB": 115.8
     },
@@ -2632,6 +2887,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Segment Master — Independent & K–8 Schools 8-Week STEM Flight Lab Proposal",
       "filename": "Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx",
       "url": "./downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx",
+      "downloadUrl": "./downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx",
       "category": "Segment Master Proposal",
       "sizeKB": 115.8
     },
@@ -2639,6 +2895,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Osito Academy 5-Touch Follow-Up Sequence & Cadence Playbook",
       "filename": "Osito_Academy_5_Touch_Follow_Up_Sequence.docx",
       "url": "./downloads/admin-proposals/Osito_Academy_5_Touch_Follow_Up_Sequence.docx",
+      "downloadUrl": "./downloads/admin-proposals/Osito_Academy_5_Touch_Follow_Up_Sequence.docx",
       "category": "Playbook & Action Orders",
       "sizeKB": 119.0
     },
@@ -2646,6 +2903,7 @@ window.OSITO_ADMIN_DATA = {
       "title": "Miguel CEO 5-Day Action Orders & SF Corridor Tour",
       "filename": "Miguel_CEO_5_Day_Action_Orders.docx",
       "url": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx",
+      "downloadUrl": "./downloads/admin-proposals/Miguel_CEO_5_Day_Action_Orders.docx",
       "category": "Playbook & Action Orders",
       "sizeKB": 115.8
     }
