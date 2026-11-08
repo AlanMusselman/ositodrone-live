@@ -916,6 +916,30 @@
       }
     }
 
+    function syncAcademyTrackFromHash() {
+      var h = String(window.location.hash || '').toLowerCase();
+      var targetId = '';
+      if (h === '#drone-academy') targetId = 'drone-academy';
+      else if (h === '#flight-academy') targetId = 'flight-academy';
+      else if (h === '#stem-academy') targetId = 'stem-academy';
+      if (!targetId) return;
+      var btns = document.querySelectorAll('.academy-track-btn');
+      for (var i = 0; i < btns.length; i++) {
+        var oc = String(btns[i].getAttribute('onclick') || '');
+        btns[i].classList.toggle('active', oc.indexOf("'all'") !== -1);
+      }
+      var cards = document.querySelectorAll('.osito-academy-division-card');
+      for (var j = 0; j < cards.length; j++) {
+        cards[j].style.display = 'flex';
+      }
+      var el = document.getElementById(targetId);
+      if (el && el.scrollIntoView) {
+        setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+      }
+    }
+    window.addEventListener('hashchange', syncAcademyTrackFromHash);
+    window.addEventListener('DOMContentLoaded', syncAcademyTrackFromHash);
+
     function prefillAcademyTrackInquiry(divisionLabel) {
       var sel = document.getElementById('ositoAcadDivision');
       if (sel && divisionLabel) {
@@ -1010,6 +1034,7 @@
         relayBody._subject = subjectLine;
         relayBody._template = 'table';
         relayBody._captcha = 'false';
+        relayBody._autoresponse = relayBody.message || subjectLine;
         if (payload.cc || payload._cc) relayBody._cc = payload._cc || payload.cc;
 
         try {

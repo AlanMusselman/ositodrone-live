@@ -380,9 +380,10 @@
           <label for="ositoEstType" style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:5px;">1. Select Osito Drone Program / Service</label>
           <select id="ositoEstType" style="width:100%; padding:10px 12px; border:1.5px solid #8E93DA; font-size:13.5px; font-weight:600; color:#161616; background:#F6F6F6; margin-bottom:12px; cursor:pointer;">
             <option value="party">VIP Kids Drone Birthday Party &amp; LED Race Arena ($371 w/ 25% Off | Reg. $495)</option>
-            <option value="aerocub">TK-5 Aero-Cub 3D-Print &amp; Glider Workshop ($450 w/ 25% Off | Reg. $600)</option>
-            <option value="lab4">2-Hr Indoor 4-Station School/Camp STEM Flight Lab ($713 w/ 25% Off | Reg. $950)</option>
-            <option value="school6">6-Week After-School STEM Drone Academy Cohort ($1,800 w/ 25% Off | Reg. $2,400)</option>
+            <option value="aerocub">Flight Academy: TK-5 Aero-Cub Aeronautics, Planes &amp; Gliders Lab ($450 w/ 25% Off | Reg. $600)</option>
+            <option value="stemart">STEM Academy: STEM + Art &amp; In-House 3D-Printed Maker Lab ($450 w/ 25% Off | Reg. $600)</option>
+            <option value="lab4">Drone Academy: 2-Hr Indoor 4-Station School/Camp Flight Lab ($713 w/ 25% Off | Reg. $950)</option>
+            <option value="school6">6-Week After-School Drone / Flight / STEM + Art Academy Cohort ($1,800 w/ 25% Off | Reg. $2,400)</option>
             <option value="brewery">Corporate Team-Building / Brewery Race Night ($900 w/ 25% Off | Reg. $1,200)</option>
             <option value="commercial">Commercial Roof, HVAC Thermal &amp; Real Estate Aerials ($296+ w/ 25% Off | Reg. $395+)</option>
           </select>
@@ -1260,11 +1261,17 @@
         unitLabel = 'student (6 wks)';
         desc = 'Full 6-Week After-School STEM Curriculum ($300/wk New Year Special, EN/ES): All Drones, 3D Simulators, Waivers & FAA TRUST Wings Included.';
       } else if (mode === 'aerocub') {
-        countValEl.textContent = count + (count === 1 ? ' TK-5 Student' : ' TK-5 Students');
+        countValEl.textContent = count + (count === 1 ? ' Flight Academy Student' : ' Flight Academy Students');
         var extraAero = Math.max(0, count - 15);
         regTotal = 600 + (extraAero * 20) + (addKits ? count * kitRegPerKid : 0);
         unitLabel = 'student';
-        desc = 'TK-5 Aero-Cub Paper-to-Prop-to-3D-Drone Workshop (up to 15 students base): Airfoil gliders, 3D-printed prop planes & ducted micro-drones.';
+        desc = 'Flight Academy (Drone Academy Flight): Aeronautics, fixed-wing planes, airfoil gliders & things that fly (100% 3D-printed in-house except metal/electronics).';
+      } else if (mode === 'stemart') {
+        countValEl.textContent = count + (count === 1 ? ' STEM + Art Maker' : ' STEM + Art Makers');
+        var extraStem = Math.max(0, count - 15);
+        regTotal = 600 + (extraStem * 20) + (addKits ? count * kitRegPerKid : 0);
+        unitLabel = 'student';
+        desc = 'STEM Academy (STEM + Art / STEAM): Hands-on 3D CAD, kinetic gears, LED art & creative maker builds (can include flight/drones; 100% 3D-printed in-house except metal/electronics).';
       } else if (mode === 'brewery') {
         countValEl.textContent = count + (count === 1 ? ' Event Challenger' : ' Event Challengers');
         var extraBrew = Math.max(0, count - 15);
@@ -1444,6 +1451,7 @@
           relayPayload.message = subjectLine;
         }
       }
+      relayPayload._autoresponse = relayPayload.message;
 
       var outboxEntry = {
         id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
