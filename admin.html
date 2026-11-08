@@ -154,6 +154,30 @@
     display: none;
   }
 
+  /* Smooth Anchor Offset for Sticky Navigation Header */
+  #osito-bookable-job-packages,
+  #osito-live-sim-estimator-hub,
+  #osito-contact-section,
+  #drone-academy,
+  #flight-academy,
+  #stem-academy,
+  #osito-coloring-books-downloads,
+  #osito-academy-newsletter-inquiry,
+  #osito-commercial-newsletter-inquiry,
+  #teen-exam,
+  #interactive-calc,
+  #chapter-1 {
+    scroll-margin-top: 72px;
+  }
+
+  /* Touch & Keyboard Dropdown Support on Tablet/Desktop (> 900px) */
+  .osito-dropdown.osito-dd-open .osito-dropdown-menu,
+  .osito-nav-dropdown.osito-dd-open .osito-nav-dropdown-menu,
+  .osito-dropdown:focus-within .osito-dropdown-menu,
+  .osito-nav-dropdown:focus-within .osito-nav-dropdown-menu {
+    display: block !important;
+  }
+
   /* Tablet & Mobile Navigation Drawer + Parallax Fix (<= 900px) */
   @media (max-width: 900px) {
     #osito-site-nav,
@@ -165,6 +189,10 @@
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
+      background: #161616 !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      overflow: visible !important;
     }
     #osito-site-nav .osito-nav-inner,
     header.topbar .osito-nav-inner,
@@ -261,6 +289,7 @@
       overflow-y: auto !important;
       -webkit-overflow-scrolling: touch !important;
       touch-action: pan-y !important;
+      pointer-events: auto !important;
     }
     #osito-site-nav.osito-nav-open .osito-nav-menu,
     header.topbar.osito-nav-open .osito-nav-menu,
@@ -275,12 +304,15 @@
       justify-content: space-between !important;
       align-items: center !important;
       padding: 11px 14px !important;
-      min-height: 43px !important;
+      min-height: 44px !important;
       height: auto !important;
       font-size: 13.5px !important;
       border: none !important;
       border-bottom: 1px solid #262626 !important;
       text-align: left !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+      cursor: pointer !important;
     }
     .osito-dropdown,
     .osito-nav-dropdown {
@@ -305,12 +337,23 @@
     }
     .osito-dropdown-menu a,
     .osito-nav-dropdown-menu a {
-      padding: 9px 14px 9px 22px !important;
-      font-size: 12px !important;
+      padding: 10px 14px 10px 22px !important;
+      min-height: 42px !important;
+      font-size: 12.5px !important;
       color: #EEF0FA !important;
       border-bottom: 1px solid rgba(112, 119, 207, 0.16) !important;
-      display: block !important;
+      display: flex !important;
+      align-items: center !important;
       white-space: normal !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+      cursor: pointer !important;
+    }
+    .osito-nav-menu a:active,
+    .osito-dropdown-menu a:active,
+    .osito-nav-dropdown-menu a:active {
+      background: #232A68 !important;
+      color: #FFFFFF !important;
     }
     .osito-dropdown-menu a:last-child,
     .osito-nav-dropdown-menu a:last-child {
@@ -997,7 +1040,7 @@
       <nav class="osito-nav-menu" aria-label="Primary Navigation">
         <a href="./index.html" class="osito-nav-item">Home</a>
         <div class="osito-nav-dropdown">
-          <a href="./osito-drone-academy.html" class="osito-nav-item">Services<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
+          <a href="./index.html#osito-bookable-job-packages" class="osito-nav-item">Services<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
           <div class="osito-nav-dropdown-menu">
             <a href="./osito-drone-academy.html#drone-academy">Drone Academy</a>
             <a href="./osito-drone-academy.html#flight-academy">Flight Academy</a>
@@ -1024,6 +1067,7 @@
             <a href="./interactive-book.html">Interactive Book &amp; Exam</a>
             <a href="./stl-editor.html">3D STL Editor</a>
             <a href="./osito-design-tool.html">Design Studio</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
             <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
             <a href="./admin.html">Staff Portal</a>
           </div>
@@ -1504,6 +1548,9 @@
         </div>
       </div>
 
+      <!-- Inline Table Action Feedback Banner (Visible Directly Above Subscribers Table) -->
+      <div id="nl-table-alert" class="admin-alert" role="status" aria-live="polite" style="margin-bottom:14px;"></div>
+
       <!-- Subscribers Table -->
       <div class="crm-table-wrap" style="margin-bottom:34px;">
         <table class="crm-table">
@@ -1898,7 +1945,10 @@ Osito Drone Services | San Francisco, CA</textarea>
             <label class="form-label">STAFF NOTES</label>
             <textarea id="editSubNotes" class="form-textarea" rows="3" placeholder="Add notes about this subscriber..."></textarea>
           </div>
-          <button type="submit" id="saveEditSubscriberBtn" class="osito-action-btn emerald" style="width:100%;">SAVE SUBSCRIBER CHANGES</button>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" id="saveEditSubscriberBtn" class="osito-action-btn emerald" style="flex:1.4;">SAVE SUBSCRIBER CHANGES</button>
+            <button type="button" id="verifyNowModalBtn" class="osito-action-btn dark" style="flex:1;" onclick="verifyAndSaveSubscriberModal()">VERIFY NOW &amp; SAVE</button>
+          </div>
         </form>
       </div>
     </div>
@@ -3010,11 +3060,19 @@ Osito Drone Services | San Francisco, CA</textarea>
     }
 
     function showNlAdminAlert(msg, type) {
+      var cls = 'admin-alert ' + (type || 'success');
       var box = document.getElementById('nl-admin-alert');
-      if (!box) return;
-      box.textContent = msg;
-      box.className = 'admin-alert ' + (type || 'success');
-      box.style.display = 'block';
+      if (box) {
+        box.textContent = msg;
+        box.className = cls;
+        box.style.display = 'block';
+      }
+      var tblBox = document.getElementById('nl-table-alert');
+      if (tblBox) {
+        tblBox.textContent = msg;
+        tblBox.className = cls;
+        tblBox.style.display = 'block';
+      }
     }
 
     function showNlBroadcastAlert(msg, type) {
@@ -3083,10 +3141,6 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function isLegacySampleRecord(item) {
       if (!item || typeof item !== 'object') return true;
-      var idStr = String(item.id || '').trim();
-      if (LEGACY_SAMPLE_IDS[idStr]) return true;
-      var srcInqId = String(item.sourceInquiryId || '').trim();
-      if (srcInqId && LEGACY_SAMPLE_IDS[srcInqId]) return true;
       var vTok = String(item.verifyToken || '');
       if (vTok.indexOf('ositoverify-sub100') === 0 || vTok.indexOf('tok-sub-100') === 0) return true;
       if (item.email && isLegacySampleEmail(item.email)) return true;
@@ -3102,6 +3156,15 @@ Osito Drone Services | San Francisco, CA</textarea>
           if (isLegacySampleEmail(item.recipients[r])) return true;
         }
       }
+      var idStr = String(item.id || '').trim();
+      if (LEGACY_SAMPLE_IDS[idStr]) {
+        if (idStr.indexOf('SUB-') === 0 && item.email && isValidSubscriberEmail(item.email) && !isLegacySampleEmail(item.email)) {
+          return false;
+        }
+        return true;
+      }
+      var srcInqId = String(item.sourceInquiryId || '').trim();
+      if (srcInqId && LEGACY_SAMPLE_IDS[srcInqId]) return true;
       return false;
     }
 
@@ -3131,6 +3194,8 @@ Osito Drone Services | San Francisco, CA</textarea>
       }
     }
 
+    var lastVerifiedSubId = '';
+
     function loadAdminSubscribers() {
       try {
         var raw = localStorage.getItem(STORAGE_KEYS.NL_SUBSCRIBERS);
@@ -3138,10 +3203,46 @@ Osito Drone Services | San Francisco, CA</textarea>
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed)) {
             var cleaned = [];
+            var mutated = false;
             for (var i = 0; i < parsed.length; i++) {
-              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+              if (!isLegacySampleRecord(parsed[i])) {
+                cleaned.push(parsed[i]);
+              } else {
+                mutated = true;
+              }
             }
-            if (cleaned.length !== parsed.length) {
+            var seenIds = {};
+            for (var j = 0; j < cleaned.length; j++) {
+              var s = cleaned[j];
+              var curId = String(s.id || '').trim();
+              if (!curId || LEGACY_SAMPLE_IDS[curId] || seenIds[curId]) {
+                curId = generateUniqueAdminId('SUB', 1006, cleaned);
+                s.id = curId;
+                mutated = true;
+              } else if (s.id !== curId) {
+                s.id = curId;
+                mutated = true;
+              }
+              seenIds[curId] = true;
+              var normEmail = String(s.email || '').trim().toLowerCase();
+              if (s.email !== normEmail) {
+                s.email = normEmail;
+                mutated = true;
+              }
+              if (s.status !== 'Verified' && s.status !== 'Pending Verification' && s.status !== 'Unsubscribed') {
+                s.status = (s.verified === true || String(s.status || '').toLowerCase() === 'verified') ? 'Verified' : 'Pending Verification';
+                mutated = true;
+              }
+              if (!s.verifyCode) {
+                s.verifyCode = String(Math.floor(100000 + Math.random() * 900000));
+                mutated = true;
+              }
+              if (!s.verifyToken) {
+                s.verifyToken = 'ositoverify-' + Date.now().toString(36) + '-' + s.verifyCode;
+                mutated = true;
+              }
+            }
+            if (mutated) {
               localStorage.setItem(STORAGE_KEYS.NL_SUBSCRIBERS, JSON.stringify(cleaned));
             }
             return cleaned;
@@ -3234,6 +3335,25 @@ Osito Drone Services | San Francisco, CA</textarea>
       if (elInq) elInq.textContent = String(inqs.length);
     }
 
+    function findSubscriberIndex(subs, subId, subEmail) {
+      var cleanId = String(subId || '').trim();
+      var cleanEmail = String(subEmail || '').trim().toLowerCase();
+      if (!cleanEmail && cleanId.indexOf('@') !== -1) {
+        cleanEmail = cleanId.toLowerCase();
+      }
+      if (cleanId) {
+        for (var i = 0; i < subs.length; i++) {
+          if (String(subs[i].id || '').trim() === cleanId) return i;
+        }
+      }
+      if (cleanEmail) {
+        for (var j = 0; j < subs.length; j++) {
+          if (String(subs[j].email || '').trim().toLowerCase() === cleanEmail) return j;
+        }
+      }
+      return -1;
+    }
+
     function renderAdminSubscribersTable() {
       var tbody = document.getElementById('admin-subscribers-tbody');
       if (!tbody) return;
@@ -3274,23 +3394,32 @@ Osito Drone Services | San Francisco, CA</textarea>
 
         var subDate = item.subscribedAt ? item.subscribedAt.slice(0, 10) : '2026-11-07';
         var verDate = item.verifiedAt ? item.verifiedAt.slice(0, 10) : '-';
+        var safeId = escapeHtmlSafe(item.id);
+        var safeEmail = escapeHtmlSafe(item.email);
 
         var verifyBtnHtml = '';
+        var inlineStatusVerifyHtml = '';
         if (!isVer) {
-          verifyBtnHtml = '<button type="button" class="osito-action-btn emerald" style="padding:5px 9px; font-size:11px;" onclick="verifySubscriberAdmin(\'' + escapeHtmlSafe(item.id) + '\')">VERIFY NOW</button>';
+          verifyBtnHtml = '<button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 10px; font-size:11.5px;" onclick="verifySubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">VERIFY NOW</button>';
+          inlineStatusVerifyHtml = '<div style="margin-top:6px;"><button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:4px 9px; font-size:11px;" onclick="verifySubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">&#10003; VERIFY NOW</button></div>';
+        } else {
+          verifyBtnHtml = '<span class="osito-action-btn" style="padding:6px 10px; font-size:11px; background:#D1FAE5; color:#065F46; border:1px solid #10B981; cursor:default; font-weight:700;">&#10003; VERIFIED</span>';
         }
-        var sendVerifyHtml = '<button type="button" class="osito-action-btn dark" style="padding:5px 9px; font-size:11px;" onclick="sendSubscriberVerifyEmailAdmin(\'' + escapeHtmlSafe(item.id) + '\')">SEND VERIFY EMAIL</button>';
-        var editBtnHtml = '<button type="button" class="osito-action-btn" style="padding:5px 9px; font-size:11px;" onclick="openEditSubscriberModal(\'' + escapeHtmlSafe(item.id) + '\')">EDIT</button>';
-        var delBtnHtml = '<button type="button" class="osito-action-btn danger" style="padding:5px 9px; font-size:11px;" onclick="deleteSubscriberAdmin(\'' + escapeHtmlSafe(item.id) + '\')">DELETE</button>';
+        var sendVerifyHtml = '<button type="button" class="osito-action-btn dark" data-sub-action="send-verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="sendSubscriberVerifyEmailAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">' + (isVer ? 'RESEND CONFIRM' : 'SEND VERIFY EMAIL') + '</button>';
+        var editBtnHtml = '<button type="button" class="osito-action-btn" data-sub-action="edit" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="openEditSubscriberModal(\'' + safeId + '\', \'' + safeEmail + '\')">EDIT</button>';
+        var delBtnHtml = '<button type="button" class="osito-action-btn danger" data-sub-action="delete" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="deleteSubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">DELETE</button>';
 
-        rowsHtml += '<tr data-sub-id="' + escapeHtmlSafe(item.id) + '">'
-          + '<td><strong>' + escapeHtmlSafe(item.id) + '</strong><br/><span style="font-size:11px; color:#5E5E5E;">' + escapeHtmlSafe(item.source || 'Admin Panel') + '</span></td>'
-          + '<td><strong style="font-size:13.5px; color:#232A68;">' + escapeHtmlSafe(item.email) + '</strong><br/><span style="font-size:12px; color:#333333;">' + escapeHtmlSafe(item.name || '-') + '</span></td>'
+        var rowHighlightStyle = (lastVerifiedSubId && lastVerifiedSubId === item.id) ? ' style="background:#ECFDF5; outline:2px solid #10B981;"' : '';
+
+        rowsHtml += '<tr data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '"' + rowHighlightStyle + '>'
+          + '<td><strong>' + safeId + '</strong><br/><span style="font-size:11px; color:#5E5E5E;">' + escapeHtmlSafe(item.source || 'Admin Panel') + '</span></td>'
+          + '<td><strong style="font-size:13.5px; color:#232A68;">' + safeEmail + '</strong><br/><span style="font-size:12px; color:#333333;">' + escapeHtmlSafe(item.name || '-') + '</span></td>'
           + '<td><span class="prio-badge prio-std">' + escapeHtmlSafe(item.segment || 'General') + '</span>'
           + (item.notes ? '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px;">' + escapeHtmlSafe(item.notes) + '</div>' : '')
           + '</td>'
           + '<td><span class="prio-badge ' + badgeClass + '" style="' + badgeStyle + '">' + escapeHtmlSafe(item.status) + '</span>'
-          + '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px; font-family:monospace;">Code: <strong>' + escapeHtmlSafe(item.verifyCode || 'N/A') + '</strong></div></td>'
+          + '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px; font-family:monospace;">Code: <strong>' + escapeHtmlSafe(item.verifyCode || 'N/A') + '</strong></div>'
+          + inlineStatusVerifyHtml + '</td>'
           + '<td><div style="font-size:11.5px;"><strong>Added:</strong> ' + escapeHtmlSafe(subDate) + '</div><div style="font-size:11.5px; color:#059669;"><strong>Verified:</strong> ' + escapeHtmlSafe(verDate) + '</div></td>'
           + '<td><div style="display:flex; flex-wrap:wrap; gap:5px;">' + verifyBtnHtml + sendVerifyHtml + editBtnHtml + delBtnHtml + '</div></td>'
           + '</tr>';
@@ -3361,6 +3490,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         });
         showNlAdminAlert('Added ' + em + ' (' + newSub.id + ') as Pending Verification and dispatched verification email (Code: ' + code + ').', 'success');
       } else {
+        lastVerifiedSubId = newSub.id;
         showNlAdminAlert('Added ' + em + ' (' + newSub.id + ') as a Verified Subscriber!', 'success');
       }
 
@@ -3370,44 +3500,60 @@ Osito Drone Services | San Francisco, CA</textarea>
       updateNewsletterLivePreview();
     }
 
-    function verifySubscriberAdmin(subId) {
+    var __lastVerifyActionTs = 0;
+
+    function verifySubscriberAdmin(subId, subEmail) {
+      var nowTs = Date.now();
+      if (nowTs - __lastVerifyActionTs < 40 && lastVerifiedSubId === String(subId || '').trim()) {
+        return;
+      }
       var subs = loadAdminSubscribers();
-      var target = null;
-      for (var i = 0; i < subs.length; i++) {
-        if (subs[i].id === subId) {
-          subs[i].status = 'Verified';
-          subs[i].verifiedAt = new Date().toISOString();
-          target = subs[i];
-          break;
+      var idx = findSubscriberIndex(subs, subId, subEmail);
+      if (idx === -1 && !String(subId || '').trim() && !String(subEmail || '').trim()) {
+        for (var k = 0; k < subs.length; k++) {
+          if (subs[k].status !== 'Verified') {
+            idx = k;
+            break;
+          }
         }
       }
-      if (!target) return;
+      if (idx === -1) {
+        showNlAdminAlert('Could not find subscriber record (' + (subId || subEmail || 'unknown') + ') to verify.', 'error');
+        return;
+      }
+      var target = subs[idx];
+      var nowIso = new Date().toISOString();
+      target.status = 'Verified';
+      target.verifiedAt = nowIso;
+      lastVerifiedSubId = target.id;
+      __lastVerifyActionTs = nowTs;
+
+      var statFilterEl = document.getElementById('subStatusFilter');
+      if (statFilterEl && statFilterEl.value === 'Pending Verification') {
+        statFilterEl.value = 'all';
+      }
+
       saveAdminSubscribers(subs);
       renderAdminSubscribersTable();
       updateNewsletterLivePreview();
-      showNlAdminAlert('Verified subscriber ' + target.email + ' (' + target.id + '). They will now receive all newsletter broadcasts.', 'success');
+      showNlAdminAlert('Verified subscriber ' + target.email + ' (' + target.id + '). Status updated to Verified and active for all newsletter broadcasts.', 'success');
     }
 
-    function sendSubscriberVerifyEmailAdmin(subId) {
+    function sendSubscriberVerifyEmailAdmin(subId, subEmail) {
       var subs = loadAdminSubscribers();
-      var target = null;
-      for (var i = 0; i < subs.length; i++) {
-        if (subs[i].id === subId) {
-          if (!subs[i].verifyCode) {
-            subs[i].verifyCode = String(Math.floor(100000 + Math.random() * 900000));
-          }
-          if (!subs[i].verifyToken) {
-            subs[i].verifyToken = 'ositoverify-' + Date.now().toString(36) + '-' + subs[i].verifyCode;
-          }
-          if (subs[i].status === 'Unsubscribed') {
-            subs[i].status = 'Pending Verification';
-            subs[i].verifiedAt = null;
-          }
-          target = subs[i];
-          break;
-        }
+      var idx = findSubscriberIndex(subs, subId, subEmail);
+      if (idx === -1) return;
+      var target = subs[idx];
+      if (!target.verifyCode) {
+        target.verifyCode = String(Math.floor(100000 + Math.random() * 900000));
       }
-      if (!target) return;
+      if (!target.verifyToken) {
+        target.verifyToken = 'ositoverify-' + Date.now().toString(36) + '-' + target.verifyCode;
+      }
+      if (target.status === 'Unsubscribed') {
+        target.status = 'Pending Verification';
+        target.verifiedAt = null;
+      }
       saveAdminSubscribers(subs);
       var verifyUrl = getPublicVerifyUrl(target.verifyToken, target.email);
       dispatchAdminBackendRelay({
@@ -3430,32 +3576,32 @@ Osito Drone Services | San Francisco, CA</textarea>
       var count = 0;
       var nowIso = new Date().toISOString();
       for (var i = 0; i < subs.length; i++) {
-        if (subs[i].status === 'Pending Verification') {
+        if (subs[i].status !== 'Verified' && subs[i].status !== 'Unsubscribed') {
           subs[i].status = 'Verified';
           subs[i].verifiedAt = nowIso;
+          lastVerifiedSubId = subs[i].id;
           count++;
         }
+      }
+      var statFilterEl = document.getElementById('subStatusFilter');
+      if (statFilterEl && statFilterEl.value === 'Pending Verification') {
+        statFilterEl.value = 'all';
       }
       saveAdminSubscribers(subs);
       renderAdminSubscribersTable();
       updateNewsletterLivePreview();
       if (count > 0) {
-        showNlAdminAlert('Bulk verified ' + count + ' pending subscriber(s)! All are now active.', 'success');
+        showNlAdminAlert('Bulk verified ' + count + ' pending subscriber(s)! All are now Verified and active.', 'success');
       } else {
         showNlAdminAlert('All subscribers are already verified (0 pending).', 'success');
       }
     }
 
-    function openEditSubscriberModal(subId) {
+    function openEditSubscriberModal(subId, subEmail) {
       var subs = loadAdminSubscribers();
-      var found = null;
-      for (var i = 0; i < subs.length; i++) {
-        if (subs[i].id === subId) {
-          found = subs[i];
-          break;
-        }
-      }
-      if (!found) return;
+      var idx = findSubscriberIndex(subs, subId, subEmail);
+      if (idx === -1) return;
+      var found = subs[idx];
       document.getElementById('editSubId').value = found.id;
       document.getElementById('editSubEmail').value = found.email || '';
       document.getElementById('editSubName').value = found.name || '';
@@ -3468,6 +3614,12 @@ Osito Drone Services | San Francisco, CA</textarea>
     function closeEditSubscriberModal() {
       var modal = document.getElementById('osito-edit-subscriber-modal');
       if (modal) modal.style.display = 'none';
+    }
+
+    function verifyAndSaveSubscriberModal() {
+      var statusEl = document.getElementById('editSubStatus');
+      if (statusEl) statusEl.value = 'Verified';
+      handleSaveSubscriberEdit();
     }
 
     function handleSaveSubscriberEdit(ev) {
@@ -3493,21 +3645,20 @@ Osito Drone Services | San Francisco, CA</textarea>
       }
 
       var updated = null;
-      for (var i = 0; i < subs.length; i++) {
-        if (subs[i].id === subId) {
-          subs[i].email = newEmail;
-          subs[i].name = newName;
-          subs[i].segment = newSeg;
-          subs[i].status = newStatus;
-          subs[i].notes = newNotes;
-          if (newStatus === 'Verified') {
-            if (!subs[i].verifiedAt) subs[i].verifiedAt = new Date().toISOString();
-          } else {
-            subs[i].verifiedAt = null;
-          }
-          updated = subs[i];
-          break;
+      var idx = findSubscriberIndex(subs, subId, newEmail);
+      if (idx !== -1) {
+        subs[idx].email = newEmail;
+        subs[idx].name = newName;
+        subs[idx].segment = newSeg;
+        subs[idx].status = newStatus;
+        subs[idx].notes = newNotes;
+        if (newStatus === 'Verified') {
+          if (!subs[idx].verifiedAt) subs[idx].verifiedAt = new Date().toISOString();
+          lastVerifiedSubId = subs[idx].id;
+        } else {
+          subs[idx].verifiedAt = null;
         }
+        updated = subs[idx];
       }
 
       saveAdminSubscribers(subs);
@@ -3519,12 +3670,13 @@ Osito Drone Services | San Francisco, CA</textarea>
       }
     }
 
-    function deleteSubscriberAdmin(subId) {
+    function deleteSubscriberAdmin(subId, subEmail) {
       var subs = loadAdminSubscribers();
+      var idx = findSubscriberIndex(subs, subId, subEmail);
       var removedEmail = '';
       var nextList = [];
       for (var i = 0; i < subs.length; i++) {
-        if (subs[i].id === subId) {
+        if (i === idx) {
           removedEmail = subs[i].email;
         } else {
           nextList.push(subs[i]);
@@ -4012,10 +4164,53 @@ Osito Drone Services | San Francisco, CA</textarea>
     }
 
     // =========================================================================
-    // 8. AUTO-RESTORE STAFF SESSION ON PAGE LOAD
+    // 8. GLOBAL WINDOW BINDINGS & AUTO-RESTORE STAFF SESSION ON PAGE LOAD
     // =========================================================================
+    try {
+      window.verifySubscriberAdmin = verifySubscriberAdmin;
+      window.adminVerifySubscriberNow = verifySubscriberAdmin;
+      window.sendSubscriberVerifyEmailAdmin = sendSubscriberVerifyEmailAdmin;
+      window.verifyAllPendingSubscribers = verifyAllPendingSubscribers;
+      window.openEditSubscriberModal = openEditSubscriberModal;
+      window.closeEditSubscriberModal = closeEditSubscriberModal;
+      window.verifyAndSaveSubscriberModal = verifyAndSaveSubscriberModal;
+      window.handleSaveSubscriberEdit = handleSaveSubscriberEdit;
+      window.deleteSubscriberAdmin = deleteSubscriberAdmin;
+      window.handleAdminAddSubscriber = handleAdminAddSubscriber;
+      window.exportSubscribersCsv = exportSubscribersCsv;
+      window.renderAdminSubscribersTable = renderAdminSubscribersTable;
+      window.loadNewsletterTemplate = loadNewsletterTemplate;
+      window.handleSendNewsletterBroadcast = handleSendNewsletterBroadcast;
+      window.downloadNewsletterEmlDraft = downloadNewsletterEmlDraft;
+      window.updateContactInquiryField = updateContactInquiryField;
+      window.convertInquiryToCrmLead = convertInquiryToCrmLead;
+      window.addInquirySenderToNewsletter = addInquirySenderToNewsletter;
+      window.deleteContactInquiryAdmin = deleteContactInquiryAdmin;
+      window.switchAdminTab = switchAdminTab;
+    } catch (e) {}
+
     (function initOsitoAdminPortal() {
       purgeLegacySampleAdminData();
+      try {
+        var subTbody = document.getElementById('admin-subscribers-tbody');
+        if (subTbody && typeof subTbody.addEventListener === 'function') {
+          subTbody.addEventListener('click', function(ev) {
+            try {
+              var tgt = ev && ev.target ? ev.target : null;
+              while (tgt && tgt !== subTbody && (!tgt.getAttribute || !tgt.getAttribute('data-sub-action'))) {
+                tgt = tgt.parentNode;
+              }
+              if (!tgt || !tgt.getAttribute) return;
+              var act = tgt.getAttribute('data-sub-action');
+              var sid = tgt.getAttribute('data-sub-id') || '';
+              var sem = tgt.getAttribute('data-sub-email') || '';
+              if (act === 'verify') {
+                verifySubscriberAdmin(sid, sem);
+              }
+            } catch (err) {}
+          });
+        }
+      } catch (e) {}
       try {
         var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
         if (raw) {
@@ -4033,8 +4228,19 @@ Osito Drone Services | San Francisco, CA</textarea>
   try {
     if (typeof document === "undefined" || typeof document.getElementById !== "function") return;
 
+    function closeOsitoDropdowns() {
+      try {
+        if (typeof document.querySelectorAll !== "function") return;
+        var dds = document.querySelectorAll(".osito-dropdown.osito-dd-open, .osito-nav-dropdown.osito-dd-open");
+        for (var i = 0; i < dds.length; i++) {
+          dds[i].className = dds[i].className.replace(/\bosito-dd-open\b/g, "").trim();
+        }
+      } catch (e) {}
+    }
+
     function closeOsitoMobileNav() {
       try {
+        closeOsitoDropdowns();
         var btn = document.getElementById("ositoMobileMenuBtn");
         var navHeader = document.getElementById("osito-site-nav") ||
                         (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
@@ -4046,6 +4252,96 @@ Osito Drone Services | San Francisco, CA</textarea>
         }
       } catch (e) {}
     }
+
+    function getCurrentPageName() {
+      try {
+        var p = (window.location && window.location.pathname) ? String(window.location.pathname) : "";
+        var segs = p.split("/");
+        var last = segs.length ? segs[segs.length - 1] : "";
+        if (!last || last === "/") return "index.html";
+        return last.toLowerCase();
+      } catch (e) {
+        return "index.html";
+      }
+    }
+
+    function resolveSamePageTargetId(href) {
+      try {
+        if (!href) return null;
+        var s = String(href).trim();
+        var hashIdx = s.indexOf("#");
+        if (hashIdx === -1) return null;
+        var pathPart = s.substring(0, hashIdx).replace(/^\.\//, "").replace(/^\//, "").trim().toLowerCase();
+        var hashId = s.substring(hashIdx + 1).trim();
+        if (!hashId) return null;
+        var targetEl = document.getElementById(hashId);
+        if (!targetEl) return null;
+        if (!pathPart) return hashId;
+        var curPage = getCurrentPageName();
+        var pathSegs = pathPart.split("/");
+        var targetPage = pathSegs[pathSegs.length - 1] || "index.html";
+        if (targetPage === curPage) return hashId;
+        if (targetPage === "index.html" && document.getElementById("osito-bookable-job-packages")) return hashId;
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function scrollToTargetHashElement(hashId) {
+      try {
+        if (!hashId) return false;
+        var cleanId = String(hashId).replace(/^#/, "").trim();
+        var targetEl = document.getElementById(cleanId);
+        if (!targetEl) return false;
+
+        closeOsitoMobileNav();
+
+        try {
+          if (window.history && typeof window.history.pushState === "function") {
+            window.history.pushState(null, "", "#" + cleanId);
+          } else if (window.location) {
+            window.location.hash = "#" + cleanId;
+          }
+        } catch (hErr) {}
+
+        var performScroll = function() {
+          try {
+            var docEl = document.documentElement;
+            var prevBehavior = (docEl && docEl.style) ? docEl.style.scrollBehavior : "";
+            if (docEl && docEl.style) docEl.style.scrollBehavior = "auto";
+            var navHeader = document.getElementById("osito-site-nav") ||
+                            (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
+            var navOffset = (navHeader && navHeader.offsetHeight) ? (navHeader.offsetHeight + 10) : 64;
+            if (navOffset > 120 || navOffset < 40) navOffset = 64;
+            if (typeof targetEl.getBoundingClientRect === "function" && typeof window.scrollTo === "function") {
+              var rect = targetEl.getBoundingClientRect();
+              var currentScroll = window.pageYOffset ||
+                                  (docEl && docEl.scrollTop) ||
+                                  (document.body && document.body.scrollTop) || 0;
+              var destY = Math.max(0, Math.round(currentScroll + rect.top - navOffset));
+              try {
+                window.scrollTo({ top: destY, left: 0, behavior: "instant" });
+              } catch (scrollObjErr) {
+                window.scrollTo(0, destY);
+              }
+            } else if (typeof targetEl.scrollIntoView === "function") {
+              targetEl.scrollIntoView(true);
+            }
+            if (docEl && docEl.style) docEl.style.scrollBehavior = prevBehavior;
+          } catch (sErr) {}
+        };
+
+        performScroll();
+        setTimeout(performScroll, 60);
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    window.scrollToOsitoSection = scrollToTargetHashElement;
+    window.closeOsitoMobileNav = closeOsitoMobileNav;
 
     window.toggleOsitoMobileNav = function(e) {
       try {
@@ -4074,13 +4370,54 @@ Osito Drone Services | San Francisco, CA</textarea>
           btn.onclick = window.toggleOsitoMobileNav;
 
           if (typeof document.querySelectorAll === "function") {
-            var links = document.querySelectorAll(".osito-nav-menu a");
-            for (var i = 0; i < links.length; i++) {
-              links[i].addEventListener("click", function() {
-                if (window.innerWidth <= 900) {
-                  closeOsitoMobileNav();
-                }
+            var bindNavLink = function(linkEl) {
+              if (!linkEl || typeof linkEl.addEventListener !== "function") return;
+              linkEl.addEventListener("click", function(ev) {
+                try {
+                  var rawHref = (typeof linkEl.getAttribute === "function")
+                    ? (linkEl.getAttribute("href") || "")
+                    : (linkEl.href || "");
+                  var parentEl = linkEl.parentNode;
+                  var isDropdownTrigger = parentEl && parentEl.className &&
+                    (parentEl.className.indexOf("osito-dropdown") !== -1 ||
+                     parentEl.className.indexOf("osito-nav-dropdown") !== -1) &&
+                    linkEl.className && linkEl.className.indexOf("osito-nav-item") !== -1;
+
+                  /* On tablet/desktop (> 900px) touch screens, first tap on a parent dropdown opens the submenu */
+                  if (isDropdownTrigger && window.innerWidth > 900 && ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents) {
+                    if (parentEl.className.indexOf("osito-dd-open") === -1) {
+                      if (ev.preventDefault) ev.preventDefault();
+                      closeOsitoDropdowns();
+                      parentEl.className = (parentEl.className + " osito-dd-open").trim();
+                      return;
+                    }
+                  }
+
+                  var samePageId = resolveSamePageTargetId(rawHref);
+                  if (samePageId) {
+                    if (ev && ev.preventDefault) ev.preventDefault();
+                    scrollToTargetHashElement(samePageId);
+                    return;
+                  }
+
+                  if (window.innerWidth <= 900) {
+                    closeOsitoMobileNav();
+                  } else {
+                    closeOsitoDropdowns();
+                  }
+                } catch (clickErr) {}
               });
+            };
+
+            var menuLinks = document.querySelectorAll(".osito-nav-menu a");
+            for (var i = 0; i < menuLinks.length; i++) {
+              bindNavLink(menuLinks[i]);
+            }
+            var quickLinks = document.querySelectorAll(
+              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a"
+            );
+            for (var j = 0; j < quickLinks.length; j++) {
+              bindNavLink(quickLinks[j]);
             }
           }
 
@@ -4091,6 +4428,9 @@ Osito Drone Services | San Francisco, CA</textarea>
                   if (ev && ev.target && navHeader.contains && !navHeader.contains(ev.target)) {
                     closeOsitoMobileNav();
                   }
+                }
+                if (ev && ev.target && navHeader.contains && !navHeader.contains(ev.target)) {
+                  closeOsitoDropdowns();
                 }
               } catch (e) {}
             });
@@ -4105,6 +4445,15 @@ Osito Drone Services | San Francisco, CA</textarea>
         var bottomBar = document.getElementById("osito-mobile-bottom-bar");
         if (bottomBar && document.body && document.body.className.indexOf("has-osito-mobile-bar") === -1) {
           document.body.className = (document.body.className + " has-osito-mobile-bar").trim();
+        }
+
+        if (window.location && window.location.hash && window.location.hash.length > 1) {
+          var initHashId = window.location.hash.substring(1);
+          if (document.getElementById(initHashId)) {
+            setTimeout(function() {
+              scrollToTargetHashElement(initHashId);
+            }, 80);
+          }
         }
       } catch (innerErr) {}
     }

@@ -177,6 +177,30 @@
     display: none;
   }
 
+  /* Smooth Anchor Offset for Sticky Navigation Header */
+  #osito-bookable-job-packages,
+  #osito-live-sim-estimator-hub,
+  #osito-contact-section,
+  #drone-academy,
+  #flight-academy,
+  #stem-academy,
+  #osito-coloring-books-downloads,
+  #osito-academy-newsletter-inquiry,
+  #osito-commercial-newsletter-inquiry,
+  #teen-exam,
+  #interactive-calc,
+  #chapter-1 {
+    scroll-margin-top: 72px;
+  }
+
+  /* Touch & Keyboard Dropdown Support on Tablet/Desktop (> 900px) */
+  .osito-dropdown.osito-dd-open .osito-dropdown-menu,
+  .osito-nav-dropdown.osito-dd-open .osito-nav-dropdown-menu,
+  .osito-dropdown:focus-within .osito-dropdown-menu,
+  .osito-nav-dropdown:focus-within .osito-nav-dropdown-menu {
+    display: block !important;
+  }
+
   /* Tablet & Mobile Navigation Drawer + Parallax Fix (<= 900px) */
   @media (max-width: 900px) {
     #osito-site-nav,
@@ -188,6 +212,10 @@
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
+      background: #161616 !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      overflow: visible !important;
     }
     #osito-site-nav .osito-nav-inner,
     header.topbar .osito-nav-inner,
@@ -284,6 +312,7 @@
       overflow-y: auto !important;
       -webkit-overflow-scrolling: touch !important;
       touch-action: pan-y !important;
+      pointer-events: auto !important;
     }
     #osito-site-nav.osito-nav-open .osito-nav-menu,
     header.topbar.osito-nav-open .osito-nav-menu,
@@ -298,12 +327,15 @@
       justify-content: space-between !important;
       align-items: center !important;
       padding: 11px 14px !important;
-      min-height: 43px !important;
+      min-height: 44px !important;
       height: auto !important;
       font-size: 13.5px !important;
       border: none !important;
       border-bottom: 1px solid #262626 !important;
       text-align: left !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+      cursor: pointer !important;
     }
     .osito-dropdown,
     .osito-nav-dropdown {
@@ -328,12 +360,23 @@
     }
     .osito-dropdown-menu a,
     .osito-nav-dropdown-menu a {
-      padding: 9px 14px 9px 22px !important;
-      font-size: 12px !important;
+      padding: 10px 14px 10px 22px !important;
+      min-height: 42px !important;
+      font-size: 12.5px !important;
       color: #EEF0FA !important;
       border-bottom: 1px solid rgba(112, 119, 207, 0.16) !important;
-      display: block !important;
+      display: flex !important;
+      align-items: center !important;
       white-space: normal !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+      cursor: pointer !important;
+    }
+    .osito-nav-menu a:active,
+    .osito-dropdown-menu a:active,
+    .osito-nav-dropdown-menu a:active {
+      background: #232A68 !important;
+      color: #FFFFFF !important;
     }
     .osito-dropdown-menu a:last-child,
     .osito-nav-dropdown-menu a:last-child {
@@ -1062,8 +1105,19 @@
   try {
     if (typeof document === "undefined" || typeof document.getElementById !== "function") return;
 
+    function closeOsitoDropdowns() {
+      try {
+        if (typeof document.querySelectorAll !== "function") return;
+        var dds = document.querySelectorAll(".osito-dropdown.osito-dd-open, .osito-nav-dropdown.osito-dd-open");
+        for (var i = 0; i < dds.length; i++) {
+          dds[i].className = dds[i].className.replace(/\bosito-dd-open\b/g, "").trim();
+        }
+      } catch (e) {}
+    }
+
     function closeOsitoMobileNav() {
       try {
+        closeOsitoDropdowns();
         var btn = document.getElementById("ositoMobileMenuBtn");
         var navHeader = document.getElementById("osito-site-nav") ||
                         (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
@@ -1075,6 +1129,96 @@
         }
       } catch (e) {}
     }
+
+    function getCurrentPageName() {
+      try {
+        var p = (window.location && window.location.pathname) ? String(window.location.pathname) : "";
+        var segs = p.split("/");
+        var last = segs.length ? segs[segs.length - 1] : "";
+        if (!last || last === "/") return "index.html";
+        return last.toLowerCase();
+      } catch (e) {
+        return "index.html";
+      }
+    }
+
+    function resolveSamePageTargetId(href) {
+      try {
+        if (!href) return null;
+        var s = String(href).trim();
+        var hashIdx = s.indexOf("#");
+        if (hashIdx === -1) return null;
+        var pathPart = s.substring(0, hashIdx).replace(/^\.\//, "").replace(/^\//, "").trim().toLowerCase();
+        var hashId = s.substring(hashIdx + 1).trim();
+        if (!hashId) return null;
+        var targetEl = document.getElementById(hashId);
+        if (!targetEl) return null;
+        if (!pathPart) return hashId;
+        var curPage = getCurrentPageName();
+        var pathSegs = pathPart.split("/");
+        var targetPage = pathSegs[pathSegs.length - 1] || "index.html";
+        if (targetPage === curPage) return hashId;
+        if (targetPage === "index.html" && document.getElementById("osito-bookable-job-packages")) return hashId;
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function scrollToTargetHashElement(hashId) {
+      try {
+        if (!hashId) return false;
+        var cleanId = String(hashId).replace(/^#/, "").trim();
+        var targetEl = document.getElementById(cleanId);
+        if (!targetEl) return false;
+
+        closeOsitoMobileNav();
+
+        try {
+          if (window.history && typeof window.history.pushState === "function") {
+            window.history.pushState(null, "", "#" + cleanId);
+          } else if (window.location) {
+            window.location.hash = "#" + cleanId;
+          }
+        } catch (hErr) {}
+
+        var performScroll = function() {
+          try {
+            var docEl = document.documentElement;
+            var prevBehavior = (docEl && docEl.style) ? docEl.style.scrollBehavior : "";
+            if (docEl && docEl.style) docEl.style.scrollBehavior = "auto";
+            var navHeader = document.getElementById("osito-site-nav") ||
+                            (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
+            var navOffset = (navHeader && navHeader.offsetHeight) ? (navHeader.offsetHeight + 10) : 64;
+            if (navOffset > 120 || navOffset < 40) navOffset = 64;
+            if (typeof targetEl.getBoundingClientRect === "function" && typeof window.scrollTo === "function") {
+              var rect = targetEl.getBoundingClientRect();
+              var currentScroll = window.pageYOffset ||
+                                  (docEl && docEl.scrollTop) ||
+                                  (document.body && document.body.scrollTop) || 0;
+              var destY = Math.max(0, Math.round(currentScroll + rect.top - navOffset));
+              try {
+                window.scrollTo({ top: destY, left: 0, behavior: "instant" });
+              } catch (scrollObjErr) {
+                window.scrollTo(0, destY);
+              }
+            } else if (typeof targetEl.scrollIntoView === "function") {
+              targetEl.scrollIntoView(true);
+            }
+            if (docEl && docEl.style) docEl.style.scrollBehavior = prevBehavior;
+          } catch (sErr) {}
+        };
+
+        performScroll();
+        setTimeout(performScroll, 60);
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    window.scrollToOsitoSection = scrollToTargetHashElement;
+    window.closeOsitoMobileNav = closeOsitoMobileNav;
 
     window.toggleOsitoMobileNav = function(e) {
       try {
@@ -1103,13 +1247,54 @@
           btn.onclick = window.toggleOsitoMobileNav;
 
           if (typeof document.querySelectorAll === "function") {
-            var links = document.querySelectorAll(".osito-nav-menu a");
-            for (var i = 0; i < links.length; i++) {
-              links[i].addEventListener("click", function() {
-                if (window.innerWidth <= 900) {
-                  closeOsitoMobileNav();
-                }
+            var bindNavLink = function(linkEl) {
+              if (!linkEl || typeof linkEl.addEventListener !== "function") return;
+              linkEl.addEventListener("click", function(ev) {
+                try {
+                  var rawHref = (typeof linkEl.getAttribute === "function")
+                    ? (linkEl.getAttribute("href") || "")
+                    : (linkEl.href || "");
+                  var parentEl = linkEl.parentNode;
+                  var isDropdownTrigger = parentEl && parentEl.className &&
+                    (parentEl.className.indexOf("osito-dropdown") !== -1 ||
+                     parentEl.className.indexOf("osito-nav-dropdown") !== -1) &&
+                    linkEl.className && linkEl.className.indexOf("osito-nav-item") !== -1;
+
+                  /* On tablet/desktop (> 900px) touch screens, first tap on a parent dropdown opens the submenu */
+                  if (isDropdownTrigger && window.innerWidth > 900 && ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents) {
+                    if (parentEl.className.indexOf("osito-dd-open") === -1) {
+                      if (ev.preventDefault) ev.preventDefault();
+                      closeOsitoDropdowns();
+                      parentEl.className = (parentEl.className + " osito-dd-open").trim();
+                      return;
+                    }
+                  }
+
+                  var samePageId = resolveSamePageTargetId(rawHref);
+                  if (samePageId) {
+                    if (ev && ev.preventDefault) ev.preventDefault();
+                    scrollToTargetHashElement(samePageId);
+                    return;
+                  }
+
+                  if (window.innerWidth <= 900) {
+                    closeOsitoMobileNav();
+                  } else {
+                    closeOsitoDropdowns();
+                  }
+                } catch (clickErr) {}
               });
+            };
+
+            var menuLinks = document.querySelectorAll(".osito-nav-menu a");
+            for (var i = 0; i < menuLinks.length; i++) {
+              bindNavLink(menuLinks[i]);
+            }
+            var quickLinks = document.querySelectorAll(
+              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a"
+            );
+            for (var j = 0; j < quickLinks.length; j++) {
+              bindNavLink(quickLinks[j]);
             }
           }
 
@@ -1120,6 +1305,9 @@
                   if (ev && ev.target && navHeader.contains && !navHeader.contains(ev.target)) {
                     closeOsitoMobileNav();
                   }
+                }
+                if (ev && ev.target && navHeader.contains && !navHeader.contains(ev.target)) {
+                  closeOsitoDropdowns();
                 }
               } catch (e) {}
             });
@@ -1134,6 +1322,15 @@
         var bottomBar = document.getElementById("osito-mobile-bottom-bar");
         if (bottomBar && document.body && document.body.className.indexOf("has-osito-mobile-bar") === -1) {
           document.body.className = (document.body.className + " has-osito-mobile-bar").trim();
+        }
+
+        if (window.location && window.location.hash && window.location.hash.length > 1) {
+          var initHashId = window.location.hash.substring(1);
+          if (document.getElementById(initHashId)) {
+            setTimeout(function() {
+              scrollToTargetHashElement(initHashId);
+            }, 80);
+          }
         }
       } catch (innerErr) {}
     }
