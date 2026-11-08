@@ -402,6 +402,7 @@
       z-index: 10005 !important;
       width: 100% !important;
       flex-direction: column !important;
+      flex-wrap: nowrap !important;
       align-items: stretch !important;
       gap: 0 !important;
       background: #161616 !important;
@@ -413,19 +414,25 @@
       max-height: calc(100vh - 54px) !important;
       max-height: calc(100dvh - 54px) !important;
       overflow-y: auto !important;
+      overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
       touch-action: pan-y !important;
       pointer-events: auto !important;
+      box-sizing: border-box !important;
     }
     #osito-site-nav.osito-nav-open .osito-nav-menu,
     header.topbar.osito-nav-open .osito-nav-menu,
     header.admin-topbar.osito-nav-open .osito-nav-menu {
       display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
     }
     .osito-nav-menu > a.osito-nav-item,
     .osito-nav-menu > .osito-dropdown > a.osito-nav-item,
     .osito-nav-menu > .osito-nav-dropdown > a.osito-nav-item {
       width: 100% !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
@@ -443,6 +450,8 @@
     .osito-dropdown,
     .osito-nav-dropdown {
       width: 100% !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: stretch !important;
@@ -454,6 +463,8 @@
       position: static !important;
       width: 100% !important;
       min-width: 0 !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       background: #1B1F3B !important;
       border: none !important;
       border-left: 3px solid #7077CF !important;
@@ -470,6 +481,8 @@
       border-bottom: 1px solid rgba(112, 119, 207, 0.16) !important;
       display: flex !important;
       align-items: center !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       white-space: normal !important;
       pointer-events: auto !important;
       touch-action: manipulation !important;
@@ -487,6 +500,8 @@
     }
     .osito-nav-menu .osito-action-btn {
       width: calc(100% - 24px) !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       margin: 10px 12px 4px !important;
       padding: 11px 14px !important;
       font-size: 14px !important;
@@ -2526,8 +2541,21 @@
       } catch (err) {}
     };
 
+    var lastPointerWasTouch = false;
+
     function initOsitoMobileNav() {
       try {
+        if (typeof document.addEventListener === "function") {
+          document.addEventListener("touchstart", function() {
+            lastPointerWasTouch = true;
+          }, { passive: true });
+          document.addEventListener("pointerdown", function(ev) {
+            if (ev && ev.pointerType) {
+              lastPointerWasTouch = (ev.pointerType === "touch" || ev.pointerType === "pen");
+            }
+          }, { passive: true });
+        }
+
         var btn = document.getElementById("ositoMobileMenuBtn");
         var navHeader = document.getElementById("osito-site-nav") ||
                         (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
@@ -2537,6 +2565,8 @@
           if (typeof document.querySelectorAll === "function") {
             var bindNavLink = function(linkEl) {
               if (!linkEl || typeof linkEl.addEventListener !== "function") return;
+              if (typeof linkEl.getAttribute === "function" && linkEl.getAttribute("data-osito-nav-bound") === "1") return;
+              if (typeof linkEl.setAttribute === "function") linkEl.setAttribute("data-osito-nav-bound", "1");
               linkEl.addEventListener("click", function(ev) {
                 try {
                   var rawHref = (typeof linkEl.getAttribute === "function")
@@ -2548,10 +2578,13 @@
                      parentEl.className.indexOf("osito-nav-dropdown") !== -1) &&
                     linkEl.className && linkEl.className.indexOf("osito-nav-item") !== -1;
 
+                  var isTouchTap = lastPointerWasTouch ||
+                    (ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents);
+
                   /* On tablet/desktop (> 900px) touch screens, first tap on a parent dropdown opens the submenu */
-                  if (isDropdownTrigger && window.innerWidth > 900 && ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents) {
+                  if (isDropdownTrigger && window.innerWidth > 900 && isTouchTap) {
                     if (parentEl.className.indexOf("osito-dd-open") === -1) {
-                      if (ev.preventDefault) ev.preventDefault();
+                      if (ev && ev.preventDefault) ev.preventDefault();
                       closeOsitoDropdowns();
                       parentEl.className = (parentEl.className + " osito-dd-open").trim();
                       return;
@@ -2579,7 +2612,7 @@
               bindNavLink(menuLinks[i]);
             }
             var quickLinks = document.querySelectorAll(
-              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a"
+              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a, .nav-bar a, a[href*='#']"
             );
             for (var j = 0; j < quickLinks.length; j++) {
               bindNavLink(quickLinks[j]);
@@ -2618,6 +2651,14 @@
             setTimeout(function() {
               scrollToTargetHashElement(initHashId);
             }, 80);
+            setTimeout(function() {
+              scrollToTargetHashElement(initHashId);
+            }, 260);
+            if (typeof window.addEventListener === "function") {
+              window.addEventListener("load", function() {
+                scrollToTargetHashElement(initHashId);
+              });
+            }
           }
         }
       } catch (innerErr) {}

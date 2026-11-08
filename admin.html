@@ -276,6 +276,7 @@
       z-index: 10005 !important;
       width: 100% !important;
       flex-direction: column !important;
+      flex-wrap: nowrap !important;
       align-items: stretch !important;
       gap: 0 !important;
       background: #161616 !important;
@@ -287,19 +288,25 @@
       max-height: calc(100vh - 54px) !important;
       max-height: calc(100dvh - 54px) !important;
       overflow-y: auto !important;
+      overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
       touch-action: pan-y !important;
       pointer-events: auto !important;
+      box-sizing: border-box !important;
     }
     #osito-site-nav.osito-nav-open .osito-nav-menu,
     header.topbar.osito-nav-open .osito-nav-menu,
     header.admin-topbar.osito-nav-open .osito-nav-menu {
       display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
     }
     .osito-nav-menu > a.osito-nav-item,
     .osito-nav-menu > .osito-dropdown > a.osito-nav-item,
     .osito-nav-menu > .osito-nav-dropdown > a.osito-nav-item {
       width: 100% !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
@@ -317,6 +324,8 @@
     .osito-dropdown,
     .osito-nav-dropdown {
       width: 100% !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: stretch !important;
@@ -328,6 +337,8 @@
       position: static !important;
       width: 100% !important;
       min-width: 0 !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       background: #1B1F3B !important;
       border: none !important;
       border-left: 3px solid #7077CF !important;
@@ -344,6 +355,8 @@
       border-bottom: 1px solid rgba(112, 119, 207, 0.16) !important;
       display: flex !important;
       align-items: center !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       white-space: normal !important;
       pointer-events: auto !important;
       touch-action: manipulation !important;
@@ -361,6 +374,8 @@
     }
     .osito-nav-menu .osito-action-btn {
       width: calc(100% - 24px) !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
       margin: 10px 12px 4px !important;
       padding: 11px 14px !important;
       font-size: 14px !important;
@@ -3091,7 +3106,9 @@ Osito Drone Services | San Francisco, CA</textarea>
       var baseUrl = 'https://staging.ositodrone.com/index.html';
       try {
         if (window.location && window.location.origin && window.location.origin.indexOf('http') === 0) {
-          baseUrl = window.location.origin + '/index.html';
+          var pathPart = (window.location.pathname || '/').replace(/[^\/]*$/, '');
+          if (pathPart.charAt(pathPart.length - 1) !== '/') pathPart += '/';
+          baseUrl = window.location.origin + pathPart + 'index.html';
         }
       } catch (e) {}
       return baseUrl + '?verify_newsletter=' + encodeURIComponent(token || '') + '&email=' + encodeURIComponent(email || '');
@@ -3399,21 +3416,25 @@ Osito Drone Services | San Francisco, CA</textarea>
 
         var verifyBtnHtml = '';
         var inlineStatusVerifyHtml = '';
+        var col2VerifyHtml = '';
         if (!isVer) {
-          verifyBtnHtml = '<button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 10px; font-size:11.5px;" onclick="verifySubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">VERIFY NOW</button>';
-          inlineStatusVerifyHtml = '<div style="margin-top:6px;"><button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:4px 9px; font-size:11px;" onclick="verifySubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">&#10003; VERIFY NOW</button></div>';
+          verifyBtnHtml = '<button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 10px; font-size:11.5px;" onclick="verifySubscriberAdmin(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">VERIFY NOW</button>';
+          inlineStatusVerifyHtml = '<div style="margin-top:6px;"><button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:4px 9px; font-size:11px;" onclick="verifySubscriberAdmin(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">&#10003; VERIFY NOW</button></div>';
+          col2VerifyHtml = '<div style="margin-top:5px; display:flex; flex-wrap:wrap; align-items:center; gap:6px;"><span class="prio-badge ' + badgeClass + '" style="' + badgeStyle + ' font-size:10px; padding:2px 6px;">' + escapeHtmlSafe(item.status) + '</span><button type="button" class="osito-action-btn emerald" data-sub-action="verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:3px 8px; font-size:10.5px;" onclick="verifySubscriberAdmin(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">&#10003; VERIFY NOW</button></div>';
         } else {
           verifyBtnHtml = '<span class="osito-action-btn" style="padding:6px 10px; font-size:11px; background:#D1FAE5; color:#065F46; border:1px solid #10B981; cursor:default; font-weight:700;">&#10003; VERIFIED</span>';
+          inlineStatusVerifyHtml = '<div style="margin-top:6px;"><span style="display:inline-block; padding:3px 8px; font-size:11px; font-weight:700; background:#D1FAE5; color:#065F46; border:1px solid #10B981;">&#10003; Verified &amp; Active</span></div>';
+          col2VerifyHtml = '<div style="margin-top:5px;"><span class="prio-badge prio-std" style="background:#D1FAE5; color:#065F46; border:1px solid #10B981; font-size:10px; padding:2px 6px;">&#10003; VERIFIED</span></div>';
         }
-        var sendVerifyHtml = '<button type="button" class="osito-action-btn dark" data-sub-action="send-verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="sendSubscriberVerifyEmailAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">' + (isVer ? 'RESEND CONFIRM' : 'SEND VERIFY EMAIL') + '</button>';
-        var editBtnHtml = '<button type="button" class="osito-action-btn" data-sub-action="edit" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="openEditSubscriberModal(\'' + safeId + '\', \'' + safeEmail + '\')">EDIT</button>';
-        var delBtnHtml = '<button type="button" class="osito-action-btn danger" data-sub-action="delete" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="deleteSubscriberAdmin(\'' + safeId + '\', \'' + safeEmail + '\')">DELETE</button>';
+        var sendVerifyHtml = '<button type="button" class="osito-action-btn dark" data-sub-action="send-verify" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="sendSubscriberVerifyEmailAdmin(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">' + (isVer ? 'RESEND CONFIRM' : 'SEND VERIFY EMAIL') + '</button>';
+        var editBtnHtml = '<button type="button" class="osito-action-btn" data-sub-action="edit" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="openEditSubscriberModal(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">EDIT</button>';
+        var delBtnHtml = '<button type="button" class="osito-action-btn danger" data-sub-action="delete" data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '" style="padding:6px 9px; font-size:11px;" onclick="deleteSubscriberAdmin(this.getAttribute(\'data-sub-id\'), this.getAttribute(\'data-sub-email\'))">DELETE</button>';
 
         var rowHighlightStyle = (lastVerifiedSubId && lastVerifiedSubId === item.id) ? ' style="background:#ECFDF5; outline:2px solid #10B981;"' : '';
 
         rowsHtml += '<tr data-sub-id="' + safeId + '" data-sub-email="' + safeEmail + '"' + rowHighlightStyle + '>'
           + '<td><strong>' + safeId + '</strong><br/><span style="font-size:11px; color:#5E5E5E;">' + escapeHtmlSafe(item.source || 'Admin Panel') + '</span></td>'
-          + '<td><strong style="font-size:13.5px; color:#232A68;">' + safeEmail + '</strong><br/><span style="font-size:12px; color:#333333;">' + escapeHtmlSafe(item.name || '-') + '</span></td>'
+          + '<td><strong style="font-size:13.5px; color:#232A68;">' + safeEmail + '</strong><br/><span style="font-size:12px; color:#333333;">' + escapeHtmlSafe(item.name || '-') + '</span>' + col2VerifyHtml + '</td>'
           + '<td><span class="prio-badge prio-std">' + escapeHtmlSafe(item.segment || 'General') + '</span>'
           + (item.notes ? '<div style="font-size:11.5px; color:#5E5E5E; margin-top:4px;">' + escapeHtmlSafe(item.notes) + '</div>' : '')
           + '</td>'
@@ -3500,13 +3521,7 @@ Osito Drone Services | San Francisco, CA</textarea>
       updateNewsletterLivePreview();
     }
 
-    var __lastVerifyActionTs = 0;
-
     function verifySubscriberAdmin(subId, subEmail) {
-      var nowTs = Date.now();
-      if (nowTs - __lastVerifyActionTs < 40 && lastVerifiedSubId === String(subId || '').trim()) {
-        return;
-      }
       var subs = loadAdminSubscribers();
       var idx = findSubscriberIndex(subs, subId, subEmail);
       if (idx === -1 && !String(subId || '').trim() && !String(subEmail || '').trim()) {
@@ -3522,11 +3537,14 @@ Osito Drone Services | San Francisco, CA</textarea>
         return;
       }
       var target = subs[idx];
+      var wasAlreadyVerified = (target.status === 'Verified');
       var nowIso = new Date().toISOString();
       target.status = 'Verified';
       target.verifiedAt = nowIso;
+      if (!target.notes || target.notes.indexOf('verification email dispatched') !== -1 || target.notes.indexOf('Awaiting') !== -1) {
+        target.notes = 'Verified by staff in Admin Panel (' + nowIso.slice(0, 10) + ').';
+      }
       lastVerifiedSubId = target.id;
-      __lastVerifyActionTs = nowTs;
 
       var statFilterEl = document.getElementById('subStatusFilter');
       if (statFilterEl && statFilterEl.value === 'Pending Verification') {
@@ -3534,6 +3552,18 @@ Osito Drone Services | San Francisco, CA</textarea>
       }
 
       saveAdminSubscribers(subs);
+      if (!wasAlreadyVerified) {
+        dispatchAdminBackendRelay({
+          actionType: 'newsletter_verified',
+          to: target.email,
+          cc: 'info@ositodrone.com',
+          _subject: 'Osito Drone Newsletter Subscription Verified (' + target.email + ')',
+          subscriber_id: target.id,
+          email: target.email,
+          name: target.name || '',
+          verified_at: nowIso
+        });
+      }
       renderAdminSubscribersTable();
       updateNewsletterLivePreview();
       showNlAdminAlert('Verified subscriber ' + target.email + ' (' + target.id + '). Status updated to Verified and active for all newsletter broadcasts.', 'success');
@@ -3655,8 +3685,15 @@ Osito Drone Services | San Francisco, CA</textarea>
         if (newStatus === 'Verified') {
           if (!subs[idx].verifiedAt) subs[idx].verifiedAt = new Date().toISOString();
           lastVerifiedSubId = subs[idx].id;
+          var statFilterEl = document.getElementById('subStatusFilter');
+          if (statFilterEl && statFilterEl.value === 'Pending Verification') {
+            statFilterEl.value = 'all';
+          }
         } else {
           subs[idx].verifiedAt = null;
+          if (lastVerifiedSubId === subs[idx].id) {
+            lastVerifiedSubId = '';
+          }
         }
         updated = subs[idx];
       }
@@ -4201,11 +4238,18 @@ Osito Drone Services | San Francisco, CA</textarea>
                 tgt = tgt.parentNode;
               }
               if (!tgt || !tgt.getAttribute) return;
+              if (tgt.getAttribute('onclick')) return;
               var act = tgt.getAttribute('data-sub-action');
               var sid = tgt.getAttribute('data-sub-id') || '';
               var sem = tgt.getAttribute('data-sub-email') || '';
               if (act === 'verify') {
                 verifySubscriberAdmin(sid, sem);
+              } else if (act === 'send-verify') {
+                sendSubscriberVerifyEmailAdmin(sid, sem);
+              } else if (act === 'edit') {
+                openEditSubscriberModal(sid, sem);
+              } else if (act === 'delete') {
+                deleteSubscriberAdmin(sid, sem);
               }
             } catch (err) {}
           });
@@ -4361,8 +4405,21 @@ Osito Drone Services | San Francisco, CA</textarea>
       } catch (err) {}
     };
 
+    var lastPointerWasTouch = false;
+
     function initOsitoMobileNav() {
       try {
+        if (typeof document.addEventListener === "function") {
+          document.addEventListener("touchstart", function() {
+            lastPointerWasTouch = true;
+          }, { passive: true });
+          document.addEventListener("pointerdown", function(ev) {
+            if (ev && ev.pointerType) {
+              lastPointerWasTouch = (ev.pointerType === "touch" || ev.pointerType === "pen");
+            }
+          }, { passive: true });
+        }
+
         var btn = document.getElementById("ositoMobileMenuBtn");
         var navHeader = document.getElementById("osito-site-nav") ||
                         (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
@@ -4372,6 +4429,8 @@ Osito Drone Services | San Francisco, CA</textarea>
           if (typeof document.querySelectorAll === "function") {
             var bindNavLink = function(linkEl) {
               if (!linkEl || typeof linkEl.addEventListener !== "function") return;
+              if (typeof linkEl.getAttribute === "function" && linkEl.getAttribute("data-osito-nav-bound") === "1") return;
+              if (typeof linkEl.setAttribute === "function") linkEl.setAttribute("data-osito-nav-bound", "1");
               linkEl.addEventListener("click", function(ev) {
                 try {
                   var rawHref = (typeof linkEl.getAttribute === "function")
@@ -4383,10 +4442,13 @@ Osito Drone Services | San Francisco, CA</textarea>
                      parentEl.className.indexOf("osito-nav-dropdown") !== -1) &&
                     linkEl.className && linkEl.className.indexOf("osito-nav-item") !== -1;
 
+                  var isTouchTap = lastPointerWasTouch ||
+                    (ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents);
+
                   /* On tablet/desktop (> 900px) touch screens, first tap on a parent dropdown opens the submenu */
-                  if (isDropdownTrigger && window.innerWidth > 900 && ev && ev.sourceCapabilities && ev.sourceCapabilities.firesTouchEvents) {
+                  if (isDropdownTrigger && window.innerWidth > 900 && isTouchTap) {
                     if (parentEl.className.indexOf("osito-dd-open") === -1) {
-                      if (ev.preventDefault) ev.preventDefault();
+                      if (ev && ev.preventDefault) ev.preventDefault();
                       closeOsitoDropdowns();
                       parentEl.className = (parentEl.className + " osito-dd-open").trim();
                       return;
@@ -4414,7 +4476,7 @@ Osito Drone Services | San Francisco, CA</textarea>
               bindNavLink(menuLinks[i]);
             }
             var quickLinks = document.querySelectorAll(
-              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a"
+              "#osito-mobile-bottom-bar a, .osito-mobile-header-actions a, .hero-quick-actions a, .nav-bar a, a[href*='#']"
             );
             for (var j = 0; j < quickLinks.length; j++) {
               bindNavLink(quickLinks[j]);
@@ -4453,6 +4515,14 @@ Osito Drone Services | San Francisco, CA</textarea>
             setTimeout(function() {
               scrollToTargetHashElement(initHashId);
             }, 80);
+            setTimeout(function() {
+              scrollToTargetHashElement(initHashId);
+            }, 260);
+            if (typeof window.addEventListener === "function") {
+              window.addEventListener("load", function() {
+                scrollToTargetHashElement(initHashId);
+              });
+            }
           }
         }
       } catch (innerErr) {}
