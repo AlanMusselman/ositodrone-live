@@ -831,6 +831,10 @@
         color: #FFFFFF !important;
       }
     }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 112px;
+    }
     /* Unified Site Top Navigation Bar (#osito-site-nav) */
     #osito-site-nav {
       position: sticky;
@@ -847,6 +851,9 @@
     #osito-site-nav * {
       border-radius: 0px !important;
       box-sizing: border-box;
+    }
+    .nav-bar {
+      top: 52px;
     }
     .osito-nav-inner {
       max-width: 1440px;
@@ -996,6 +1003,9 @@
       #osito-site-nav {
         padding: 6px 8px;
       }
+      .nav-bar {
+        top: 42px;
+      }
       .osito-nav-brand img {
         height: 26px;
       }
@@ -1022,7 +1032,7 @@
       <nav class="osito-nav-menu" aria-label="Main Navigation">
         <a href="./index.html" class="osito-nav-item">Home</a>
         <div class="osito-dropdown">
-          <a href="./osito-drone-academy.html" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <a href="./index.html#osito-bookable-job-packages" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
           <div class="osito-dropdown-menu">
             <a href="./osito-drone-academy.html#drone-academy">Drone Academy</a>
             <a href="./osito-drone-academy.html#flight-academy">Flight Academy</a>
@@ -1292,7 +1302,7 @@
               </div>
               <div class="chapter-body">
                 <p class="lead-para">Great pilots aren't born with magical thumbs—they follow a disciplined training progression and treat high-energy Lithium-Polymer batteries with scientific respect. Here is how Osito's 4-Station Flight Lab turns beginners into pros.</p>
-                <div class='sec-block'><h3>5.1 The Osito 4-Station Progressive Rotation</h3><p>When Osito Drone Services sets up at a school gymnasium or community center, our team runs four synchronized 15-minute stations so every student gets maximum stick time with zero downtime:</p><p>• Station 1 — The 4-Tablet Simulator & Coding Pod: Before risking hardware, you build muscle memory in our AcroBee65 / Osito SF Flight Simulator using real USB-C Hall-sensor radios, practicing throttle hover control and Python block/script missions.</p><p>• Station 2 — The Pop-Up Netted Hover Cage (Line-of-Sight): Inside a 10×10 ft enclosed mesh tent, you master Stationary Hover at eye level, the 4-Corner Box Drill, and 'Nose-In' orientation (where roll commands appear reversed when the drone faces you!).</p><p>• Station 3 — The Neon LED FPV Obstacle Course & Crew Resource Management (CRM): Every FPV pilot flying with goggles is paired with a dedicated Visual Observer (Spotter). Using real airline CRM protocol, the Spotter watches the airspace and calls out battery voltage, gate clearance, and landing cues.</p><p>• Station 4 — The Pit Crew & Battery Engineering Bench: Students inspect prop guards, swap tool-free 3-pin JST motors, and log battery storage voltages using ViFly Whoopstor V3 smart chargers inside steel Bat-Safe boxes.</p></div><div class='sec-block'><h3>5.2 1S LiHV Battery Chemistry, Voltage Thresholds & Energy Math</h3><p>Our micro-drones use 1-Cell High-Voltage Lithium-Polymer (1S LiHV) batteries (300mAh to 450mAh capacity with BT2.0 high-current connectors). Unlike AA batteries, LiHV cells require strict voltage discipline:</p><p>• 4.35 V per cell = 100% Full Charge (LiHV peak voltage).</p><p>• 3.80 V per cell = Official Storage Voltage! Always charge or discharge cells to 3.80V on the ViFly Whoopstor V3 at the end of the day. Leaving LiPos at 4.35V for days causes internal gas generation ('puffing') and degrades capacity.</p><p>• 3.50 V under load = 'Land Now!' OSD warning floor.</p><p>• < 3.30 V = Permanent chemical damage to the lithium-cobalt-oxide cathode layers.</p><p>• Energy & C-Rating Formulas:</p><p>  - Capacity in Amp-Hours (Ah) = mAh ÷ 1,000 (e.g., 300 mAh = 0.30 Ah).</p><p>  - Stored Energy in Watt-Hours (Wh) = Nominal Voltage (3.8V) × Ah = 3.8V × 0.30Ah = 1.14 Wh.</p><p>  - Max Safe Continuous Current (Amps) = Capacity (Ah) × C-Rating (e.g., 0.30 Ah × 75C = 22.5 Amps!).</p></div>
+                <div class='sec-block'><h3>5.1 The Osito 4-Station Progressive Rotation</h3><p>When Osito Drone Services sets up at a school gymnasium or community center, our team runs four synchronized 15-minute stations so every student gets maximum stick time with zero downtime:</p><p>• Station 1 — The 4-Tablet Simulator & Coding Pod: Before risking hardware, you build muscle memory in our CUB-75 / Osito SF Flight Simulator using real USB-C Hall-sensor radios, practicing throttle hover control and Python block/script missions.</p><p>• Station 2 — The Pop-Up Netted Hover Cage (Line-of-Sight): Inside a 10×10 ft enclosed mesh tent, you master Stationary Hover at eye level, the 4-Corner Box Drill, and 'Nose-In' orientation (where roll commands appear reversed when the drone faces you!).</p><p>• Station 3 — The Neon LED FPV Obstacle Course & Crew Resource Management (CRM): Every FPV pilot flying with goggles is paired with a dedicated Visual Observer (Spotter). Using real airline CRM protocol, the Spotter watches the airspace and calls out battery voltage, gate clearance, and landing cues.</p><p>• Station 4 — The Pit Crew & Battery Engineering Bench: Students inspect prop guards, swap tool-free 3-pin JST motors, and log battery storage voltages using ViFly Whoopstor V3 smart chargers inside steel Bat-Safe boxes.</p></div><div class='sec-block'><h3>5.2 1S LiHV Battery Chemistry, Voltage Thresholds & Energy Math</h3><p>Our micro-drones use 1-Cell High-Voltage Lithium-Polymer (1S LiHV) batteries (300mAh to 450mAh capacity with BT2.0 high-current connectors). Unlike AA batteries, LiHV cells require strict voltage discipline:</p><p>• 4.35 V per cell = 100% Full Charge (LiHV peak voltage).</p><p>• 3.80 V per cell = Official Storage Voltage! Always charge or discharge cells to 3.80V on the ViFly Whoopstor V3 at the end of the day. Leaving LiPos at 4.35V for days causes internal gas generation ('puffing') and degrades capacity.</p><p>• 3.50 V under load = 'Land Now!' OSD warning floor.</p><p>• < 3.30 V = Permanent chemical damage to the lithium-cobalt-oxide cathode layers.</p><p>• Energy & C-Rating Formulas:</p><p>  - Capacity in Amp-Hours (Ah) = mAh ÷ 1,000 (e.g., 300 mAh = 0.30 Ah).</p><p>  - Stored Energy in Watt-Hours (Wh) = Nominal Voltage (3.8V) × Ah = 3.8V × 0.30Ah = 1.14 Wh.</p><p>  - Max Safe Continuous Current (Amps) = Capacity (Ah) × C-Rating (e.g., 0.30 Ah × 75C = 22.5 Amps!).</p></div>
                 
                 <div class="callout-box">
                   <h4>💡 GOLDEN PIT CREW RULE: NEVER UNPLUG BY THE WIRES & ALWAYS USE A BAT-SAFE</h4>
@@ -2201,7 +2211,34 @@ class OsitoCub75AutonomousController:
       document.getElementById('kpiTime').textContent = safeMin.toFixed(1) + ' min';
       document.getElementById('kpiFAA').textContent = auw < 250 ? 'SUB-250g (' + auw.toFixed(1) + 'g)' : 'REG REQ (≥250g)';
     }
-    function updateCertName() {
+    const OSITO_BOOK_EXAM_STORAGE_KEY = 'osito_interactive_book_exam_v1';
+    function loadExamStorageState() {
+      try {
+        const raw = localStorage.getItem(OSITO_BOOK_EXAM_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') return parsed;
+        }
+      } catch (e) {}
+      return { answers: {}, graded: false, cadetName: '', cadetCallsign: '' };
+    }
+    function saveExamStorageState(patch) {
+      try {
+        const cur = loadExamStorageState();
+        const next = Object.assign({}, cur, patch || {});
+        localStorage.setItem(OSITO_BOOK_EXAM_STORAGE_KEY, JSON.stringify(next));
+      } catch (e) {}
+    }
+    function collectCurrentQuizAnswers() {
+      const answers = {};
+      const cards = document.querySelectorAll('.quiz-card');
+      cards.forEach((card, idx) => {
+        const sel = card.querySelector('input[type=radio]:checked');
+        if (sel) answers['q' + idx] = sel.value;
+      });
+      return answers;
+    }
+    function updateCertName(skipSave) {
       const n = document.getElementById('cadetNameInput');
       const c = document.getElementById('cadetCallsignInput');
       const out = document.getElementById('certCadetDisplay');
@@ -2209,9 +2246,15 @@ class OsitoCub75AutonomousController:
         const nameVal = n.value.trim() || 'CADET PILOT [ENTER NAME ABOVE]';
         const callVal = (c && c.value.trim()) ? ' ("' + c.value.trim().toUpperCase() + '")' : '';
         out.textContent = nameVal.toUpperCase() + callVal;
+        if (!skipSave) {
+          saveExamStorageState({
+            cadetName: n.value,
+            cadetCallsign: c ? c.value : ''
+          });
+        }
       }
     }
-    function updateExamProgress() {
+    function updateExamProgress(skipSave) {
       const cards = document.querySelectorAll('.quiz-card');
       let answered = 0;
       cards.forEach(card => {
@@ -2219,6 +2262,9 @@ class OsitoCub75AutonomousController:
       });
       const ansEl = document.getElementById('examKpiAnswered');
       if (ansEl) ansEl.textContent = answered + ' / ' + cards.length;
+      if (!skipSave) {
+        saveExamStorageState({ answers: collectCurrentQuizAnswers() });
+      }
     }
     function resetQuiz() {
       const cards = document.querySelectorAll('.quiz-card');
@@ -2243,8 +2289,9 @@ class OsitoCub75AutonomousController:
         grEl.textContent = 'IN PROGRESS';
         grEl.style.color = '#FFFFFF';
       }
+      saveExamStorageState({ answers: {}, graded: false });
     }
-    function gradeQuiz() {
+    function gradeQuiz(skipSave) {
       const cards = document.querySelectorAll('.quiz-card');
       let correct = 0;
       let answered = 0;
@@ -2296,6 +2343,35 @@ class OsitoCub75AutonomousController:
       } else {
         banner.style.color = '#B91C1C';
         banner.textContent = 'Score: ' + correct + ' / ' + cards.length + ' (' + pct + '%) — Review the explanations above and click Grade again to reach 12/15 (80%)!';
+      }
+      if (!skipSave) {
+        saveExamStorageState({ answers: collectCurrentQuizAnswers(), graded: true });
+      }
+    }
+    function restoreExamAndCertState() {
+      const st = loadExamStorageState();
+      const n = document.getElementById('cadetNameInput');
+      const c = document.getElementById('cadetCallsignInput');
+      if (n && st.cadetName) n.value = st.cadetName;
+      if (c && st.cadetCallsign) c.value = st.cadetCallsign;
+      if ((n && st.cadetName) || (c && st.cadetCallsign)) updateCertName(true);
+      if (st.answers && typeof st.answers === 'object') {
+        const cards = document.querySelectorAll('.quiz-card');
+        let anyRestored = false;
+        cards.forEach((card, idx) => {
+          const val = st.answers['q' + idx];
+          if (val) {
+            const r = card.querySelector('input[type=radio][value="' + val + '"]');
+            if (r) {
+              r.checked = true;
+              anyRestored = true;
+            }
+          }
+        });
+        if (anyRestored) {
+          updateExamProgress(true);
+          if (st.graded) gradeQuiz(true);
+        }
       }
     }
     
@@ -2365,6 +2441,7 @@ class OsitoCub75AutonomousController:
     renderTofGrid();
     recalcPhysics();
     recalcRollover();
+    restoreExamAndCertState();
     window.OsitoTeenLab = (function() {
       // Challenge 1: FPV Drone Gate Sprint & Physics Challenge
       const fpv = {

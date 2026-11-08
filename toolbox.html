@@ -80,6 +80,7 @@
             <a href="./osito-drone-academy.html#drone-academy">Drone Academy (Drones &amp; FPV)</a>
             <a href="./osito-drone-academy.html#flight-academy">Flight Academy (Aeronautics &amp; Planes)</a>
             <a href="./osito-drone-academy.html#stem-academy">STEM Academy (STEM + Art &amp; 3D Print)</a>
+            <a href="./interactive-book.html">Interactive Book &amp; Exam</a>
             <a href="./osito-drone-academy.html#osito-coloring-books-downloads">Free STEM Coloring Books</a>
           </div>
         </div>
@@ -311,15 +312,16 @@
       <div id="osito-pdf-preview-drawer" style="display:none; background:#161616; color:#FFFFFF; border:3px solid #7077CF; margin-bottom:32px;">
         <div style="background:#232A68; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:2px solid #7077CF;">
           <div>
-            <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#8E93DA; text-transform:uppercase; letter-spacing:0.05em;">INTERACTIVE 28-PAGE BOOK PREVIEW</span>
+            <span id="osito-pdf-preview-badge" style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#8E93DA; text-transform:uppercase; letter-spacing:0.05em;">INTERACTIVE 28-PAGE BOOK PREVIEW</span>
             <h3 id="osito-pdf-preview-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:2px 0 0; color:#FFFFFF; text-transform:uppercase;">01 | A Boy and His Drone (28 Pages)</h3>
           </div>
-          <div style="display:flex; gap:10px; align-items:center;">
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <a id="osito-pdf-preview-open-tab" href="./downloads/coloring-books/01_Osito_A_Boy_and_His_Drone_28p.pdf" target="_blank" rel="noopener" class="osito-action-btn dark" style="padding:8px 14px; font-size:13.5px; border-color:#7077CF;">OPEN IN NEW TAB</a>
             <a id="osito-pdf-preview-dl" href="./downloads/coloring-books/01_Osito_A_Boy_and_His_Drone_28p.pdf" download class="osito-action-btn emerald" style="padding:8px 16px; font-size:13.5px;">DOWNLOAD PDF</a>
             <button type="button" onclick="closeOsitoPdfPreview()" class="osito-action-btn dark" style="padding:8px 14px; font-size:13.5px; border-color:#FFFFFF;">CLOSE</button>
           </div>
         </div>
-        <iframe id="osito-pdf-preview-frame" title="Osito Drone Coloring Book PDF Preview" style="width:100%; height:620px; border:0; background:#2B2B2B; display:block;"></iframe>
+        <iframe id="osito-pdf-preview-frame" title="Osito Drone PDF Book Preview" style="width:100%; height:620px; border:0; background:#2B2B2B; display:block;"></iframe>
       </div>
 
       <!-- 10 Coloring Book Cards Grid -->
@@ -579,6 +581,7 @@
         <a href="./about.html" style="color:#EEF0FA; text-decoration:none;">About</a>
         <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Flight Sim</a>
         <a href="./toolbox.html" style="color:#EEF0FA; text-decoration:none;">Toolbox</a>
+        <a href="./interactive-book.html" style="color:#EEF0FA; text-decoration:none;">Interactive Book &amp; Exam</a>
         <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
       </div>
     </div>
@@ -602,13 +605,25 @@
       }
     }
 
-    function openOsitoPdfPreview(pdfUrl, titleText) {
+    function openOsitoPdfPreview(pdfUrl, titleText, badgeText) {
       var drawer = document.getElementById('osito-pdf-preview-drawer');
       var frame = document.getElementById('osito-pdf-preview-frame');
       var titleEl = document.getElementById('osito-pdf-preview-title');
+      var badgeEl = document.getElementById('osito-pdf-preview-badge');
       var dlEl = document.getElementById('osito-pdf-preview-dl');
+      var openTabEl = document.getElementById('osito-pdf-preview-open-tab');
       titleEl.textContent = titleText;
+      if (badgeEl) {
+        if (badgeText) {
+          badgeEl.textContent = badgeText;
+        } else if (String(pdfUrl).indexOf('teen-book') !== -1) {
+          badgeEl.textContent = 'INTERACTIVE 16-PAGE HANDBOOK PDF PREVIEW';
+        } else {
+          badgeEl.textContent = 'INTERACTIVE 28-PAGE BOOK PREVIEW';
+        }
+      }
       dlEl.href = pdfUrl;
+      if (openTabEl) openTabEl.href = pdfUrl;
       frame.src = pdfUrl;
       drawer.style.display = 'block';
       drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -623,6 +638,7 @@
 
     // Backwards-compatible aliases
     var previewColoringBook = openOsitoPdfPreview;
+    var previewColoringBookPdf = openOsitoPdfPreview;
     var closeColoringBookPreview = closeOsitoPdfPreview;
   </script>
 </body>

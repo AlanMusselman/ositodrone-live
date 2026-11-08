@@ -436,7 +436,7 @@ window.OSITO_ADMIN_DATA = {
       "docCount": 7,
       "sha256Short": "47c0a1533c",
       "sha256": "47c0a1533c",
-      "description": "Pelican V525 mobile classroom foam/divider DXF & STL templates, AcroBee65 silicone repair mat layout, and foldable 4-Tablet Flight Simulator Pod stands.",
+      "description": "Pelican V525 mobile classroom foam/divider DXF & STL templates, CUB-75 / 65mm silicone repair mat layout, and foldable 4-Tablet Flight Simulator Pod stands.",
       "sampleFiles": [
         "AcroBee65_Silicone_Mat/Osito_AcroBee65_Silicone_Mat_Spec_Sheet.docx",
         "2026-10-31_4_Tablet_Sim_Pod/Osito_4_Tablet_Sim_Pod_Transport_Logistics.docx",
