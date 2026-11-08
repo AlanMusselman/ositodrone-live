@@ -9,37 +9,63 @@
   <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    body {
+      margin: 0;
+      background-color: #1E2660;
+      background-image: linear-gradient(180deg, rgba(20, 28, 76, 0.54) 0%, rgba(30, 39, 98, 0.66) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #FFFFFF;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
     * { border-radius: 0px !important; box-sizing: border-box; }
 
-    /* Unified Top Site Navbar */
-    #osito-site-nav { position: sticky; top: 0; z-index: 10000; background: #161616; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
+    /* Unified Top Site Navbar with Parallax Osito Aerial Backdrop */
+    #osito-site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background-color: #1E2660;
+      background-image: linear-gradient(90deg, rgba(20, 28, 76, 0.84) 0%, rgba(35, 42, 104, 0.78) 50%, rgba(20, 28, 76, 0.84) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg');
+      background-size: cover;
+      background-position: center center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 2px solid #7077CF;
+      padding: 8px 20px;
+      flex-shrink: 0;
+      font-family: 'Roboto', sans-serif;
+    }
     .osito-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .osito-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; }
     .osito-nav-brand img { height: 36px; width: auto; display: block; }
     .osito-nav-menu { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .osito-nav-item { font-family: 'Fjalla One', sans-serif; font-size: 13.5px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: #EEF0FA; padding: 6px 11px; border: 1px solid transparent; transition: background 0.15s ease, border-color 0.15s ease; display: inline-flex; align-items: center; cursor: pointer; background: transparent; }
-    .osito-nav-item:hover, .osito-nav-item.active { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-nav-item:hover, .osito-nav-item.active { background: rgba(35, 42, 104, 0.88); border-color: #7077CF; color: #FFFFFF; }
     .osito-nav-dropdown { position: relative; display: inline-block; }
-    .osito-nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 230px; background: #161616; border: 2px solid #7077CF; box-shadow: 0 12px 28px rgba(0,0,0,0.65); z-index: 10001; padding: 4px 0; }
+    .osito-nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 230px; background: rgba(24, 33, 84, 0.96); backdrop-filter: blur(12px); border: 2px solid #7077CF; box-shadow: 0 12px 28px rgba(15, 23, 62, 0.65); z-index: 10001; padding: 4px 0; }
     .osito-nav-dropdown:hover .osito-nav-dropdown-menu { display: block; }
-    .osito-nav-dropdown-menu a { display: block; padding: 9px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #EEF0FA; text-decoration: none; border-bottom: 1px solid #24293E; }
+    .osito-nav-dropdown-menu a { display: block; padding: 9px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #EEF0FA; text-decoration: none; border-bottom: 1px solid rgba(112, 119, 207, 0.28); }
     .osito-nav-dropdown-menu a:last-child { border-bottom: none; }
     .osito-nav-dropdown-menu a:hover { background: #232A68; color: #10B981; }
     .osito-nav-caret { display: inline-block; width: 10px; height: 10px; margin-left: 5px; vertical-align: middle; fill: currentColor; }
-    .osito-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 10px 18px; background: #7077CF; color: #FFFFFF; border: 2px solid #8E93DA; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
-    .osito-action-btn:hover { background: #6068C4; border-color: #FFFFFF; color: #FFFFFF; }
-    .osito-action-btn.emerald { background: #10B981; border-color: #059669; color: #161616; font-weight: 700; }
+    .osito-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 10px 18px; background: #6366F1; color: #FFFFFF; border: 2px solid #A5B4FC; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
+    .osito-action-btn:hover { background: #4F46E5; border-color: #FFFFFF; color: #FFFFFF; }
+    .osito-action-btn.emerald { background: #10B981; border-color: #059669; color: #1E293B; font-weight: 700; }
     .osito-action-btn.emerald:hover { background: #059669; color: #FFFFFF; }
-    .osito-action-btn.dark { background: #232A68; border-color: #7077CF; color: #FFFFFF; }
+    .osito-action-btn.dark { background: rgba(35, 42, 104, 0.86); border-color: #7077CF; color: #FFFFFF; }
     .osito-action-btn.dark:hover { background: #303885; border-color: #FFFFFF; }
     .osito-action-btn.danger { background: #7F1D1D; border-color: #EF4444; color: #FFFFFF; }
     .osito-action-btn.danger:hover { background: #991B1B; }
 
-    /* Parallax Dark Background */
+    /* Parallax Aerial Background */
     .osito-parallax-dark {
-      background-color: #161616 !important;
-      background-image: linear-gradient(180deg, rgba(22, 22, 22, 0.86) 0%, rgba(35, 42, 104, 0.80) 50%, rgba(22, 22, 22, 0.92) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(180deg, rgba(20, 28, 76, 0.50) 0%, rgba(35, 42, 104, 0.62) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
       background-size: cover !important;
       background-position: center center !important;
       background-attachment: fixed !important;
@@ -48,87 +74,111 @@
 
     /* Login Gate Container */
     #admin-auth-gate { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
-    .auth-card { width: 100%; max-width: 560px; background: #1B1B1B; border: 3px solid #7077CF; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-    .auth-card-header { background: #232A68; padding: 22px 26px; border-bottom: 2px solid #7077CF; }
-    .auth-badge { display: inline-block; background: #161616; color: #10B981; border: 1px solid #10B981; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; letter-spacing: 0.06em; padding: 3px 9px; text-transform: uppercase; margin-bottom: 8px; }
+    .auth-card { width: 100%; max-width: 560px; background: linear-gradient(145deg, rgba(24, 34, 86, 0.84) 0%, rgba(35, 42, 104, 0.90) 100%); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 3px solid #7077CF; box-shadow: 0 20px 50px rgba(15, 23, 62, 0.65); }
+    .auth-card-header { background: rgba(35, 42, 104, 0.92); padding: 22px 26px; border-bottom: 2px solid #7077CF; }
+    .auth-badge { display: inline-block; background: rgba(16, 185, 129, 0.18); color: #34D399; border: 1px solid #10B981; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; letter-spacing: 0.06em; padding: 3px 9px; text-transform: uppercase; margin-bottom: 8px; }
     .auth-card-body { padding: 26px; }
     .form-group { margin-bottom: 16px; }
     .form-label { display: block; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: #EEF0FA; margin-bottom: 6px; }
-    .form-input, .form-select, .form-textarea { width: 100%; padding: 10px 12px; background: #161616; border: 2px solid #303885; color: #FFFFFF; font-family: 'Roboto', sans-serif; font-size: 14px; outline: none; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 10px 12px; background: rgba(18, 26, 70, 0.85); border: 2px solid #6366F1; color: #FFFFFF; font-family: 'Roboto', sans-serif; font-size: 14px; outline: none; }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #10B981; }
     .staff-pill-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
-    .staff-pill-btn { background: #161616; border: 1px solid #7077CF; color: #EEF0FA; padding: 8px 6px; font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; text-align: center; transition: all 0.15s ease; }
-    .staff-pill-btn:hover, .staff-pill-btn.active { background: #232A68; border-color: #10B981; color: #10B981; }
+    .staff-pill-btn { background: rgba(24, 33, 84, 0.82); border: 1px solid #7077CF; color: #EEF0FA; padding: 8px 6px; font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; text-align: center; transition: all 0.15s ease; }
+    .staff-pill-btn:hover, .staff-pill-btn.active { background: #232A68; border-color: #10B981; color: #34D399; }
 
     /* Alert Banners */
     .admin-alert { padding: 11px 14px; font-size: 13px; margin-bottom: 16px; border-left: 4px solid #7077CF; background: #232A68; color: #FFFFFF; display: none; line-height: 1.45; }
     .admin-alert.error { background: rgba(127, 29, 29, 0.9); border-left-color: #EF4444; color: #FECACA; }
     .admin-alert.success { background: rgba(6, 78, 59, 0.9); border-left-color: #10B981; color: #D1FAE5; }
 
-    /* Authenticated Dashboard Layout */
-    #admin-dashboard-view { display: none; flex: 1; background: #F6F6F6; color: #161616; }
-    .dash-hero-bar { background: #232A68; color: #FFFFFF; border-bottom: 3px solid #7077CF; padding: 22px 24px; }
+    /* Authenticated Dashboard Layout with Daylight Aerial Parallax */
+    #admin-dashboard-view {
+      display: none;
+      flex: 1;
+      background-color: #F4F7FC;
+      background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.86) 0%, rgba(238, 242, 255, 0.90) 100%), url('./assets/d-treasure-island-bay-bridge.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #1E293B;
+    }
+    .dash-hero-bar {
+      background-color: #232A68;
+      background-image: linear-gradient(135deg, rgba(24, 33, 84, 0.72) 0%, rgba(35, 42, 104, 0.78) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg');
+      background-size: cover;
+      background-position: center center;
+      color: #FFFFFF;
+      border-bottom: 3px solid #7077CF;
+      padding: 22px 24px;
+    }
     .dash-container { max-width: 1400px; margin: 0 auto; }
-    .dash-tabs-bar { background: #161616; border-bottom: 2px solid #7077CF; padding: 0 24px; }
+    .dash-tabs-bar {
+      background-color: #1E2660;
+      background-image: linear-gradient(90deg, rgba(20, 28, 76, 0.86) 0%, rgba(35, 42, 104, 0.88) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg');
+      background-size: cover;
+      background-position: center center;
+      border-bottom: 2px solid #7077CF;
+      padding: 0 24px;
+    }
     .dash-tabs-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; }
-    .dash-tab-btn { background: transparent; color: #B0B5C9; border: none; border-bottom: 4px solid transparent; padding: 14px 20px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.15s ease; }
-    .dash-tab-btn:hover { color: #FFFFFF; background: #1B1B1B; }
-    .dash-tab-btn.active { color: #10B981; border-bottom-color: #10B981; background: #232A68; }
+    .dash-tab-btn { background: transparent; color: #E0E7FF; border: none; border-bottom: 4px solid transparent; padding: 14px 20px; font-family: 'Fjalla One', sans-serif; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.15s ease; }
+    .dash-tab-btn:hover { color: #FFFFFF; background: rgba(99, 102, 241, 0.28); }
+    .dash-tab-btn.active { color: #34D399; border-bottom-color: #10B981; background: rgba(35, 42, 104, 0.90); }
     .dash-panel { display: none; padding: 28px 24px 60px; max-width: 1400px; margin: 0 auto; }
     .dash-panel.active { display: block; }
 
     /* KPI Strip */
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 14px; margin-bottom: 24px; }
-    .kpi-card { background: #FFFFFF; border: 2px solid #E2E2E2; border-top: 4px solid #232A68; padding: 16px 18px; }
+    .kpi-card { background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(6px); border: 2px solid #CBD5E1; border-top: 4px solid #232A68; padding: 16px 18px; }
     .kpi-card.emerald { border-top-color: #10B981; }
-    .kpi-card.indigo { border-top-color: #7077CF; }
-    .kpi-label { font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.05em; color: #5E5E5E; text-transform: uppercase; }
-    .kpi-val { font-family: 'Fjalla One', sans-serif; font-size: 28px; color: #161616; margin: 4px 0 2px; }
-    .kpi-sub { font-size: 12px; color: #5E5E5E; }
+    .kpi-card.indigo { border-top-color: #6366F1; }
+    .kpi-label { font-family: 'Fjalla One', sans-serif; font-size: 12px; letter-spacing: 0.05em; color: #475569; text-transform: uppercase; }
+    .kpi-val { font-family: 'Fjalla One', sans-serif; font-size: 28px; color: #1E293B; margin: 4px 0 2px; }
+    .kpi-sub { font-size: 12px; color: #475569; }
 
     /* Pack & Proposal Cards */
     .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 390px), 1fr)); gap: 18px; }
-    .pack-card { background: #FFFFFF; border: 2px solid #D0D4E8; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
+    .pack-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border: 2px solid #CBD5E1; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(30, 41, 59, 0.07); }
     .pack-card-top { padding: 20px; }
     .pack-cat-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
     .pack-cat-badge { background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; letter-spacing: 0.05em; padding: 3px 9px; text-transform: uppercase; }
-    .pack-ver-badge { background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; padding: 2px 8px; }
-    .pack-title { font-family: 'Fjalla One', sans-serif; font-size: 19px; color: #161616; margin: 0 0 8px; line-height: 1.25; }
-    .pack-desc { font-size: 13.5px; color: #4A4A4A; line-height: 1.5; margin: 0 0 12px; }
-    .pack-bambu-box { background: #EEF0FA; border-left: 4px solid #7077CF; padding: 9px 12px; font-size: 12.5px; color: #161616; margin-bottom: 12px; }
+    .pack-ver-badge { background: #EEF2FF; color: #232A68; border: 1px solid #8E93DA; font-family: 'Fjalla One', sans-serif; font-size: 11.5px; padding: 2px 8px; }
+    .pack-title { font-family: 'Fjalla One', sans-serif; font-size: 19px; color: #1E293B; margin: 0 0 8px; line-height: 1.25; }
+    .pack-desc { font-size: 13.5px; color: #334155; line-height: 1.5; margin: 0 0 12px; }
+    .pack-bambu-box { background: #EEF2FF; border-left: 4px solid #6366F1; padding: 9px 12px; font-size: 12.5px; color: #1E293B; margin-bottom: 12px; }
     .pack-meta-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-    .pack-pill { background: #F6F6F6; border: 1px solid #E2E2E2; padding: 3px 8px; font-size: 11.5px; font-weight: 600; color: #333333; }
-    .pack-files-drawer { display: none; background: #161616; color: #EEF0FA; padding: 10px 12px; font-family: monospace; font-size: 11.5px; max-height: 160px; overflow-y: auto; margin-top: 8px; border: 1px solid #7077CF; }
-    .pack-card-actions { background: #F6F6F6; border-top: 1px solid #E2E2E2; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .pack-pill { background: #F4F7FC; border: 1px solid #CBD5E1; padding: 3px 8px; font-size: 11.5px; font-weight: 600; color: #334155; }
+    .pack-files-drawer { display: none; background: #1E2660; color: #EEF0FA; padding: 10px 12px; font-family: monospace; font-size: 11.5px; max-height: 160px; overflow-y: auto; margin-top: 8px; border: 1px solid #7077CF; }
+    .pack-card-actions { background: #F4F7FC; border-top: 1px solid #CBD5E1; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
     /* Filter Bar */
-    .filter-toolbar { background: #FFFFFF; border: 2px solid #D0D4E8; padding: 16px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    .filter-toolbar { background: rgba(255, 255, 255, 0.95); border: 2px solid #CBD5E1; padding: 16px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
     .filter-btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
-    .filter-chip { background: #F6F6F6; border: 1px solid #C5CAE9; color: #161616; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; cursor: pointer; }
+    .filter-chip { background: #F4F7FC; border: 1px solid #CBD5E1; color: #1E293B; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; cursor: pointer; }
     .filter-chip:hover, .filter-chip.active { background: #232A68; color: #FFFFFF; border-color: #232A68; }
 
     /* Sales CRM Table */
-    .crm-table-wrap { background: #FFFFFF; border: 2px solid #D0D4E8; overflow-x: auto; }
+    .crm-table-wrap { background: #FFFFFF; border: 2px solid #CBD5E1; overflow-x: auto; }
     .crm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1150px; }
     .crm-table th { background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; padding: 12px 12px; text-align: left; border-right: 1px solid #303885; }
-    .crm-table td { padding: 11px 12px; border-bottom: 1px solid #E2E2E2; border-right: 1px solid #EFEFEF; vertical-align: top; color: #161616; }
-    .crm-table tr:nth-child(even) td { background: #F9FAFB; }
-    .crm-table tr:hover td { background: #EEF0FA; }
+    .crm-table td { padding: 11px 12px; border-bottom: 1px solid #E2E8F0; border-right: 1px solid #F1F5F9; vertical-align: top; color: #1E293B; }
+    .crm-table tr:nth-child(even) td { background: #F8FAFC; }
+    .crm-table tr:hover td { background: #EEF2FF; }
     .prio-badge { display: inline-block; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 2px 7px; text-transform: uppercase; }
     .prio-hot { background: #FEE2E2; color: #991B1B; border: 1px solid #EF4444; }
     .prio-warm { background: #FEF3C7; color: #92400E; border: 1px solid #F59E0B; }
-    .prio-std { background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; }
-    .crm-status-select { width: 100%; padding: 5px 6px; font-family: 'Roboto', sans-serif; font-size: 12px; font-weight: 600; border: 1px solid #7077CF; background: #FFFFFF; color: #161616; margin-bottom: 6px; }
-    .crm-notes-input { width: 100%; min-height: 52px; padding: 5px 7px; font-family: 'Roboto', sans-serif; font-size: 12px; border: 1px solid #CCCCCC; background: #FFFFFF; color: #161616; resize: vertical; }
+    .prio-std { background: #EEF2FF; color: #232A68; border: 1px solid #8E93DA; }
+    .crm-status-select { width: 100%; padding: 5px 6px; font-family: 'Roboto', sans-serif; font-size: 12px; font-weight: 600; border: 1px solid #7077CF; background: #FFFFFF; color: #1E293B; margin-bottom: 6px; }
+    .crm-notes-input { width: 100%; min-height: 52px; padding: 5px 7px; font-family: 'Roboto', sans-serif; font-size: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; color: #1E293B; resize: vertical; }
 
     /* Modal Overlay */
-    .osito-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); z-index: 20000; align-items: center; justify-content: center; padding: 20px; }
-    .osito-modal-box { width: 100%; max-width: 600px; background: #1B1B1B; color: #FFFFFF; border: 3px solid #7077CF; box-shadow: 0 24px 60px rgba(0,0,0,0.9); }
+    .osito-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(18, 26, 70, 0.80); backdrop-filter: blur(6px); z-index: 20000; align-items: center; justify-content: center; padding: 20px; }
+    .osito-modal-box { width: 100%; max-width: 600px; background: linear-gradient(145deg, rgba(24, 34, 86, 0.94) 0%, rgba(35, 42, 104, 0.96) 100%); color: #FFFFFF; border: 3px solid #7077CF; box-shadow: 0 24px 60px rgba(15, 23, 62, 0.85); }
     .osito-modal-header { background: #232A68; padding: 16px 22px; border-bottom: 2px solid #7077CF; display: flex; justify-content: space-between; align-items: center; }
     .osito-modal-body { padding: 22px; }
     .recovery-mode-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 18px; }
-    .recovery-tab-btn { background: #161616; color: #B0B5C9; border: 1px solid #303885; padding: 9px 8px; font-family: 'Fjalla One', sans-serif; font-size: 12px; text-transform: uppercase; cursor: pointer; }
-    .recovery-tab-btn.active { background: #232A68; color: #10B981; border-color: #10B981; }
+    .recovery-tab-btn { background: rgba(20, 28, 74, 0.85); color: #CBD5E1; border: 1px solid #303885; padding: 9px 8px; font-family: 'Fjalla One', sans-serif; font-size: 12px; text-transform: uppercase; cursor: pointer; }
+    .recovery-tab-btn.active { background: #232A68; color: #34D399; border-color: #10B981; }
 
     @media (max-width: 768px) {
       .packs-grid { grid-template-columns: 1fr; }
@@ -137,9 +187,175 @@
   </style>
   <style id="osito-mobile-ux-styles">
   /* ==========================================================================
-     OSITO DRONE SERVICES — UNIFIED MOBILE & TABLET UX UPGRADE
+     OSITO DRONE SERVICES — AEROSPACE HORIZON INDIGO & DAYLIGHT GLASS UX PALETTE
+     + MULTI-PHOTO PARALLAX SCROLLING ENGINE + UNIFIED MOBILE & TABLET UX
      Strict ositodrone.com Design System: Fjalla One + Roboto, 0px Sharp Corners
      ========================================================================== */
+  :root {
+    --osito-indigo: #7077CF;
+    --osito-indigo-hover: #6068C4;
+    --osito-indigo-active: #444FB6;
+    --osito-royal: #232A68;
+    --osito-royal-mid: #303885;
+    --osito-horizon-navy: #1E2660;
+    --osito-lavender: #EEF2FF;
+    --osito-lavender-border: #8E93DA;
+    --osito-sky-alabaster: #F4F7FC;
+    --osito-text-primary: #1E293B;
+    --osito-text-muted: #475569;
+    --osito-emerald: #10B981;
+    --osito-emerald-dark: #059669;
+    --osito-gold-warm: #F59E0B;
+  }
+
+  /* Multi-Photo Parallax Scrolling Sections (Real Osito Aerial & Event Photography) */
+  .osito-parallax-nav,
+  #osito-site-nav,
+  header.topbar,
+  header.admin-topbar {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.84) 0%, rgba(35, 42, 104, 0.80) 50%, rgba(22, 30, 78, 0.86) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-size: cover !important;
+    background-position: center 42% !important;
+    border-bottom: 2px solid #7077CF !important;
+    box-shadow: 0 6px 24px rgba(18, 26, 70, 0.38) !important;
+  }
+
+  .osito-parallax-dark {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(18, 28, 74, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-alt {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(24, 34, 88, 0.52) 0%, rgba(35, 42, 104, 0.60) 52%, rgba(20, 30, 78, 0.64) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-sunset {
+    background-color: #232A68 !important;
+    background-image: linear-gradient(135deg, rgba(35, 42, 104, 0.50) 0%, rgba(48, 56, 133, 0.58) 52%, rgba(24, 32, 82, 0.64) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-twilight {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.50) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 84, 0.64) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-baybridge {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 32, 84, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 82, 0.62) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sutromoon {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(25, 34, 90, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 30, 80, 0.62) 100%), url('./assets/d-sutro-tower-moonrise.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-maker {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/maker-faire-youth-pilots-arena.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sierra {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 34, 82, 0.48) 0%, rgba(35, 42, 104, 0.56) 52%, rgba(22, 32, 80, 0.62) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-mural {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(22, 32, 84, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(20, 30, 78, 0.66) 100%), url('./assets/d-box-shop-murals-pano.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-footer,
+  footer {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 28, 74, 0.72) 0%, rgba(35, 42, 104, 0.76) 50%, rgba(18, 26, 70, 0.80) 100%), url('./assets/d-sf-freeway-skyline-twilight.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-top: 3px solid #7077CF !important;
+  }
+
+  /* Daylight Aerial Mist Parallax Surfaces (Light Sections) */
+  .osito-parallax-daylight {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.88) 0%, rgba(238, 242, 255, 0.84) 50%, rgba(244, 247, 252, 0.90) 100%), url('./assets/d-sf-residential-nadir-ortho.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-bay {
+    background-color: #EEF2FF !important;
+    background-image: linear-gradient(180deg, rgba(238, 242, 255, 0.86) 0%, rgba(244, 247, 252, 0.82) 50%, rgba(238, 242, 255, 0.88) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-sierra {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.86) 0%, rgba(238, 242, 255, 0.82) 50%, rgba(244, 247, 252, 0.88) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  /* Translucent Aerospace Glassmorphic Cards Inside Parallax Sections */
+  .osito-glass-card {
+    background: linear-gradient(145deg, rgba(24, 34, 86, 0.80) 0%, rgba(35, 42, 104, 0.86) 100%) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(142, 147, 218, 0.55) !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 62, 0.35) !important;
+  }
+
+  .osito-glass-card-sub {
+    background: rgba(20, 30, 78, 0.74) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+
   .osito-mobile-header-actions {
     display: none;
   }
@@ -164,6 +380,7 @@
   #osito-coloring-books-downloads,
   #osito-academy-newsletter-inquiry,
   #osito-commercial-newsletter-inquiry,
+  #osito-academy-live-photo-showcase,
   #teen-exam,
   #interactive-calc,
   #chapter-1 {
@@ -189,7 +406,10 @@
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.90) 0%, rgba(35, 42, 104, 0.88) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
+      background-position: center 42% !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       overflow: visible !important;
@@ -279,10 +499,12 @@
       flex-wrap: nowrap !important;
       align-items: stretch !important;
       gap: 0 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(180deg, rgba(24, 34, 86, 0.94) 0%, rgba(35, 42, 104, 0.96) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #303885 !important;
       border-bottom: 2px solid #7077CF !important;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85) !important;
+      box-shadow: 0 18px 40px rgba(15, 23, 62, 0.85) !important;
       margin-top: 0 !important;
       padding: 6px 0 12px !important;
       max-height: calc(100vh - 54px) !important;
@@ -315,7 +537,7 @@
       height: auto !important;
       font-size: 13.5px !important;
       border: none !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       text-align: left !important;
       pointer-events: auto !important;
       touch-action: manipulation !important;
@@ -339,10 +561,10 @@
       min-width: 0 !important;
       flex-shrink: 0 !important;
       box-sizing: border-box !important;
-      background: #1B1F3B !important;
+      background: rgba(20, 28, 74, 0.92) !important;
       border: none !important;
       border-left: 3px solid #7077CF !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       box-shadow: none !important;
       padding: 2px 0 !important;
     }
@@ -389,14 +611,24 @@
       -webkit-overflow-scrolling: touch !important;
     }
 
-    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter */
+    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter (JS parallax handles smooth offset) */
     .osito-parallax-dark,
     .osito-parallax-dark-alt,
     .osito-parallax-dark-sunset,
+    .osito-parallax-twilight,
+    .osito-parallax-baybridge,
+    .osito-parallax-sutromoon,
+    .osito-parallax-maker,
+    .osito-parallax-sierra,
+    .osito-parallax-mural,
+    .osito-parallax-footer,
+    .osito-parallax-daylight,
+    .osito-parallax-daylight-bay,
+    .osito-parallax-daylight-sierra,
+    footer,
     [style*="background-attachment: fixed"],
     [style*="background-attachment:fixed"] {
       background-attachment: scroll !important;
-      background-position: center center !important;
       background-size: cover !important;
     }
   }
@@ -445,7 +677,7 @@
     .design-mobile-tabs {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
-      background: #161616 !important;
+      background: #1E2660 !important;
       border-bottom: 2px solid #7077CF !important;
       position: sticky !important;
       top: 52px !important;
@@ -454,10 +686,10 @@
     }
     .stl-mob-tab,
     .design-mob-tab {
-      background: #1B1B1B !important;
+      background: rgba(24, 34, 86, 0.92) !important;
       color: #CBD5E1 !important;
       border: none !important;
-      border-right: 1px solid #2E3468 !important;
+      border-right: 1px solid #303885 !important;
       padding: 9px 4px !important;
       font-family: 'Fjalla One', sans-serif !important;
       font-size: 11px !important;
@@ -658,7 +890,7 @@
       max-width: 100% !important;
       height: auto !important;
       border-right: none !important;
-      border-bottom: 1px solid #2e2e2e !important;
+      border-bottom: 1px solid #303885 !important;
     }
   }
 
@@ -925,7 +1157,7 @@
       font-size: 11px !important;
       letter-spacing: 0.05em !important;
       color: #232A68 !important;
-      background: #EEF0FA !important;
+      background: #EEF2FF !important;
       border: 1px solid #8E93DA !important;
       border-bottom: none !important;
       padding: 5px 10px !important;
@@ -937,7 +1169,7 @@
       font-size: 12px !important;
     }
 
-    /* Sticky Mobile Bottom Quick-Action Bar */
+    /* Sticky Mobile Bottom Quick-Action Bar (Parallax Horizon Navy) */
     #osito-mobile-bottom-bar {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
@@ -946,9 +1178,11 @@
       left: 0 !important;
       right: 0 !important;
       z-index: 9998 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.92) 0%, rgba(35, 42, 104, 0.90) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #7077CF !important;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55) !important;
+      box-shadow: 0 -4px 16px rgba(15, 23, 62, 0.55) !important;
     }
     #osito-mobile-bottom-bar a {
       display: flex !important;
@@ -964,7 +1198,7 @@
       font-size: 10.5px !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
-      border-right: 1px solid #2A2A2A !important;
+      border-right: 1px solid rgba(112, 119, 207, 0.35) !important;
       border-radius: 0px !important;
       text-align: center !important;
       line-height: 1.15 !important;
@@ -1149,12 +1383,12 @@
 
         <!-- First-Time Co-Founder Setup & Recovery Key Drawer -->
         <div style="margin-top:20px; border-top:1px solid #303885; padding-top:14px;">
-          <button type="button" onclick="toggleFirstTimeSetupDrawer()" style="width:100%; background:#161616; border:1px solid #7077CF; color:#EEF0FA; padding:9px 12px; font-family:'Fjalla One',sans-serif; font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <button type="button" onclick="toggleFirstTimeSetupDrawer()" style="width:100%; background:rgba(24, 34, 86, 0.88); border:1px solid #7077CF; color:#EEF0FA; padding:9px 12px; font-family:'Fjalla One',sans-serif; font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
             <span>FIRST-TIME CO-FOUNDER LOGIN &amp; RECOVERY KEYS</span>
             <span id="setup-drawer-indicator">VIEW CREDENTIALS</span>
           </button>
-          <div id="first-time-setup-drawer" style="display:none; background:#161616; border:1px solid #7077CF; border-top:none; padding:14px; font-size:12.5px; color:#EEF0FA; line-height:1.55;">
-            <p style="margin:0 0 10px; color:#10B981; font-weight:700;">
+          <div id="first-time-setup-drawer" style="display:none; background:rgba(20, 28, 74, 0.92); border:1px solid #7077CF; border-top:none; padding:14px; font-size:12.5px; color:#EEF0FA; line-height:1.55;">
+            <p style="margin:0 0 10px; color:#34D399; font-weight:700;">
               Click any row below to auto-fill your initial Co-Founder login, then change your custom password inside the Security tab:
             </p>
             <div style="display:grid; gap:8px;">
@@ -1194,9 +1428,9 @@
       <div class="dash-container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
         <div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;">
-            <span style="background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11.5px; font-weight:700; padding:3px 9px; text-transform:uppercase;">AUTHENTICATED STAFF SESSION</span>
-            <span id="dash-user-role-badge" style="background:#161616; color:#EEF0FA; border:1px solid #7077CF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:3px 9px; text-transform:uppercase;">COO | PRINCIPAL ARCHITECT</span>
-            <span style="font-size:12px; color:#B0B5C9;">Release: v2026.11-Staff-Portal (No GitHub Required)</span>
+            <span style="background:#10B981; color:#0F172A; font-family:'Fjalla One',sans-serif; font-size:11.5px; font-weight:700; padding:3px 9px; text-transform:uppercase;">AUTHENTICATED STAFF SESSION</span>
+            <span id="dash-user-role-badge" style="background:rgba(24, 34, 86, 0.88); color:#EEF0FA; border:1px solid #7077CF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:3px 9px; text-transform:uppercase;">COO | PRINCIPAL ARCHITECT</span>
+            <span style="font-size:12px; color:#CBD5E1;">Release: v2026.11-Staff-Portal (No GitHub Required)</span>
           </div>
           <h1 id="dash-welcome-heading" style="font-family:'Fjalla One',sans-serif; font-size:28px; margin:0; text-transform:uppercase; letter-spacing:0.04em;">
             WELCOME BACK, ALAN MUSSELMAN
@@ -1678,7 +1912,7 @@ Osito Drone Services | San Francisco, CA</textarea>
               <span class="form-label" style="color:#232A68; margin:0;">LIVE BRANDED HTML EMAIL PREVIEW</span>
               <span id="nlPreviewRecipientBadge" style="background:#EEF0FA; color:#232A68; border:1px solid #8E93DA; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:2px 8px;">0 RECIPIENTS SELECTED</span>
             </div>
-            <div id="nlLivePreviewBox" style="border:2px solid #7077CF; background:#161616; color:#FFFFFF; padding:0; overflow:hidden; margin-bottom:18px;"></div>
+            <div id="nlLivePreviewBox" style="border:2px solid #7077CF; background:#1E2660; color:#FFFFFF; padding:0; overflow:hidden; margin-bottom:18px;"></div>
 
             <h4 style="font-family:'Fjalla One',sans-serif; font-size:15px; color:#232A68; margin:0 0 8px; text-transform:uppercase;">
               SENT NEWSLETTER CAMPAIGN LOG
@@ -1971,7 +2205,7 @@ Osito Drone Services | San Francisco, CA</textarea>
   </div>
 
   <!-- Footer -->
-  <footer style="background:#161616; color:#B0B5C9; padding:24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
+  <footer class="osito-parallax-footer" style="color:#E2E8F0; padding:24px; text-align:center; border-top:2px solid #7077CF; font-size:13px;">
     <div style="max-width:1220px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
       <div>Copyright (c) 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA; text-decoration:none;">info@ositodrone.com</a></div>
       <div style="display:flex; gap:14px; flex-wrap:wrap;">
@@ -1980,7 +2214,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Commercial</a>
         <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Flight Sim</a>
         <a href="./toolbox.html" style="color:#EEF0FA; text-decoration:none;">Toolbox</a>
-        <a href="./admin.html" style="color:#10B981; text-decoration:none; font-weight:700;">Staff Portal</a>
+        <a href="./admin.html" style="color:#34D399; text-decoration:none; font-weight:700;">Staff Portal</a>
         <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
       </div>
     </div>
@@ -4175,7 +4409,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         + bodyHtml
         + (ctaText ? '<div style="margin:18px 0 10px;"><a href="' + escapeHtmlSafe(ctaUrl || '#') + '" target="_blank" rel="noopener" style="display:inline-block; background:#10B981; color:#161616; font-family:\'Fjalla One\',sans-serif; font-size:13.5px; font-weight:700; text-decoration:none; padding:10px 18px; border:2px solid #059669; text-transform:uppercase;">' + escapeHtmlSafe(ctaText) + '</a></div>' : '')
         + '</div>'
-        + '<div style="background:#161616; color:#B0B5C9; padding:12px 20px; font-size:11.5px; border-top:2px solid #232A68;">'
+        + '<div style="background:#1E2660; color:#E0E7FF; padding:12px 20px; font-size:11.5px; border-top:2px solid #7077CF;">'
         + '  Sent by Osito Drone Services (<code>info@ositodrone.com</code>) | San Francisco, CA | Verified Subscriber: ' + escapeHtmlSafe(recEmail)
         + '</div>'
         + '</div>';
@@ -4765,6 +4999,36 @@ Osito Drone Services | San Francisco, CA</textarea>
     window.scrollToOsitoSection = scrollToTargetHashElement;
     window.closeOsitoMobileNav = closeOsitoMobileNav;
 
+    /* Universal Multi-Photo Smooth Parallax Scroll Engine */
+    var parallaxTicking = false;
+    function updateOsitoParallax() {
+      parallaxTicking = false;
+      try {
+        if (typeof document.querySelectorAll !== "function") return;
+        var secs = document.querySelectorAll(
+          ".osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset, " +
+          ".osito-parallax-twilight, .osito-parallax-baybridge, .osito-parallax-sutromoon, " +
+          ".osito-parallax-maker, .osito-parallax-sierra, .osito-parallax-mural, " +
+          ".osito-parallax-footer, .osito-parallax-daylight, .osito-parallax-daylight-bay, " +
+          ".osito-parallax-daylight-sierra"
+        );
+        var vh = (typeof window !== "undefined" && window.innerHeight) ? window.innerHeight : 800;
+        for (var i = 0; i < secs.length; i++) {
+          var el = secs[i];
+          if (!el || typeof el.getBoundingClientRect !== "function" || !el.style) continue;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > vh + 120) continue;
+          var centerDelta = (rect.top + rect.height * 0.5) - (vh * 0.5);
+          var offset = Math.round(centerDelta * -0.14);
+          if (offset > 75) offset = 75;
+          if (offset < -75) offset = -75;
+          el.style.backgroundPosition = "center calc(50% + " + offset + "px)";
+        }
+      } catch (pErr) {}
+    }
+
+    window.updateOsitoParallax = updateOsitoParallax;
+
     window.toggleOsitoMobileNav = function(e) {
       try {
         if (e && e.stopPropagation) e.stopPropagation();
@@ -4787,6 +5051,21 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function initOsitoMobileNav() {
       try {
+        if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
+          window.addEventListener("scroll", function() {
+            if (!parallaxTicking) {
+              parallaxTicking = true;
+              if (typeof window.requestAnimationFrame === "function") {
+                window.requestAnimationFrame(updateOsitoParallax);
+              } else {
+                setTimeout(updateOsitoParallax, 16);
+              }
+            }
+          }, { passive: true });
+          window.addEventListener("resize", updateOsitoParallax, { passive: true });
+        }
+        updateOsitoParallax();
+
         if (typeof document.addEventListener === "function") {
           document.addEventListener("touchstart", function() {
             lastPointerWasTouch = true;

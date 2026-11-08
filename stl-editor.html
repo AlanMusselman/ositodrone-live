@@ -12,7 +12,10 @@
     body {
       margin: 0;
       padding: 0;
-      background: #161616;
+      background-color: #161E54;
+      background-image: linear-gradient(180deg, rgba(18, 25, 68, 0.84) 0%, rgba(30, 38, 96, 0.90) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg');
+      background-size: cover;
+      background-position: center;
       color: #FFFFFF;
       font-family: 'Roboto', sans-serif;
       height: 100vh;
@@ -21,7 +24,10 @@
       overflow: hidden;
     }
     .topbar {
-      background: #161616;
+      background-color: #161E54;
+      background-image: linear-gradient(90deg, rgba(22, 30, 84, 0.92) 0%, rgba(35, 42, 104, 0.90) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg');
+      background-size: cover;
+      background-position: center;
       border-bottom: 2px solid #7077CF;
       padding: 9px 16px;
       display: flex;
@@ -84,7 +90,8 @@
       min-height: 0;
     }
     .sidebar {
-      background: #1B1B1B;
+      background: rgba(22, 30, 84, 0.86);
+      backdrop-filter: blur(10px);
       border-right: 1px solid #2E3468;
       padding: 12px;
       overflow-y: auto;
@@ -93,7 +100,8 @@
       gap: 14px;
     }
     .sidebar-right {
-      background: #1B1B1B;
+      background: rgba(22, 30, 84, 0.86);
+      backdrop-filter: blur(10px);
       border-left: 1px solid #2E3468;
       padding: 12px;
       overflow-y: auto;
@@ -121,7 +129,7 @@
       font-size: 11.5px;
       font-weight: 500;
       padding: 7px 9px;
-      background: #232329;
+      background: rgba(35, 42, 104, 0.78);
       border: 1px solid #383E70;
       color: #EEF0FA;
       text-align: left;
@@ -139,7 +147,10 @@
     }
     .viewport-wrap {
       position: relative;
-      background: #0B0E17;
+      background-color: #121842;
+      background-image: linear-gradient(180deg, rgba(16, 22, 60, 0.78) 0%, rgba(26, 34, 88, 0.84) 100%), url('./assets/d-sf-ferry-building-night.jpg');
+      background-size: cover;
+      background-position: center;
       display: flex;
       flex-direction: column;
       min-height: 0;
@@ -155,7 +166,7 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: rgba(22, 22, 22, 0.90);
+      background: rgba(24, 34, 86, 0.90);
       border: 1px solid #7077CF;
       padding: 8px 12px;
       font-size: 12px;
@@ -176,7 +187,7 @@
     }
     .hud-bottom > div {
       pointer-events: auto;
-      background: rgba(22, 22, 22, 0.92);
+      background: rgba(24, 34, 86, 0.92);
       border: 1px solid #303885;
       padding: 6px 10px;
       display: flex;
@@ -199,7 +210,7 @@
     }
     .control-row input[type="number"] {
       width: 100%;
-      background: #11131C;
+      background: rgba(18, 25, 68, 0.90);
       border: 1px solid #383E70;
       color: #FFFFFF;
       padding: 4px 6px;
@@ -208,7 +219,7 @@
     }
     select, input[type="text"] {
       width: 100%;
-      background: #11131C;
+      background: rgba(18, 25, 68, 0.90);
       border: 1px solid #7077CF;
       color: #FFFFFF;
       padding: 7px 9px;
@@ -216,7 +227,7 @@
       font-family: 'Roboto', sans-serif;
     }
     .stat-box {
-      background: #121521;
+      background: rgba(24, 34, 86, 0.88);
       border: 1px solid #303885;
       padding: 9px 11px;
     }
@@ -232,7 +243,7 @@
       max-height: 135px;
       overflow-y: auto;
       border: 1px solid #2E3468;
-      background: #11131C;
+      background: rgba(18, 25, 68, 0.90);
     }
     .part-item {
       padding: 6px 9px;
@@ -261,7 +272,7 @@
       margin-bottom: 8px;
     }
   
-        #osito-site-nav { position: sticky; top: 0; z-index: 10000; background: #161616; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
+        #osito-site-nav { position: sticky; top: 0; z-index: 10000; background-color: #161E54; background-image: linear-gradient(90deg, rgba(22, 30, 84, 0.92) 0%, rgba(35, 42, 104, 0.90) 50%, rgba(22, 30, 84, 0.92) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg'); background-size: cover; background-position: center 42%; border-bottom: 2px solid #7077CF; padding: 8px 20px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
     #osito-site-nav * { border-radius: 0px !important; box-sizing: border-box; }
     .osito-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .osito-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; }
@@ -273,7 +284,7 @@
     .osito-nav-item.sim-link:hover { background: #444FB6; border-color: #FFFFFF; }
     .osito-nav-caret { display: inline-block !important; vertical-align: middle; margin-left: 5px; }
     .osito-dropdown { position: relative; display: inline-block; }
-    .osito-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 240px; background: #1B1B1B; border: 1px solid #7077CF; z-index: 20000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+    .osito-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 240px; background: linear-gradient(180deg, rgba(24, 34, 86, 0.97) 0%, rgba(35, 42, 104, 0.98) 100%); border: 1px solid #7077CF; z-index: 20000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
     .osito-dropdown:hover .osito-dropdown-menu { display: block; }
     .osito-dropdown-menu a { display: block; padding: 10px 14px; font-family: 'Fjalla One', sans-serif; font-size: 13px; letter-spacing: 0.04em; color: #EEF0FA; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid #232A68; }
     .osito-dropdown-menu a:hover { background: #232A68; color: #FFFFFF; }
@@ -285,9 +296,175 @@
   </style>
   <style id="osito-mobile-ux-styles">
   /* ==========================================================================
-     OSITO DRONE SERVICES — UNIFIED MOBILE & TABLET UX UPGRADE
+     OSITO DRONE SERVICES — AEROSPACE HORIZON INDIGO & DAYLIGHT GLASS UX PALETTE
+     + MULTI-PHOTO PARALLAX SCROLLING ENGINE + UNIFIED MOBILE & TABLET UX
      Strict ositodrone.com Design System: Fjalla One + Roboto, 0px Sharp Corners
      ========================================================================== */
+  :root {
+    --osito-indigo: #7077CF;
+    --osito-indigo-hover: #6068C4;
+    --osito-indigo-active: #444FB6;
+    --osito-royal: #232A68;
+    --osito-royal-mid: #303885;
+    --osito-horizon-navy: #1E2660;
+    --osito-lavender: #EEF2FF;
+    --osito-lavender-border: #8E93DA;
+    --osito-sky-alabaster: #F4F7FC;
+    --osito-text-primary: #1E293B;
+    --osito-text-muted: #475569;
+    --osito-emerald: #10B981;
+    --osito-emerald-dark: #059669;
+    --osito-gold-warm: #F59E0B;
+  }
+
+  /* Multi-Photo Parallax Scrolling Sections (Real Osito Aerial & Event Photography) */
+  .osito-parallax-nav,
+  #osito-site-nav,
+  header.topbar,
+  header.admin-topbar {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.84) 0%, rgba(35, 42, 104, 0.80) 50%, rgba(22, 30, 78, 0.86) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-size: cover !important;
+    background-position: center 42% !important;
+    border-bottom: 2px solid #7077CF !important;
+    box-shadow: 0 6px 24px rgba(18, 26, 70, 0.38) !important;
+  }
+
+  .osito-parallax-dark {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(18, 28, 74, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-alt {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(24, 34, 88, 0.52) 0%, rgba(35, 42, 104, 0.60) 52%, rgba(20, 30, 78, 0.64) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-sunset {
+    background-color: #232A68 !important;
+    background-image: linear-gradient(135deg, rgba(35, 42, 104, 0.50) 0%, rgba(48, 56, 133, 0.58) 52%, rgba(24, 32, 82, 0.64) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-twilight {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.50) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 84, 0.64) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-baybridge {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 32, 84, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 82, 0.62) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sutromoon {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(25, 34, 90, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 30, 80, 0.62) 100%), url('./assets/d-sutro-tower-moonrise.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-maker {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/maker-faire-youth-pilots-arena.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sierra {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 34, 82, 0.48) 0%, rgba(35, 42, 104, 0.56) 52%, rgba(22, 32, 80, 0.62) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-mural {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(22, 32, 84, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(20, 30, 78, 0.66) 100%), url('./assets/d-box-shop-murals-pano.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-footer,
+  footer {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 28, 74, 0.72) 0%, rgba(35, 42, 104, 0.76) 50%, rgba(18, 26, 70, 0.80) 100%), url('./assets/d-sf-freeway-skyline-twilight.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-top: 3px solid #7077CF !important;
+  }
+
+  /* Daylight Aerial Mist Parallax Surfaces (Light Sections) */
+  .osito-parallax-daylight {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.88) 0%, rgba(238, 242, 255, 0.84) 50%, rgba(244, 247, 252, 0.90) 100%), url('./assets/d-sf-residential-nadir-ortho.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-bay {
+    background-color: #EEF2FF !important;
+    background-image: linear-gradient(180deg, rgba(238, 242, 255, 0.86) 0%, rgba(244, 247, 252, 0.82) 50%, rgba(238, 242, 255, 0.88) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-sierra {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.86) 0%, rgba(238, 242, 255, 0.82) 50%, rgba(244, 247, 252, 0.88) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  /* Translucent Aerospace Glassmorphic Cards Inside Parallax Sections */
+  .osito-glass-card {
+    background: linear-gradient(145deg, rgba(24, 34, 86, 0.80) 0%, rgba(35, 42, 104, 0.86) 100%) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(142, 147, 218, 0.55) !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 62, 0.35) !important;
+  }
+
+  .osito-glass-card-sub {
+    background: rgba(20, 30, 78, 0.74) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+
   .osito-mobile-header-actions {
     display: none;
   }
@@ -312,6 +489,7 @@
   #osito-coloring-books-downloads,
   #osito-academy-newsletter-inquiry,
   #osito-commercial-newsletter-inquiry,
+  #osito-academy-live-photo-showcase,
   #teen-exam,
   #interactive-calc,
   #chapter-1 {
@@ -337,7 +515,10 @@
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.90) 0%, rgba(35, 42, 104, 0.88) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
+      background-position: center 42% !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       overflow: visible !important;
@@ -427,10 +608,12 @@
       flex-wrap: nowrap !important;
       align-items: stretch !important;
       gap: 0 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(180deg, rgba(24, 34, 86, 0.94) 0%, rgba(35, 42, 104, 0.96) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #303885 !important;
       border-bottom: 2px solid #7077CF !important;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85) !important;
+      box-shadow: 0 18px 40px rgba(15, 23, 62, 0.85) !important;
       margin-top: 0 !important;
       padding: 6px 0 12px !important;
       max-height: calc(100vh - 54px) !important;
@@ -463,7 +646,7 @@
       height: auto !important;
       font-size: 13.5px !important;
       border: none !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       text-align: left !important;
       pointer-events: auto !important;
       touch-action: manipulation !important;
@@ -487,10 +670,10 @@
       min-width: 0 !important;
       flex-shrink: 0 !important;
       box-sizing: border-box !important;
-      background: #1B1F3B !important;
+      background: rgba(20, 28, 74, 0.92) !important;
       border: none !important;
       border-left: 3px solid #7077CF !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       box-shadow: none !important;
       padding: 2px 0 !important;
     }
@@ -537,14 +720,24 @@
       -webkit-overflow-scrolling: touch !important;
     }
 
-    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter */
+    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter (JS parallax handles smooth offset) */
     .osito-parallax-dark,
     .osito-parallax-dark-alt,
     .osito-parallax-dark-sunset,
+    .osito-parallax-twilight,
+    .osito-parallax-baybridge,
+    .osito-parallax-sutromoon,
+    .osito-parallax-maker,
+    .osito-parallax-sierra,
+    .osito-parallax-mural,
+    .osito-parallax-footer,
+    .osito-parallax-daylight,
+    .osito-parallax-daylight-bay,
+    .osito-parallax-daylight-sierra,
+    footer,
     [style*="background-attachment: fixed"],
     [style*="background-attachment:fixed"] {
       background-attachment: scroll !important;
-      background-position: center center !important;
       background-size: cover !important;
     }
   }
@@ -593,7 +786,7 @@
     .design-mobile-tabs {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
-      background: #161616 !important;
+      background: #1E2660 !important;
       border-bottom: 2px solid #7077CF !important;
       position: sticky !important;
       top: 52px !important;
@@ -602,10 +795,10 @@
     }
     .stl-mob-tab,
     .design-mob-tab {
-      background: #1B1B1B !important;
+      background: rgba(24, 34, 86, 0.92) !important;
       color: #CBD5E1 !important;
       border: none !important;
-      border-right: 1px solid #2E3468 !important;
+      border-right: 1px solid #303885 !important;
       padding: 9px 4px !important;
       font-family: 'Fjalla One', sans-serif !important;
       font-size: 11px !important;
@@ -806,7 +999,7 @@
       max-width: 100% !important;
       height: auto !important;
       border-right: none !important;
-      border-bottom: 1px solid #2e2e2e !important;
+      border-bottom: 1px solid #303885 !important;
     }
   }
 
@@ -1073,7 +1266,7 @@
       font-size: 11px !important;
       letter-spacing: 0.05em !important;
       color: #232A68 !important;
-      background: #EEF0FA !important;
+      background: #EEF2FF !important;
       border: 1px solid #8E93DA !important;
       border-bottom: none !important;
       padding: 5px 10px !important;
@@ -1085,7 +1278,7 @@
       font-size: 12px !important;
     }
 
-    /* Sticky Mobile Bottom Quick-Action Bar */
+    /* Sticky Mobile Bottom Quick-Action Bar (Parallax Horizon Navy) */
     #osito-mobile-bottom-bar {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
@@ -1094,9 +1287,11 @@
       left: 0 !important;
       right: 0 !important;
       z-index: 9998 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.92) 0%, rgba(35, 42, 104, 0.90) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #7077CF !important;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55) !important;
+      box-shadow: 0 -4px 16px rgba(15, 23, 62, 0.55) !important;
     }
     #osito-mobile-bottom-bar a {
       display: flex !important;
@@ -1112,7 +1307,7 @@
       font-size: 10.5px !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
-      border-right: 1px solid #2A2A2A !important;
+      border-right: 1px solid rgba(112, 119, 207, 0.35) !important;
       border-radius: 0px !important;
       text-align: center !important;
       line-height: 1.15 !important;
@@ -1259,7 +1454,7 @@
     <div class="sidebar">
       
       <!-- 0. Custom .STL Upload & Drag-and-Drop Inspector (Public Website Edition - Zero Proprietary STLs) -->
-      <div style="background:#16192B; border:1px solid #7077CF; padding:12px;">
+      <div style="background:#232A68; border:1px solid #7077CF; padding:12px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
           <h2 class="sec-head" style="margin:0; border:none; padding:0; color:#EEF0FA;">0. IMPORT &amp; INSPECT YOUR .STL</h2>
           <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:10px; padding:2px 6px;">BINARY &amp; ASCII</span>
@@ -2533,6 +2728,36 @@
     window.scrollToOsitoSection = scrollToTargetHashElement;
     window.closeOsitoMobileNav = closeOsitoMobileNav;
 
+    /* Universal Multi-Photo Smooth Parallax Scroll Engine */
+    var parallaxTicking = false;
+    function updateOsitoParallax() {
+      parallaxTicking = false;
+      try {
+        if (typeof document.querySelectorAll !== "function") return;
+        var secs = document.querySelectorAll(
+          ".osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset, " +
+          ".osito-parallax-twilight, .osito-parallax-baybridge, .osito-parallax-sutromoon, " +
+          ".osito-parallax-maker, .osito-parallax-sierra, .osito-parallax-mural, " +
+          ".osito-parallax-footer, .osito-parallax-daylight, .osito-parallax-daylight-bay, " +
+          ".osito-parallax-daylight-sierra"
+        );
+        var vh = (typeof window !== "undefined" && window.innerHeight) ? window.innerHeight : 800;
+        for (var i = 0; i < secs.length; i++) {
+          var el = secs[i];
+          if (!el || typeof el.getBoundingClientRect !== "function" || !el.style) continue;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > vh + 120) continue;
+          var centerDelta = (rect.top + rect.height * 0.5) - (vh * 0.5);
+          var offset = Math.round(centerDelta * -0.14);
+          if (offset > 75) offset = 75;
+          if (offset < -75) offset = -75;
+          el.style.backgroundPosition = "center calc(50% + " + offset + "px)";
+        }
+      } catch (pErr) {}
+    }
+
+    window.updateOsitoParallax = updateOsitoParallax;
+
     window.toggleOsitoMobileNav = function(e) {
       try {
         if (e && e.stopPropagation) e.stopPropagation();
@@ -2555,6 +2780,21 @@
 
     function initOsitoMobileNav() {
       try {
+        if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
+          window.addEventListener("scroll", function() {
+            if (!parallaxTicking) {
+              parallaxTicking = true;
+              if (typeof window.requestAnimationFrame === "function") {
+                window.requestAnimationFrame(updateOsitoParallax);
+              } else {
+                setTimeout(updateOsitoParallax, 16);
+              }
+            }
+          }, { passive: true });
+          window.addEventListener("resize", updateOsitoParallax, { passive: true });
+        }
+        updateOsitoParallax();
+
         if (typeof document.addEventListener === "function") {
           document.addEventListener("touchstart", function() {
             lastPointerWasTouch = true;

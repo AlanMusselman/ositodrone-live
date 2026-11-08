@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-    body { margin: 0; background: #161616; color: #FFFFFF; font-family: 'Roboto', sans-serif; }
+    body { margin: 0; background-color: #1A2258; background-image: linear-gradient(180deg, rgba(20, 28, 76, 0.76) 0%, rgba(35, 42, 104, 0.84) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg'); background-attachment: fixed; background-size: cover; background-position: center; color: #FFFFFF; font-family: 'Roboto', sans-serif; }
     * { border-radius: 0px !important; box-sizing: border-box; }
         /* Unified Top Navigation Bar (#osito-site-nav) */
     #osito-site-nav {
       position: sticky;
       top: 0;
       z-index: 10000;
-      background: rgba(22, 22, 22, 0.96);
+      background-color: #161E54; background-image: linear-gradient(90deg, rgba(22, 30, 84, 0.92) 0%, rgba(35, 42, 104, 0.90) 50%, rgba(22, 30, 84, 0.92) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg'); background-size: cover; background-position: center 42%;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 2px solid #7077CF;
@@ -84,7 +84,7 @@
       top: 100%;
       left: 0;
       min-width: 220px;
-      background: #1B1B1B;
+      background: linear-gradient(180deg, rgba(24, 34, 86, 0.97) 0%, rgba(35, 42, 104, 0.98) 100%);
       border: 1px solid #7077CF;
       z-index: 10001;
       box-shadow: 0 8px 24px rgba(0,0,0,0.7);
@@ -113,8 +113,8 @@
     }
     /* Scrolling Aerial Parallax Dark Containers */
     .osito-parallax-dark {
-      background-color: #161616;
-      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+      background-color: #1A2258;
+      background-image: linear-gradient(180deg, rgba(20, 28, 76, 0.72) 0%, rgba(35, 42, 104, 0.80) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
       background-attachment: fixed;
       background-position: center center;
       background-repeat: no-repeat;
@@ -122,8 +122,8 @@
       position: relative;
     }
     .osito-parallax-dark-alt {
-      background-color: #161616;
-      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+      background-color: #1A2258;
+      background-image: linear-gradient(180deg, rgba(20, 28, 76, 0.70) 0%, rgba(35, 42, 104, 0.78) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
       background-attachment: fixed;
       background-position: center center;
       background-repeat: no-repeat;
@@ -131,8 +131,8 @@
       position: relative;
     }
     .osito-parallax-dark-sunset {
-      background-color: #161616;
-      background-image: linear-gradient(180deg, rgba(14, 16, 26, 0.84) 0%, rgba(22, 22, 22, 0.90) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+      background-color: #1A2258;
+      background-image: linear-gradient(180deg, rgba(26, 30, 82, 0.68) 0%, rgba(35, 42, 104, 0.78) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
       background-attachment: fixed;
       background-position: center center;
       background-repeat: no-repeat;
@@ -153,7 +153,7 @@
     .cb-card { background: #FFFFFF; border: 2px solid #232A68; display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .cb-card:hover { border-color: #7077CF; box-shadow: 0 8px 24px rgba(35, 42, 104, 0.14); }
     .cb-card-top { display: grid; grid-template-columns: 128px 1fr; gap: 16px; padding: 18px; border-bottom: 1px solid #E2E2E2; align-items: start; }
-    .cb-cover-wrap { position: relative; border: 2px solid #232A68; background: #161616; overflow: hidden; }
+    .cb-cover-wrap { position: relative; border: 2px solid #232A68; background: #1E2660; overflow: hidden; }
     .cb-cover-wrap img { width: 100%; height: 168px; object-fit: cover; display: block; }
     .cb-rank-tag { position: absolute; top: 0; left: 0; background: #232A68; color: #FFFFFF; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 3px 8px; letter-spacing: 0.05em; border-right: 1px solid #7077CF; border-bottom: 1px solid #7077CF; }
     .cb-meta-cat { display: inline-block; background: #EEF0FA; color: #232A68; border: 1px solid #8E93DA; font-family: 'Fjalla One', sans-serif; font-size: 11px; padding: 3px 8px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
@@ -171,9 +171,175 @@
   </style>
   <style id="osito-mobile-ux-styles">
   /* ==========================================================================
-     OSITO DRONE SERVICES — UNIFIED MOBILE & TABLET UX UPGRADE
+     OSITO DRONE SERVICES — AEROSPACE HORIZON INDIGO & DAYLIGHT GLASS UX PALETTE
+     + MULTI-PHOTO PARALLAX SCROLLING ENGINE + UNIFIED MOBILE & TABLET UX
      Strict ositodrone.com Design System: Fjalla One + Roboto, 0px Sharp Corners
      ========================================================================== */
+  :root {
+    --osito-indigo: #7077CF;
+    --osito-indigo-hover: #6068C4;
+    --osito-indigo-active: #444FB6;
+    --osito-royal: #232A68;
+    --osito-royal-mid: #303885;
+    --osito-horizon-navy: #1E2660;
+    --osito-lavender: #EEF2FF;
+    --osito-lavender-border: #8E93DA;
+    --osito-sky-alabaster: #F4F7FC;
+    --osito-text-primary: #1E293B;
+    --osito-text-muted: #475569;
+    --osito-emerald: #10B981;
+    --osito-emerald-dark: #059669;
+    --osito-gold-warm: #F59E0B;
+  }
+
+  /* Multi-Photo Parallax Scrolling Sections (Real Osito Aerial & Event Photography) */
+  .osito-parallax-nav,
+  #osito-site-nav,
+  header.topbar,
+  header.admin-topbar {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.84) 0%, rgba(35, 42, 104, 0.80) 50%, rgba(22, 30, 78, 0.86) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-size: cover !important;
+    background-position: center 42% !important;
+    border-bottom: 2px solid #7077CF !important;
+    box-shadow: 0 6px 24px rgba(18, 26, 70, 0.38) !important;
+  }
+
+  .osito-parallax-dark {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(18, 28, 74, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-alt {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(24, 34, 88, 0.52) 0%, rgba(35, 42, 104, 0.60) 52%, rgba(20, 30, 78, 0.64) 100%), url('./assets/d-sf-ferry-building-night.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-dark-sunset {
+    background-color: #232A68 !important;
+    background-image: linear-gradient(135deg, rgba(35, 42, 104, 0.50) 0%, rgba(48, 56, 133, 0.58) 52%, rgba(24, 32, 82, 0.64) 100%), url('./assets/d-sf-sutro-crimson-sunset.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-twilight {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.50) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 84, 0.64) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-baybridge {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 32, 84, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 32, 82, 0.62) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sutromoon {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(25, 34, 90, 0.48) 0%, rgba(35, 42, 104, 0.58) 52%, rgba(22, 30, 80, 0.62) 100%), url('./assets/d-sutro-tower-moonrise.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-maker {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 30, 80, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(22, 32, 82, 0.66) 100%), url('./assets/maker-faire-youth-pilots-arena.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-sierra {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 34, 82, 0.48) 0%, rgba(35, 42, 104, 0.56) 52%, rgba(22, 32, 80, 0.62) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-mural {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(22, 32, 84, 0.54) 0%, rgba(35, 42, 104, 0.62) 52%, rgba(20, 30, 78, 0.66) 100%), url('./assets/d-box-shop-murals-pano.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-footer,
+  footer {
+    background-color: #1E2660 !important;
+    background-image: linear-gradient(135deg, rgba(20, 28, 74, 0.72) 0%, rgba(35, 42, 104, 0.76) 50%, rgba(18, 26, 70, 0.80) 100%), url('./assets/d-sf-freeway-skyline-twilight.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-top: 3px solid #7077CF !important;
+  }
+
+  /* Daylight Aerial Mist Parallax Surfaces (Light Sections) */
+  .osito-parallax-daylight {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.88) 0%, rgba(238, 242, 255, 0.84) 50%, rgba(244, 247, 252, 0.90) 100%), url('./assets/d-sf-residential-nadir-ortho.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-bay {
+    background-color: #EEF2FF !important;
+    background-image: linear-gradient(180deg, rgba(238, 242, 255, 0.86) 0%, rgba(244, 247, 252, 0.82) 50%, rgba(238, 242, 255, 0.88) 100%), url('./assets/d-treasure-island-bay-bridge.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .osito-parallax-daylight-sierra {
+    background-color: #F4F7FC !important;
+    background-image: linear-gradient(180deg, rgba(244, 247, 252, 0.86) 0%, rgba(238, 242, 255, 0.82) 50%, rgba(244, 247, 252, 0.88) 100%), url('./assets/d-sierra-expedition-aerial.jpg') !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  /* Translucent Aerospace Glassmorphic Cards Inside Parallax Sections */
+  .osito-glass-card {
+    background: linear-gradient(145deg, rgba(24, 34, 86, 0.80) 0%, rgba(35, 42, 104, 0.86) 100%) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(142, 147, 218, 0.55) !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 62, 0.35) !important;
+  }
+
+  .osito-glass-card-sub {
+    background: rgba(20, 30, 78, 0.74) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+
   .osito-mobile-header-actions {
     display: none;
   }
@@ -198,6 +364,7 @@
   #osito-coloring-books-downloads,
   #osito-academy-newsletter-inquiry,
   #osito-commercial-newsletter-inquiry,
+  #osito-academy-live-photo-showcase,
   #teen-exam,
   #interactive-calc,
   #chapter-1 {
@@ -223,7 +390,10 @@
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.90) 0%, rgba(35, 42, 104, 0.88) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
+      background-position: center 42% !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       overflow: visible !important;
@@ -313,10 +483,12 @@
       flex-wrap: nowrap !important;
       align-items: stretch !important;
       gap: 0 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(180deg, rgba(24, 34, 86, 0.94) 0%, rgba(35, 42, 104, 0.96) 100%), url('./assets/d-sf-night-corridor-bay-bridge.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #303885 !important;
       border-bottom: 2px solid #7077CF !important;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85) !important;
+      box-shadow: 0 18px 40px rgba(15, 23, 62, 0.85) !important;
       margin-top: 0 !important;
       padding: 6px 0 12px !important;
       max-height: calc(100vh - 54px) !important;
@@ -349,7 +521,7 @@
       height: auto !important;
       font-size: 13.5px !important;
       border: none !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       text-align: left !important;
       pointer-events: auto !important;
       touch-action: manipulation !important;
@@ -373,10 +545,10 @@
       min-width: 0 !important;
       flex-shrink: 0 !important;
       box-sizing: border-box !important;
-      background: #1B1F3B !important;
+      background: rgba(20, 28, 74, 0.92) !important;
       border: none !important;
       border-left: 3px solid #7077CF !important;
-      border-bottom: 1px solid #262626 !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.25) !important;
       box-shadow: none !important;
       padding: 2px 0 !important;
     }
@@ -423,14 +595,24 @@
       -webkit-overflow-scrolling: touch !important;
     }
 
-    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter */
+    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter (JS parallax handles smooth offset) */
     .osito-parallax-dark,
     .osito-parallax-dark-alt,
     .osito-parallax-dark-sunset,
+    .osito-parallax-twilight,
+    .osito-parallax-baybridge,
+    .osito-parallax-sutromoon,
+    .osito-parallax-maker,
+    .osito-parallax-sierra,
+    .osito-parallax-mural,
+    .osito-parallax-footer,
+    .osito-parallax-daylight,
+    .osito-parallax-daylight-bay,
+    .osito-parallax-daylight-sierra,
+    footer,
     [style*="background-attachment: fixed"],
     [style*="background-attachment:fixed"] {
       background-attachment: scroll !important;
-      background-position: center center !important;
       background-size: cover !important;
     }
   }
@@ -479,7 +661,7 @@
     .design-mobile-tabs {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
-      background: #161616 !important;
+      background: #1E2660 !important;
       border-bottom: 2px solid #7077CF !important;
       position: sticky !important;
       top: 52px !important;
@@ -488,10 +670,10 @@
     }
     .stl-mob-tab,
     .design-mob-tab {
-      background: #1B1B1B !important;
+      background: rgba(24, 34, 86, 0.92) !important;
       color: #CBD5E1 !important;
       border: none !important;
-      border-right: 1px solid #2E3468 !important;
+      border-right: 1px solid #303885 !important;
       padding: 9px 4px !important;
       font-family: 'Fjalla One', sans-serif !important;
       font-size: 11px !important;
@@ -692,7 +874,7 @@
       max-width: 100% !important;
       height: auto !important;
       border-right: none !important;
-      border-bottom: 1px solid #2e2e2e !important;
+      border-bottom: 1px solid #303885 !important;
     }
   }
 
@@ -959,7 +1141,7 @@
       font-size: 11px !important;
       letter-spacing: 0.05em !important;
       color: #232A68 !important;
-      background: #EEF0FA !important;
+      background: #EEF2FF !important;
       border: 1px solid #8E93DA !important;
       border-bottom: none !important;
       padding: 5px 10px !important;
@@ -971,7 +1153,7 @@
       font-size: 12px !important;
     }
 
-    /* Sticky Mobile Bottom Quick-Action Bar */
+    /* Sticky Mobile Bottom Quick-Action Bar (Parallax Horizon Navy) */
     #osito-mobile-bottom-bar {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
@@ -980,9 +1162,11 @@
       left: 0 !important;
       right: 0 !important;
       z-index: 9998 !important;
-      background: #161616 !important;
+      background-color: #1E2660 !important;
+      background-image: linear-gradient(90deg, rgba(22, 30, 78, 0.92) 0%, rgba(35, 42, 104, 0.90) 100%), url('./assets/dji-sf-mission-twilight-grid.jpg') !important;
+      background-size: cover !important;
       border-top: 2px solid #7077CF !important;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55) !important;
+      box-shadow: 0 -4px 16px rgba(15, 23, 62, 0.55) !important;
     }
     #osito-mobile-bottom-bar a {
       display: flex !important;
@@ -998,7 +1182,7 @@
       font-size: 10.5px !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
-      border-right: 1px solid #2A2A2A !important;
+      border-right: 1px solid rgba(112, 119, 207, 0.35) !important;
       border-radius: 0px !important;
       text-align: center !important;
       line-height: 1.15 !important;
@@ -1125,7 +1309,7 @@
     </div>
   </header>
 
-  <section class="osito-parallax-dark" style="background:#232A68; color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
+  <section class="osito-parallax-dark" style="color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:36px; align-items:center;">
       <div>
         <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:5px 12px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">OSITO ACADEMY DIVISIONS | DRONE • FLIGHT • STEM + ART</span>
@@ -1144,14 +1328,14 @@
           <a href="#osito-coloring-books-downloads" class="osito-action-btn dark" style="border-color:#10B981;">COLORING BOOKS</a>
         </div>
       </div>
-      <div style="border:2px solid #7077CF; background:#090D16;">
+      <div style="border:2px solid #7077CF; background:#1E2660;">
         <img src="./assets/live-academy-hero.jpg" onerror="this.src='./assets/maker-faire-drones-pavilion.jpg'" alt="Crowd gathered under blue tents at Osito Drone Academy indoor event" style="width:100%; height:360px; object-fit:cover; display:block;" />
       </div>
     </div>
   </section>
 
   <!-- 3-DIVISION ACADEMY SPLIT: DRONE ACADEMY, FLIGHT ACADEMY, AND STEM + ART ACADEMY -->
-  <section id="osito-three-academies-hub" style="background:#F6F6F6; color:#161616; padding:56px 24px; border-bottom:4px solid #7077CF;">
+  <section id="osito-three-academies-hub" class="osito-parallax-daylight" style="color:#1E293B; padding:56px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto;">
       <div style="text-align:center; margin-bottom:26px;">
         <span style="background:#232A68; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:12px; padding:4px 12px; letter-spacing:0.06em; text-transform:uppercase;">3 SPECIALIZED ACADEMY TRACKS | BUILT &amp; 3D-PRINTED IN SAN FRANCISCO</span>
@@ -1257,7 +1441,7 @@
             </p>
           </div>
           <div style="flex:1; min-width:280px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-            <div style="background:#161616; border:1px solid #10B981; padding:14px;">
+            <div style="background:linear-gradient(145deg, rgba(16, 24, 68, 0.88) 0%, rgba(30, 42, 108, 0.92) 100%); border:1px solid #10B981; padding:14px;">
               <strong style="font-family:'Fjalla One',sans-serif; font-size:15px; color:#10B981; display:block; margin-bottom:6px; text-transform:uppercase;">3D-PRINTED IN-HOUSE (SF FARM)</strong>
               <ul style="font-size:12.5px; color:#EEF0FA; margin:0; padding-left:16px; line-height:1.55;">
                 <li>Ducted drone frames (`PETG-CF` / `PAHT-CF`)</li>
@@ -1267,7 +1451,7 @@
                 <li>4-Tablet Sim Pod stands &amp; assembly jigs</li>
               </ul>
             </div>
-            <div style="background:#161616; border:1px solid #8E93DA; padding:14px;">
+            <div style="background:linear-gradient(145deg, rgba(16, 24, 68, 0.88) 0%, rgba(30, 42, 108, 0.92) 100%); border:1px solid #8E93DA; padding:14px;">
               <strong style="font-family:'Fjalla One',sans-serif; font-size:15px; color:#8E93DA; display:block; margin-bottom:6px; text-transform:uppercase;">NON-PRINTED (METAL &amp; ELECTRONICS)</strong>
               <ul style="font-size:12.5px; color:#EEF0FA; margin:0; padding-left:16px; line-height:1.55;">
                 <li><strong>Metal Objects:</strong> M1.4/M2 steel screws, bearings, N52 magnets, steel axles</li>
@@ -1280,7 +1464,7 @@
     </div>
   </section>
 
-  <section style="background:#FFFFFF; color:#161616; padding:56px 24px; border-bottom:4px solid #232A68;">
+  <section class="osito-parallax-daylight-bay" style="color:#1E293B; padding:56px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto;">
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:28px; margin-bottom:40px;">
         <div style="background:#F6F6F6; border:2px solid #232A68; padding:28px;">
@@ -1335,15 +1519,15 @@
         <h2 style="font-family:'Fjalla One',sans-serif; font-size:28px; margin:0 0 12px; text-transform:uppercase;">SAFETY FIRST, ALWAYS</h2>
         <p style="font-size:15px; color:#EEF0FA; margin:0 0 18px;">Safety is our top priority for every school, camp, and pop-up event:</p>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:18px; margin-bottom:24px;">
-          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:18px;">
+          <div style="background:linear-gradient(145deg, rgba(20, 28, 76, 0.88) 0%, rgba(38, 48, 120, 0.92) 100%); border:1px solid #8E93DA; padding:18px;">
             <strong style="font-family:'Fjalla One',sans-serif; font-size:18px; color:#FFFFFF; display:block; margin-bottom:6px; text-transform:uppercase;">FULLY CONTAINED FLIGHT ARENAS</strong>
             <span style="font-size:13.5px; color:#EEF0FA;">All active flying takes place strictly within modular, reinforced floor-to-ceiling safety netting.</span>
           </div>
-          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:18px;">
+          <div style="background:linear-gradient(145deg, rgba(20, 28, 76, 0.88) 0%, rgba(38, 48, 120, 0.92) 100%); border:1px solid #8E93DA; padding:18px;">
             <strong style="font-family:'Fjalla One',sans-serif; font-size:18px; color:#FFFFFF; display:block; margin-bottom:6px; text-transform:uppercase;">SAFE SUB-250G EQUIPMENT</strong>
             <span style="font-size:13.5px; color:#EEF0FA;">We fly lightweight, ducted Tiny Whoop class micro-drones equipped with fully shielded propellers to prevent any impact damage.</span>
           </div>
-          <div style="background:#1B1B1B; border:1px solid #7077CF; padding:18px;">
+          <div style="background:linear-gradient(145deg, rgba(20, 28, 76, 0.88) 0%, rgba(38, 48, 120, 0.92) 100%); border:1px solid #8E93DA; padding:18px;">
             <strong style="font-family:'Fjalla One',sans-serif; font-size:18px; color:#FFFFFF; display:block; margin-bottom:6px; text-transform:uppercase;">PROTECTIVE GEAR & PROTOCOLS</strong>
             <span style="font-size:13.5px; color:#EEF0FA;">All students and participants are provided with protective eyewear and clear pre-flight briefings from our 3 certified instructors.</span>
           </div>
@@ -1359,8 +1543,87 @@
     </div>
   </section>
 
+  <!-- LIVE ACADEMY & MAKER FAIRE PHOTO SHOWCASE (8 REAL OSITO PHOTOS) -->
+  <section id="osito-academy-live-photo-showcase" class="osito-parallax-maker" style="color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:28px;">
+        <span style="background:#10B981; color:#0F172A; font-family:'Fjalla One',sans-serif; font-size:12px; font-weight:700; padding:4px 12px; letter-spacing:0.06em; text-transform:uppercase;">REAL SAN FRANCISCO &amp; BAY AREA MAKER FAIRE MOMENTS</span>
+        <h2 style="font-family:'Fjalla One',sans-serif; font-size:34px; color:#FFFFFF; margin:10px 0 6px; letter-spacing:0.04em; text-transform:uppercase;">INSIDE OUR LIVE YOUTH DRONE, FLIGHT &amp; 3D-PRINT MAKER ARENAS</h2>
+        <p style="font-size:15px; color:#E0E7FF; max-width:840px; margin:0 auto;">
+          Every photograph below was captured at our live Bay Area Maker Faire 3-tent flight pavilion and San Francisco field sessions—featuring our 10&times;10 netted Hover cages, 5-station RadioMaster ELRS flight benches, custom 3D-printed drones, and 1-on-1 youth pilot coaching.
+        </p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap:18px;">
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-custom-drone-table.jpg" alt="Custom Fishing Drone and 3D-Printed Geodesic Cage Drone at Maker Faire" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">STEM + ART &amp; CUSTOM HARDWARE</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">3D-Printed Soccer Drone &amp; Heavy-Lift Table</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Students inspect our 3D-printed geodesic cage drone and custom fishing payload aircraft while Miguel &amp; Chuy coach inside the net.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-flight-bench-fleet.jpg" alt="5 RadioMaster Pocket ELRS Controllers and Micro-Drone Fleet" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">DRONE ACADEMY | ELRS FLIGHT LINE</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">5-Station ELRS Radio Bench &amp; Bat-Safe Fleet</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Miguel and Chuy managing 5 color-coded RadioMaster Pocket ELRS controllers, sub-250g micro-drones, and LiPo safety bags.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-youth-pilots-arena.jpg" alt="Youth Pilots Flying Micro-Drones Toward Glowing LED Cube" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">LIVE YOUTH PILOTING | NETTED CAGE</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">Youth Pilots Flying the LED Cube Course</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Students line up outside the floor-to-ceiling safety net to pilot ducted micro-drones through glowing hoops.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-blue-cube-action.jpg" alt="Inside the Netted Arena with Blue LED Cube and Race Gates" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">10X20 COUPLED FPV SPEEDWAY</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">Blue LED Cube &amp; Suspended Gate Action</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Inside our 3-tent turf flight arena with illuminated obstacle cubes, elevated helipads, and suspended race rings.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-kid-coaching.jpg" alt="1-on-1 Youth Pilot Stick Control Coaching" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">CERTIFIED INSTRUCTOR COACHING</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">1-on-1 Mode-2 Throttle &amp; Pitch Coaching</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Hands-on stick control instruction helping first-time youth pilots master smooth hover and directional yaw control.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-crash-build-repeat.jpg" alt="Crash Build Repeat Multi-Pilot Youth Flight Line" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">CRASH • BUILD • REPEAT</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">Multi-Pilot Simultaneous Flight Rotations</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Three young pilots fly simultaneously while our instructors spot takeoffs and teach rapid modular repairs.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-hoop-racing.jpg" alt="Students Racing Through Suspended Obstacle Hoops" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">BEAR PILOT PROGRESSION</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">Obstacle Hoop Slalom &amp; Precision Landing</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Families cheering as students advance from basic hover to figure-8 obstacle hoop racing.</p>
+          </div>
+        </div>
+        <div class="osito-glass-card" style="overflow:hidden;">
+          <img src="./assets/maker-faire-drones-pavilion.jpg" alt="Packed Crowds at the Maker Faire Drones Pavilion" loading="lazy" style="width:100%; height:200px; object-fit:cover; display:block; border-bottom:2px solid #7077CF;" />
+          <div style="padding:14px;">
+            <span style="font-family:'Fjalla One',sans-serif; font-size:11px; color:#34D399; letter-spacing:0.05em;">COMMUNITY POP-UP LABS</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:17px; color:#FFFFFF; margin:4px 0 4px; text-transform:uppercase;">3-Tent Mobile Flight Pavilion</h3>
+            <p style="font-size:12.5px; color:#E0E7FF; margin:0;">Our modular pop-up flight tents deploy in 60 minutes at schools, camps, sports complexes, and community festivals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- COMPETITIVE BAY AREA SCHOOL, CAMP & PARTY PRICING -->
-  <section id="osito-academy-pricing" style="background:#FFFFFF; color:#161616; padding:52px 24px; border-bottom:4px solid #232A68;">
+  <section id="osito-academy-pricing" class="osito-parallax-daylight" style="color:#1E293B; padding:56px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto;">
       <div style="text-align:center; margin-bottom:28px;">
         <span style="background:#059669; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:12px; padding:4px 12px; letter-spacing:0.06em; text-transform:uppercase;">NEW YEAR SPECIAL | 25% OFF ALL BOOKINGS TILL JAN 1</span>
@@ -1431,7 +1694,7 @@
   </section>
 
   <!-- FREE STEM & AERONAUTICS COLORING BOOKS DOWNLOAD LIBRARY -->
-  <section id="osito-coloring-books-downloads" style="background:#F6F6F6; color:#161616; padding:60px 24px; border-bottom:4px solid #7077CF;">
+  <section id="osito-coloring-books-downloads" class="osito-parallax-daylight-bay" style="color:#1E293B; padding:60px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto;">
       <div style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:28px 32px; margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
         <div style="max-width:700px;">
@@ -1458,7 +1721,7 @@
       </div>
 
       <!-- On-Demand PDF Preview Drawer (Hidden until user clicks Preview PDF) -->
-      <div id="osito-pdf-preview-drawer" style="display:none; background:#161616; color:#FFFFFF; border:3px solid #7077CF; margin-bottom:32px;">
+      <div id="osito-pdf-preview-drawer" class="osito-parallax-twilight" style="display:none; background-color:#1E2660; color:#FFFFFF; border:3px solid #7077CF; margin-bottom:32px;">
         <div style="background:#232A68; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:2px solid #7077CF;">
           <div>
             <span style="font-family:'Fjalla One',sans-serif; font-size:12px; color:#8E93DA; text-transform:uppercase; letter-spacing:0.05em;">INTERACTIVE 28-PAGE BOOK PREVIEW</span>
@@ -1469,7 +1732,7 @@
             <button type="button" onclick="closeColoringBookPreview()" class="osito-action-btn dark" style="padding:8px 14px; font-size:13.5px; border-color:#FFFFFF;">CLOSE</button>
           </div>
         </div>
-        <iframe id="osito-pdf-preview-frame" title="Osito Drone Coloring Book PDF Preview" style="width:100%; height:620px; border:0; background:#2B2B2B; display:block;"></iframe>
+        <iframe id="osito-pdf-preview-frame" title="Osito Drone Coloring Book PDF Preview" style="width:100%; height:620px; border:0; background:#1E2660; display:block;"></iframe>
       </div>
 
       <!-- 10 Coloring Book Cards Grid -->
@@ -1721,7 +1984,7 @@
   </section>
 
   <!-- ACADEMY NEWSLETTER SIGNUP & DIRECT PROGRAM INQUIRY SECTION -->
-  <section id="osito-academy-newsletter-inquiry" style="background:#1B1B1B; color:#FFFFFF; padding:52px 24px; border-bottom:4px solid #232A68;">
+  <section id="osito-academy-newsletter-inquiry" class="osito-parallax-dark-sunset" style="color:#FFFFFF; padding:56px 24px; border-bottom:4px solid #7077CF;">
     <div style="max-width:1180px; margin:0 auto;">
       <!-- Academy Newsletter Bar -->
       <div id="osito-academy-newsletter-bar" style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:24px 28px; margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
@@ -1734,7 +1997,7 @@
           <input id="ositoAcademySubEmail" type="email" required placeholder="Enter your email address..." style="flex:1; min-width:220px; padding:12px 14px; border:1px solid #8E93DA; background:#FFFFFF; color:#161616; font-family:Roboto,sans-serif; font-size:14px;" />
           <button id="ositoAcademySubBtn" type="submit" class="osito-action-btn" style="padding:12px 22px; white-space:nowrap;">SUBSCRIBE</button>
         </form>
-        <div id="ositoAcademyNlFeedbackBox" role="status" aria-live="polite" style="display:none; width:100%; background:#161616; border:2px solid #10B981; padding:18px 20px; margin-top:4px; color:#FFFFFF;">
+        <div id="ositoAcademyNlFeedbackBox" role="status" aria-live="polite" style="display:none; width:100%; background:linear-gradient(145deg, rgba(22, 30, 84, 0.92) 0%, rgba(35, 42, 104, 0.95) 100%); border:2px solid #10B981; padding:18px 20px; margin-top:4px; color:#FFFFFF;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px;">
             <div style="flex:1; min-width:260px;">
               <span id="ositoAcademyNlBadge" style="display:inline-block; background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11px; font-weight:700; padding:3px 9px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:6px;">VERIFICATION EMAIL DISPATCHED</span>
@@ -1810,7 +2073,7 @@
     </div>
   </section>
 
-  <footer style="background:#161616; color:#B0B5C9; padding:28px 24px; text-align:center; border-top:2px solid #232A68; font-size:13px;">
+  <footer class="osito-parallax-footer" style="color:#E0E7FF; padding:32px 24px; text-align:center; border-top:3px solid #7077CF; font-size:13.5px;">
     <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
       <div>Copyright © 2026 Osito Drone Services - All Rights Reserved. | San Francisco, CA | <a href="mailto:info@ositodrone.com" style="color:#8E93DA;">info@ositodrone.com</a></div>
       <div style="display:flex; gap:16px;">
@@ -2962,6 +3225,36 @@
     window.scrollToOsitoSection = scrollToTargetHashElement;
     window.closeOsitoMobileNav = closeOsitoMobileNav;
 
+    /* Universal Multi-Photo Smooth Parallax Scroll Engine */
+    var parallaxTicking = false;
+    function updateOsitoParallax() {
+      parallaxTicking = false;
+      try {
+        if (typeof document.querySelectorAll !== "function") return;
+        var secs = document.querySelectorAll(
+          ".osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset, " +
+          ".osito-parallax-twilight, .osito-parallax-baybridge, .osito-parallax-sutromoon, " +
+          ".osito-parallax-maker, .osito-parallax-sierra, .osito-parallax-mural, " +
+          ".osito-parallax-footer, .osito-parallax-daylight, .osito-parallax-daylight-bay, " +
+          ".osito-parallax-daylight-sierra"
+        );
+        var vh = (typeof window !== "undefined" && window.innerHeight) ? window.innerHeight : 800;
+        for (var i = 0; i < secs.length; i++) {
+          var el = secs[i];
+          if (!el || typeof el.getBoundingClientRect !== "function" || !el.style) continue;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > vh + 120) continue;
+          var centerDelta = (rect.top + rect.height * 0.5) - (vh * 0.5);
+          var offset = Math.round(centerDelta * -0.14);
+          if (offset > 75) offset = 75;
+          if (offset < -75) offset = -75;
+          el.style.backgroundPosition = "center calc(50% + " + offset + "px)";
+        }
+      } catch (pErr) {}
+    }
+
+    window.updateOsitoParallax = updateOsitoParallax;
+
     window.toggleOsitoMobileNav = function(e) {
       try {
         if (e && e.stopPropagation) e.stopPropagation();
@@ -2984,6 +3277,21 @@
 
     function initOsitoMobileNav() {
       try {
+        if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
+          window.addEventListener("scroll", function() {
+            if (!parallaxTicking) {
+              parallaxTicking = true;
+              if (typeof window.requestAnimationFrame === "function") {
+                window.requestAnimationFrame(updateOsitoParallax);
+              } else {
+                setTimeout(updateOsitoParallax, 16);
+              }
+            }
+          }, { passive: true });
+          window.addEventListener("resize", updateOsitoParallax, { passive: true });
+        }
+        updateOsitoParallax();
+
         if (typeof document.addEventListener === "function") {
           document.addEventListener("touchstart", function() {
             lastPointerWasTouch = true;
