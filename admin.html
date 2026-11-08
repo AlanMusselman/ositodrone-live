@@ -148,9 +148,20 @@
         <div class="osito-nav-dropdown">
           <a href="./osito-drone-academy.html" class="osito-nav-item">Services<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
           <div class="osito-nav-dropdown-menu">
-            <a href="./osito-drone-academy.html">STEM Drone Academy</a>
-            <a href="./custom-aerial-solutions.html">Commercial Aerials</a>
-            <a href="./index.html#osito-live-sim-estimator-hub">Pricing Calculator</a>
+            <a href="./osito-drone-academy.html#drone-academy">Drone Academy</a>
+            <a href="./osito-drone-academy.html#flight-academy">Flight Academy</a>
+            <a href="./osito-drone-academy.html#stem-academy">STEM Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+          </div>
+        </div>
+        <div class="osito-nav-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Academy<svg class="osito-nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg></a>
+          <div class="osito-nav-dropdown-menu">
+            <a href="./osito-drone-academy.html#drone-academy">Drone Academy (Drones &amp; FPV)</a>
+            <a href="./osito-drone-academy.html#flight-academy">Flight Academy (Aeronautics &amp; Planes)</a>
+            <a href="./osito-drone-academy.html#stem-academy">STEM Academy (STEM + Art &amp; 3D Print)</a>
+            <a href="./osito-drone-academy.html#osito-coloring-books-downloads">Free STEM Coloring Books</a>
           </div>
         </div>
         <a href="./flight-sim.html" class="osito-nav-item">Flight Sim</a>
@@ -1992,25 +2003,110 @@ Osito Drone Services | San Francisco, CA</textarea>
       } catch (e) {}
     }
 
+    function submitHiddenRelayFormAdmin(targetEmail, relayObj) {
+      try {
+        if (!document || !document.body || typeof document.createElement !== 'function') return;
+        var frameName = 'osito_admin_relay_frame';
+        var existingFrame = document.getElementById(frameName);
+        if (!existingFrame) {
+          existingFrame = document.createElement('iframe');
+          existingFrame.id = frameName;
+          existingFrame.name = frameName;
+          existingFrame.style.display = 'none';
+          document.body.appendChild(existingFrame);
+        }
+        var formEl = document.createElement('form');
+        formEl.method = 'POST';
+        formEl.action = 'https://formsubmit.co/' + encodeURIComponent(targetEmail);
+        formEl.target = frameName;
+        formEl.style.display = 'none';
+        for (var k in relayObj) {
+          if (Object.prototype.hasOwnProperty.call(relayObj, k) && relayObj[k] !== null && relayObj[k] !== undefined) {
+            var inp = document.createElement('input');
+            inp.type = 'hidden';
+            inp.name = k;
+            inp.value = String(relayObj[k]);
+            formEl.appendChild(inp);
+          }
+        }
+        document.body.appendChild(formEl);
+        if (typeof formEl.submit === 'function') formEl.submit();
+        setTimeout(function() {
+          try { document.body.removeChild(formEl); } catch (e) {}
+        }, 4000);
+      } catch (e) {}
+    }
+
     function dispatchAdminBackendRelay(payload) {
+      var primaryTo = String(payload.to || 'info@ositodrone.com').trim().toLowerCase();
+      var subjLine = payload._subject || payload.subject || 'Osito Drone Admin Dispatch';
+      var relayPayload = {};
+      for (var k in payload) {
+        if (Object.prototype.hasOwnProperty.call(payload, k)) {
+          relayPayload[k] = payload[k];
+        }
+      }
+      relayPayload._subject = subjLine;
+      relayPayload._template = relayPayload._template || 'table';
+      relayPayload._captcha = 'false';
+
+      var ccList = [];
+      function addAdminCc(addr) {
+        var c = String(addr || '').trim().toLowerCase();
+        if (c && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c) && c !== primaryTo && ccList.indexOf(c) === -1) {
+          ccList.push(c);
+        }
+      }
+      if (payload._cc) String(payload._cc).split(/[,;\s]+/).forEach(addAdminCc);
+      if (payload.cc) String(payload.cc).split(/[,;\s]+/).forEach(addAdminCc);
+      addAdminCc('info@ositodrone.com');
+      addAdminCc('alan@ositodrone.com');
+      if (payload.email) addAdminCc(payload.email);
+      if (ccList.length > 0) relayPayload._cc = ccList.join(',');
+      if (!relayPayload._replyto && payload.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+        relayPayload._replyto = payload.email;
+      }
+      if (!relayPayload.message && (payload.verification_code || payload.verification_link)) {
+        relayPayload.message =
+          'Osito Drone Newsletter Verification\n' +
+          'Subscriber Email: ' + (payload.email || primaryTo) + '\n' +
+          '6-Digit Verification Code: ' + (payload.verification_code || '') + '\n' +
+          '1-Click Verification Link: ' + (payload.verification_link || '');
+      }
+
       appendAdminOutboxLog({
         id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
-        to: payload.to || 'info@ositodrone.com',
-        subject: payload._subject || payload.subject || 'Osito Drone Admin Dispatch',
+        to: primaryTo,
+        subject: subjLine,
         type: payload.actionType || 'admin_dispatch',
-        payload: payload,
+        payload: relayPayload,
         sentAt: new Date().toISOString()
       });
+
+      var endpoints = ['https://formsubmit.co/ajax/' + encodeURIComponent(primaryTo)];
+      if (primaryTo !== 'alan@ositodrone.com') endpoints.push('https://formsubmit.co/ajax/alan@ositodrone.com');
+      if (primaryTo !== 'info@ositodrone.com') endpoints.push('https://formsubmit.co/ajax/info@ositodrone.com');
+
       try {
         if (typeof fetch === 'function') {
-          fetch('https://formsubmit.co/ajax/info@ositodrone.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          }).catch(function() {});
+          endpoints.forEach(function(epUrl) {
+            fetch(epUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(relayPayload)
+            }).then(function(r) {
+              return (r && typeof r.json === 'function') ? r.json().catch(function() { return {}; }) : {};
+            }).then(function(data) {
+              if (data && (data.success === 'false' || data.success === false)) {
+                submitHiddenRelayFormAdmin(primaryTo, relayPayload);
+              }
+            }).catch(function() {
+              submitHiddenRelayFormAdmin(primaryTo, relayPayload);
+            });
+          });
         }
       } catch (e) {}
     }
