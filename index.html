@@ -1631,6 +1631,11 @@
               <a id="ositoNlOpenMailBtn" href="mailto:info@ositodrone.com" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#10B981; color:#10B981;">OPEN IN MAIL APP</a>
               <button type="button" id="ositoNlDownloadEmlBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#8E93DA;">DOWNLOAD .EML</button>
             </div>
+            <div id="ositoNlVerifiedActions" style="display:none; flex-wrap:wrap; gap:8px; align-items:center;">
+              <button type="button" id="ositoNlResendConfirmBtn" class="osito-action-btn" style="background:#10B981; border-color:#059669; color:#161616; font-weight:700; padding:9px 14px; font-size:12.5px;">RESEND CONFIRMATION EMAIL</button>
+              <a id="ositoNlVerifiedOpenMailBtn" href="mailto:info@ositodrone.com" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#10B981; color:#10B981;">OPEN IN MAIL APP</a>
+              <button type="button" id="ositoNlVerifiedDownloadEmlBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#8E93DA;">DOWNLOAD .EML</button>
+            </div>
           </div>
         </div>
       </div>
@@ -2623,6 +2628,7 @@
     }
 
     var activePendingEmail = '';
+    var lastActiveSubscriberEmail = '';
     var subForm = document.getElementById('ositoPublicSubscribeForm');
     var subEmail = document.getElementById('ositoSubscriberEmail');
     var subBtn = document.getElementById('ositoSubscriberBtn');
@@ -2631,27 +2637,37 @@
     var nlTitle = document.getElementById('ositoNlFeedbackTitle');
     var nlText = document.getElementById('ositoNlFeedbackText');
     var nlVerifyCtrls = document.getElementById('ositoNlVerifyControls');
+    var nlVerifiedActions = document.getElementById('ositoNlVerifiedActions');
     var nlCodeInput = document.getElementById('ositoNlVerifyCodeInput');
     var nlVerifyBtn = document.getElementById('ositoNlVerifyNowBtn');
     var nlResendBtn = document.getElementById('ositoNlResendBtn');
+    var nlResendConfirmBtn = document.getElementById('ositoNlResendConfirmBtn');
     var nlOpenMailBtn = document.getElementById('ositoNlOpenMailBtn');
+    var nlVerifiedOpenMailBtn = document.getElementById('ositoNlVerifiedOpenMailBtn');
     var nlDownloadEmlBtn = document.getElementById('ositoNlDownloadEmlBtn');
+    var nlVerifiedDownloadEmlBtn = document.getElementById('ositoNlVerifiedDownloadEmlBtn');
 
     function updateNlMailActionButtons(subRecord) {
       if (!subRecord || !subRecord.email) return;
+      lastActiveSubscriberEmail = String(subRecord.email).trim().toLowerCase();
+      var isVer = (subRecord.status === 'Verified');
       var codeStr = subRecord.verifyCode || '654321';
       var tokStr = subRecord.verifyToken || ('ositoverify-' + codeStr);
       var verifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(tokStr) + '&email=' + encodeURIComponent(subRecord.email);
-      var subjStr = 'Verify Your Osito Drone Newsletter Subscription (Code: ' + codeStr + ')';
-      var bodyStr = 'Hi ' + (subRecord.name || subRecord.email) + ',\n\nThank you for subscribing to the Osito Drone Academy, Flight Academy & STEM + Art Newsletter!\n\nYour 6-digit verification code is: ' + codeStr + '\n\nOne-Click Verification Link:\n' + verifyUrl + '\n\n- Osito Drone Services (San Francisco, CA | info@ositodrone.com)';
-      if (nlOpenMailBtn) {
-        nlOpenMailBtn.href = 'mailto:' + encodeURIComponent(subRecord.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(subjStr) + '&body=' + encodeURIComponent(bodyStr);
-      }
-      if (nlDownloadEmlBtn) {
-        nlDownloadEmlBtn.onclick = function() {
-          downloadPublicEmlFile('Osito_Verify_' + codeStr + '.eml', subRecord.email, 'info@ositodrone.com, alan@ositodrone.com', subjStr, bodyStr);
-        };
-      }
+      var subjStr = isVer
+        ? ('Confirmed: Your Osito Drone Newsletter Subscription is Verified! (Code: ' + codeStr + ')')
+        : ('Verify Your Osito Drone Newsletter Subscription (Code: ' + codeStr + ')');
+      var bodyStr = isVer
+        ? ('Hi ' + (subRecord.name || subRecord.email) + ',\n\nYour Osito Drone Academy, Flight Academy & STEM + Art Newsletter subscription (' + subRecord.email + ') is confirmed and verified!\n\nReference Code: ' + codeStr + '\nConfirmation Link:\n' + verifyUrl + '\n\n- Osito Drone Services (San Francisco, CA | info@ositodrone.com)')
+        : ('Hi ' + (subRecord.name || subRecord.email) + ',\n\nThank you for subscribing to the Osito Drone Academy, Flight Academy & STEM + Art Newsletter!\n\nYour 6-digit verification code is: ' + codeStr + '\n\nOne-Click Verification Link:\n' + verifyUrl + '\n\n- Osito Drone Services (San Francisco, CA | info@ositodrone.com)');
+      var mailtoHref = 'mailto:' + encodeURIComponent(subRecord.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(subjStr) + '&body=' + encodeURIComponent(bodyStr);
+      if (nlOpenMailBtn) nlOpenMailBtn.href = mailtoHref;
+      if (nlVerifiedOpenMailBtn) nlVerifiedOpenMailBtn.href = mailtoHref;
+      var dlHandler = function() {
+        downloadPublicEmlFile('Osito_' + (isVer ? 'Confirmed_' : 'Verify_') + codeStr + '.eml', subRecord.email, 'info@ositodrone.com, alan@ositodrone.com', subjStr, bodyStr);
+      };
+      if (nlDownloadEmlBtn) nlDownloadEmlBtn.onclick = dlHandler;
+      if (nlVerifiedDownloadEmlBtn) nlVerifiedDownloadEmlBtn.onclick = dlHandler;
     }
 
     function showNewsletterFeedbackState(mode, subRecord, extraMsg) {
@@ -2668,12 +2684,14 @@
         if (nlTitle) nlTitle.textContent = 'PLEASE CHECK YOUR EMAIL ADDRESS OR CODE';
         if (nlText) nlText.textContent = extraMsg || 'Please enter a valid email address.';
         if (nlVerifyCtrls) nlVerifyCtrls.style.display = activePendingEmail ? 'flex' : 'none';
+        if (nlVerifiedActions) nlVerifiedActions.style.display = 'none';
         return;
       }
 
       nlBox.style.borderColor = '#10B981';
       if (mode === 'pending' && subRecord) {
         activePendingEmail = subRecord.email;
+        lastActiveSubscriberEmail = subRecord.email;
         if (nlBadge) {
           nlBadge.style.background = '#F59E0B';
           nlBadge.style.color = '#161616';
@@ -2686,8 +2704,10 @@
         }
         if (nlCodeInput) nlCodeInput.value = subRecord.verifyCode;
         if (nlVerifyCtrls) nlVerifyCtrls.style.display = 'flex';
+        if (nlVerifiedActions) nlVerifiedActions.style.display = 'none';
       } else if (mode === 'verified' && subRecord) {
         activePendingEmail = '';
+        lastActiveSubscriberEmail = subRecord.email;
         if (nlBadge) {
           nlBadge.style.background = '#10B981';
           nlBadge.style.color = '#161616';
@@ -2698,6 +2718,7 @@
           nlText.textContent = extraMsg || ('Your email (' + subRecord.email + ') is confirmed and active on the Osito Drone Youth STEM Flight Academy & 25%-Off New Year Newsletter list.');
         }
         if (nlVerifyCtrls) nlVerifyCtrls.style.display = 'none';
+        if (nlVerifiedActions) nlVerifiedActions.style.display = 'flex';
       }
     }
 
@@ -2735,6 +2756,7 @@
       if (found.status !== 'Verified') {
         activePendingEmail = found.email;
       }
+      lastActiveSubscriberEmail = found.email;
       var cleanCode = (enteredCode !== null && enteredCode !== undefined) ? String(enteredCode).trim() : '';
       var cleanToken = (enteredToken !== null && enteredToken !== undefined) ? String(enteredToken).trim() : '';
       if (!cleanCode && !cleanToken) {
@@ -2884,41 +2906,57 @@
     if (nlVerifyBtn) {
       nlVerifyBtn.onclick = function() {
         var codeVal = nlCodeInput ? (nlCodeInput.value || '').trim() : '';
-        var targetEm = activePendingEmail || (subEmail ? (subEmail.value || '').trim().toLowerCase() : '');
+        var targetEm = activePendingEmail || lastActiveSubscriberEmail || (subEmail ? (subEmail.value || '').trim().toLowerCase() : '');
         verifySubscriberByEmail(targetEm, codeVal, null);
       };
     }
 
-    if (nlResendBtn) {
-      nlResendBtn.onclick = function() {
-        if (!activePendingEmail) return;
-        var list = loadBackendSubscribers();
-        for (var i = 0; i < list.length; i++) {
-          if (String(list[i].email || '').toLowerCase() === activePendingEmail) {
-            var newCode = String(Math.floor(100000 + Math.random() * 900000));
-            var newToken = 'ositoverify-' + Date.now().toString(36) + '-' + newCode;
-            var resendVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(newToken) + '&email=' + encodeURIComponent(list[i].email);
-            list[i].verifyCode = newCode;
-            list[i].verifyToken = newToken;
-            saveBackendSubscribers(list);
-            notifyBackendSync('subscriber_updated', list[i]);
-            dispatchBackendEmailRelay({
-              actionType: 'newsletter_verification_resend',
-              to: list[i].email,
-              cc: 'info@ositodrone.com',
-              _cc: 'info@ositodrone.com,alan@ositodrone.com',
-              _subject: 'Resent: Verify Your Osito Drone Newsletter Subscription (Code: ' + newCode + ')',
-              subscriber_id: list[i].id,
-              email: list[i].email,
-              verification_code: newCode,
-              verification_link: resendVerifyUrl,
-              message: 'Here is your resent Osito Drone Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl
-            });
+    function handleNlResendOrConfirm() {
+      var targetEm = activePendingEmail || lastActiveSubscriberEmail || (subEmail ? (subEmail.value || '').trim().toLowerCase() : '');
+      if (!targetEm) return;
+      var list = loadBackendSubscribers();
+      for (var i = 0; i < list.length; i++) {
+        if (String(list[i].email || '').toLowerCase() === targetEm) {
+          var isVer = (list[i].status === 'Verified');
+          var newCode = isVer ? (list[i].verifyCode || String(Math.floor(100000 + Math.random() * 900000))) : String(Math.floor(100000 + Math.random() * 900000));
+          var newToken = isVer ? (list[i].verifyToken || ('ositoverify-' + Date.now().toString(36) + '-' + newCode)) : ('ositoverify-' + Date.now().toString(36) + '-' + newCode);
+          var resendVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(newToken) + '&email=' + encodeURIComponent(list[i].email);
+          list[i].verifyCode = newCode;
+          list[i].verifyToken = newToken;
+          list[i].confirmEmailSentAt = new Date().toISOString();
+          saveBackendSubscribers(list);
+          notifyBackendSync('subscriber_updated', list[i]);
+          dispatchBackendEmailRelay({
+            actionType: isVer ? 'newsletter_confirmation_resend' : 'newsletter_verification_resend',
+            to: list[i].email,
+            cc: 'info@ositodrone.com',
+            _cc: 'info@ositodrone.com,alan@ositodrone.com',
+            _subject: isVer ? ('Confirmed: Your Osito Drone Newsletter Subscription is Verified! (Code: ' + newCode + ')') : ('Resent: Verify Your Osito Drone Newsletter Subscription (Code: ' + newCode + ')'),
+            subscriber_id: list[i].id,
+            email: list[i].email,
+            status: list[i].status,
+            verification_code: newCode,
+            verification_link: resendVerifyUrl,
+            message: isVer
+              ? ('Your Osito Drone Newsletter subscription (' + list[i].email + ') is confirmed and verified! Reference code: ' + newCode + '. Confirmation link: ' + resendVerifyUrl)
+              : ('Here is your resent Osito Drone Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl)
+          });
+          if (isVer) {
+            if (nlResendConfirmBtn) nlResendConfirmBtn.textContent = '✓ CONFIRMATION EMAIL SENT';
+            showNewsletterFeedbackState('verified', list[i], 'We resent a fresh confirmation & verification email to ' + list[i].email + ' (Code: ' + newCode + ').');
+          } else {
             showNewsletterFeedbackState('pending', list[i], 'We resent a fresh verification email to ' + list[i].email + ' (New Code: ' + newCode + ').');
-            break;
           }
+          break;
         }
-      };
+      }
+    }
+
+    if (nlResendBtn) {
+      nlResendBtn.onclick = handleNlResendOrConfirm;
+    }
+    if (nlResendConfirmBtn) {
+      nlResendConfirmBtn.onclick = handleNlResendOrConfirm;
     }
 
     // Auto-verify if visitor clicked a verification link (?verify_newsletter=...&email=...)
@@ -2928,6 +2966,7 @@
       var vEmail = urlParams.get('email');
       if (vEmail && vToken) {
         activePendingEmail = String(vEmail).trim().toLowerCase();
+        lastActiveSubscriberEmail = activePendingEmail;
         verifySubscriberByEmail(vEmail, null, vToken);
         var nlBarEl = document.getElementById('osito-public-newsletter-bar');
         if (nlBarEl && nlBarEl.scrollIntoView) nlBarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });

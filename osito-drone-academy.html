@@ -1748,6 +1748,11 @@
               <a id="ositoAcademyNlMailtoBtn" href="mailto:info@ositodrone.com" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#10B981; color:#10B981;">OPEN IN MAIL APP</a>
               <button type="button" id="ositoAcademyNlDownloadEmlBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px;">DOWNLOAD .EML</button>
             </div>
+            <div id="ositoAcademyNlVerifiedActions" style="display:none; flex-wrap:wrap; gap:8px; align-items:center;">
+              <button type="button" id="ositoAcademyNlResendConfirmBtn" class="osito-action-btn" style="background:#10B981; border-color:#059669; color:#161616; font-weight:700; padding:9px 14px; font-size:12.5px;">RESEND CONFIRMATION EMAIL</button>
+              <a id="ositoAcademyNlVerifiedMailtoBtn" href="mailto:info@ositodrone.com" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#10B981; color:#10B981;">OPEN IN MAIL APP</a>
+              <button type="button" id="ositoAcademyNlVerifiedDownloadEmlBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px;">DOWNLOAD .EML</button>
+            </div>
           </div>
         </div>
       </div>
@@ -2303,28 +2308,39 @@
       var acadNlTitle = document.getElementById('ositoAcademyNlTitle');
       var acadNlText = document.getElementById('ositoAcademyNlText');
       var acadNlVerifyCtrls = document.getElementById('ositoAcademyNlVerifyCtrls');
+      var acadNlVerifiedActions = document.getElementById('ositoAcademyNlVerifiedActions');
       var acadNlCodeInput = document.getElementById('ositoAcademyNlCodeInput');
       var acadNlVerifyBtn = document.getElementById('ositoAcademyNlVerifyBtn');
       var acadNlResendBtn = document.getElementById('ositoAcademyNlResendBtn');
+      var acadNlResendConfirmBtn = document.getElementById('ositoAcademyNlResendConfirmBtn');
       var acadNlMailtoBtn = document.getElementById('ositoAcademyNlMailtoBtn');
+      var acadNlVerifiedMailtoBtn = document.getElementById('ositoAcademyNlVerifiedMailtoBtn');
       var acadNlDownloadEmlBtn = document.getElementById('ositoAcademyNlDownloadEmlBtn');
+      var acadNlVerifiedDownloadEmlBtn = document.getElementById('ositoAcademyNlVerifiedDownloadEmlBtn');
       var activeAcadEmail = '';
+      var lastAcadSubscriberEmail = '';
 
       function updateAcademyNlMailActionButtons(subObj) {
         if (!subObj || !subObj.email) return;
+        lastAcadSubscriberEmail = String(subObj.email).trim().toLowerCase();
+        var isVer = (subObj.status === 'Verified');
         var vCode = subObj.verifyCode || '654321';
         var vTok = subObj.verifyToken || ('ositoverify-' + vCode);
         var verifyLink = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(vTok) + '&email=' + encodeURIComponent(subObj.email);
-        var mailSubj = 'Verify Your Osito Academy Newsletter Subscription (Code: ' + vCode + ')';
-        var mailBody = 'Hello,\n\nThank you for subscribing to Osito Drone Academy, Flight Academy & STEM + Art Academy!\n\nSubscriber Email: ' + subObj.email + '\n6-Digit Verification Code: ' + vCode + '\nOne-Click Verification Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com';
-        if (acadNlMailtoBtn) {
-          acadNlMailtoBtn.href = 'mailto:' + encodeURIComponent(subObj.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(mailSubj) + '&body=' + encodeURIComponent(mailBody);
-        }
-        if (acadNlDownloadEmlBtn) {
-          acadNlDownloadEmlBtn.onclick = function() {
-            downloadPublicEmlFile('Osito_Academy_Newsletter_Verification_' + vCode + '.eml', subObj.email, 'info@ositodrone.com, alan@ositodrone.com', mailSubj, mailBody);
-          };
-        }
+        var mailSubj = isVer
+          ? ('Confirmed: Your Osito Academy Newsletter Subscription is Verified! (Code: ' + vCode + ')')
+          : ('Verify Your Osito Academy Newsletter Subscription (Code: ' + vCode + ')');
+        var mailBody = isVer
+          ? ('Hello,\n\nYour subscription to Osito Drone Academy, Flight Academy & STEM + Art Academy (' + subObj.email + ') is confirmed and verified!\n\nReference Code: ' + vCode + '\nConfirmation Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com')
+          : ('Hello,\n\nThank you for subscribing to Osito Drone Academy, Flight Academy & STEM + Art Academy!\n\nSubscriber Email: ' + subObj.email + '\n6-Digit Verification Code: ' + vCode + '\nOne-Click Verification Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com');
+        var mailtoHref = 'mailto:' + encodeURIComponent(subObj.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(mailSubj) + '&body=' + encodeURIComponent(mailBody);
+        if (acadNlMailtoBtn) acadNlMailtoBtn.href = mailtoHref;
+        if (acadNlVerifiedMailtoBtn) acadNlVerifiedMailtoBtn.href = mailtoHref;
+        var dlHandler = function() {
+          downloadPublicEmlFile('Osito_Academy_Newsletter_' + (isVer ? 'Confirmed_' : 'Verification_') + vCode + '.eml', subObj.email, 'info@ositodrone.com, alan@ositodrone.com', mailSubj, mailBody);
+        };
+        if (acadNlDownloadEmlBtn) acadNlDownloadEmlBtn.onclick = dlHandler;
+        if (acadNlVerifiedDownloadEmlBtn) acadNlVerifiedDownloadEmlBtn.onclick = dlHandler;
       }
 
       function showAcademyNewsletterFeedbackState(mode, subObj, customMsg) {
@@ -2333,6 +2349,7 @@
         if (subObj && subObj.email) updateAcademyNlMailActionButtons(subObj);
         if (mode === 'pending' && subObj) {
           activeAcadEmail = subObj.email;
+          lastAcadSubscriberEmail = subObj.email;
           acadNlBox.style.borderColor = '#10B981';
           if (acadNlBadge) {
             acadNlBadge.style.background = '#10B981';
@@ -2350,9 +2367,11 @@
             );
           }
           if (acadNlVerifyCtrls) acadNlVerifyCtrls.style.display = 'flex';
+          if (acadNlVerifiedActions) acadNlVerifiedActions.style.display = 'none';
           if (acadNlCodeInput) acadNlCodeInput.value = subObj.verifyCode || '';
         } else if (mode === 'verified' && subObj) {
           activeAcadEmail = '';
+          lastAcadSubscriberEmail = subObj.email;
           acadNlBox.style.borderColor = '#10B981';
           if (acadNlBadge) {
             acadNlBadge.style.background = '#10B981';
@@ -2368,6 +2387,7 @@
             );
           }
           if (acadNlVerifyCtrls) acadNlVerifyCtrls.style.display = 'none';
+          if (acadNlVerifiedActions) acadNlVerifiedActions.style.display = 'flex';
         } else if (mode === 'error') {
           acadNlBox.style.borderColor = '#EF4444';
           if (acadNlBadge) {
@@ -2382,6 +2402,7 @@
             acadNlText.textContent = customMsg || 'Please enter a valid email address or 6-digit verification code.';
           }
           if (acadNlVerifyCtrls) acadNlVerifyCtrls.style.display = activeAcadEmail ? 'flex' : 'none';
+          if (acadNlVerifiedActions) acadNlVerifiedActions.style.display = 'none';
         }
       }
 
@@ -2419,6 +2440,7 @@
         if (target.status !== 'Verified') {
           activeAcadEmail = target.email;
         }
+        lastAcadSubscriberEmail = target.email;
         var cleanCode = (enteredCode !== null && enteredCode !== undefined) ? String(enteredCode).trim() : '';
         var cleanToken = (enteredToken !== null && enteredToken !== undefined) ? String(enteredToken).trim() : '';
         if (!cleanCode && !cleanToken) {
@@ -2482,6 +2504,7 @@
           var token = 'ositoverify-' + Date.now().toString(36) + '-' + code;
           var verifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(token) + '&email=' + encodeURIComponent(em);
           activeAcadEmail = em;
+          lastAcadSubscriberEmail = em;
 
           if (existing) {
             if (existing.status === 'Verified') {
@@ -2494,6 +2517,8 @@
                 _subject: 'Osito Academy Newsletter Confirmation (' + em + ' is Verified)',
                 subscriber_id: existing.id,
                 email: em,
+                verification_code: existing.verifyCode || code,
+                verification_link: verifyUrl,
                 status: 'Verified',
                 message: 'Your email (' + em + ') is already verified on the Osito Drone Academy, Flight Academy & STEM + Art Academy Newsletter list.'
               });
@@ -2568,41 +2593,57 @@
       if (acadNlVerifyBtn) {
         acadNlVerifyBtn.onclick = function() {
           var codeVal = acadNlCodeInput ? (acadNlCodeInput.value || '').trim() : '';
-          var targetEm = activeAcadEmail || (acadSubEmail ? (acadSubEmail.value || '').trim().toLowerCase() : '');
+          var targetEm = activeAcadEmail || lastAcadSubscriberEmail || (acadSubEmail ? (acadSubEmail.value || '').trim().toLowerCase() : '');
           verifyAcademySubscriberByEmail(targetEm, codeVal, null);
         };
       }
 
-      if (acadNlResendBtn) {
-        acadNlResendBtn.onclick = function() {
-          if (!activeAcadEmail) return;
-          var list = loadAcademySubscribers();
-          for (var i = 0; i < list.length; i++) {
-            if (String(list[i].email || '').toLowerCase() === activeAcadEmail) {
-              var newCode = String(Math.floor(100000 + Math.random() * 900000));
-              var newToken = 'ositoverify-' + Date.now().toString(36) + '-' + newCode;
-              var resendVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(newToken) + '&email=' + encodeURIComponent(list[i].email);
-              list[i].verifyCode = newCode;
-              list[i].verifyToken = newToken;
-              saveAcademySubscribers(list);
-              notifyAcademySync('subscriber_updated', list[i]);
-              dispatchAcademyRelay({
-                actionType: 'newsletter_verification_resend',
-                to: list[i].email,
-                cc: 'info@ositodrone.com',
-                _cc: 'info@ositodrone.com,alan@ositodrone.com',
-                _subject: 'Resent: Verify Your Osito Academy Subscription (Code: ' + newCode + ')',
-                subscriber_id: list[i].id,
-                email: list[i].email,
-                verification_code: newCode,
-                verification_link: resendVerifyUrl,
-                message: 'Here is your resent Osito Academy Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl
-              });
+      function handleAcadNlResendOrConfirm() {
+        var targetEm = activeAcadEmail || lastAcadSubscriberEmail || (acadSubEmail ? (acadSubEmail.value || '').trim().toLowerCase() : '');
+        if (!targetEm) return;
+        var list = loadAcademySubscribers();
+        for (var i = 0; i < list.length; i++) {
+          if (String(list[i].email || '').toLowerCase() === targetEm) {
+            var isVer = (list[i].status === 'Verified');
+            var newCode = isVer ? (list[i].verifyCode || String(Math.floor(100000 + Math.random() * 900000))) : String(Math.floor(100000 + Math.random() * 900000));
+            var newToken = isVer ? (list[i].verifyToken || ('ositoverify-' + Date.now().toString(36) + '-' + newCode)) : ('ositoverify-' + Date.now().toString(36) + '-' + newCode);
+            var resendVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(newToken) + '&email=' + encodeURIComponent(list[i].email);
+            list[i].verifyCode = newCode;
+            list[i].verifyToken = newToken;
+            list[i].confirmEmailSentAt = new Date().toISOString();
+            saveAcademySubscribers(list);
+            notifyAcademySync('subscriber_updated', list[i]);
+            dispatchAcademyRelay({
+              actionType: isVer ? 'newsletter_confirmation_resend' : 'newsletter_verification_resend',
+              to: list[i].email,
+              cc: 'info@ositodrone.com',
+              _cc: 'info@ositodrone.com,alan@ositodrone.com',
+              _subject: isVer ? ('Confirmed: Your Osito Academy Subscription is Verified! (Code: ' + newCode + ')') : ('Resent: Verify Your Osito Academy Subscription (Code: ' + newCode + ')'),
+              subscriber_id: list[i].id,
+              email: list[i].email,
+              status: list[i].status,
+              verification_code: newCode,
+              verification_link: resendVerifyUrl,
+              message: isVer
+                ? ('Your Osito Academy Newsletter subscription (' + list[i].email + ') is confirmed and verified! Reference code: ' + newCode + '. Confirmation link: ' + resendVerifyUrl)
+                : ('Here is your resent Osito Academy Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl)
+            });
+            if (isVer) {
+              if (acadNlResendConfirmBtn) acadNlResendConfirmBtn.textContent = '✓ CONFIRMATION EMAIL SENT';
+              showAcademyNewsletterFeedbackState('verified', list[i], 'We resent a fresh confirmation & verification email to ' + list[i].email + ' (Code: ' + newCode + ').');
+            } else {
               showAcademyNewsletterFeedbackState('pending', list[i], 'We resent a fresh verification email to ' + list[i].email + ' (New Code: ' + newCode + ').');
-              break;
             }
+            break;
           }
-        };
+        }
+      }
+
+      if (acadNlResendBtn) {
+        acadNlResendBtn.onclick = handleAcadNlResendOrConfirm;
+      }
+      if (acadNlResendConfirmBtn) {
+        acadNlResendConfirmBtn.onclick = handleAcadNlResendOrConfirm;
       }
 
       // Auto-verify if visitor clicked a verification link (?verify_newsletter=...&email=...)
@@ -2612,6 +2653,7 @@
         var vEmail = urlParams.get('email');
         if (vEmail && vToken) {
           activeAcadEmail = String(vEmail).trim().toLowerCase();
+          lastAcadSubscriberEmail = activeAcadEmail;
           verifyAcademySubscriberByEmail(vEmail, null, vToken);
           var nlBarEl = document.getElementById('osito-academy-newsletter-bar');
           if (nlBarEl && nlBarEl.scrollIntoView) nlBarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
