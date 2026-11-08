@@ -68,7 +68,8 @@
   #osito-mobile-bottom-bar {
     display: none;
   }
-  .stl-mobile-tabs {
+  .stl-mobile-tabs,
+  .design-mobile-tabs {
     display: none;
   }
   .osito-mobile-table-hint {
@@ -80,6 +81,9 @@
     #osito-site-nav,
     header.topbar,
     header.admin-topbar {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 10000 !important;
       padding: 8px 12px !important;
       height: auto !important;
       min-height: 50px !important;
@@ -93,6 +97,7 @@
       align-items: center !important;
       width: 100% !important;
       gap: 8px !important;
+      position: relative !important;
     }
     .osito-nav-brand img,
     header.topbar .brand-logo,
@@ -158,18 +163,26 @@
     header.topbar .osito-nav-menu,
     header.admin-topbar .osito-nav-menu {
       display: none !important;
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 10005 !important;
       width: 100% !important;
-      flex-basis: 100% !important;
       flex-direction: column !important;
       align-items: stretch !important;
       gap: 0 !important;
       background: #161616 !important;
       border-top: 2px solid #303885 !important;
-      margin-top: 8px !important;
-      padding: 6px 0 10px !important;
-      max-height: calc(100vh - 60px) !important;
+      border-bottom: 2px solid #7077CF !important;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85) !important;
+      margin-top: 0 !important;
+      padding: 6px 0 12px !important;
+      max-height: calc(100vh - 54px) !important;
+      max-height: calc(100dvh - 54px) !important;
       overflow-y: auto !important;
       -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
     }
     #osito-site-nav.osito-nav-open .osito-nav-menu,
     header.topbar.osito-nav-open .osito-nav-menu,
@@ -234,6 +247,12 @@
       display: block !important;
     }
 
+    /* Flight Sim internal horizontal nav touch scrolling */
+    body.osito-flight-sim-body #root header nav.overflow-x-auto {
+      touch-action: pan-x !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
     /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter */
     .osito-parallax-dark,
     .osito-parallax-dark-alt,
@@ -246,41 +265,81 @@
     }
   }
 
-  /* 3D STL Editor Responsive Mobile/Tablet Layout (<= 960px) */
+  /* 3D STL Editor & Design Studio Responsive Mobile/Tablet Layout (<= 960px) */
   @media (max-width: 960px) {
+    html:has(body.osito-stl-editor-body) {
+      height: auto !important;
+      overflow-y: auto !important;
+      overflow-x: clip !important;
+    }
     body.osito-stl-editor-body {
+      display: block !important;
       height: auto !important;
       min-height: 100vh !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      overflow-x: clip !important;
     }
-    .stl-mobile-tabs {
+    body.osito-stl-editor-body .topbar {
+      padding: 8px 12px !important;
+      gap: 6px !important;
+    }
+    body.osito-stl-editor-body .topbar .brand-badge {
+      display: none !important;
+    }
+    body.osito-stl-editor-body .topbar .brand h1 {
+      font-size: 13.5px !important;
+    }
+    body.osito-stl-editor-body .topbar > div:last-child {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-x !important;
+      width: 100% !important;
+      gap: 6px !important;
+      padding-bottom: 2px !important;
+    }
+    body.osito-stl-editor-body .topbar > div:last-child .btn {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+      padding: 5px 8px !important;
+      font-size: 11px !important;
+    }
+    .stl-mobile-tabs,
+    .design-mobile-tabs {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
       background: #161616 !important;
       border-bottom: 2px solid #7077CF !important;
       position: sticky !important;
-      top: 50px !important;
+      top: 52px !important;
       z-index: 9000 !important;
+      flex-shrink: 0 !important;
     }
-    .stl-mob-tab {
+    .stl-mob-tab,
+    .design-mob-tab {
       background: #1B1B1B !important;
       color: #CBD5E1 !important;
       border: none !important;
       border-right: 1px solid #2E3468 !important;
-      padding: 10px 4px !important;
+      padding: 9px 4px !important;
       font-family: 'Fjalla One', sans-serif !important;
-      font-size: 11.5px !important;
+      font-size: 11px !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
       cursor: pointer !important;
       text-align: center !important;
       border-radius: 0px !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
     }
-    .stl-mob-tab:last-child {
+    .stl-mob-tab:last-child,
+    .design-mob-tab:last-child {
       border-right: none !important;
     }
-    .stl-mob-tab.active {
+    .stl-mob-tab.active,
+    .design-mob-tab.active {
       background: #232A68 !important;
       color: #FFFFFF !important;
       border-bottom: 3px solid #10B981 !important;
@@ -351,12 +410,127 @@
       padding: 4px 6px !important;
       font-size: 10.5px !important;
     }
+
+    /* Osito Design & Flowchart Studio (osito-design-tool.html) Mobile Workspace */
+    body.osito-design-studio-body #root > div {
+      width: 100% !important;
+      max-width: 100vw !important;
+      height: 100% !important;
+      min-height: 0 !important;
+    }
+    body.osito-design-studio-body #root > div > header {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-x !important;
+      justify-content: flex-start !important;
+      gap: 8px !important;
+      scrollbar-width: none !important;
+    }
+    body.osito-design-studio-body #root > div > header::-webkit-scrollbar {
+      display: none !important;
+    }
+    body.osito-design-studio-body #root > div > header > * {
+      flex-shrink: 0 !important;
+    }
+    /* Mode 1: Canvas + Left Tool Strip (default "canvas") */
+    body.osito-design-studio-body #root:not([data-mob-panel]) > div > div.relative.z-10 > aside:first-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="canvas"] > div > div.relative.z-10 > aside:first-of-type {
+      width: 58px !important;
+      min-width: 58px !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    body.osito-design-studio-body #root:not([data-mob-panel]) > div > div.relative.z-10 > div.flex-1,
+    body.osito-design-studio-body #root[data-mob-panel="canvas"] > div > div.relative.z-10 > div.flex-1 {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      width: calc(100% - 58px) !important;
+    }
+    body.osito-design-studio-body #root:not([data-mob-panel]) > div > div.relative.z-10 > .cursor-col-resize,
+    body.osito-design-studio-body #root[data-mob-panel="canvas"] > div > div.relative.z-10 > .cursor-col-resize,
+    body.osito-design-studio-body #root:not([data-mob-panel]) > div > div.relative.z-10 > aside:last-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="canvas"] > div > div.relative.z-10 > aside:last-of-type {
+      display: none !important;
+    }
+    body.osito-design-studio-body #root:not([data-mob-panel]) > div > footer,
+    body.osito-design-studio-body #root[data-mob-panel="canvas"] > div > footer {
+      min-height: 64px !important;
+      max-height: 78px !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-x !important;
+    }
+    /* Mode 2: Full-Screen Canvas ("full") */
+    body.osito-design-studio-body #root[data-mob-panel="full"] > div > div.relative.z-10 > aside:first-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="full"] > div > div.relative.z-10 > .cursor-col-resize,
+    body.osito-design-studio-body #root[data-mob-panel="full"] > div > div.relative.z-10 > aside:last-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="full"] > div > footer {
+      display: none !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="full"] > div > div.relative.z-10 > div.flex-1 {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    /* Mode 3: Osito Dock, Layers & AI ("dock") */
+    body.osito-design-studio-body #root[data-mob-panel="dock"] > div > div.relative.z-10 > aside:first-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="dock"] > div > div.relative.z-10 > div.flex-1,
+    body.osito-design-studio-body #root[data-mob-panel="dock"] > div > div.relative.z-10 > .cursor-col-resize,
+    body.osito-design-studio-body #root[data-mob-panel="dock"] > div > footer {
+      display: none !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="dock"] > div > div.relative.z-10 > aside:last-of-type {
+      display: flex !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      flex: 1 1 100% !important;
+      border-left: none !important;
+    }
+    /* Mode 4: Bottom Inspector & Properties ("inspector") */
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > div.relative.z-10 > aside:first-of-type,
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > div.relative.z-10 > .cursor-col-resize,
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > div.relative.z-10 > aside:last-of-type {
+      display: none !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > div.relative.z-10 {
+      flex: 0 0 34% !important;
+      height: 34% !important;
+      min-height: 130px !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > div.relative.z-10 > div.flex-1 {
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > footer {
+      display: flex !important;
+      flex: 1 1 66% !important;
+      height: auto !important;
+      max-height: none !important;
+      min-height: 0 !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
+    }
+    body.osito-design-studio-body #root[data-mob-panel="inspector"] > div > footer > div {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      border-right: none !important;
+      border-bottom: 1px solid #2e2e2e !important;
+    }
   }
 
   /* Phone & Small Tablet Layout (<= 768px) */
   @media (max-width: 768px) {
-    html, body {
-      overflow-x: hidden !important;
+    html,
+    body:not(.osito-design-studio-body):not(.osito-flight-sim-body) {
+      overflow-x: clip !important;
       max-width: 100vw !important;
     }
     body.has-osito-mobile-bar {
@@ -387,12 +561,15 @@
     .osito-inner [style*="grid-template-columns"],
     main [style*="grid-template-columns"],
     section [style*="grid-template-columns"],
+    #admin-dashboard-view [style*="grid-template-columns"],
+    .dash-panel [style*="grid-template-columns"],
+    .osito-modal-box [style*="grid-template-columns"],
     .cb-grid,
     .packs-grid,
     .calc-grid,
-    .admin-main .grid-2,
-    .admin-main .grid-3,
-    .admin-main .kpi-grid {
+    .grid-2,
+    .grid-3,
+    .kpi-grid {
       grid-template-columns: 1fr !important;
     }
     /* Keep interactive Book KPI strip as clean 2x2 grid on mobile */
@@ -409,9 +586,69 @@
     .osito-inner div[style*="min-width"],
     section div[style*="min-width"],
     main div[style*="min-width"],
+    #admin-dashboard-view div[style*="min-width"],
+    .dash-panel div[style*="min-width"],
+    .osito-modal-box div[style*="min-width"],
+    .container div[style*="min-width"],
+    footer div[style*="min-width"],
     form[style*="min-width"] {
       min-width: 0 !important;
       max-width: 100% !important;
+    }
+
+    /* Staff Admin Portal (#admin-dashboard-view) Mobile Layout & Table Overflow Fixes */
+    .dash-tabs-inner {
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+    }
+    .dash-tabs-inner::-webkit-scrollbar {
+      display: none !important;
+    }
+    .dash-tab-btn {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+      padding: 11px 14px !important;
+      font-size: 12.5px !important;
+    }
+    .dash-panel {
+      padding: 18px 12px 48px !important;
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+    }
+    .filter-toolbar {
+      padding: 12px !important;
+      gap: 8px !important;
+    }
+    .filter-toolbar select,
+    .filter-toolbar input {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .pack-card,
+    .kpi-card,
+    .calc-box {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding: 16px 12px !important;
+      overflow-x: auto !important;
+    }
+    .pack-card table.crm-table {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Footer Links Responsive Wrapping on 320px-375px Viewports */
+    footer div[style*="display:flex"],
+    footer div[style*="display: flex"] {
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      gap: 10px 14px !important;
     }
 
     .osito-card {
@@ -516,7 +753,7 @@
 
     /* Interactive Book Sticky Chapter Bar Mobile Single-Row Touch Strip */
     .nav-bar {
-      top: 50px !important;
+      top: 52px !important;
       flex-wrap: nowrap !important;
       overflow-x: auto !important;
       -webkit-overflow-scrolling: touch !important;
@@ -629,6 +866,23 @@
     }
   }
 
+  /* Landscape Phone Viewport Optimization (<= 900px width and <= 500px height) */
+  @media (max-width: 900px) and (max-height: 500px) {
+    #osito-mobile-bottom-bar {
+      display: none !important;
+    }
+    body.has-osito-mobile-bar {
+      padding-bottom: 0 !important;
+    }
+    #ositoEditToggleBtn {
+      bottom: 8px !important;
+    }
+    .viewport-wrap {
+      height: 62vh !important;
+      min-height: 185px !important;
+    }
+  }
+
   /* Extra-narrow phone refinements (<= 400px, e.g., iPhone SE / 320px-375px) */
   @media (max-width: 400px) {
     .osito-mobile-quote-chip {
@@ -647,6 +901,7 @@
     .osito-mobile-header-actions,
     #osito-mobile-bottom-bar,
     .stl-mobile-tabs,
+    .design-mobile-tabs,
     .osito-mobile-table-hint {
       display: none !important;
     }
@@ -1249,6 +1504,20 @@
   try {
     if (typeof document === "undefined" || typeof document.getElementById !== "function") return;
 
+    function closeOsitoMobileNav() {
+      try {
+        var btn = document.getElementById("ositoMobileMenuBtn");
+        var navHeader = document.getElementById("osito-site-nav") ||
+                        (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
+        if (!btn || !navHeader) return;
+        if (navHeader.className.indexOf("osito-nav-open") !== -1) {
+          navHeader.className = navHeader.className.replace(/\bosito-nav-open\b/g, "").trim();
+          btn.setAttribute("aria-expanded", "false");
+          btn.innerHTML = "&#9776; MENU";
+        }
+      } catch (e) {}
+    }
+
     window.toggleOsitoMobileNav = function(e) {
       try {
         if (e && e.stopPropagation) e.stopPropagation();
@@ -1258,9 +1527,7 @@
         if (!btn || !navHeader) return;
         var isOpen = navHeader.className.indexOf("osito-nav-open") !== -1;
         if (isOpen) {
-          navHeader.className = navHeader.className.replace(/\bosito-nav-open\b/g, "").trim();
-          btn.setAttribute("aria-expanded", "false");
-          btn.innerHTML = "&#9776; MENU";
+          closeOsitoMobileNav();
         } else {
           navHeader.className = (navHeader.className + " osito-nav-open").trim();
           btn.setAttribute("aria-expanded", "true");
@@ -1281,13 +1548,28 @@
             var links = document.querySelectorAll(".osito-nav-menu a");
             for (var i = 0; i < links.length; i++) {
               links[i].addEventListener("click", function() {
-                if (window.innerWidth <= 900 && navHeader.className.indexOf("osito-nav-open") !== -1) {
-                  navHeader.className = navHeader.className.replace(/\bosito-nav-open\b/g, "").trim();
-                  btn.setAttribute("aria-expanded", "false");
-                  btn.innerHTML = "&#9776; MENU";
+                if (window.innerWidth <= 900) {
+                  closeOsitoMobileNav();
                 }
               });
             }
+          }
+
+          if (typeof document.addEventListener === "function") {
+            document.addEventListener("click", function(ev) {
+              try {
+                if (navHeader.className.indexOf("osito-nav-open") !== -1) {
+                  if (ev && ev.target && navHeader.contains && !navHeader.contains(ev.target)) {
+                    closeOsitoMobileNav();
+                  }
+                }
+              } catch (e) {}
+            });
+            document.addEventListener("keydown", function(ev) {
+              if (ev && (ev.key === "Escape" || ev.keyCode === 27)) {
+                closeOsitoMobileNav();
+              }
+            });
           }
         }
 
@@ -1309,6 +1591,29 @@
           for (var i = 0; i < tabs.length; i++) {
             var t = tabs[i];
             if (t.getAttribute("data-stl-panel") === mode) {
+              if (t.className.indexOf("active") === -1) t.className += " active";
+            } else {
+              t.className = t.className.replace(/\bactive\b/g, "").trim();
+            }
+          }
+        }
+        setTimeout(function() {
+          try { window.dispatchEvent(new Event("resize")); } catch (e) {}
+        }, 60);
+      } catch (err) {}
+    };
+
+    window.switchDesignMobilePanel = function(mode) {
+      try {
+        var rootEl = document.getElementById("root");
+        if (rootEl) {
+          rootEl.setAttribute("data-mob-panel", mode);
+        }
+        if (typeof document.querySelectorAll === "function") {
+          var tabs = document.querySelectorAll(".design-mob-tab");
+          for (var i = 0; i < tabs.length; i++) {
+            var t = tabs[i];
+            if (t.getAttribute("data-design-panel") === mode) {
               if (t.className.indexOf("active") === -1) t.className += " active";
             } else {
               t.className = t.className.replace(/\bactive\b/g, "").trim();
