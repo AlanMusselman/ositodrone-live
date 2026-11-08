@@ -1870,30 +1870,50 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function handleAddNewLead(ev) {
       if (ev) ev.preventDefault();
+      var orgInput = document.getElementById('newLeadOrg');
+      var areaInput = document.getElementById('newLeadArea');
+      var contactInput = document.getElementById('newLeadContact');
+      var roleInput = document.getElementById('newLeadRole');
+      var phoneInput = document.getElementById('newLeadPhone');
+      var emailInput = document.getElementById('newLeadEmail');
+      var notesInput = document.getElementById('newLeadNotes');
+
+      var orgVal = (orgInput ? orgInput.value : '').trim();
+      var emailVal = (emailInput ? emailInput.value : '').trim().toLowerCase();
+      if (!orgVal) return;
+      if (emailVal && !isValidSubscriberEmail(emailVal)) return;
+
       var custom = getCustomLeads();
       var newId = generateUniqueAdminId('NEW', 101, custom);
       var leadObj = {
         id: newId,
         sourceDeck: 'Staff Portal Custom Lead',
-        organization: document.getElementById('newLeadOrg').value.trim(),
-        neighborhood: document.getElementById('newLeadArea').value.trim(),
-        contactName: document.getElementById('newLeadContact').value.trim(),
-        contactRole: document.getElementById('newLeadRole').value.trim(),
-        phone: document.getElementById('newLeadPhone').value.trim(),
-        email: document.getElementById('newLeadEmail').value.trim(),
+        organization: orgVal,
+        neighborhood: (areaInput ? areaInput.value : '').trim(),
+        contactName: (contactInput ? contactInput.value : '').trim(),
+        contactRole: (roleInput ? roleInput.value : '').trim(),
+        phone: (phoneInput ? phoneInput.value : '').trim(),
+        email: emailVal,
         segment: document.getElementById('newLeadSegment').value,
         priority: '1-Hot (Nov window)',
         owner: document.getElementById('newLeadOwner').value,
         offerPitch: document.getElementById('newLeadOffer').value.trim(),
         estimatedValue: document.getElementById('newLeadValue').value.trim(),
         stage: '1. To Call / Walk-In',
-        notes: document.getElementById('newLeadNotes').value.trim(),
+        notes: (notesInput ? notesInput.value : '').trim(),
         proposalUrl: './downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx'
       };
       custom.unshift(leadObj);
       try {
         localStorage.setItem(STORAGE_KEYS.CUSTOM_LEADS, JSON.stringify(custom));
       } catch (e) {}
+      if (orgInput) orgInput.value = '';
+      if (areaInput) areaInput.value = '';
+      if (contactInput) contactInput.value = '';
+      if (roleInput) roleInput.value = '';
+      if (phoneInput) phoneInput.value = '';
+      if (emailInput) emailInput.value = '';
+      if (notesInput) notesInput.value = '';
       closeAddLeadModal();
       renderCrmLeadsTable();
     }

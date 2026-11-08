@@ -361,7 +361,95 @@
             <h3 style="font-family:'Fjalla One',sans-serif; font-size:22px; margin:0 0 4px; text-transform:uppercase;">LET'S BUILD YOUR NEXT AERIAL MISSION</h3>
             <p style="font-size:14px; color:#EEF0FA; margin:0;">Whether you need a one-time promotional shoot or a recurring infrastructure mapping contract, Osito Drone Services is ready to deliver precision from above.</p>
           </div>
-          <a href="mailto:info@ositodrone.com?subject=Custom%20Aerial%20Solutions%20Quote" class="osito-action-btn">REQUEST QUOTE</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="#osito-commercial-newsletter-inquiry" class="osito-action-btn" style="background:#10B981; border-color:#059669; color:#161616; font-weight:700;">SUBMIT DIRECT QUOTE FORM</a>
+            <a href="mailto:info@ositodrone.com?subject=Custom%20Aerial%20Solutions%20Quote" class="osito-action-btn">REQUEST QUOTE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIAL NEWSLETTER SIGNUP & DIRECT AERIAL MISSION INQUIRY SECTION -->
+  <section id="osito-commercial-newsletter-inquiry" style="background:#1B1B1B; color:#FFFFFF; padding:52px 24px; border-bottom:4px solid #232A68;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <!-- Commercial Newsletter Bar -->
+      <div id="osito-commercial-newsletter-bar" style="background:#232A68; color:#FFFFFF; border:2px solid #7077CF; padding:24px 28px; margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+        <div style="max-width:620px;">
+          <span style="background:#7077CF; color:#FFFFFF; font-family:'Fjalla One',sans-serif; padding:4px 10px; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">PART 107 COMMERCIAL • ROOF &amp; THERMAL • 25% OFF UPDATES</span>
+          <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#FFFFFF; margin:8px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">SUBSCRIBE FOR COMMERCIAL AERIAL CASE STUDIES &amp; 25%-OFF RATE CARDS</h3>
+          <p style="font-size:13.5px; color:#EEF0FA; margin:0;">Enter your email to receive a 6-digit verification code &amp; confirmation email for commercial roof, thermal, orthomosaic, and indoor FPV inspection updates.</p>
+        </div>
+        <form id="ositoCommercialSubscribeForm" style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
+          <input id="ositoCommercialSubEmail" type="email" required placeholder="Enter your business email..." style="flex:1; min-width:220px; padding:12px 14px; border:1px solid #8E93DA; background:#FFFFFF; color:#161616; font-family:Roboto,sans-serif; font-size:14px;" />
+          <button id="ositoCommercialSubBtn" type="submit" class="osito-action-btn" style="padding:12px 22px; white-space:nowrap;">SUBSCRIBE</button>
+        </form>
+        <div id="ositoCommercialNlFeedbackBox" role="status" aria-live="polite" style="display:none; width:100%; background:#161616; border:2px solid #10B981; padding:18px 20px; margin-top:4px; color:#FFFFFF;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px;">
+            <div style="flex:1; min-width:260px;">
+              <span id="ositoCommercialNlBadge" style="display:inline-block; background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11px; font-weight:700; padding:3px 9px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:6px;">VERIFICATION EMAIL DISPATCHED</span>
+              <h4 id="ositoCommercialNlTitle" style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#FFFFFF; margin:0 0 6px; letter-spacing:0.03em; text-transform:uppercase;">THANK YOU FOR SUBSCRIBING!</h4>
+              <p id="ositoCommercialNlText" style="font-size:13.5px; color:#EEF0FA; margin:0; line-height:1.5;"></p>
+            </div>
+            <div id="ositoCommercialNlVerifyCtrls" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+              <input id="ositoCommercialNlCodeInput" type="text" maxlength="6" placeholder="6-digit code" aria-label="6-digit verification code" style="width:120px; padding:9px 10px; background:#FFFFFF; color:#161616; border:1px solid #7077CF; font-family:monospace; font-size:13.5px; font-weight:700;" />
+              <button type="button" id="ositoCommercialNlVerifyBtn" class="osito-action-btn" style="background:#10B981; border-color:#059669; color:#161616; font-weight:700; padding:9px 14px; font-size:12.5px;">VERIFY &amp; CONFIRM</button>
+              <button type="button" id="ositoCommercialNlResendBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px;">RESEND EMAIL</button>
+              <a id="ositoCommercialNlMailtoBtn" href="mailto:info@ositodrone.com" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px; border-color:#10B981; color:#10B981;">OPEN IN MAIL APP</a>
+              <button type="button" id="ositoCommercialNlDownloadEmlBtn" class="osito-action-btn dark" style="padding:9px 12px; font-size:12px;">DOWNLOAD .EML</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Commercial Aerial Mission Quote Form -->
+      <div style="background:#FFFFFF; color:#161616; border:2px solid #7077CF; padding:28px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+          <div>
+            <span style="background:#232A68; color:#FFFFFF; font-family:'Fjalla One',sans-serif; font-size:11.5px; padding:4px 10px; letter-spacing:0.05em; text-transform:uppercase;">FAA PART 107 INSURED • 25% OFF ($296+ / ZONE)</span>
+            <h3 style="font-family:'Fjalla One',sans-serif; font-size:26px; color:#232A68; margin:6px 0 2px; text-transform:uppercase;">REQUEST A COMMERCIAL AERIAL INSPECTION OR MAPPING QUOTE</h3>
+          </div>
+          <span style="font-size:13px; color:#5E5E5E;">Routes directly to <strong style="color:#232A68;">info@ositodrone.com</strong> &amp; <strong style="color:#232A68;">alan@ositodrone.com</strong></span>
+        </div>
+        <div id="ositoCommercialContactErr" role="alert" style="display:none; background:#FEE2E2; border-left:4px solid #EF4444; color:#991B1B; padding:10px 12px; font-size:13px; margin-bottom:14px;"></div>
+        <form id="ositoCommercialInquiryForm" onsubmit="return false;" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px;">
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Name / Company *</label>
+            <input id="ositoCommName" type="text" required placeholder="Your Name or Company" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px;" />
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Email *</label>
+            <input id="ositoCommEmail" type="email" required placeholder="Business Email Address" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px;" />
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Mission Type *</label>
+            <select id="ositoCommService" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; font-weight:600; color:#161616;">
+              <option value="Commercial Roof & Facade Inspection ($296+ w/ 25% Off)">1. Commercial Roof &amp; Facade Inspection ($296+ w/ 25% Off)</option>
+              <option value="Construction Progress & Orthomosaic Site Mapping">2. Construction Progress &amp; Orthomosaic Site Mapping</option>
+              <option value="Thermal / Solar / HVAC Anomaly Survey">3. Thermal / Solar / HVAC Anomaly Survey</option>
+              <option value="Commercial Real Estate 4K & Indoor Micro-FPV Tour">4. Commercial Real Estate 4K &amp; Indoor Micro-FPV Tour</option>
+            </select>
+          </div>
+          <div style="grid-column:1 / -1;">
+            <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Property Address, Scope &amp; Target Dates *</label>
+            <textarea id="ositoCommMsg" rows="3" required placeholder="Tell us the site location, approximate square footage or number of roof zones, and desired deliverables..." style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px; font-family:Roboto,sans-serif;"></textarea>
+          </div>
+          <div style="grid-column:1 / -1;">
+            <button id="ositoCommSubmitBtn" type="submit" class="osito-action-btn" style="width:100%; padding:12px 20px;">SEND COMMERCIAL QUOTE REQUEST TO INFO@OSITODRONE.COM</button>
+          </div>
+        </form>
+        <div id="ositoCommercialThankYouBox" role="status" aria-live="polite" style="display:none; background:#EEF0FA; border:2px solid #10B981; padding:18px; margin-top:14px; color:#161616;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+            <span style="display:inline-block; background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11px; font-weight:700; padding:3px 9px; text-transform:uppercase;">DISPATCHED TO INFO@OSITODRONE.COM</span>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a id="ositoCommercialOpenMailBtn" href="mailto:info@ositodrone.com" class="osito-action-btn" style="padding:6px 12px; font-size:11.5px; background:#10B981; border-color:#059669; color:#161616; font-weight:700;">OPEN IN MAIL APP</a>
+              <button type="button" id="ositoCommercialDownloadEmlBtn" class="osito-action-btn dark" style="padding:6px 12px; font-size:11.5px;">DOWNLOAD .EML</button>
+              <button type="button" id="ositoCommercialResetBtn" class="osito-action-btn dark" style="padding:6px 12px; font-size:11.5px;">SEND ANOTHER QUOTE REQUEST</button>
+            </div>
+          </div>
+          <h4 id="ositoCommercialThankYouTitle" style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#232A68; margin:0 0 6px; text-transform:uppercase;">THANK YOU! YOUR COMMERCIAL QUOTE REQUEST WAS SENT.</h4>
+          <p id="ositoCommercialThankYouText" style="font-size:13.5px; color:#161616; margin:0 0 8px;"></p>
+          <div id="ositoCommercialThankYouSummary" style="background:#FFFFFF; border:1px solid #8E93DA; padding:10px 12px; font-size:12.5px; color:#232A68; line-height:1.5;"></div>
         </div>
       </div>
     </div>
@@ -380,6 +468,639 @@
       </div>
     </div>
   </footer>
+  <script>
+  (function() {
+    var NL_KEY = 'osito_newsletter_subscribers_v1';
+    var INQ_KEY = 'osito_contact_submissions_v1';
+    var OUT_KEY = 'osito_backend_outbox_log_v1';
+    var ID_COUNTER_KEY = 'osito_id_counters_v1';
+    var ositoSyncChannel = null;
+    try {
+      if (typeof BroadcastChannel !== 'undefined') {
+        ositoSyncChannel = new BroadcastChannel('osito_backend_sync_v1');
+      }
+    } catch (e) {}
+
+    function notifyCommSync(eventType, detail) {
+      try {
+        if (ositoSyncChannel) {
+          ositoSyncChannel.postMessage({ type: eventType, detail: detail || {}, ts: Date.now() });
+        }
+      } catch (e) {}
+    }
+
+    var LEGACY_SAMPLE_EMAILS = {
+      'events@presidiokids.org': true,
+      'stem-committee@sunsetelementary-sf.org': true,
+      'r.chen@bayviewcommunitycenter.org': true,
+      'TaproomEvents@sf-craft-guild.com': true,
+      'taproomevents@sf-craft-guild.com': true,
+      'facilities@golden-gate-roofing.com': true,
+      'm.gonzalez@mission-youth-stem.org': true,
+      'd.park@marina-property-group.com': true
+    };
+    var LEGACY_SAMPLE_CODES = {
+      '482910': true, '739204': true, '518392': true, '840129': true, '629401': true
+    };
+
+    function isLegacySampleRecord(item) {
+      if (!item || typeof item !== 'object') return false;
+      var em = String(item.email || '').trim().toLowerCase();
+      if (LEGACY_SAMPLE_EMAILS[em]) return true;
+      var code = String(item.verifyCode || '').trim();
+      if (LEGACY_SAMPLE_CODES[code] && String(item.verifyToken || '').indexOf('tok-sub-100') === 0) return true;
+      if ( (item.id === 'INQ-1001' && em === 'm.gonzalez@mission-youth-stem.org') ||
+           (item.id === 'INQ-1002' && em === 'd.park@marina-property-group.com') ) {
+        return true;
+      }
+      return false;
+    }
+
+    function generateUniqueBackendId(prefix, baseStart, list) {
+      var maxNum = baseStart - 1;
+      var counters = {};
+      try {
+        counters = JSON.parse(localStorage.getItem(ID_COUNTER_KEY) || '{}') || {};
+      } catch (e) { counters = {}; }
+      if (typeof counters[prefix] === 'number' && counters[prefix] > maxNum) {
+        maxNum = counters[prefix];
+      }
+      if (Array.isArray(list)) {
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          if (item && item.id) {
+            var m = String(item.id).match(new RegExp('^' + prefix + '-(\\d+)$'));
+            if (m) {
+              var n = parseInt(m[1], 10);
+              if (!isNaN(n) && n > maxNum) maxNum = n;
+            }
+          }
+        }
+      }
+      var nextNum = maxNum + 1;
+      counters[prefix] = nextNum;
+      try {
+        localStorage.setItem(ID_COUNTER_KEY, JSON.stringify(counters));
+      } catch (e) {}
+      return prefix + '-' + nextNum;
+    }
+
+    function escapeHtmlPublic(str) {
+      return String(str === undefined || str === null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function isValidEmailAddress(email) {
+      var cleaned = String(email || '').trim();
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleaned);
+    }
+
+    function loadCommSubscribers() {
+      try {
+        var raw = localStorage.getItem(NL_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(NL_KEY, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function saveCommSubscribers(list) {
+      try { localStorage.setItem(NL_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    function loadCommInquiries() {
+      try {
+        var raw = localStorage.getItem(INQ_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(INQ_KEY, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function saveCommInquiries(list) {
+      try { localStorage.setItem(INQ_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    loadCommSubscribers();
+    loadCommInquiries();
+
+    function downloadPublicEmlFile(filename, toEmail, ccEmail, subjectLine, plainBody) {
+      var emlLines = [
+        'To: ' + toEmail,
+        ccEmail ? ('Cc: ' + ccEmail) : null,
+        'Subject: ' + subjectLine,
+        'X-Unsent: 1',
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset="UTF-8"',
+        '',
+        plainBody
+      ].filter(Boolean).join('\r\n');
+      var blob = new Blob([emlLines], { type: 'message/rfc822;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename || 'Osito_Commercial_Message.eml';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 250);
+    }
+
+    function submitCommHiddenForm(targetEmail, payload) {
+      try {
+        var frameName = 'osito_comm_relay_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        var iframe = document.createElement('iframe');
+        iframe.name = frameName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://formsubmit.co/' + encodeURIComponent(targetEmail);
+        form.target = frameName;
+        form.style.display = 'none';
+        for (var k in payload) {
+          if (Object.prototype.hasOwnProperty.call(payload, k) && payload[k] !== undefined && payload[k] !== null) {
+            var inp = document.createElement('input');
+            inp.type = 'hidden';
+            inp.name = k;
+            inp.value = String(payload[k]);
+            form.appendChild(inp);
+          }
+        }
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(function() {
+          try {
+            if (form.parentNode) form.parentNode.removeChild(form);
+            if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+          } catch (e2) {}
+        }, 9000);
+        return true;
+      } catch (e) { return false; }
+    }
+
+    function dispatchCommRelay(payload) {
+      var nowIso = new Date().toISOString();
+      var primaryTo = String(payload.to || 'info@ositodrone.com').trim();
+      var subjectLine = payload._subject || payload.subject || 'Osito Commercial Aerial Notification';
+      var relayBody = {};
+      for (var k in payload) {
+        if (Object.prototype.hasOwnProperty.call(payload, k)) relayBody[k] = payload[k];
+      }
+      relayBody._subject = subjectLine;
+      relayBody._template = 'table';
+      relayBody._captcha = 'false';
+      relayBody._autoresponse = relayBody.message || subjectLine;
+      if (payload.cc || payload._cc) relayBody._cc = payload._cc || payload.cc;
+
+      var logEntry = {
+        id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
+        to: primaryTo,
+        cc: relayBody._cc || 'info@ositodrone.com',
+        subject: subjectLine,
+        type: payload.actionType || 'commercial_dispatch',
+        payload: relayBody,
+        sentAt: nowIso,
+        deliveryStatus: 'Dispatched via Osito Backend Relay'
+      };
+      try {
+        var raw = localStorage.getItem(OUT_KEY);
+        var logs = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(logs)) logs = [];
+        logs.unshift(logEntry);
+        localStorage.setItem(OUT_KEY, JSON.stringify(logs.slice(0, 200)));
+      } catch (e) {}
+      notifyCommSync('backend_email_dispatched', logEntry);
+
+      var targets = [primaryTo];
+      if (primaryTo.toLowerCase() !== 'alan@ositodrone.com') targets.push('alan@ositodrone.com');
+      if (primaryTo.toLowerCase() !== 'info@ositodrone.com') targets.push('info@ositodrone.com');
+
+      for (var i = 0; i < targets.length; i++) {
+        (function(recip, idx) {
+          if (typeof fetch === 'function') {
+            fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recip), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(relayBody)
+            }).then(function(r) { return r.json(); }).then(function(d) {
+              if (idx === 0 && d && (d.success === 'false' || d.success === false)) {
+                submitCommHiddenForm(recip, relayBody);
+              }
+            }).catch(function() {
+              if (idx === 0) submitCommHiddenForm(recip, relayBody);
+            });
+          } else if (idx === 0) {
+            submitCommHiddenForm(recip, relayBody);
+          }
+        })(targets[i], i);
+      }
+    }
+
+    var commSubForm = document.getElementById('ositoCommercialSubscribeForm');
+    var commSubEmail = document.getElementById('ositoCommercialSubEmail');
+    var commSubBtn = document.getElementById('ositoCommercialSubBtn');
+    var commNlBox = document.getElementById('ositoCommercialNlFeedbackBox');
+    var commNlBadge = document.getElementById('ositoCommercialNlBadge');
+    var commNlTitle = document.getElementById('ositoCommercialNlTitle');
+    var commNlText = document.getElementById('ositoCommercialNlText');
+    var commNlVerifyCtrls = document.getElementById('ositoCommercialNlVerifyCtrls');
+    var commNlCodeInput = document.getElementById('ositoCommercialNlCodeInput');
+    var commNlVerifyBtn = document.getElementById('ositoCommercialNlVerifyBtn');
+    var commNlResendBtn = document.getElementById('ositoCommercialNlResendBtn');
+    var commNlMailtoBtn = document.getElementById('ositoCommercialNlMailtoBtn');
+    var commNlDownloadEmlBtn = document.getElementById('ositoCommercialNlDownloadEmlBtn');
+    var activeCommEmail = '';
+
+    function showCommNewsletterFeedbackState(mode, subObj, customMsg) {
+      if (!commNlBox) return;
+      commNlBox.style.display = 'block';
+      if (mode === 'pending') {
+        commNlBox.style.borderColor = '#10B981';
+        if (commNlBadge) {
+          commNlBadge.style.background = '#10B981';
+          commNlBadge.style.color = '#161616';
+          commNlBadge.textContent = 'STEP 1 COMPLETE: VERIFICATION EMAIL DISPATCHED';
+        }
+        if (commNlTitle) {
+          commNlTitle.textContent = 'THANK YOU FOR SUBSCRIBING, ' + (subObj.email || '').toUpperCase() + '!';
+        }
+        if (commNlText) {
+          var vCode = subObj.verifyCode || '------';
+          var verifyLink = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(subObj.verifyToken || '') + '&email=' + encodeURIComponent(subObj.email || '');
+          commNlText.textContent = customMsg || (
+            'We logged ' + subObj.email + ' in the Osito Commercial Newsletter Backend and dispatched a verification email (Code: ' + vCode + ') to ' + subObj.email + ' and info@ositodrone.com. ' +
+            'Click "VERIFY & CONFIRM" below (pre-filled with your code ' + vCode + ') to activate your subscription immediately.'
+          );
+          var mailSubj = 'Verify Your Osito Commercial Aerial Newsletter Subscription (Code: ' + vCode + ')';
+          var mailBody = 'Hello,\n\nThank you for subscribing to Osito Commercial Aerial Solutions!\n\nSubscriber Email: ' + subObj.email + '\n6-Digit Verification Code: ' + vCode + '\nOne-Click Verification Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com';
+          if (commNlMailtoBtn) {
+            commNlMailtoBtn.href = 'mailto:' + encodeURIComponent(subObj.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(mailSubj) + '&body=' + encodeURIComponent(mailBody);
+          }
+          if (commNlDownloadEmlBtn) {
+            commNlDownloadEmlBtn.onclick = function() {
+              downloadPublicEmlFile('Osito_Commercial_Newsletter_Verification_' + vCode + '.eml', subObj.email, 'info@ositodrone.com', mailSubj, mailBody);
+            };
+          }
+        }
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
+        if (commNlCodeInput) commNlCodeInput.value = subObj.verifyCode || '';
+      } else if (mode === 'verified') {
+        commNlBox.style.borderColor = '#10B981';
+        if (commNlBadge) {
+          commNlBadge.style.background = '#10B981';
+          commNlBadge.style.color = '#161616';
+          commNlBadge.textContent = 'VERIFIED & ADDED TO NEWSLETTER';
+        }
+        if (commNlTitle) {
+          commNlTitle.textContent = 'THANK YOU! ' + (subObj.email || '').toUpperCase() + ' IS VERIFIED & CONFIRMED!';
+        }
+        if (commNlText) {
+          commNlText.textContent = customMsg || ('Your email (' + subObj.email + ') is now Verified in the Osito Newsletter Backend.');
+        }
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'none';
+      } else if (mode === 'error') {
+        commNlBox.style.borderColor = '#EF4444';
+        if (commNlBadge) {
+          commNlBadge.style.background = '#EF4444';
+          commNlBadge.style.color = '#FFFFFF';
+          commNlBadge.textContent = 'VALIDATION NOTICE';
+        }
+        if (commNlTitle) {
+          commNlTitle.textContent = 'PLEASE CHECK YOUR EMAIL OR VERIFICATION CODE';
+        }
+        if (commNlText) {
+          commNlText.textContent = customMsg || 'Please enter a valid email address or 6-digit verification code.';
+        }
+      }
+    }
+
+    function verifyCommSubscriberByEmail(emailRaw, enteredCode, enteredToken) {
+      var em = String(emailRaw || '').trim().toLowerCase();
+      if (!em) return false;
+      var list = loadCommSubscribers();
+      var target = null;
+      for (var i = 0; i < list.length; i++) {
+        if (String(list[i].email || '').toLowerCase() === em) { target = list[i]; break; }
+      }
+      if (!target) {
+        showCommNewsletterFeedbackState('error', { email: em }, 'No pending subscription found for ' + em + '. Please enter your email above and click SUBSCRIBE first.');
+        return false;
+      }
+      var cleanCode = String(enteredCode || '').trim();
+      var cleanToken = String(enteredToken || '').trim();
+      var codeMatched = cleanCode.length > 0 && cleanCode === String(target.verifyCode || '').trim();
+      var tokenMatched = cleanToken.length > 0 && cleanToken === String(target.verifyToken || '').trim();
+      if (!codeMatched && !tokenMatched) {
+        showCommNewsletterFeedbackState('error', target, 'The verification code "' + cleanCode + '" did not match our 6-digit code (' + target.verifyCode + '). Please enter ' + target.verifyCode + ' and click VERIFY & CONFIRM.');
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
+        return false;
+      }
+      target.status = 'Verified';
+      target.verifiedAt = new Date().toISOString();
+      saveCommSubscribers(list);
+      notifyCommSync('subscriber_verified', target);
+
+      dispatchCommRelay({
+        actionType: 'newsletter_verified',
+        to: target.email,
+        cc: 'info@ositodrone.com',
+        _cc: 'info@ositodrone.com,alan@ositodrone.com',
+        _subject: 'Confirmed: You Are Verified on the Osito Commercial Aerial Newsletter!',
+        subscriber_id: target.id,
+        email: target.email,
+        status: 'Verified',
+        verified_at: target.verifiedAt,
+        message: 'Thank you! Your email (' + target.email + ') is now Verified on the Osito Commercial Aerial Solutions Newsletter list.'
+      });
+
+      showCommNewsletterFeedbackState('verified', target);
+      return true;
+    }
+
+    if (commSubForm && commSubEmail && commSubBtn) {
+      commSubForm.onsubmit = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var em = (commSubEmail.value || '').trim().toLowerCase();
+        if (!isValidEmailAddress(em)) {
+          showCommNewsletterFeedbackState('error', { email: em }, 'Please enter a valid business email address.');
+          return false;
+        }
+        var list = loadCommSubscribers();
+        var existing = null;
+        for (var i = 0; i < list.length; i++) {
+          if (String(list[i].email || '').toLowerCase() === em) { existing = list[i]; break; }
+        }
+        var code = String(Math.floor(100000 + Math.random() * 900000));
+        var token = 'ositoverify-' + Date.now().toString(36) + '-' + code;
+        var verifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(token) + '&email=' + encodeURIComponent(em);
+        activeCommEmail = em;
+
+        if (existing) {
+          if (existing.status === 'Verified') {
+            saveCommSubscribers(list);
+            dispatchCommRelay({
+              actionType: 'newsletter_already_verified_confirmation',
+              to: em,
+              cc: 'info@ositodrone.com',
+              _cc: 'info@ositodrone.com,alan@ositodrone.com',
+              _subject: 'Osito Commercial Aerial Newsletter Confirmation (' + em + ' is Verified)',
+              subscriber_id: existing.id,
+              email: em,
+              status: 'Verified',
+              message: 'Your email (' + em + ') is already verified on the Osito Commercial Aerial Newsletter list.'
+            });
+            commSubBtn.textContent = 'ALREADY VERIFIED';
+            commSubEmail.value = '';
+            showCommNewsletterFeedbackState('verified', existing, 'Good news! ' + em + ' is already verified on the Osito Newsletter list.');
+            return false;
+          }
+          existing.verifyCode = code;
+          existing.verifyToken = token;
+          existing.status = 'Pending Verification';
+          existing.subscribedAt = new Date().toISOString();
+          saveCommSubscribers(list);
+          notifyCommSync('subscriber_updated', existing);
+          dispatchCommRelay({
+            actionType: 'newsletter_verification_email',
+            to: em,
+            cc: 'info@ositodrone.com',
+            _cc: 'info@ositodrone.com,alan@ositodrone.com',
+            _subject: 'Verify Your Osito Commercial Aerial Newsletter Subscription (Code: ' + code + ')',
+            subscriber_id: existing.id,
+            email: em,
+            verification_code: code,
+            verification_link: verifyUrl,
+            message: 'Thank you for subscribing to Osito Commercial Aerial Solutions! Your 6-digit verification code is ' + code + '. Click here to verify: ' + verifyUrl
+          });
+          commSubBtn.textContent = 'VERIFICATION SENT';
+          commSubEmail.value = '';
+          showCommNewsletterFeedbackState('pending', existing);
+          return false;
+        }
+
+        var localPrefix = em.split('@')[0].replace(/[._-]+/g, ' ');
+        var newSub = {
+          id: generateUniqueBackendId('SUB', 1006, list),
+          email: em,
+          name: localPrefix.charAt(0).toUpperCase() + localPrefix.slice(1),
+          segment: 'Commercial Aerial Inspections',
+          status: 'Pending Verification',
+          verifyCode: code,
+          verifyToken: token,
+          source: 'Custom Aerial Solutions Page',
+          subscribedAt: new Date().toISOString(),
+          verifiedAt: null,
+          notes: 'Subscribed via Custom Aerial Solutions page; verification email dispatched.'
+        };
+        list.unshift(newSub);
+        saveCommSubscribers(list);
+        notifyCommSync('subscriber_added', newSub);
+        dispatchCommRelay({
+          actionType: 'newsletter_verification_email',
+          to: em,
+          cc: 'info@ositodrone.com',
+          _cc: 'info@ositodrone.com,alan@ositodrone.com',
+          _subject: 'Verify Your Osito Commercial Aerial Newsletter Subscription (Code: ' + code + ')',
+          subscriber_id: newSub.id,
+          email: em,
+          verification_code: code,
+          verification_link: verifyUrl,
+          status: 'Pending Verification',
+          message: 'Thank you for subscribing to Osito Commercial Aerial Solutions! Your 6-digit verification code is ' + code + '. Click here to verify: ' + verifyUrl
+        });
+        commSubBtn.textContent = 'VERIFICATION SENT';
+        commSubEmail.value = '';
+        showCommNewsletterFeedbackState('pending', newSub);
+        return false;
+      };
+    }
+
+    if (commNlVerifyBtn) {
+      commNlVerifyBtn.onclick = function() {
+        var codeVal = commNlCodeInput ? (commNlCodeInput.value || '').trim() : '';
+        var targetEm = activeCommEmail || (commSubEmail ? (commSubEmail.value || '').trim().toLowerCase() : '');
+        verifyCommSubscriberByEmail(targetEm, codeVal, null);
+      };
+    }
+
+    if (commNlResendBtn) {
+      commNlResendBtn.onclick = function() {
+        if (!activeCommEmail) return;
+        var list = loadCommSubscribers();
+        for (var i = 0; i < list.length; i++) {
+          if (String(list[i].email || '').toLowerCase() === activeCommEmail) {
+            var newCode = String(Math.floor(100000 + Math.random() * 900000));
+            var newToken = 'ositoverify-' + Date.now().toString(36) + '-' + newCode;
+            var resendVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(newToken) + '&email=' + encodeURIComponent(list[i].email);
+            list[i].verifyCode = newCode;
+            list[i].verifyToken = newToken;
+            saveCommSubscribers(list);
+            notifyCommSync('subscriber_updated', list[i]);
+            dispatchCommRelay({
+              actionType: 'newsletter_verification_resend',
+              to: list[i].email,
+              cc: 'info@ositodrone.com',
+              _cc: 'info@ositodrone.com,alan@ositodrone.com',
+              _subject: 'Resent: Verify Your Osito Commercial Aerial Subscription (Code: ' + newCode + ')',
+              subscriber_id: list[i].id,
+              email: list[i].email,
+              verification_code: newCode,
+              verification_link: resendVerifyUrl,
+              message: 'Here is your resent Osito Commercial Aerial Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl
+            });
+            showCommNewsletterFeedbackState('pending', list[i], 'We resent a fresh verification email to ' + list[i].email + ' (New Code: ' + newCode + ').');
+            break;
+          }
+        }
+      };
+    }
+
+    try {
+      var urlParams = new URLSearchParams(window.location.search || '');
+      var vToken = urlParams.get('verify_newsletter');
+      var vEmail = urlParams.get('email');
+      if (vEmail && vToken) {
+        activeCommEmail = String(vEmail).trim().toLowerCase();
+        verifyCommSubscriberByEmail(vEmail, null, vToken);
+        var nlBarEl = document.getElementById('osito-commercial-newsletter-bar');
+        if (nlBarEl && nlBarEl.scrollIntoView) nlBarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } catch (e) {}
+
+    var commInqForm = document.getElementById('ositoCommercialInquiryForm');
+    var commSubmitBtn = document.getElementById('ositoCommSubmitBtn');
+    var commOpenMailBtn = document.getElementById('ositoCommercialOpenMailBtn');
+    var commDownloadEmlBtn = document.getElementById('ositoCommercialDownloadEmlBtn');
+    var commResetBtn = document.getElementById('ositoCommercialResetBtn');
+    var commThankYouBox = document.getElementById('ositoCommercialThankYouBox');
+    var commThankYouTitle = document.getElementById('ositoCommercialThankYouTitle');
+    var commThankYouText = document.getElementById('ositoCommercialThankYouText');
+    var commThankYouSummary = document.getElementById('ositoCommercialThankYouSummary');
+    var commErrEl = document.getElementById('ositoCommercialContactErr');
+
+    if (commInqForm) {
+      commInqForm.onsubmit = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (commErrEl) commErrEl.style.display = 'none';
+        var n = (document.getElementById('ositoCommName').value || '').trim();
+        var em = (document.getElementById('ositoCommEmail').value || '').trim().toLowerCase();
+        var srv = (document.getElementById('ositoCommService').value || '').trim();
+        var msg = (document.getElementById('ositoCommMsg').value || '').trim();
+        if (!n || !isValidEmailAddress(em) || !msg) {
+          if (commErrEl) {
+            commErrEl.textContent = 'Please enter your Name/Company, a valid Business Email Address, and your Mission Details.';
+            commErrEl.style.display = 'block';
+          }
+          return false;
+        }
+        var inqs = loadCommInquiries();
+        var inqId = generateUniqueBackendId('INQ', 1003, inqs);
+        var nowIso = new Date().toISOString();
+        var rec = {
+          id: inqId,
+          name: n,
+          email: em,
+          phone: srv,
+          message: '[' + srv + '] ' + msg,
+          recipient: 'info@ositodrone.com',
+          status: 'New - Unread',
+          deliveryState: 'Sent to info@ositodrone.com',
+          submittedAt: nowIso,
+          notes: ''
+        };
+        inqs.unshift(rec);
+        saveCommInquiries(inqs);
+        notifyCommSync('contact_inquiry_submitted', rec);
+
+        var inqSubject = 'Osito Commercial Aerial Quote Request (' + srv + ') from ' + n + ' [' + inqId + ']';
+        var inqPlainBody = 'Reference ID: ' + inqId + '\nFrom: ' + n + ' <' + em + '>\nMission Type: ' + srv + '\nSubmitted At: ' + nowIso + '\n\nProperty / Mission Scope:\n' + msg;
+
+        dispatchCommRelay({
+          actionType: 'contact_form_inquiry',
+          to: 'info@ositodrone.com',
+          _cc: 'alan@ositodrone.com',
+          _replyto: em,
+          _subject: inqSubject,
+          inquiry_id: inqId,
+          recipient: 'info@ositodrone.com',
+          name: n,
+          email: em,
+          mission_type: srv,
+          message: msg,
+          submitted_at: nowIso
+        });
+
+        if (commOpenMailBtn) {
+          commOpenMailBtn.href = 'mailto:info@ositodrone.com?cc=' + encodeURIComponent('alan@ositodrone.com') + '&subject=' + encodeURIComponent(inqSubject) + '&body=' + encodeURIComponent(inqPlainBody);
+        }
+        if (commDownloadEmlBtn) {
+          commDownloadEmlBtn.onclick = function() {
+            downloadPublicEmlFile('Osito_Commercial_Quote_' + inqId + '.eml', 'info@ositodrone.com', 'alan@ositodrone.com', inqSubject, inqPlainBody);
+          };
+        }
+        if (commSubmitBtn) {
+          commSubmitBtn.textContent = 'COMMERCIAL QUOTE SENT TO INFO@OSITODRONE.COM';
+        }
+        if (commThankYouTitle) {
+          commThankYouTitle.textContent = 'THANK YOU, ' + n.toUpperCase() + '! YOUR COMMERCIAL QUOTE REQUEST WAS SENT.';
+        }
+        if (commThankYouText) {
+          commThankYouText.textContent = 'Thank you, ' + n + '! Your quote request (' + inqId + ') for ' + srv + ' has been sent in the backend directly to info@ositodrone.com and alan@ositodrone.com.';
+        }
+        if (commThankYouSummary) {
+          commThankYouSummary.innerHTML =
+            '<strong>Reference ID:</strong> ' + escapeHtmlPublic(inqId) + ' | <strong>Delivered To:</strong> <code>info@ositodrone.com</code> &amp; <code>alan@ositodrone.com</code><br/>' +
+            '<strong>From:</strong> ' + escapeHtmlPublic(n) + ' (' + escapeHtmlPublic(em) + ' | ' + escapeHtmlPublic(srv) + ')<br/>' +
+            '<strong>Mission Scope:</strong> ' + escapeHtmlPublic(msg);
+        }
+        if (commThankYouBox) commThankYouBox.style.display = 'block';
+        document.getElementById('ositoCommName').value = '';
+        document.getElementById('ositoCommEmail').value = '';
+        document.getElementById('ositoCommMsg').value = '';
+        return false;
+      };
+    }
+
+    if (commResetBtn) {
+      commResetBtn.onclick = function() {
+        if (commThankYouBox) commThankYouBox.style.display = 'none';
+        if (commErrEl) commErrEl.style.display = 'none';
+        if (commSubmitBtn) commSubmitBtn.textContent = 'SEND COMMERCIAL QUOTE REQUEST TO INFO@OSITODRONE.COM';
+        var nameInput = document.getElementById('ositoCommName');
+        if (nameInput) nameInput.focus();
+      };
+    }
+  })();
+  </script>
   <script>
   (function() {
     var parallaxSections = document.querySelectorAll('.osito-parallax-dark, .osito-parallax-dark-alt, .osito-parallax-dark-sunset');

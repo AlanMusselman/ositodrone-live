@@ -1308,6 +1308,12 @@
         bookBtn.onclick = function() {
           var cMsg = document.getElementById('ositoContactMsg');
           var cSec = document.getElementById('osito-contact-section');
+          var tyBox = document.getElementById('ositoContactThankYouBox');
+          var errBox = document.getElementById('ositoContactErrorAlert');
+          var subBtnEl = document.getElementById('ositoContactSubmitBtn');
+          if (tyBox) tyBox.style.display = 'none';
+          if (errBox) errBox.style.display = 'none';
+          if (subBtnEl) subBtnEl.textContent = 'SEND MESSAGE';
           if (cMsg) cMsg.value = plainBody;
           if (cSec && cSec.scrollIntoView) cSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
@@ -1333,7 +1339,13 @@
             var pkgSubj = qIdx !== -1 ? decodeURIComponent(hrefVal.slice(qIdx + 8).split('&')[0]) : 'Osito Drone Package Booking Inquiry';
             var cMsg = document.getElementById('ositoContactMsg');
             var cSec = document.getElementById('osito-contact-section');
-            if (cMsg && !cMsg.value) {
+            var tyBox = document.getElementById('ositoContactThankYouBox');
+            var errBox = document.getElementById('ositoContactErrorAlert');
+            var subBtnEl = document.getElementById('ositoContactSubmitBtn');
+            if (tyBox) tyBox.style.display = 'none';
+            if (errBox) errBox.style.display = 'none';
+            if (subBtnEl) subBtnEl.textContent = 'SEND MESSAGE';
+            if (cMsg) {
               cMsg.value = 'Hi Osito Drone Team,\n\nI would like to book / request a quote for: ' + pkgSubj + '.\nPlease let us know available dates and next steps.';
             }
             if (cSec && cSec.scrollIntoView) cSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1909,7 +1921,8 @@
     if (nlVerifyBtn) {
       nlVerifyBtn.onclick = function() {
         var codeVal = nlCodeInput ? (nlCodeInput.value || '').trim() : '';
-        verifySubscriberByEmail(activePendingEmail, codeVal, null);
+        var targetEm = activePendingEmail || (subEmail ? (subEmail.value || '').trim().toLowerCase() : '');
+        verifySubscriberByEmail(targetEm, codeVal, null);
       };
     }
 
@@ -1951,6 +1964,7 @@
       var vToken = urlParams.get('verify_newsletter');
       var vEmail = urlParams.get('email');
       if (vEmail && vToken) {
+        activePendingEmail = String(vEmail).trim().toLowerCase();
         verifySubscriberByEmail(vEmail, null, vToken);
         var nlBarEl = document.getElementById('osito-public-newsletter-bar');
         if (nlBarEl && nlBarEl.scrollIntoView) nlBarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2008,7 +2022,7 @@
         var msgEl = document.getElementById('ositoContactMsg');
 
         var n = (nameEl ? nameEl.value : '').trim();
-        var em = (emailEl ? emailEl.value : '').trim();
+        var em = (emailEl ? emailEl.value : '').trim().toLowerCase();
         var ph = (phoneEl ? phoneEl.value : '').trim();
         var msg = (msgEl ? msgEl.value : '').trim();
 
@@ -2105,6 +2119,7 @@
     if (contactResetBtn) {
       contactResetBtn.onclick = function() {
         if (contactThankYouBox) contactThankYouBox.style.display = 'none';
+        if (contactErrorEl) contactErrorEl.style.display = 'none';
         if (contactSubmitBtn) contactSubmitBtn.textContent = 'SEND MESSAGE';
         var nameEl = document.getElementById('ositoContactName');
         if (nameEl) nameEl.focus();
