@@ -78,7 +78,7 @@
     .dash-panel.active { display: block; }
 
     /* KPI Strip */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 14px; margin-bottom: 24px; }
     .kpi-card { background: #FFFFFF; border: 2px solid #E2E2E2; border-top: 4px solid #232A68; padding: 16px 18px; }
     .kpi-card.emerald { border-top-color: #10B981; }
     .kpi-card.indigo { border-top-color: #7077CF; }
@@ -87,7 +87,7 @@
     .kpi-sub { font-size: 12px; color: #5E5E5E; }
 
     /* Pack & Proposal Cards */
-    .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(390px, 1fr)); gap: 18px; }
+    .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 390px), 1fr)); gap: 18px; }
     .pack-card { background: #FFFFFF; border: 2px solid #D0D4E8; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
     .pack-card-top { padding: 20px; }
     .pack-cat-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
@@ -135,6 +135,601 @@
       .staff-pill-row, .recovery-mode-tabs { grid-template-columns: 1fr; }
     }
   </style>
+  <style id="osito-mobile-ux-styles">
+  /* ==========================================================================
+     OSITO DRONE SERVICES — UNIFIED MOBILE & TABLET UX UPGRADE
+     Strict ositodrone.com Design System: Fjalla One + Roboto, 0px Sharp Corners
+     ========================================================================== */
+  .osito-mobile-header-actions {
+    display: none;
+  }
+  #osito-mobile-bottom-bar {
+    display: none;
+  }
+  .stl-mobile-tabs {
+    display: none;
+  }
+  .osito-mobile-table-hint {
+    display: none;
+  }
+
+  /* Tablet & Mobile Navigation Drawer + Parallax Fix (<= 900px) */
+  @media (max-width: 900px) {
+    #osito-site-nav,
+    header.topbar,
+    header.admin-topbar {
+      padding: 8px 12px !important;
+      height: auto !important;
+      min-height: 50px !important;
+    }
+    #osito-site-nav .osito-nav-inner,
+    header.topbar .osito-nav-inner,
+    header.admin-topbar {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+      gap: 8px !important;
+    }
+    .osito-nav-brand img,
+    header.topbar .brand-logo,
+    header.admin-topbar .brand img {
+      height: 28px !important;
+      width: auto !important;
+    }
+    header.topbar .brand-title,
+    header.admin-topbar .brand-title {
+      font-size: 13px !important;
+    }
+    header.topbar .brand-sub,
+    header.admin-topbar .brand-sub {
+      display: none !important;
+    }
+    .osito-mobile-header-actions {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      margin-left: auto !important;
+    }
+    .osito-mobile-quote-chip {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #059669 !important;
+      color: #FFFFFF !important;
+      border: 1px solid #10B981 !important;
+      font-family: 'Fjalla One', sans-serif !important;
+      font-size: 11.5px !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      padding: 6px 10px !important;
+      min-height: 36px !important;
+      border-radius: 0px !important;
+      white-space: nowrap !important;
+    }
+    .osito-mobile-menu-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 5px !important;
+      background: #232A68 !important;
+      color: #FFFFFF !important;
+      border: 1px solid #7077CF !important;
+      font-family: 'Fjalla One', sans-serif !important;
+      font-size: 12.5px !important;
+      letter-spacing: 0.05em !important;
+      text-transform: uppercase !important;
+      padding: 6px 12px !important;
+      min-height: 36px !important;
+      cursor: pointer !important;
+      border-radius: 0px !important;
+      white-space: nowrap !important;
+    }
+    .osito-mobile-menu-btn[aria-expanded="true"] {
+      background: #7077CF !important;
+      border-color: #FFFFFF !important;
+      color: #FFFFFF !important;
+    }
+    #osito-site-nav .osito-nav-menu,
+    header.topbar .osito-nav-menu,
+    header.admin-topbar .osito-nav-menu {
+      display: none !important;
+      width: 100% !important;
+      flex-basis: 100% !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 0 !important;
+      background: #161616 !important;
+      border-top: 2px solid #303885 !important;
+      margin-top: 8px !important;
+      padding: 6px 0 10px !important;
+      max-height: calc(100vh - 60px) !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    #osito-site-nav.osito-nav-open .osito-nav-menu,
+    header.topbar.osito-nav-open .osito-nav-menu,
+    header.admin-topbar.osito-nav-open .osito-nav-menu {
+      display: flex !important;
+    }
+    .osito-nav-menu > a.osito-nav-item,
+    .osito-nav-menu > .osito-dropdown > a.osito-nav-item,
+    .osito-nav-menu > .osito-nav-dropdown > a.osito-nav-item {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 11px 14px !important;
+      min-height: 43px !important;
+      height: auto !important;
+      font-size: 13.5px !important;
+      border: none !important;
+      border-bottom: 1px solid #262626 !important;
+      text-align: left !important;
+    }
+    .osito-dropdown,
+    .osito-nav-dropdown {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      height: auto !important;
+    }
+    .osito-dropdown-menu,
+    .osito-nav-dropdown-menu {
+      display: block !important;
+      position: static !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      background: #1B1F3B !important;
+      border: none !important;
+      border-left: 3px solid #7077CF !important;
+      border-bottom: 1px solid #262626 !important;
+      box-shadow: none !important;
+      padding: 2px 0 !important;
+    }
+    .osito-dropdown-menu a,
+    .osito-nav-dropdown-menu a {
+      padding: 9px 14px 9px 22px !important;
+      font-size: 12px !important;
+      color: #EEF0FA !important;
+      border-bottom: 1px solid rgba(112, 119, 207, 0.16) !important;
+      display: block !important;
+      white-space: normal !important;
+    }
+    .osito-dropdown-menu a:last-child,
+    .osito-nav-dropdown-menu a:last-child {
+      border-bottom: none !important;
+    }
+    .osito-nav-menu .osito-action-btn {
+      width: calc(100% - 24px) !important;
+      margin: 10px 12px 4px !important;
+      padding: 11px 14px !important;
+      font-size: 14px !important;
+      text-align: center !important;
+      display: block !important;
+    }
+
+    /* Disable fixed background attachment on mobile/tablet to prevent iOS Safari zoom/jitter */
+    .osito-parallax-dark,
+    .osito-parallax-dark-alt,
+    .osito-parallax-dark-sunset,
+    [style*="background-attachment: fixed"],
+    [style*="background-attachment:fixed"] {
+      background-attachment: scroll !important;
+      background-position: center center !important;
+      background-size: cover !important;
+    }
+  }
+
+  /* 3D STL Editor Responsive Mobile/Tablet Layout (<= 960px) */
+  @media (max-width: 960px) {
+    body.osito-stl-editor-body {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    .stl-mobile-tabs {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      background: #161616 !important;
+      border-bottom: 2px solid #7077CF !important;
+      position: sticky !important;
+      top: 50px !important;
+      z-index: 9000 !important;
+    }
+    .stl-mob-tab {
+      background: #1B1B1B !important;
+      color: #CBD5E1 !important;
+      border: none !important;
+      border-right: 1px solid #2E3468 !important;
+      padding: 10px 4px !important;
+      font-family: 'Fjalla One', sans-serif !important;
+      font-size: 11.5px !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      text-align: center !important;
+      border-radius: 0px !important;
+    }
+    .stl-mob-tab:last-child {
+      border-right: none !important;
+    }
+    .stl-mob-tab.active {
+      background: #232A68 !important;
+      color: #FFFFFF !important;
+      border-bottom: 3px solid #10B981 !important;
+    }
+    .workspace {
+      display: flex !important;
+      flex-direction: column !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+    .viewport-wrap {
+      order: 1 !important;
+      width: 100% !important;
+      height: 50vh !important;
+      min-height: 310px !important;
+      flex: none !important;
+    }
+    .workspace[data-mob-panel="viewport"] .viewport-wrap {
+      height: 70vh !important;
+    }
+    .workspace[data-mob-panel="viewport"] .sidebar,
+    .workspace[data-mob-panel="viewport"] .sidebar-right {
+      display: none !important;
+    }
+    .workspace[data-mob-panel="cad"] .viewport-wrap {
+      height: 34vh !important;
+      min-height: 220px !important;
+    }
+    .workspace[data-mob-panel="cad"] .sidebar-right {
+      display: none !important;
+    }
+    .workspace[data-mob-panel="slicer"] .viewport-wrap {
+      height: 34vh !important;
+      min-height: 220px !important;
+    }
+    .workspace[data-mob-panel="slicer"] .sidebar {
+      display: none !important;
+    }
+    .sidebar {
+      order: 2 !important;
+      width: 100% !important;
+      border-right: none !important;
+      border-top: 2px solid #7077CF !important;
+      overflow-y: visible !important;
+    }
+    .sidebar-right {
+      order: 3 !important;
+      width: 100% !important;
+      border-left: none !important;
+      border-top: 2px solid #7077CF !important;
+      overflow-y: visible !important;
+    }
+    .hud-overlay {
+      top: 8px !important;
+      left: 8px !important;
+      right: 8px !important;
+      padding: 6px 8px !important;
+      font-size: 10.5px !important;
+    }
+    .hud-bottom {
+      bottom: 6px !important;
+      left: 6px !important;
+      right: 6px !important;
+      gap: 4px !important;
+    }
+    .hud-bottom > div {
+      padding: 4px 6px !important;
+      font-size: 10.5px !important;
+    }
+  }
+
+  /* Phone & Small Tablet Layout (<= 768px) */
+  @media (max-width: 768px) {
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+    }
+    body.has-osito-mobile-bar {
+      padding-bottom: 64px !important;
+    }
+    .osito-section {
+      padding: 28px 14px !important;
+    }
+    .osito-inner {
+      max-width: 100% !important;
+    }
+    h1 {
+      font-size: clamp(22px, 6.2vw, 28px) !important;
+      line-height: 1.16 !important;
+      word-break: break-word !important;
+    }
+    h2 {
+      font-size: clamp(19px, 5.2vw, 24px) !important;
+      line-height: 1.2 !important;
+      word-break: break-word !important;
+    }
+    h3 {
+      font-size: clamp(16px, 4.5vw, 19px) !important;
+      line-height: 1.25 !important;
+    }
+
+    /* Collapse multi-column content grids to single column on mobile to guarantee zero horizontal overflow */
+    .osito-inner [style*="grid-template-columns"],
+    main [style*="grid-template-columns"],
+    section [style*="grid-template-columns"],
+    .cb-grid,
+    .packs-grid,
+    .calc-grid,
+    .admin-main .grid-2,
+    .admin-main .grid-3,
+    .admin-main .kpi-grid {
+      grid-template-columns: 1fr !important;
+    }
+    /* Keep interactive Book KPI strip as clean 2x2 grid on mobile */
+    .kpi-strip {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 8px !important;
+    }
+    /* Keep 8x8 ToF Laser matrix as 8 columns on mobile */
+    .tof-grid {
+      grid-template-columns: repeat(8, 1fr) !important;
+    }
+
+    /* Reset rigid inline min-widths on flex children so narrow 320px-375px screens never overflow */
+    .osito-inner div[style*="min-width"],
+    section div[style*="min-width"],
+    main div[style*="min-width"],
+    form[style*="min-width"] {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .osito-card {
+      padding: 18px 14px !important;
+    }
+
+    /* Prevent iOS Safari auto-zoom on form field focus by enforcing 16px font-size */
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    select,
+    textarea {
+      font-size: 16px !important;
+      max-width: 100% !important;
+    }
+
+    /* Full-width thumb-friendly action buttons in heroes and cards */
+    .hero-quick-actions {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 8px !important;
+    }
+    .hero-quick-link,
+    .btn-group .btn-primary {
+      width: 100% !important;
+      text-align: center !important;
+      justify-content: center !important;
+    }
+
+    /* Maker Faire Photo Carousel Mobile Polish (index.html) */
+    #osito-photo-carousel-frame {
+      height: 220px !important;
+    }
+    .osito-carousel-caption {
+      padding: 8px 10px !important;
+    }
+    .osito-carousel-caption h4 {
+      font-size: 13px !important;
+    }
+    .osito-carousel-caption p {
+      font-size: 11px !important;
+      line-height: 1.3 !important;
+    }
+    .osito-thumb-strip {
+      grid-template-columns: repeat(6, 1fr) !important;
+      gap: 4px !important;
+    }
+    .osito-thumb-btn {
+      height: 42px !important;
+    }
+
+    /* Instant Quote Estimator Mobile Polish (index.html) */
+    #ositoEstimatorForm {
+      padding: 16px 12px !important;
+    }
+
+    /* Coloring Book Cards Mobile Layout (osito-drone-academy.html & toolbox.html) */
+    .cb-card-top {
+      grid-template-columns: 92px 1fr !important;
+      gap: 12px !important;
+      padding: 12px !important;
+    }
+    .cb-thumb {
+      min-height: 116px !important;
+    }
+    .cb-card-actions {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 6px !important;
+      padding: 10px 12px !important;
+    }
+    .cb-card-actions .cb-btn-pdf {
+      grid-column: 1 / -1 !important;
+      padding: 10px !important;
+      font-size: 13px !important;
+    }
+    .cb-card-actions .cb-btn-docx,
+    .cb-card-actions .cb-btn-preview {
+      padding: 9px 6px !important;
+      font-size: 11.5px !important;
+    }
+    #osito-pdf-preview-frame {
+      height: 380px !important;
+    }
+
+    /* Toolbox 3-Step Visual Diagrams Vertical Mobile Stack (toolbox.html) */
+    .osito-tool-diagram-wrap {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 14px 10px !important;
+    }
+    .osito-tool-diagram-row {
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+    .osito-tool-diagram-row > div {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .osito-tool-diagram-arrow {
+      transform: rotate(90deg) !important;
+      margin: 2px 0 !important;
+    }
+
+    /* Interactive Book Sticky Chapter Bar Mobile Single-Row Touch Strip */
+    .nav-bar {
+      top: 50px !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+      padding: 7px 10px !important;
+      gap: 6px !important;
+    }
+    .nav-bar::-webkit-scrollbar {
+      display: none !important;
+    }
+    .nav-pill {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+      padding: 6px 10px !important;
+      font-size: 12px !important;
+    }
+    .quiz-opt {
+      padding: 6px 4px !important;
+      min-height: 38px !important;
+    }
+
+    /* Scrollable Comparison Tables on Mobile */
+    [style*="overflow-x:auto"],
+    [style*="overflow-x: auto"],
+    .table-wrap,
+    .osito-table-scroll {
+      -webkit-overflow-scrolling: touch !important;
+      max-width: 100% !important;
+    }
+    .osito-mobile-table-hint {
+      display: block !important;
+      font-family: 'Fjalla One', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: 0.05em !important;
+      color: #232A68 !important;
+      background: #EEF0FA !important;
+      border: 1px solid #8E93DA !important;
+      border-bottom: none !important;
+      padding: 5px 10px !important;
+      text-transform: uppercase !important;
+    }
+    table th,
+    table td {
+      padding: 8px 9px !important;
+      font-size: 12px !important;
+    }
+
+    /* Sticky Mobile Bottom Quick-Action Bar */
+    #osito-mobile-bottom-bar {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 9998 !important;
+      background: #161616 !important;
+      border-top: 2px solid #7077CF !important;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.55) !important;
+    }
+    #osito-mobile-bottom-bar a {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 2px !important;
+      padding: 6px 4px !important;
+      min-height: 54px !important;
+      text-decoration: none !important;
+      color: #EEF0FA !important;
+      font-family: 'Fjalla One', sans-serif !important;
+      font-size: 10.5px !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      border-right: 1px solid #2A2A2A !important;
+      border-radius: 0px !important;
+      text-align: center !important;
+      line-height: 1.15 !important;
+    }
+    #osito-mobile-bottom-bar a:last-child {
+      border-right: none !important;
+    }
+    #osito-mobile-bottom-bar a.mob-cta-emerald {
+      background: #065F46 !important;
+      color: #FFFFFF !important;
+      border-top: 2px solid #10B981 !important;
+      margin-top: -2px !important;
+    }
+    #osito-mobile-bottom-bar a:active,
+    #osito-mobile-bottom-bar a:hover {
+      background: #232A68 !important;
+      color: #FFFFFF !important;
+    }
+    #osito-mobile-bottom-bar .mob-icon {
+      font-size: 14px !important;
+      line-height: 1 !important;
+    }
+
+    /* Reposition floating No-Code Editor button above the mobile bottom bar */
+    #ositoEditToggleBtn {
+      bottom: 62px !important;
+      right: 8px !important;
+      padding: 6px 10px !important;
+      font-size: 10.5px !important;
+    }
+    #ositoVisualEditorBar {
+      bottom: 54px !important;
+      padding: 8px 10px !important;
+      font-size: 11px !important;
+    }
+  }
+
+  /* Extra-narrow phone refinements (<= 400px, e.g., iPhone SE / 320px-375px) */
+  @media (max-width: 400px) {
+    .osito-mobile-quote-chip {
+      display: none !important;
+    }
+    .cb-card-top {
+      grid-template-columns: 1fr !important;
+    }
+    .cb-thumb {
+      max-width: 170px !important;
+      margin: 0 auto !important;
+    }
+  }
+
+  @media print {
+    .osito-mobile-header-actions,
+    #osito-mobile-bottom-bar,
+    .stl-mobile-tabs,
+    .osito-mobile-table-hint {
+      display: none !important;
+    }
+  }
+</style>
 </head>
 <body>
   <!-- Unified Site Top Navigation Bar -->
@@ -143,6 +738,7 @@
       <a href="./index.html" class="osito-nav-brand">
         <img src="./assets/ositologo-white.png" alt="Osito Drone Logo" />
       </a>
+      <div class="osito-mobile-header-actions"><a href="./index.html#osito-live-sim-estimator-hub" class="osito-mobile-quote-chip">25% OFF QUOTE</a><button type="button" class="osito-mobile-menu-btn" id="ositoMobileMenuBtn" onclick="if(window.toggleOsitoMobileNav){window.toggleOsitoMobileNav(event);}" aria-expanded="false" aria-label="Toggle Navigation Menu">&#9776; MENU</button></div>
       <nav class="osito-nav-menu" aria-label="Primary Navigation">
         <a href="./index.html" class="osito-nav-item">Home</a>
         <div class="osito-nav-dropdown">
@@ -473,7 +1069,7 @@
          TAB 4: SECURITY, PASSWORD MANAGEMENT & CLOUD AUTH
          ================================================================= -->
     <section id="tab-security" class="dash-panel">
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:22px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:22px;">
         <div class="pack-card" style="padding:24px;">
           <span class="pack-cat-badge" style="align-self:flex-start; margin-bottom:10px;">PASSWORD &amp; RECOVERY KEY MANAGER</span>
           <h3 class="pack-title">CHANGE YOUR CO-FOUNDER PASSWORD</h3>
@@ -607,7 +1203,7 @@
         <h3 style="font-family:'Fjalla One',sans-serif; font-size:16px; color:#232A68; margin:0 0 12px; text-transform:uppercase;">
           + ADD NEW SUBSCRIBER EMAIL TO BACKEND
         </h3>
-        <form id="adminAddSubscriberForm" onsubmit="handleAdminAddSubscriber(event)" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; align-items:end;">
+        <form id="adminAddSubscriberForm" onsubmit="handleAdminAddSubscriber(event)" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap:12px; align-items:end;">
           <div>
             <label class="form-label" style="color:#232A68;">EMAIL ADDRESS *</label>
             <input type="email" id="adminSubEmailInput" class="form-input" style="background:#F6F6F6; color:#161616; border-color:#8E93DA;" required placeholder="parent.or.school@domain.com" />
@@ -691,7 +1287,7 @@
           </div>
         </div>
 
-        <div style="padding:22px; display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:24px;">
+        <div style="padding:22px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:24px;">
           <!-- Left Column: Composer Form -->
           <form id="ositoSendNewsletterForm" onsubmit="handleSendNewsletterBroadcast(event)">
             <div id="nl-broadcast-alert" class="admin-alert" role="status" aria-live="polite"></div>
@@ -3176,5 +3772,90 @@ Osito Drone Services | San Francisco, CA</textarea>
       } catch (e) {}
     })();
   </script>
+  <script id="osito-mobile-ux-script">
+(function() {
+  try {
+    if (typeof document === "undefined" || typeof document.getElementById !== "function") return;
+
+    window.toggleOsitoMobileNav = function(e) {
+      try {
+        if (e && e.stopPropagation) e.stopPropagation();
+        var btn = document.getElementById("ositoMobileMenuBtn");
+        var navHeader = document.getElementById("osito-site-nav") ||
+                        (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
+        if (!btn || !navHeader) return;
+        var isOpen = navHeader.className.indexOf("osito-nav-open") !== -1;
+        if (isOpen) {
+          navHeader.className = navHeader.className.replace(/\bosito-nav-open\b/g, "").trim();
+          btn.setAttribute("aria-expanded", "false");
+          btn.innerHTML = "&#9776; MENU";
+        } else {
+          navHeader.className = (navHeader.className + " osito-nav-open").trim();
+          btn.setAttribute("aria-expanded", "true");
+          btn.innerHTML = "&#10005; CLOSE";
+        }
+      } catch (err) {}
+    };
+
+    function initOsitoMobileNav() {
+      try {
+        var btn = document.getElementById("ositoMobileMenuBtn");
+        var navHeader = document.getElementById("osito-site-nav") ||
+                        (document.querySelector ? document.querySelector("header.topbar, header.admin-topbar") : null);
+        if (btn && navHeader) {
+          btn.onclick = window.toggleOsitoMobileNav;
+
+          if (typeof document.querySelectorAll === "function") {
+            var links = document.querySelectorAll(".osito-nav-menu a");
+            for (var i = 0; i < links.length; i++) {
+              links[i].addEventListener("click", function() {
+                if (window.innerWidth <= 900 && navHeader.className.indexOf("osito-nav-open") !== -1) {
+                  navHeader.className = navHeader.className.replace(/\bosito-nav-open\b/g, "").trim();
+                  btn.setAttribute("aria-expanded", "false");
+                  btn.innerHTML = "&#9776; MENU";
+                }
+              });
+            }
+          }
+        }
+
+        var bottomBar = document.getElementById("osito-mobile-bottom-bar");
+        if (bottomBar && document.body && document.body.className.indexOf("has-osito-mobile-bar") === -1) {
+          document.body.className = (document.body.className + " has-osito-mobile-bar").trim();
+        }
+      } catch (innerErr) {}
+    }
+
+    window.switchStlMobilePanel = function(mode) {
+      try {
+        var ws = document.querySelector ? document.querySelector(".workspace") : null;
+        if (ws) {
+          ws.setAttribute("data-mob-panel", mode);
+        }
+        if (typeof document.querySelectorAll === "function") {
+          var tabs = document.querySelectorAll(".stl-mob-tab");
+          for (var i = 0; i < tabs.length; i++) {
+            var t = tabs[i];
+            if (t.getAttribute("data-stl-panel") === mode) {
+              if (t.className.indexOf("active") === -1) t.className += " active";
+            } else {
+              t.className = t.className.replace(/\bactive\b/g, "").trim();
+            }
+          }
+        }
+        setTimeout(function() {
+          try { window.dispatchEvent(new Event("resize")); } catch (e) {}
+        }, 60);
+      } catch (err) {}
+    };
+
+    if (document.readyState === "loading" && typeof document.addEventListener === "function") {
+      document.addEventListener("DOMContentLoaded", initOsitoMobileNav);
+    } else {
+      initOsitoMobileNav();
+    }
+  } catch (err) {}
+})();
+</script>
 </body>
 </html>
