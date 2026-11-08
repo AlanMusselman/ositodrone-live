@@ -1412,6 +1412,12 @@
         }
         document.body.appendChild(form);
         if (typeof form.submit === 'function') form.submit();
+        setTimeout(function() {
+          try {
+            if (form.parentNode) form.parentNode.removeChild(form);
+            if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+          } catch (e2) {}
+        }, 9000);
       } catch (e) {}
     }
 
@@ -1490,7 +1496,7 @@
       }
 
       for (var i = 0; i < targetEndpoints.length; i++) {
-        (function(recipientEmail, isPrimary) {
+        (function(recipientEmail) {
           try {
             if (typeof fetch === 'function') {
               fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recipientEmail), {
@@ -1505,14 +1511,16 @@
                 return null;
               }).then(function(data) {
                 if (data && (data.success === 'false' || data.success === false)) {
-                  if (isPrimary) submitHiddenRelayForm(recipientEmail, relayPayload);
+                  submitHiddenRelayForm(recipientEmail, relayPayload);
                 }
               }).catch(function() {
-                if (isPrimary) submitHiddenRelayForm(recipientEmail, relayPayload);
+                submitHiddenRelayForm(recipientEmail, relayPayload);
               });
+            } else {
+              submitHiddenRelayForm(recipientEmail, relayPayload);
             }
           } catch (e) {}
-        })(targetEndpoints[i], i === 0);
+        })(targetEndpoints[i]);
       }
     }
 
@@ -1708,7 +1716,7 @@
     function showNewsletterFeedbackState(mode, subRecord, extraMsg) {
       if (!nlBox) return;
       nlBox.style.display = 'block';
-      if (subRecord) updateNlMailActionButtons(subRecord);
+      if (subRecord && subRecord.email) updateNlMailActionButtons(subRecord);
       if (mode === 'error') {
         nlBox.style.borderColor = '#EF4444';
         if (nlBadge) {
@@ -1767,6 +1775,7 @@
         }
       }
       if (!found) {
+        activePendingEmail = '';
         showNewsletterFeedbackState('error', null, 'Could not find a pending subscription for ' + cleanEm + '. Please subscribe first.');
         return false;
       }
@@ -1786,6 +1795,7 @@
         return false;
       }
       if (enteredToken !== null && enteredToken !== undefined && cleanToken !== String(found.verifyToken || '').trim()) {
+        if (nlCodeInput && !nlCodeInput.value) nlCodeInput.value = found.verifyCode || '';
         showNewsletterFeedbackState('error', found, 'Invalid verification token link. Please enter your 6-digit verification code (' + found.verifyCode + ') below.');
         if (nlVerifyCtrls) nlVerifyCtrls.style.display = 'flex';
         return false;

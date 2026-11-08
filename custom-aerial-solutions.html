@@ -489,31 +489,96 @@
       } catch (e) {}
     }
 
-    var LEGACY_SAMPLE_EMAILS = {
-      'events@presidiokids.org': true,
-      'stem-committee@sunsetelementary-sf.org': true,
-      'r.chen@bayviewcommunitycenter.org': true,
-      'TaproomEvents@sf-craft-guild.com': true,
-      'taproomevents@sf-craft-guild.com': true,
-      'facilities@golden-gate-roofing.com': true,
-      'm.gonzalez@mission-youth-stem.org': true,
-      'd.park@marina-property-group.com': true
-    };
-    var LEGACY_SAMPLE_CODES = {
-      '482910': true, '739204': true, '518392': true, '840129': true, '629401': true
+    var LEGACY_PUBLIC_SAMPLE_IDS = {
+      'SUB-1001': true,
+      'SUB-1002': true,
+      'SUB-1003': true,
+      'SUB-1004': true,
+      'SUB-1005': true,
+      'CAMP-101': true,
+      'INQ-1001': true,
+      'INQ-1002': true
     };
 
-    function isLegacySampleRecord(item) {
-      if (!item || typeof item !== 'object') return false;
-      var em = String(item.email || '').trim().toLowerCase();
-      if (LEGACY_SAMPLE_EMAILS[em]) return true;
-      var code = String(item.verifyCode || '').trim();
-      if (LEGACY_SAMPLE_CODES[code] && String(item.verifyToken || '').indexOf('tok-sub-100') === 0) return true;
-      if ( (item.id === 'INQ-1001' && em === 'm.gonzalez@mission-youth-stem.org') ||
-           (item.id === 'INQ-1002' && em === 'd.park@marina-property-group.com') ) {
-        return true;
+    var LEGACY_PUBLIC_SAMPLE_DOMAINS = [
+      '@sfusd-stem.org',
+      '@presidiokids.org',
+      '@missionmakers.org',
+      '@bayarearoofing.com',
+      '@noevalleyparents.com',
+      '@stignatius-sf.org',
+      '@apexprop-bayarea.com',
+      '@sfschool.org',
+      '@bgcsf.org',
+      '@sfrecpark.org',
+      '@oaklandbuilders.com',
+      '@bayareastem.org',
+      '@stignatiussf.org',
+      '@sunsetelementary-sf.org',
+      '@bayviewcommunitycenter.org',
+      '@sf-craft-guild.com',
+      '@golden-gate-roofing.com',
+      '@mission-youth-stem.org',
+      '@marina-property-group.com'
+    ];
+
+    function isLegacyPublicSampleEmail(emailStr) {
+      var em = String(emailStr || '').trim().toLowerCase();
+      if (!em) return false;
+      for (var i = 0; i < LEGACY_PUBLIC_SAMPLE_DOMAINS.length; i++) {
+        if (em.indexOf(LEGACY_PUBLIC_SAMPLE_DOMAINS[i]) !== -1) return true;
       }
       return false;
+    }
+
+    function isLegacySampleRecord(item) {
+      if (!item || typeof item !== 'object') return true;
+      var idStr = String(item.id || '').trim();
+      if (LEGACY_PUBLIC_SAMPLE_IDS[idStr]) return true;
+      var srcInqId = String(item.sourceInquiryId || '').trim();
+      if (srcInqId && LEGACY_PUBLIC_SAMPLE_IDS[srcInqId]) return true;
+      var vTok = String(item.verifyToken || '');
+      if (vTok.indexOf('ositoverify-sub100') === 0 || vTok.indexOf('tok-sub-100') === 0) return true;
+      if (item.email && isLegacyPublicSampleEmail(item.email)) return true;
+      if (item.to && isLegacyPublicSampleEmail(item.to)) return true;
+      if (item.payload && typeof item.payload === 'object') {
+        if (item.payload.email && isLegacyPublicSampleEmail(item.payload.email)) return true;
+        if (item.payload.to && isLegacyPublicSampleEmail(item.payload.to)) return true;
+        var pId = String(item.payload.id || item.payload.subscriber_id || item.payload.inquiry_id || '').trim();
+        if (pId && LEGACY_PUBLIC_SAMPLE_IDS[pId]) return true;
+      }
+      if (Array.isArray(item.recipients)) {
+        for (var r = 0; r < item.recipients.length; r++) {
+          if (isLegacyPublicSampleEmail(item.recipients[r])) return true;
+        }
+      }
+      return false;
+    }
+
+    function purgeLegacySampleCommData() {
+      var keys = [
+        NL_KEY,
+        'osito_newsletter_campaigns_v1',
+        INQ_KEY,
+        'osito_crm_custom_leads_v1',
+        OUT_KEY
+      ];
+      for (var k = 0; k < keys.length; k++) {
+        try {
+          var raw = localStorage.getItem(keys[k]);
+          if (!raw) continue;
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(keys[k], JSON.stringify(cleaned));
+            }
+          }
+        } catch (e) {}
+      }
     }
 
     function generateUniqueBackendId(prefix, baseStart, list) {
@@ -555,8 +620,7 @@
     }
 
     function isValidEmailAddress(email) {
-      var cleaned = String(email || '').trim();
-      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleaned);
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
     }
 
     function loadCommSubscribers() {
@@ -607,6 +671,7 @@
       try { localStorage.setItem(INQ_KEY, JSON.stringify(list)); } catch (e) {}
     }
 
+    purgeLegacySampleCommData();
     loadCommSubscribers();
     loadCommInquiries();
 
@@ -636,6 +701,7 @@
 
     function submitCommHiddenForm(targetEmail, payload) {
       try {
+        if (typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') return false;
         var frameName = 'osito_comm_relay_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
         var iframe = document.createElement('iframe');
         iframe.name = frameName;
@@ -651,12 +717,12 @@
             var inp = document.createElement('input');
             inp.type = 'hidden';
             inp.name = k;
-            inp.value = String(payload[k]);
+            inp.value = typeof payload[k] === 'object' ? JSON.stringify(payload[k]) : String(payload[k]);
             form.appendChild(inp);
           }
         }
         document.body.appendChild(form);
-        form.submit();
+        if (typeof form.submit === 'function') form.submit();
         setTimeout(function() {
           try {
             if (form.parentNode) form.parentNode.removeChild(form);
@@ -705,23 +771,23 @@
       if (primaryTo.toLowerCase() !== 'info@ositodrone.com') targets.push('info@ositodrone.com');
 
       for (var i = 0; i < targets.length; i++) {
-        (function(recip, idx) {
+        (function(recip) {
           if (typeof fetch === 'function') {
             fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recip), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
               body: JSON.stringify(relayBody)
-            }).then(function(r) { return r.json(); }).then(function(d) {
-              if (idx === 0 && d && (d.success === 'false' || d.success === false)) {
+            }).then(function(r) { return (r && typeof r.json === 'function') ? r.json() : null; }).then(function(d) {
+              if (d && (d.success === 'false' || d.success === false)) {
                 submitCommHiddenForm(recip, relayBody);
               }
             }).catch(function() {
-              if (idx === 0) submitCommHiddenForm(recip, relayBody);
+              submitCommHiddenForm(recip, relayBody);
             });
-          } else if (idx === 0) {
+          } else {
             submitCommHiddenForm(recip, relayBody);
           }
-        })(targets[i], i);
+        })(targets[i]);
       }
     }
 
@@ -740,10 +806,29 @@
     var commNlDownloadEmlBtn = document.getElementById('ositoCommercialNlDownloadEmlBtn');
     var activeCommEmail = '';
 
+    function updateCommNlMailActionButtons(subObj) {
+      if (!subObj || !subObj.email) return;
+      var vCode = subObj.verifyCode || '654321';
+      var vTok = subObj.verifyToken || ('ositoverify-' + vCode);
+      var verifyLink = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(vTok) + '&email=' + encodeURIComponent(subObj.email);
+      var mailSubj = 'Verify Your Osito Commercial Aerial Newsletter Subscription (Code: ' + vCode + ')';
+      var mailBody = 'Hello,\n\nThank you for subscribing to Osito Commercial Aerial Solutions!\n\nSubscriber Email: ' + subObj.email + '\n6-Digit Verification Code: ' + vCode + '\nOne-Click Verification Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com';
+      if (commNlMailtoBtn) {
+        commNlMailtoBtn.href = 'mailto:' + encodeURIComponent(subObj.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(mailSubj) + '&body=' + encodeURIComponent(mailBody);
+      }
+      if (commNlDownloadEmlBtn) {
+        commNlDownloadEmlBtn.onclick = function() {
+          downloadPublicEmlFile('Osito_Commercial_Newsletter_Verification_' + vCode + '.eml', subObj.email, 'info@ositodrone.com, alan@ositodrone.com', mailSubj, mailBody);
+        };
+      }
+    }
+
     function showCommNewsletterFeedbackState(mode, subObj, customMsg) {
       if (!commNlBox) return;
       commNlBox.style.display = 'block';
-      if (mode === 'pending') {
+      if (subObj && subObj.email) updateCommNlMailActionButtons(subObj);
+      if (mode === 'pending' && subObj) {
+        activeCommEmail = subObj.email;
         commNlBox.style.borderColor = '#10B981';
         if (commNlBadge) {
           commNlBadge.style.background = '#10B981';
@@ -755,25 +840,15 @@
         }
         if (commNlText) {
           var vCode = subObj.verifyCode || '------';
-          var verifyLink = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(subObj.verifyToken || '') + '&email=' + encodeURIComponent(subObj.email || '');
           commNlText.textContent = customMsg || (
             'We logged ' + subObj.email + ' in the Osito Commercial Newsletter Backend and dispatched a verification email (Code: ' + vCode + ') to ' + subObj.email + ' and info@ositodrone.com. ' +
             'Click "VERIFY & CONFIRM" below (pre-filled with your code ' + vCode + ') to activate your subscription immediately.'
           );
-          var mailSubj = 'Verify Your Osito Commercial Aerial Newsletter Subscription (Code: ' + vCode + ')';
-          var mailBody = 'Hello,\n\nThank you for subscribing to Osito Commercial Aerial Solutions!\n\nSubscriber Email: ' + subObj.email + '\n6-Digit Verification Code: ' + vCode + '\nOne-Click Verification Link: ' + verifyLink + '\n\nBest regards,\nOsito Drone Services\ninfo@ositodrone.com | alan@ositodrone.com';
-          if (commNlMailtoBtn) {
-            commNlMailtoBtn.href = 'mailto:' + encodeURIComponent(subObj.email) + '?cc=' + encodeURIComponent('info@ositodrone.com,alan@ositodrone.com') + '&subject=' + encodeURIComponent(mailSubj) + '&body=' + encodeURIComponent(mailBody);
-          }
-          if (commNlDownloadEmlBtn) {
-            commNlDownloadEmlBtn.onclick = function() {
-              downloadPublicEmlFile('Osito_Commercial_Newsletter_Verification_' + vCode + '.eml', subObj.email, 'info@ositodrone.com', mailSubj, mailBody);
-            };
-          }
         }
         if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
         if (commNlCodeInput) commNlCodeInput.value = subObj.verifyCode || '';
-      } else if (mode === 'verified') {
+      } else if (mode === 'verified' && subObj) {
+        activeCommEmail = '';
         commNlBox.style.borderColor = '#10B981';
         if (commNlBadge) {
           commNlBadge.style.background = '#10B981';
@@ -800,27 +875,44 @@
         if (commNlText) {
           commNlText.textContent = customMsg || 'Please enter a valid email address or 6-digit verification code.';
         }
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = activeCommEmail ? 'flex' : 'none';
       }
     }
 
     function verifyCommSubscriberByEmail(emailRaw, enteredCode, enteredToken) {
       var em = String(emailRaw || '').trim().toLowerCase();
-      if (!em) return false;
+      if (!em) {
+        showCommNewsletterFeedbackState('error', null, 'Please subscribe with your email address first before verifying.');
+        return false;
+      }
       var list = loadCommSubscribers();
       var target = null;
       for (var i = 0; i < list.length; i++) {
         if (String(list[i].email || '').toLowerCase() === em) { target = list[i]; break; }
       }
       if (!target) {
-        showCommNewsletterFeedbackState('error', { email: em }, 'No pending subscription found for ' + em + '. Please enter your email above and click SUBSCRIBE first.');
+        activeCommEmail = '';
+        showCommNewsletterFeedbackState('error', null, 'No pending subscription found for ' + em + '. Please enter your email above and click SUBSCRIBE first.');
         return false;
       }
-      var cleanCode = String(enteredCode || '').trim();
-      var cleanToken = String(enteredToken || '').trim();
-      var codeMatched = cleanCode.length > 0 && cleanCode === String(target.verifyCode || '').trim();
-      var tokenMatched = cleanToken.length > 0 && cleanToken === String(target.verifyToken || '').trim();
-      if (!codeMatched && !tokenMatched) {
+      if (target.status !== 'Verified') {
+        activeCommEmail = target.email;
+      }
+      var cleanCode = (enteredCode !== null && enteredCode !== undefined) ? String(enteredCode).trim() : '';
+      var cleanToken = (enteredToken !== null && enteredToken !== undefined) ? String(enteredToken).trim() : '';
+      if (!cleanCode && !cleanToken) {
+        showCommNewsletterFeedbackState('error', target, 'Please enter the 6-digit verification code sent to ' + target.email + ' (' + target.verifyCode + ') to confirm your subscription.');
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
+        return false;
+      }
+      if (enteredCode !== null && enteredCode !== undefined && cleanCode !== String(target.verifyCode || '').trim()) {
         showCommNewsletterFeedbackState('error', target, 'The verification code "' + cleanCode + '" did not match our 6-digit code (' + target.verifyCode + '). Please enter ' + target.verifyCode + ' and click VERIFY & CONFIRM.');
+        if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
+        return false;
+      }
+      if (enteredToken !== null && enteredToken !== undefined && cleanToken !== String(target.verifyToken || '').trim()) {
+        if (commNlCodeInput && !commNlCodeInput.value) commNlCodeInput.value = target.verifyCode || '';
+        showCommNewsletterFeedbackState('error', target, 'Invalid verification token link. Please enter your 6-digit verification code (' + target.verifyCode + ') below.');
         if (commNlVerifyCtrls) commNlVerifyCtrls.style.display = 'flex';
         return false;
       }
@@ -842,6 +934,7 @@
         message: 'Thank you! Your email (' + target.email + ') is now Verified on the Osito Commercial Aerial Solutions Newsletter list.'
       });
 
+      if (commSubBtn) commSubBtn.textContent = 'VERIFIED - THANK YOU';
       showCommNewsletterFeedbackState('verified', target);
       return true;
     }
