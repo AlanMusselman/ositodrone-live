@@ -1730,7 +1730,7 @@
           <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#FFFFFF; margin:8px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">SUBSCRIBE FOR ACADEMY DATES, 3D PRINT FILES &amp; 25%-OFF INVITES</h3>
           <p style="font-size:13.5px; color:#EEF0FA; margin:0;">Enter your email to receive a verification code &amp; confirmation email for Drone Academy, Flight Academy, and STEM + Art workshops.</p>
         </div>
-        <form id="ositoAcademySubscribeForm" style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
+        <form id="ositoAcademySubscribeForm" novalidate style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
           <input id="ositoAcademySubEmail" type="email" required placeholder="Enter your email address..." style="flex:1; min-width:220px; padding:12px 14px; border:1px solid #8E93DA; background:#FFFFFF; color:#161616; font-family:Roboto,sans-serif; font-size:14px;" />
           <button id="ositoAcademySubBtn" type="submit" class="osito-action-btn" style="padding:12px 22px; white-space:nowrap;">SUBSCRIBE</button>
         </form>
@@ -1767,7 +1767,7 @@
           <span style="font-size:13px; color:#5E5E5E;">Routes directly to <strong style="color:#232A68;">info@ositodrone.com</strong> &amp; <strong style="color:#232A68;">alan@ositodrone.com</strong></span>
         </div>
         <div id="ositoAcademyContactErr" role="alert" style="display:none; background:#FEE2E2; border-left:4px solid #EF4444; color:#991B1B; padding:10px 12px; font-size:13px; margin-bottom:14px;"></div>
-        <form id="ositoAcademyInquiryForm" onsubmit="return false;" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:14px;">
+        <form id="ositoAcademyInquiryForm" novalidate onsubmit="return false;" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:14px;">
           <div>
             <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Name *</label>
             <input id="ositoAcadName" type="text" required placeholder="Your Name" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px;" />
@@ -2228,6 +2228,23 @@
         }
       }
 
+      function triggerPublicMailto(mailtoUrl) {
+        if (!mailtoUrl) return;
+        try {
+          window.__lastPublicMailtoUrl = mailtoUrl;
+          if (!document || !document.body || typeof document.createElement !== 'function') return;
+          var cleanHref = String(mailtoUrl)
+            .replace(/^mailto:([^?]*)/i, function(_, addr) { return 'mailto:' + addr.replace(/%40/gi, '@').replace(/%2C/gi, ','); })
+            .replace(/([?&](?:cc|bcc)=)([^&]*)/gi, function(_, prefix, val) { return prefix + val.replace(/%40/gi, '@').replace(/%2C/gi, ','); });
+          var a = document.createElement('a');
+          a.href = cleanHref;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          if (typeof a.click === 'function') a.click();
+          document.body.removeChild(a);
+        } catch (e) {}
+      }
+
       function dispatchAcademyRelay(payload, onDone) {
         var nowIso = new Date().toISOString();
         var primaryTo = String(payload.to || 'info@ositodrone.com').trim();
@@ -2240,7 +2257,23 @@
         relayBody._template = 'table';
         relayBody._captcha = 'false';
         relayBody._autoresponse = relayBody.message || subjectLine;
-        if (payload.cc || payload._cc) relayBody._cc = payload._cc || payload.cc;
+        var ccList = [];
+        function addAcadCc(addr) {
+          var c = String(addr || '').trim().toLowerCase();
+          if (c && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c) && ccList.indexOf(c) === -1) {
+            ccList.push(c);
+          }
+        }
+        if (payload._cc) String(payload._cc).split(/[,;\s]+/).forEach(addAcadCc);
+        if (payload.cc) String(payload.cc).split(/[,;\s]+/).forEach(addAcadCc);
+        addAcadCc('info@ositodrone.com');
+        addAcadCc('alan@ositodrone.com');
+        if (payload.email) addAcadCc(payload.email);
+        addAcadCc(primaryTo);
+        if (ccList.length > 0) relayBody._cc = ccList.join(',');
+        if (payload._replyto || payload.email) {
+          relayBody._replyto = payload._replyto || payload.email;
+        }
 
         var logEntry = {
           id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
@@ -2599,9 +2632,12 @@
       }
 
       function handleAcadNlResendOrConfirm() {
-        var targetEm = activeAcadEmail || lastAcadSubscriberEmail || (acadSubEmail ? (acadSubEmail.value || '').trim().toLowerCase() : '');
-        if (!targetEm) return;
         var list = loadAcademySubscribers();
+        var targetEm = activeAcadEmail || lastAcadSubscriberEmail || (acadSubEmail ? (acadSubEmail.value || '').trim().toLowerCase() : '');
+        if (!targetEm && list.length > 0 && list[0] && list[0].email) {
+          targetEm = String(list[0].email).trim().toLowerCase();
+        }
+        if (!targetEm) return;
         for (var i = 0; i < list.length; i++) {
           if (String(list[i].email || '').toLowerCase() === targetEm) {
             var isVer = (list[i].status === 'Verified');
@@ -2628,10 +2664,24 @@
                 ? ('Your Osito Academy Newsletter subscription (' + list[i].email + ') is confirmed and verified! Reference code: ' + newCode + '. Confirmation link: ' + resendVerifyUrl)
                 : ('Here is your resent Osito Academy Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl)
             });
+            updateAcademyNlMailActionButtons(list[i]);
+            var mailHref = isVer
+              ? (acadNlVerifiedMailtoBtn ? acadNlVerifiedMailtoBtn.href : '')
+              : (acadNlMailtoBtn ? acadNlMailtoBtn.href : '');
+            if (mailHref) triggerPublicMailto(mailHref);
             if (isVer) {
-              if (acadNlResendConfirmBtn) acadNlResendConfirmBtn.textContent = '✓ CONFIRMATION EMAIL SENT';
+              if (acadNlResendConfirmBtn) {
+                acadNlResendConfirmBtn.textContent = '\u2713 CONFIRMATION EMAIL SENT (RESEND)';
+                acadNlResendConfirmBtn.style.background = '#059669';
+                acadNlResendConfirmBtn.style.color = '#FFFFFF';
+              }
               showAcademyNewsletterFeedbackState('verified', list[i], 'We resent a fresh confirmation & verification email to ' + list[i].email + ' (Code: ' + newCode + ').');
             } else {
+              if (acadNlResendBtn) {
+                acadNlResendBtn.textContent = '\u2713 VERIFICATION EMAIL SENT (RESEND)';
+                acadNlResendBtn.style.background = '#059669';
+                acadNlResendBtn.style.color = '#FFFFFF';
+              }
               showAcademyNewsletterFeedbackState('pending', list[i], 'We resent a fresh verification email to ' + list[i].email + ' (New Code: ' + newCode + ').');
             }
             break;

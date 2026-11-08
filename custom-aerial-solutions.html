@@ -1289,7 +1289,7 @@
           <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#FFFFFF; margin:8px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">SUBSCRIBE FOR COMMERCIAL AERIAL CASE STUDIES &amp; 25%-OFF RATE CARDS</h3>
           <p style="font-size:13.5px; color:#EEF0FA; margin:0;">Enter your email to receive a 6-digit verification code &amp; confirmation email for commercial roof, thermal, orthomosaic, and indoor FPV inspection updates.</p>
         </div>
-        <form id="ositoCommercialSubscribeForm" style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
+        <form id="ositoCommercialSubscribeForm" novalidate style="display:flex; gap:10px; flex-wrap:wrap; flex:1; min-width:300px; justify-content:flex-end;" onsubmit="return false;">
           <input id="ositoCommercialSubEmail" type="email" required placeholder="Enter your business email..." style="flex:1; min-width:220px; padding:12px 14px; border:1px solid #8E93DA; background:#FFFFFF; color:#161616; font-family:Roboto,sans-serif; font-size:14px;" />
           <button id="ositoCommercialSubBtn" type="submit" class="osito-action-btn" style="padding:12px 22px; white-space:nowrap;">SUBSCRIBE</button>
         </form>
@@ -1326,7 +1326,7 @@
           <span style="font-size:13px; color:#5E5E5E;">Routes directly to <strong style="color:#232A68;">info@ositodrone.com</strong> &amp; <strong style="color:#232A68;">alan@ositodrone.com</strong></span>
         </div>
         <div id="ositoCommercialContactErr" role="alert" style="display:none; background:#FEE2E2; border-left:4px solid #EF4444; color:#991B1B; padding:10px 12px; font-size:13px; margin-bottom:14px;"></div>
-        <form id="ositoCommercialInquiryForm" onsubmit="return false;" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:14px;">
+        <form id="ositoCommercialInquiryForm" novalidate onsubmit="return false;" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:14px;">
           <div>
             <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Name / Company *</label>
             <input id="ositoCommName" type="text" required placeholder="Your Name or Company" style="width:100%; padding:10px 12px; border:1px solid #8E93DA; background:#F6F6F6; font-size:14px;" />
@@ -1679,6 +1679,23 @@
       } catch (e) { return false; }
     }
 
+    function triggerPublicMailto(mailtoUrl) {
+      if (!mailtoUrl) return;
+      try {
+        window.__lastPublicMailtoUrl = mailtoUrl;
+        if (!document || !document.body || typeof document.createElement !== 'function') return;
+        var cleanHref = String(mailtoUrl)
+          .replace(/^mailto:([^?]*)/i, function(_, addr) { return 'mailto:' + addr.replace(/%40/gi, '@').replace(/%2C/gi, ','); })
+          .replace(/([?&](?:cc|bcc)=)([^&]*)/gi, function(_, prefix, val) { return prefix + val.replace(/%40/gi, '@').replace(/%2C/gi, ','); });
+        var a = document.createElement('a');
+        a.href = cleanHref;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        if (typeof a.click === 'function') a.click();
+        document.body.removeChild(a);
+      } catch (e) {}
+    }
+
     function dispatchCommRelay(payload) {
       var nowIso = new Date().toISOString();
       var primaryTo = String(payload.to || 'info@ositodrone.com').trim();
@@ -1691,7 +1708,23 @@
       relayBody._template = 'table';
       relayBody._captcha = 'false';
       relayBody._autoresponse = relayBody.message || subjectLine;
-      if (payload.cc || payload._cc) relayBody._cc = payload._cc || payload.cc;
+      var ccList = [];
+      function addCommCc(addr) {
+        var c = String(addr || '').trim().toLowerCase();
+        if (c && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c) && ccList.indexOf(c) === -1) {
+          ccList.push(c);
+        }
+      }
+      if (payload._cc) String(payload._cc).split(/[,;\s]+/).forEach(addCommCc);
+      if (payload.cc) String(payload.cc).split(/[,;\s]+/).forEach(addCommCc);
+      addCommCc('info@ositodrone.com');
+      addCommCc('alan@ositodrone.com');
+      if (payload.email) addCommCc(payload.email);
+      addCommCc(primaryTo);
+      if (ccList.length > 0) relayBody._cc = ccList.join(',');
+      if (payload._replyto || payload.email) {
+        relayBody._replyto = payload._replyto || payload.email;
+      }
 
       var logEntry = {
         id: 'OUT-' + Date.now() + '-' + Math.floor(100 + Math.random() * 900),
@@ -1873,6 +1906,7 @@
       if (target.status !== 'Verified') {
         activeCommEmail = target.email;
       }
+      lastCommSubscriberEmail = target.email;
       var cleanCode = (enteredCode !== null && enteredCode !== undefined) ? String(enteredCode).trim() : '';
       var cleanToken = (enteredToken !== null && enteredToken !== undefined) ? String(enteredToken).trim() : '';
       if (!cleanCode && !cleanToken) {
@@ -1931,24 +1965,32 @@
         var token = 'ositoverify-' + Date.now().toString(36) + '-' + code;
         var verifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(token) + '&email=' + encodeURIComponent(em);
         activeCommEmail = em;
+        lastCommSubscriberEmail = em;
 
         if (existing) {
           if (existing.status === 'Verified') {
+            var existingCode = existing.verifyCode || code;
+            var existingToken = existing.verifyToken || token;
+            var existingVerifyUrl = window.location.origin + window.location.pathname + '?verify_newsletter=' + encodeURIComponent(existingToken) + '&email=' + encodeURIComponent(em);
+            existing.verifyCode = existingCode;
+            existing.verifyToken = existingToken;
             saveCommSubscribers(list);
             dispatchCommRelay({
               actionType: 'newsletter_already_verified_confirmation',
               to: em,
               cc: 'info@ositodrone.com',
               _cc: 'info@ositodrone.com,alan@ositodrone.com',
-              _subject: 'Osito Commercial Aerial Newsletter Confirmation (' + em + ' is Verified)',
+              _subject: 'Confirmed: Your Osito Commercial Aerial Newsletter Subscription (Code: ' + existingCode + ')',
               subscriber_id: existing.id,
               email: em,
+              verification_code: existingCode,
+              verification_link: existingVerifyUrl,
               status: 'Verified',
-              message: 'Your email (' + em + ') is already verified on the Osito Commercial Aerial Newsletter list.'
+              message: 'Your email (' + em + ') is verified on the Osito Commercial Aerial Newsletter list. Confirmation Code: ' + existingCode + ' | Link: ' + existingVerifyUrl
             });
             commSubBtn.textContent = 'ALREADY VERIFIED';
             commSubEmail.value = '';
-            showCommNewsletterFeedbackState('verified', existing, 'Good news! ' + em + ' is already verified on the Osito Newsletter list.');
+            showCommNewsletterFeedbackState('verified', existing, 'Good news! ' + em + ' is already verified on the Osito Newsletter list (and we dispatched a fresh confirmation email to ' + em + ').');
             return false;
           }
           existing.verifyCode = code;
@@ -2049,7 +2091,8 @@
       saveCommSubscribers(list);
       notifyCommSync('subscriber_updated', targetSub);
 
-      if (targetSub.status === 'Verified') {
+      var isVer = (targetSub.status === 'Verified');
+      if (isVer) {
         dispatchCommRelay({
           actionType: 'newsletter_confirmation_resend',
           to: targetSub.email,
@@ -2063,8 +2106,12 @@
           verification_link: resendVerifyUrl,
           message: 'Thank you! Your email (' + targetSub.email + ') is Verified & Confirmed on the Osito Commercial Aerial Newsletter list. Confirmation Code: ' + newCode + '. Link: ' + resendVerifyUrl
         });
+        updateCommNlMailActionButtons(targetSub);
+        if (commNlVerifiedMailtoBtn && commNlVerifiedMailtoBtn.href) {
+          triggerPublicMailto(commNlVerifiedMailtoBtn.href);
+        }
         if (commNlResendConfirmBtn) {
-          commNlResendConfirmBtn.textContent = '✓ CONFIRMATION EMAIL SENT (CLICK TO RESEND)';
+          commNlResendConfirmBtn.textContent = '\u2713 CONFIRMATION EMAIL SENT (CLICK TO RESEND)';
           commNlResendConfirmBtn.style.background = '#059669';
           commNlResendConfirmBtn.style.color = '#FFFFFF';
         }
@@ -2082,6 +2129,15 @@
           verification_link: resendVerifyUrl,
           message: 'Here is your resent Osito Commercial Aerial Newsletter verification code: ' + newCode + '. Click here to verify: ' + resendVerifyUrl
         });
+        updateCommNlMailActionButtons(targetSub);
+        if (commNlMailtoBtn && commNlMailtoBtn.href) {
+          triggerPublicMailto(commNlMailtoBtn.href);
+        }
+        if (commNlResendBtn) {
+          commNlResendBtn.textContent = '\u2713 VERIFICATION EMAIL SENT (RESEND)';
+          commNlResendBtn.style.background = '#059669';
+          commNlResendBtn.style.color = '#FFFFFF';
+        }
         showCommNewsletterFeedbackState('pending', targetSub, 'We resent a fresh verification email to ' + targetSub.email + ' (New Code: ' + newCode + ').');
       }
     }
@@ -2099,6 +2155,7 @@
       var vEmail = urlParams.get('email');
       if (vEmail && vToken) {
         activeCommEmail = String(vEmail).trim().toLowerCase();
+        lastCommSubscriberEmail = activeCommEmail;
         verifyCommSubscriberByEmail(vEmail, null, vToken);
         var nlBarEl = document.getElementById('osito-commercial-newsletter-bar');
         if (nlBarEl && nlBarEl.scrollIntoView) nlBarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
