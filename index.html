@@ -342,7 +342,7 @@
               WANT TO FLY OUR 3D SAN FRANCISCO SIMULATOR?
             </div>
             <div style="font-size:12px; color:#EEF0FA;">
-              Fly the AcroBee65 through Golden Gate Bridge, BART Subway & Coit Tower on its dedicated page.
+              Fly the Osito CUB-75 through Golden Gate Bridge, BART Subway & Coit Tower on its dedicated page.
             </div>
           </div>
           <a href="./flight-sim.html" class="osito-action-btn" style="padding:8px 14px; font-size:13px; white-space:nowrap;">
@@ -1329,7 +1329,13 @@
       '@bayarearoofing.com',
       '@noevalleyparents.com',
       '@stignatius-sf.org',
-      '@apexprop-bayarea.com'
+      '@apexprop-bayarea.com',
+      '@sfschool.org',
+      '@bgcsf.org',
+      '@sfrecpark.org',
+      '@oaklandbuilders.com',
+      '@bayareastem.org',
+      '@stignatiussf.org'
     ];
 
     function isLegacyPublicSampleEmail(emailStr) {
@@ -1345,8 +1351,17 @@
       if (!item || typeof item !== 'object') return true;
       var idStr = String(item.id || '').trim();
       if (LEGACY_PUBLIC_SAMPLE_IDS[idStr]) return true;
+      var srcInqId = String(item.sourceInquiryId || '').trim();
+      if (srcInqId && LEGACY_PUBLIC_SAMPLE_IDS[srcInqId]) return true;
       if (item.verifyToken && String(item.verifyToken).indexOf('ositoverify-sub100') === 0) return true;
       if (item.email && isLegacyPublicSampleEmail(item.email)) return true;
+      if (item.to && isLegacyPublicSampleEmail(item.to)) return true;
+      if (item.payload && typeof item.payload === 'object') {
+        if (item.payload.email && isLegacyPublicSampleEmail(item.payload.email)) return true;
+        if (item.payload.to && isLegacyPublicSampleEmail(item.payload.to)) return true;
+        var pId = String(item.payload.id || item.payload.subscriber_id || item.payload.inquiry_id || '').trim();
+        if (pId && LEGACY_PUBLIC_SAMPLE_IDS[pId]) return true;
+      }
       if (Array.isArray(item.recipients)) {
         for (var r = 0; r < item.recipients.length; r++) {
           if (isLegacyPublicSampleEmail(item.recipients[r])) return true;
@@ -1356,7 +1371,13 @@
     }
 
     function purgeLegacySamplePublicData() {
-      var keys = [NL_STORAGE_KEY, 'osito_newsletter_campaigns_v1', CONTACT_STORAGE_KEY];
+      var keys = [
+        NL_STORAGE_KEY,
+        'osito_newsletter_campaigns_v1',
+        CONTACT_STORAGE_KEY,
+        'osito_crm_custom_leads_v1',
+        OUTBOX_LOG_KEY
+      ];
       for (var k = 0; k < keys.length; k++) {
         try {
           var raw = localStorage.getItem(keys[k]);

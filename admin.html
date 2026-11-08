@@ -1652,7 +1652,19 @@ Osito Drone Services | San Francisco, CA</textarea>
     function getCustomLeads() {
       try {
         var raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_LEADS);
-        if (raw) return JSON.parse(raw);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cleaned = [];
+            for (var i = 0; i < parsed.length; i++) {
+              if (!isLegacySampleRecord(parsed[i])) cleaned.push(parsed[i]);
+            }
+            if (cleaned.length !== parsed.length) {
+              localStorage.setItem(STORAGE_KEYS.CUSTOM_LEADS, JSON.stringify(cleaned));
+            }
+            return cleaned;
+          }
+        }
       } catch (e) {}
       return [];
     }
@@ -1660,6 +1672,8 @@ Osito Drone Services | San Francisco, CA</textarea>
     function normalizeLeadRow(raw) {
       var r = {};
       for (var k in raw) r[k] = cleanDisplayText(raw[k]);
+      r.organization = r.organization || r.orgName || 'Prospective Partner';
+      r.proposalUrl = r.proposalUrl || './downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx';
 
       // Repair any unquoted-CSV column shifts automatically
       if (r.email && r.email.indexOf('@') === -1 && r.website && r.website.indexOf('@') !== -1) {
@@ -2049,7 +2063,13 @@ Osito Drone Services | San Francisco, CA</textarea>
       '@bayarearoofing.com',
       '@noevalleyparents.com',
       '@stignatius-sf.org',
-      '@apexprop-bayarea.com'
+      '@apexprop-bayarea.com',
+      '@sfschool.org',
+      '@bgcsf.org',
+      '@sfrecpark.org',
+      '@oaklandbuilders.com',
+      '@bayareastem.org',
+      '@stignatiussf.org'
     ];
 
     function isLegacySampleEmail(emailStr) {
@@ -2065,8 +2085,17 @@ Osito Drone Services | San Francisco, CA</textarea>
       if (!item || typeof item !== 'object') return true;
       var idStr = String(item.id || '').trim();
       if (LEGACY_SAMPLE_IDS[idStr]) return true;
+      var srcInqId = String(item.sourceInquiryId || '').trim();
+      if (srcInqId && LEGACY_SAMPLE_IDS[srcInqId]) return true;
       if (item.verifyToken && String(item.verifyToken).indexOf('ositoverify-sub100') === 0) return true;
       if (item.email && isLegacySampleEmail(item.email)) return true;
+      if (item.to && isLegacySampleEmail(item.to)) return true;
+      if (item.payload && typeof item.payload === 'object') {
+        if (item.payload.email && isLegacySampleEmail(item.payload.email)) return true;
+        if (item.payload.to && isLegacySampleEmail(item.payload.to)) return true;
+        var pId = String(item.payload.id || item.payload.subscriber_id || item.payload.inquiry_id || '').trim();
+        if (pId && LEGACY_SAMPLE_IDS[pId]) return true;
+      }
       if (Array.isArray(item.recipients)) {
         for (var r = 0; r < item.recipients.length; r++) {
           if (isLegacySampleEmail(item.recipients[r])) return true;
@@ -2076,7 +2105,13 @@ Osito Drone Services | San Francisco, CA</textarea>
     }
 
     function purgeLegacySampleAdminData() {
-      var keys = [STORAGE_KEYS.NL_SUBSCRIBERS, STORAGE_KEYS.NL_CAMPAIGNS, STORAGE_KEYS.CONTACT_INQUIRIES];
+      var keys = [
+        STORAGE_KEYS.NL_SUBSCRIBERS,
+        STORAGE_KEYS.NL_CAMPAIGNS,
+        STORAGE_KEYS.CONTACT_INQUIRIES,
+        STORAGE_KEYS.CUSTOM_LEADS,
+        STORAGE_KEYS.OUTBOX_LOG
+      ];
       for (var k = 0; k < keys.length; k++) {
         try {
           var raw = localStorage.getItem(keys[k]);
