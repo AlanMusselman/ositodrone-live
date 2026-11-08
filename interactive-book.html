@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osito Interactive Drone Book &amp; Self-Grading Exam | Toolbox | Osito Drone Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>:root {
+      --primary: #7077CF;
+      --primary-hover: #6068C4;
+      --deep-indigo: #232A68;
+      --royal-indigo: #303885;
+      --lavender-bg: #EEF0FA;
+      --lavender-border: #8E93DA;
+      --charcoal: #161616;
+      --surface-alt: #F6F6F6;
+      --border: #E2E2E2;
+      --muted: #5E5E5E;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: var(--charcoal);
+      background: var(--surface-alt);
+      line-height: 1.6;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    header.hero {
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--deep-indigo) 65%, var(--royal-indigo) 100%);
+      color: var(--white);
+      padding: 2.3rem 1.5rem;
+      border-bottom: 5px solid var(--primary);
+      text-align: center;
+    }
+    header.hero img.brand-logo { height: 56px; margin-bottom: 0.7rem; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--deep-indigo);
+      color: var(--white);
+      border: 1px solid var(--primary);
+      font-family: 'Fjalla One', sans-serif;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 0px;
+      font-size: 0.88rem;
+      margin-bottom: 0.7rem;
+    }
+    header.hero h1 {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 2.3rem;
+      letter-spacing: 0.04em;
+      margin: 0.4rem auto;
+      max-width: 980px;
+      text-transform: uppercase;
+    }
+    header.hero p.sub {
+      max-width: 880px;
+      margin: 0.6rem auto 1rem;
+      font-size: 1.05rem;
+      color: var(--lavender-bg);
+    }
+    .container {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      box-sizing: border-box;
+    }
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      background: var(--white);
+      padding: 0.9rem;
+      border-radius: 0px;
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .nav-pill {
+      text-decoration: none;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      background: var(--lavender-bg);
+      color: var(--deep-indigo);
+      padding: 0.38rem 0.7rem;
+      border-radius: 0px;
+      border: 1px solid var(--lavender-border);
+      transition: all 0.15s;
+    }
+    .nav-pill:hover { background: var(--deep-indigo); color: var(--white); border-color: var(--primary); }
+    .interactive-lab {
+      background: var(--white);
+      border: 2px solid var(--primary);
+      border-radius: 0px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 20px rgba(35,42,104,0.08);
+    }
+    .interactive-lab h2 {
+      font-family: 'Fjalla One', sans-serif;
+      color: var(--deep-indigo);
+      margin-top: 0;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+    .calc-box {
+      background: var(--lavender-bg);
+      border: 1px solid var(--lavender-border);
+      padding: 0.9rem;
+      border-radius: 0px;
+    }
+    .calc-box label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--deep-indigo);
+      margin-bottom: 0.3rem;
+    }
+    .calc-box input, .calc-box select {
+      width: 100%;
+      padding: 0.48rem;
+      border: 1px solid var(--lavender-border);
+      border-radius: 0px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.94rem;
+    }
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .kpi-card {
+      background: var(--deep-indigo);
+      color: var(--white);
+      padding: 0.85rem;
+      border-radius: 0px;
+      text-align: center;
+    }
+    .kpi-card .val {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-top: 0.2rem;
+    }
+    .chapter-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 0px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+    .chapter-banner {
+      background: var(--deep-indigo);
+      color: var(--white);
+      padding: 1.2rem 1.5rem;
+      border-bottom: 4px solid var(--primary);
+    }
+    .ch-badge {
+      font-family: 'Fjalla One', sans-serif;
+      color: var(--lavender-bg);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .chapter-banner h2 {
+      font-family: 'Fjalla One', sans-serif;
+      margin: 0.25rem 0 0;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .chapter-body { padding: 1.5rem; }
+    .lead-para {
+      font-size: 1.06rem;
+      font-weight: 500;
+      color: var(--deep-indigo);
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .sec-block h3 {
+      font-family: 'Fjalla One', sans-serif;
+      color: var(--deep-indigo);
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+      margin-top: 1.35rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+    }
+    .callout-box {
+      background: var(--lavender-bg);
+      border: 2px solid var(--lavender-border);
+      border-radius: 0px;
+      padding: 1.1rem 1.3rem;
+      margin-top: 1.2rem;
+    }
+    .callout-box h4 {
+      font-family: 'Fjalla One', sans-serif;
+      color: var(--deep-indigo);
+      margin: 0 0 0.4rem;
+      letter-spacing: 0.03em;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      margin: 1.1rem 0;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th {
+      background: var(--deep-indigo);
+      color: var(--white);
+      font-family: 'Fjalla One', sans-serif;
+      letter-spacing: 0.03em;
+      text-align: left;
+      padding: 0.7rem;
+    }
+    td { padding: 0.65rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--surface-alt); }
+    figure.book-fig {
+      margin: 1.3rem 0;
+      text-align: center;
+      background: var(--surface-alt);
+      padding: 0.95rem;
+      border-radius: 0px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      overflow: hidden;
+    }
+    figure.book-fig img { max-width: 100%; height: auto; border-radius: 0px; }
+    figure.book-fig figcaption { margin-top: 0.45rem; font-size: 0.86rem; color: var(--muted); font-style: italic; }
+    pre.code-block {
+      background: var(--charcoal);
+      color: var(--lavender-bg);
+      padding: 1.05rem;
+      border-radius: 0px;
+      overflow-x: auto;
+      max-width: 100%;
+      font-size: 0.83rem;
+      line-height: 1.45;
+      border-left: 4px solid var(--primary);
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .quiz-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 0px;
+      padding: 0.95rem 1.15rem;
+      margin-bottom: 0.95rem;
+    }
+    .quiz-q { font-weight: 700; color: var(--deep-indigo); margin-top: 0; }
+    .quiz-opt { display: flex; align-items: center; margin: 0.38rem 0; cursor: pointer; }
+    input {
+      border-radius: 0px;
+    }
+    .quiz-card input[type="radio"],
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--deep-indigo);
+      border-radius: 0px;
+      background: var(--white);
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      box-sizing: border-box;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.12s ease-in-out;
+    }
+    .quiz-card input[type="radio"]:checked,
+    input[type="radio"]:checked {
+      background: var(--primary);
+      border-color: var(--deep-indigo);
+      box-shadow: inset 0 0 0 2px var(--white);
+    }
+    .quiz-card input[type="radio"]:focus-visible,
+    input[type="radio"]:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    .quiz-feedback {
+      margin-top: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0px;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--deep-indigo);
+      color: var(--white);
+      border: 2px solid var(--primary);
+      padding: 0.7rem 1.4rem;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 0.98rem;
+      letter-spacing: 0.04em;
+      border-radius: 0px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-primary:hover {
+      background: #303885;
+      border-color: var(--primary-hover);
+    }
+    .btn-secondary-indigo { background: var(--royal-indigo); border: 1px solid var(--lavender-border); }
+    .btn-secondary-indigo:hover { background: var(--deep-indigo); border-color: var(--primary); }
+    .cert-panel {
+      background: var(--deep-indigo);
+      color: var(--white);
+      border: 4px solid var(--primary);
+      border-radius: 0px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .tof-grid-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tof-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 6px;
+      max-width: 480px;
+      margin: 1rem auto;
+    }
+    .tof-cell {
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+      border-radius: 0px;
+      padding: 0.4rem 0.1rem;
+      text-align: center;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 0.74rem;
+      cursor: pointer;
+      user-select: none;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .tof-cell.obstacle {
+      background: #FEE2E2;
+      color: #991B1B;
+      border-color: #EF4444;
+    }
+    footer {
+      background: var(--charcoal);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      border-top: 4px solid var(--primary);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      .interactive-lab {
+        padding: 1.1rem 0.9rem;
+      }
+      .chapter-banner {
+        padding: 1rem 1.1rem;
+      }
+      .chapter-body {
+        padding: 1.1rem 0.9rem;
+      }
+      .nav-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0.6rem 0.75rem;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+      .nav-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-pill {
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .table-wrap table {
+        min-width: 580px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0.75rem 0.5rem;
+      }
+      header.hero {
+        padding: 1.8rem 0.75rem;
+      }
+      header.hero h1 {
+        font-size: 1.7rem;
+      }
+      header.hero p.sub {
+        font-size: 0.95rem;
+      }
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+      .kpi-strip {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.5rem;
+      }
+      .kpi-card {
+        padding: 0.65rem 0.4rem;
+      }
+      .kpi-card .val {
+        font-size: 1.25rem;
+      }
+      .tof-grid {
+        gap: 3px;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .tof-cell {
+        font-size: 0.62rem;
+        padding: 0.25rem 0.05rem;
+        border-width: 1px;
+        min-width: 0;
+      }
+      .btn-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-group .btn-primary {
+        width: 100%;
+        margin-left: 0 !important;
+        text-align: center;
+      }
+      .cert-panel {
+        padding: 1.25rem 0.75rem;
+      }
+      #certCadetDisplay {
+        font-size: 1.25rem !important;
+        padding: 0 0.5rem 0.25rem !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 0.5rem 0.35rem;
+      }
+      .interactive-lab {
+        padding: 0.8rem 0.5rem;
+      }
+      .chapter-body {
+        padding: 0.8rem 0.5rem;
+      }
+      .tof-grid {
+        gap: 2px;
+      }
+      .tof-cell {
+        font-size: 0.54rem;
+        padding: 0.2rem 0.04rem;
+      }
+      .kpi-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .tof-grid {
+        gap: 2px;
+      }
+      .tof-cell {
+        font-size: 0.48rem;
+        padding: 0.2rem 0.02rem;
+      }
+    }
+
+    /* Challenge Labs & Canvas Responsive Wrap */
+    .canvas-responsive-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin: 1rem 0;
+      background: #0B0E1E;
+      border: 1px solid var(--border);
+      border-radius: 0px !important;
+    }
+    .challenge-badge-box {
+      background: var(--lavender-bg);
+      border: 2px solid var(--primary);
+      border-radius: 0px !important;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .challenge-badge-box .badge-title {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+      color: var(--deep-indigo);
+    }
+    .challenge-badge-box .badge-desc {
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+    input[type="range"] {
+      border-radius: 0px !important;
+    }
+
+    /* Print Stylesheet (@media print) */
+    @page {
+      size: letter;
+      margin: 12mm 10mm;
+    }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        background: #FFFFFF !important;
+        color: #161616 !important;
+        font-size: 11pt !important;
+        line-height: 1.28 !important;
+      }
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      /* Screen-only UI suppression */
+      #osito-site-nav,
+      .hero-quick-actions,
+      .nav-bar,
+      .btn-primary,
+      .btn-group,
+      button,
+      input,
+      select,
+      .hero-badge,
+      footer,
+      .screen-only,
+      .calc-grid,
+      #quizScoreBanner {
+        display: none !important;
+      }
+
+      /* Compact Header */
+      header.hero {
+        padding: 0.5rem 0.5rem !important;
+        background: #232A68 !important;
+        color: #FFFFFF !important;
+        border-bottom: 2px solid var(--primary) !important;
+      }
+      header.hero img.brand-logo {
+        height: 28px !important;
+        margin-bottom: 0.15rem !important;
+      }
+      header.hero h1 {
+        font-size: 1.2rem !important;
+        margin: 0.15rem 0 !important;
+      }
+      header.hero p.sub {
+        font-size: 0.82rem !important;
+        margin: 0.15rem 0 !important;
+      }
+      header.hero p {
+        font-size: 0.72rem !important;
+        margin: 0.1rem 0 !important;
+      }
+
+      /* Page-Break Management & Structural Elements */
+      .interactive-lab,
+      .chapter-card,
+      .cert-panel {
+        box-shadow: none !important;
+        border: 1px solid #D0D0D0 !important;
+        margin-bottom: 0.5rem !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .table-wrap,
+      table,
+      figure.book-fig,
+      pre.code-block,
+      .quiz-card,
+      .challenge-badge-box {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      /* Typography & Flow Elements */
+      p {
+        margin: 0.18rem 0 0.25rem 0 !important;
+        line-height: 1.28 !important;
+      }
+      .lead-para {
+        font-size: 9.5pt !important;
+        margin-bottom: 0.25rem !important;
+      }
+      h2 {
+        font-size: 1.05rem !important;
+        margin: 0.2rem 0 0.15rem 0 !important;
+      }
+      h3 {
+        font-size: 0.92rem !important;
+        margin: 0.2rem 0 0.1rem 0 !important;
+      }
+      h4 {
+        font-size: 0.85rem !important;
+        margin: 0.15rem 0 0.08rem 0 !important;
+      }
+      .chapter-banner {
+        background: #232A68 !important;
+        color: #FFFFFF !important;
+        padding: 0.25rem 0.5rem !important;
+      }
+      .chapter-banner h2 {
+        font-size: 1.05rem !important;
+        margin: 0.05rem 0 !important;
+      }
+      .chapter-banner .ch-badge {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.35rem !important;
+        margin-bottom: 0.1rem !important;
+      }
+      .chapter-body {
+        padding: 0.3rem 0.5rem !important;
+      }
+      .sec-block {
+        margin-bottom: 0.3rem !important;
+      }
+      .sec-block h3 {
+        margin-top: 0.25rem !important;
+      }
+      .callout-box {
+        padding: 0.3rem 0.5rem !important;
+        margin: 0.25rem 0 !important;
+        border-width: 1px !important;
+      }
+      .callout-box h4 {
+        margin: 0 0 0.15rem 0 !important;
+      }
+      .callout-box p {
+        margin: 0 !important;
+        font-size: 9pt !important;
+      }
+      .table-wrap {
+        margin: 0.25rem 0 !important;
+      }
+      table {
+        font-size: 7.5pt !important;
+        line-height: 1.15 !important;
+      }
+      th, td {
+        padding: 0.15rem 0.3rem !important;
+      }
+      pre.code-block {
+        font-size: 7pt !important;
+        line-height: 1.15 !important;
+        padding: 0.25rem 0.4rem !important;
+        margin: 0.25rem 0 !important;
+      }
+      figure.book-fig {
+        margin: 0.25rem 0 !important;
+        padding: 0.2rem !important;
+      }
+      figure.book-fig img {
+        max-height: 105px !important;
+        width: auto !important;
+        object-fit: contain !important;
+      }
+      figure.book-fig figcaption {
+        font-size: 7pt !important;
+        margin-top: 0.15rem !important;
+      }
+
+      /* Canvases as Static Technical Diagrams */
+      canvas {
+        max-width: 100% !important;
+        max-height: 120px !important;
+        width: auto !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0.2rem auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .canvas-responsive-wrap {
+        margin: 0.2rem 0 !important;
+        background: #0B0E1E !important;
+        border: 1px solid #CCCCCC !important;
+      }
+      .challenge-badge-box {
+        padding: 0.3rem 0.5rem !important;
+        margin-top: 0.25rem !important;
+      }
+      .challenge-badge-box .badge-title {
+        font-size: 0.88rem !important;
+        margin-bottom: 0.1rem !important;
+      }
+      .challenge-badge-box .badge-desc {
+        font-size: 7.5pt !important;
+        line-height: 1.25 !important;
+      }
+
+      /* Lab and KPI Compactness */
+      .interactive-lab {
+        padding: 0.35rem 0.55rem !important;
+        margin-bottom: 0.4rem !important;
+      }
+      .kpi-strip {
+        gap: 0.25rem !important;
+        margin: 0.2rem 0 !important;
+      }
+      .kpi-card {
+        padding: 0.2rem 0.3rem !important;
+      }
+      .kpi-card .val {
+        font-size: 0.88rem !important;
+      }
+      .kpi-card .lbl {
+        font-size: 0.6rem !important;
+      }
+      .tof-grid {
+        max-width: 220px !important;
+        margin: 0.2rem auto !important;
+        gap: 2px !important;
+      }
+      .tof-cell {
+        font-size: 0.48rem !important;
+        padding: 0.12rem 0.04rem !important;
+      }
+
+      /* Quiz Exam Compactness */
+      .quiz-card {
+        padding: 0.18rem 0.35rem !important;
+        margin-bottom: 0.2rem !important;
+      }
+      .quiz-q {
+        font-size: 8pt !important;
+        margin: 0 0 0.1rem 0 !important;
+      }
+      .quiz-opt {
+        margin: 0.08rem 0 !important;
+        font-size: 7.5pt !important;
+      }
+      .quiz-feedback {
+        padding: 0.15rem 0.3rem !important;
+        margin-top: 0.15rem !important;
+        font-size: 7pt !important;
+        line-height: 1.2 !important;
+      }
+
+      /* Standalone Cadet Wings Certificate Page Isolation */
+      #teen-cert {
+        break-before: page !important;
+        page-break-before: always !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #teen-cert > h2,
+      #teen-cert > .calc-grid {
+        display: none !important;
+      }
+      .cert-panel {
+        break-before: page !important;
+        page-break-before: always !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        background: #232A68 !important;
+        color: #FFFFFF !important;
+        border: 4px solid #7077CF !important;
+        padding: 2.5rem 2rem !important;
+        margin: 2rem auto !important;
+        max-width: 720px !important;
+        box-sizing: border-box !important;
+      }
+      .cert-panel h3 {
+        font-size: 1.6rem !important;
+        color: #FFFFFF !important;
+      }
+      .cert-panel p {
+        color: #EEF0FA !important;
+      }
+      #certCadetDisplay {
+        font-size: 1.5rem !important;
+        color: #FFFFFF !important;
+      }
+    }
+    /* Unified Site Top Navigation Bar (#osito-site-nav) */
+    #osito-site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: #161616;
+      border-bottom: 2px solid #7077CF;
+      padding: 8px 16px;
+      font-family: 'Roboto', sans-serif;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #osito-site-nav * {
+      border-radius: 0px !important;
+      box-sizing: border-box;
+    }
+    .osito-nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .osito-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .osito-nav-brand img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+    .osito-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+    .osito-nav-item {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #EEF0FA;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+    .osito-nav-item:hover, .osito-nav-item.active {
+      background: #232A68;
+      border-color: #7077CF;
+      color: #FFFFFF;
+    }
+    .osito-nav-item.sim-link {
+      background: #232A68;
+      border: 1px solid #7077CF;
+      color: #FFFFFF;
+    }
+    .osito-nav-item.sim-link:hover {
+      background: #444FB6;
+      border-color: #FFFFFF;
+    }
+    .osito-nav-caret {
+      display: inline-block !important;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .osito-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .osito-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: #1B1B1B;
+      border: 1px solid #7077CF;
+      z-index: 20000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+    .osito-dropdown:hover .osito-dropdown-menu {
+      display: block;
+    }
+    .osito-dropdown-menu a {
+      display: block;
+      padding: 9px 13px;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      color: #EEF0FA;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid #232A68;
+    }
+    .osito-dropdown-menu a:hover {
+      background: #232A68;
+      color: #FFFFFF;
+    }
+    .osito-action-btn {
+      display: inline-block;
+      text-align: center;
+      background: #7077CF;
+      color: #FFFFFF !important;
+      text-decoration: none;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 13px;
+      padding: 8px 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid #8E93DA;
+      cursor: pointer;
+    }
+    .osito-action-btn:hover {
+      background: #444FB6 !important;
+      border-color: #FFFFFF !important;
+    }
+    .hero-quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 1.1rem;
+    }
+    .hero-quick-link {
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.05rem;
+      border-radius: 0px !important;
+      background: #232A68;
+      color: #FFFFFF;
+      border: 2px solid #7077CF;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .hero-quick-link:hover {
+      background: #303885;
+      border-color: #FFFFFF;
+    }
+    .hero-quick-link.emerald {
+      background: #065F46;
+      border-color: #10B981;
+    }
+    .hero-quick-link.emerald:hover {
+      background: #047857;
+      border-color: #FFFFFF;
+    }
+    @media (max-width: 600px) {
+      #osito-site-nav {
+        padding: 6px 8px;
+      }
+      .osito-nav-brand img {
+        height: 26px;
+      }
+      .osito-nav-item {
+        font-size: 11px;
+        padding: 4px 6px;
+      }
+      .osito-action-btn {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+      .hero-quick-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header id="osito-site-nav">
+    <div class="osito-nav-inner">
+      <a href="./index.html" class="osito-nav-brand"><img src="./assets/ositologo-white.png" alt="Osito Drone" /></a>
+      <nav class="osito-nav-menu" aria-label="Main Navigation">
+        <a href="./index.html" class="osito-nav-item">Home</a>
+        <div class="osito-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Services <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html#drone-academy">Drone Academy</a>
+            <a href="./osito-drone-academy.html#flight-academy">Flight Academy</a>
+            <a href="./osito-drone-academy.html#stem-academy">STEM Academy</a>
+            <a href="./custom-aerial-solutions.html">Aerial Solutions</a>
+            <a href="./index.html#osito-bookable-job-packages">Packages &amp; Pricing</a>
+          </div>
+        </div>
+        <div class="osito-dropdown">
+          <a href="./osito-drone-academy.html" class="osito-nav-item">Academy <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./osito-drone-academy.html#drone-academy">Drone Academy (Drones &amp; FPV)</a>
+            <a href="./osito-drone-academy.html#flight-academy">Flight Academy (Aeronautics &amp; Planes)</a>
+            <a href="./osito-drone-academy.html#stem-academy">STEM Academy (STEM + Art &amp; 3D Print)</a>
+            <a href="./interactive-book.html">Interactive Book &amp; Exam</a>
+            <a href="./osito-drone-academy.html#osito-coloring-books-downloads">Free STEM Coloring Books</a>
+          </div>
+        </div>
+        <a href="./custom-aerial-solutions.html" class="osito-nav-item">Aerial Solutions</a>
+        <a href="./flight-sim.html" class="osito-nav-item sim-link">Flight Sim</a>
+        <div class="osito-dropdown">
+          <a href="./toolbox.html" class="osito-nav-item active">Toolbox <svg class="osito-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg></a>
+          <div class="osito-dropdown-menu">
+            <a href="./toolbox.html">Toolbox Hub</a>
+            <a href="./interactive-book.html">Interactive Book &amp; Exam</a>
+            <a href="./stl-editor.html">3D STL Editor</a>
+            <a href="./osito-design-tool.html">Design &amp; Flowchart</a>
+            <a href="./flight-sim.html">Flight Simulator</a>
+            <a href="./toolbox.html#osito-coloring-books-downloads">Coloring Books</a>
+            <a href="./admin.html">Staff Portal</a>
+          </div>
+        </div>
+        <a href="./about.html" class="osito-nav-item">About</a>
+        <a href="./index.html#osito-contact-section" class="osito-action-btn">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <header class="hero">
+    <img src="./assets/ositologo-white.png" alt="Osito Drone Logo" class="brand-logo" /><br/>
+    <span class="hero-badge">OSITO TOOLBOX #03 • INTERACTIVE AEROSPACE BOOK, 6 SIMULATORS &amp; SELF-GRADING EXAM</span>
+    <h1>OSITO DRONE SERVICES INTERACTIVE BOOK &amp; SELF-GRADING LAB</h1>
+    <p class="sub">Learn 10 Chapters of Multirotor Physics, 4-Tier Bambu P2S 3D Printing, Python 8×8 Laser Autonomy &amp; FAA TRUST / Part 107 — Then Grade Yourself on the 15-Question Exam &amp; Print Your Cadet Wings!</p>
+    <p style="font-size:0.92rem;color:#EEF0FA;">Osito Drone LLC — STEM Youth Academy &amp; Commercial Aerial Division (San Francisco, CA) • Miguel Flores (CEO) • Alan Musselman (COO) • Jesus Aceves (CTO)</p>
+    <div class="hero-quick-actions screen-only">
+      <a href="#teen-exam" class="hero-quick-link emerald">🎓 TAKE 15-Q SELF-GRADING EXAM</a>
+      <a href="#interactive-calc" class="hero-quick-link">⚡ LAUNCH 6 INTERACTIVE LABS</a>
+      <a href="#chapter-1" class="hero-quick-link">📖 READ 10-CHAPTER BOOK</a>
+      <a href="./downloads/teen-book/Osito_Drone_Services_Teen_Pilot_and_STEM_Handbook_Ages_12_16.pdf" download="Osito_Drone_Services_Teen_Pilot_and_STEM_Handbook_Ages_12_16.pdf" class="hero-quick-link">📥 DOWNLOAD PDF BOOK</a>
+      <a href="./downloads/teen-book/Osito_Drone_Services_Teen_Pilot_and_STEM_Handbook_Ages_12_16.docx" download="Osito_Drone_Services_Teen_Pilot_and_STEM_Handbook_Ages_12_16.docx" class="hero-quick-link">📄 WORD (.DOCX)</a>
+    </div>
+  </header>
+  <div class="container">
+    <nav class="nav-bar">
+      <a href="#interactive-calc" class="nav-pill" style="background:#232A68;color:#FFF;">⚡ LAB 1: PHYSICS &amp; BATTERY</a>
+      <a href="#laser-sim" class="nav-pill" style="background:#303885;color:#FFF;">🎯 LAB 2: 8×8 LASER MATRIX</a>
+      <a href="#rollover-sim" class="nav-pill" style="background:#444FB6;color:#FFF;">⏱️ LAB 3: 16-BIT ROLLOVER</a>
+      <a href="#teen-exam" class="nav-pill" style="background:#1B204E;color:#FFF;border-color:var(--primary);">🎓 LAB 4: 15-Q EXAM &amp; WINGS</a>
+      <a href="#fpv-sprint-challenge" class="nav-pill" style="background:#232A68;color:#FFF;">CHALLENGE 1: FPV SPRINT</a>
+      <a href="#evtol-transition-challenge" class="nav-pill" style="background:#303885;color:#FFF;">CHALLENGE 2: CITY eVTOL</a>
+      <a href="#flying-car-corridor-challenge" class="nav-pill" style="background:#444FB6;color:#FFF;">CHALLENGE 3: FLYING CAR</a>
+      <a href='#chapter-1' class='nav-pill'>CHAPTER 01: Welcome to Osito Drone Services</a>
+<a href='#chapter-2' class='nav-pill'>CHAPTER 02: The Physics of Multirotor Flight</a>
+<a href='#chapter-3' class='nav-pill'>CHAPTER 03: Inside the Osito Fleet</a>
+<a href='#chapter-4' class='nav-pill'>CHAPTER 04: Avionics, Flight Controllers, PID Loops & Aerospace Firmware Safety</a>
+<a href='#chapter-5' class='nav-pill'>CHAPTER 05: Mastering the 4-Station Flight Lab, LiPo Battery Science & Pit Crew Ops</a>
+<a href='#chapter-6' class='nav-pill'>CHAPTER 06: Coding Autonomous Drones</a>
+<a href='#chapter-7' class='nav-pill'>CHAPTER 07: Real-World Commercial Missions at Osito Drone Services</a>
+<a href='#chapter-8' class='nav-pill'>CHAPTER 08: Airspace Law, FAA TRUST (Ages 12–16) & Your Road to FAA Part 107 (Age 16)</a>
+<a href='#chapter-9' class='nav-pill'>CHAPTER 09: The Osito Teen Career, Apprenticeship & Entrepreneurship Playbook</a>
+<a href='#chapter-10' class='nav-pill'>CHAPTER 10: Engineering Challenges, Pre-Flight Checklists, Flight Log & Certification Exam</a>
+
+    </nav>
+
+    <section class="interactive-lab" id="interactive-calc">
+      <h2>⚡ Interactive Teen Aerospace Physics, Thrust-to-Weight & Flight Time Calculator</h2>
+      <p>Select any canonical Osito Drone platform below (synchronized with the 68/68 Master Fleet Safety Audit) or enter custom values:</p>
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label for="presetSelect">Osito Drone Platform</label>
+          <select id="presetSelect" onchange="applyPreset()">
+            <option value="27.6,116,300,3.2">Osito MiniCub65 BNF (27.6g AUW | 116g Thrust)</option>
+            <option value="39.5,152,450,3.6">CUB-75 MK-II Trainer (39.5g AUW | 152g Thrust)</option>
+            <option value="46.0,152,450,3.9">CUB-75 + SNAP-CODE ToF Hat (46.0g AUW)</option>
+            <option value="45.5,180,450,4.2">SHARD-75 / KODIAK-75 Optical-Flow (45.5g AUW)</option>
+            <option value="101.9,340,650,6.2">OSITO-INT-95 Interceptor (101.9g AUW)</option>
+            <option value="192.5,480,850,7.5">THERMO-95 HVAC Thermal Inspector (192.5g AUW)</option>
+          </select>
+        </div>
+        <div class="calc-box">
+          <label for="auwInput">All-Up Weight — AUW (g)</label>
+          <input type="number" id="auwInput" value="27.6" step="0.5" oninput="recalcPhysics()" />
+        </div>
+        <div class="calc-box">
+          <label for="thrustInput">4-Motor Max Thrust (g)</label>
+          <input type="number" id="thrustInput" value="116" step="1" oninput="recalcPhysics()" />
+        </div>
+        <div class="calc-box">
+          <label for="mahInput">Battery Capacity (mAh @ 3.8V)</label>
+          <input type="number" id="mahInput" value="300" step="50" oninput="recalcPhysics()" />
+        </div>
+        <div class="calc-box">
+          <label for="ampsInput">Avg Hover Current (Amps)</label>
+          <input type="number" id="ampsInput" value="3.2" step="0.1" oninput="recalcPhysics()" />
+        </div>
+      </div>
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <div>Thrust-to-Weight Ratio</div>
+          <div class="val" id="kpiTW">4.20 : 1</div>
+        </div>
+        <div class="kpi-card">
+          <div>Est. Hover Throttle %</div>
+          <div class="val" id="kpiHover">23.8%</div>
+        </div>
+        <div class="kpi-card">
+          <div>Battery Energy (Wh)</div>
+          <div class="val" id="kpiWh">1.14 Wh</div>
+        </div>
+        <div class="kpi-card">
+          <div>Safe Flight Time (80% Rule)</div>
+          <div class="val" id="kpiTime">4.5 min</div>
+        </div>
+        <div class="kpi-card">
+          <div>FAA &lt;250g Recreational Rule</div>
+          <div class="val" id="kpiFAA">SUB-250g (27.6g)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 2: INTERACTIVE 8x8 VL53L5CX LASER OBSTACLE AVOIDANCE SIMULATOR -->
+    <section class="interactive-lab" id="laser-sim">
+      <h2>🎯 Lab 2: Interactive CUB-75 `SNAP-CODE` 8×8 ToF Laser Matrix Simulator (`VL53L5CX`)</h2>
+      <p>Click any of the 64 laser zones below to toggle an obstacle at <strong>280 mm</strong> (red) vs. clear airspace at <strong>1,200 mm</strong> (green), and watch how the Python controller in Chapter 6 commands Pitch and Roll avoidance in real time:</p>
+      <div class="tof-grid-wrap"><div class="tof-grid" id="tofGrid"></div></div>
+      <div style="text-align:center;margin-bottom:0.8rem;">
+        <button class="btn-primary" onclick="resetTofGrid()">Clear All 64 Laser Zones</button>
+      </div>
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <div class="lbl">Controller Mode</div>
+          <div class="val" id="tofMode" style="font-size:1.15rem;">CRUISE_CLEAR</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Closest Forward Zone</div>
+          <div class="val" id="tofMinDist">1200 mm</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Pitch Command</div>
+          <div class="val" id="tofPitch">+3.0° (Forward)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Roll Command</div>
+          <div class="val" id="tofRoll">0.0° (Level)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 3: INTERACTIVE 16-BIT MILLISECOND ROLLOVER & WATCHDOG TESTER -->
+    <section class="interactive-lab" id="rollover-sim">
+      <h2>⏱️ Lab 3: Interactive 16-Bit Timer Rollover (`65,535 → 0 ms`) &amp; Watchdog Tester</h2>
+      <p>Test why Aerospace Safety Rule #3 (`(now_ms - last_ms) &amp; 0xFFFF`) is mandatory on 16-bit flight controllers:</p>
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label for="lastMsInput">Last Heartbeat `last_ms` (0–65535)</label>
+          <input type="number" id="lastMsInput" value="65500" min="0" max="65535" oninput="recalcRollover()" />
+        </div>
+        <div class="calc-box">
+          <label for="nowMsInput">Current Timer `now_ms` (0–65535)</label>
+          <input type="number" id="nowMsInput" value="44" min="0" max="65535" oninput="recalcRollover()" />
+        </div>
+      </div>
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <div class="lbl">Naive `now_ms - last_ms`</div>
+          <div class="val" id="naiveDiff" style="color:#EF4444;">-65456 ms (BUG!)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Safe `(now - last) &amp; 0xFFFF`</div>
+          <div class="val" id="safeDiff" style="color:#4ADE80;">80 ms (EXACT)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">2-Stage Watchdog Status</div>
+          <div class="val" id="wdStatus" style="font-size:1.15rem;">NOMINAL (&le;100ms)</div>
+        </div>
+      </div>
+    </section>
+
+    
+            <section class="chapter-card" id="chapter-1">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 01 • TARGET AGES 12–16</span>
+                <h2>Welcome to Osito Drone Services — The Teen Aviation Window (Ages 12–16)</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">Between ages 12 and 16, your brain's spatial reasoning, hand-eye reflex speed, and engineering curiosity hit peak acceleration. At Osito Drone Services in San Francisco, we don't treat 12-to-16-year-olds like little kids watching a toy demonstration—we train you as real Junior Aerospace Technicians, Python Autonomy Coders, and Future FAA Part 107 Commercial Pilots.</p>
+                <div class='sec-block'><h3>1.1 Who Is Osito Drone Services?</h3><p>Founded in San Francisco by CEO Miguel Flores, COO Alan Musselman, and CTO Jesus Aceves, Osito Drone LLC operates at the intersection of two fast-growing worlds:</p><p>• The Osito STEM Youth Drone Academy: Bringing 4-Station Mobile Flight Labs, 3D-printed carbon-fiber micro-drones, and bilingual English/Spanish aerospace education to middle schools, high schools, recreation centers, and summer camps across the Bay Area.</p><p>• Osito Commercial Aerial Services: Executing real-world B2B commercial roof inspections, HVAC thermal radiometry (heat-loss diagnostics), luxury real estate indoor FPV fly-throughs, environmental mapping, and live esports drone racing arenas.</p></div><div class='sec-block'><h3>1.2 The Osito 12-to-16 Teen Progression Ladder</h3><p>Why is the 12–16 age bracket the most exciting stage in modern aviation? Because federal aviation law gives you a direct, step-by-step runway from your first indoor hover to a paid commercial license:</p><p>• Age 12 (Cadet Wingman): Pass your official FAA TRUST recreational exam (free), master Line-of-Sight (LOS) and First-Person View (FPV) flight on the 27.6g Osito MiniCub65 and 39.5g CUB-75, and learn LiPo battery safety.</p><p>• Ages 13–14 (Avionics & Autonomy Builder): Slice 3D-printed carbon-fiber airframes in Bambu Studio, configure Betaflight 4.5.1 PID controllers, and write Python obstacle-avoidance scripts using our 8×8 Time-of-Flight (ToF) laser matrix hats.</p><p>• Ages 14–15 (Part 107 Knowledge Scholar & Pit Crew Apprentice): Under FAA regulations (14 CFR § 107.65), you can sit for the official FAA Part 107 Aeronautical Knowledge Exam starting at age 14, and serve as a Station 4 Pit Crew Apprentice or Visual Observer (VO) with Osito coaches.</p><p>• Age 16 (FAA Part 107 Certified Commercial Remote Pilot): On the morning of your 16th birthday, you are legally eligible to activate your FAA Part 107 Remote Pilot Certificate—unlocking paid commercial roof inspections, thermal imaging missions, cinematic FPV shoots, and paid Assistant Flight Coach roles!</p></div>
+                
+                <div class="callout-box">
+                  <h4>💡 DID YOU KNOW? THE 'OSITO' CALLSIGN</h4>
+                  <p>'Osito' means 'Little Bear' in Spanish—a nod to California's Golden Bear heritage, our bilingual San Francisco Mission District roots, and our flagship micro-drones (the 39.5g CUB-75 and 27.6g MiniCub65) that pack industrial aerospace brains inside palm-sized, ultra-safe ducted airframes.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-2">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 02 • TARGET AGES 12–16</span>
+                <h2>The Physics of Multirotor Flight — 4 Forces, 6-DOF & Torque Balance</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">An airplane needs a runway to move forward and push air over its wings. A quadcopter (multirotor) generates lift by spinning four miniature airfoils (propeller blades) at 15,000 to 35,000 RPM. To fly like an expert—and design your own airframes—you need to understand the exact physics happening every millisecond.</p>
+                <div class='sec-block'><h3>2.1 The Four Forces of Flight on a Quadcopter</h3><p>Every aircraft in the universe is governed by four vector forces:</p><p>1. Weight (Gravity, W = m × g): Pulls the drone straight toward the center of the Earth. For an Osito CUB-75 MK-II with battery (All-Up Weight m = 39.5 grams = 0.0395 kg), Weight is 0.0395 kg × 9.81 m/s² = 0.387 Newtons.</p><p>2. Thrust (Upward Rotor Force, T): Generated as the four angled propeller blades accelerate a column of air downward (Newton's Third Law: every action has an equal and opposite reaction).</p><p>3. Lift & Tilt Vectoring: In a level hover, 100% of Thrust points straight up to balance Weight (T = W). When you push the right stick forward (Pitch), the rear motors spin faster than the front motors, tilting the thrust vector forward by angle θ. Now Vertical Lift is T × cos(θ) and Forward Propulsion is T × sin(θ)!</p><p>4. Aerodynamic Drag (D): Air resistance pushing against the frame and prop guards, proportional to the square of velocity (D ∝ v²).</p></div><div class='sec-block'><h3>2.2 Six Degrees of Freedom (6-DOF) & The Three Rotational Axes</h3><p>In 3D space, a drone moves along three linear axes (Surge = forward/back, Sway = left/right, Heave = up/down) and rotates around three rotational axes measured by the flight controller's gyroscope:</p><p>• ROLL (Rotation around the Longitudinal Front-to-Back X-Axis): Controlled by Right Stick Left/Right. To roll right, the left motors (Motors 2 & 4) speed up while the right motors (Motors 1 & 3) slow down.</p><p>• PITCH (Rotation around the Lateral Side-to-Side Y-Axis): Controlled by Right Stick Up/Down. To pitch forward (nose down), the rear motors (Motors 1 & 2) speed up while the front motors (Motors 3 & 4) slow down.</p><p>• YAW (Rotation around the Vertical Z-Axis): Controlled by Left Stick Left/Right. How does a quadcopter spin its nose left or right without tilting? Through Conservation of Angular Momentum!</p></div><div class='sec-block'><h3>2.3 Why Diagonal Propellers Spin in Opposite Directions (CW vs. CCW)</h3><p>If all four motors spun Clockwise (CW), Newton's Third Law dictates that the airframe itself would spin uncontrollably Counter-Clockwise (CCW) like a helicopter that lost its tail rotor! To cancel this reactive torque:</p><p>• Two diagonal motors spin Clockwise (CW), and the other two diagonal motors spin Counter-Clockwise (CCW).</p><p>• At Osito Drone Services, we configure our fleet in the 'Props-Out' (Reversed) direction: Front-Left (M4) and Rear-Right (M1) spin CW, while Front-Right (M3) and Rear-Left (M2) spin CCW. 'Props-Out' sweeps obstacles and ribbon gates away from the FPV camera lens rather than pulling them into the center of the frame.</p><p>• When you command a YAW rotation, the flight controller speeds up the two CW motors while slowing down the two CCW motors by the exact same amount. Total upward thrust stays constant (so you don't climb or drop), while net reactive torque rotates the nose smoothly!</p></div>
+                <figure class='book-fig'><img src='./assets/teen-book/fig1_quadcopter_physics_6dof_cw_ccw.png' alt='Quadcopter 6-DOF Physics'/><figcaption>Figure 2.1 — Quadcopter 4 Forces, 6-DOF & Props-Out CW/CCW Torque Balance.</figcaption></figure>
+                <div class="callout-box">
+                  <h4>💡 TEEN AEROSPACE FORMULA BOX: THRUST-TO-WEIGHT RATIO (T/W)</h4>
+                  <p>Thrust-to-Weight Ratio = Total Max Thrust (g) ÷ All-Up Weight (g).<br/>• A drone needs T/W > 1.0 just to leave the ground, and T/W ≥ 2.0 for crisp control authority.<br/>• Example: The Osito MiniCub65 BNF weighs 27.6g AUW and its four 0702 27,000KV motors produce 116g of peak thrust. Its T/W ratio is 116g ÷ 27.6g = 4.20 : 1—meaning it hovers at just ~24% throttle and has massive reserve power to recover from steep dives!</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-3">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 03 • TARGET AGES 12–16</span>
+                <h2>Inside the Osito Fleet — Carbon Airframes & 4-Tier 3D Printing</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">Walk into the Osito Drone Engineering Lab and you won't see fragile store-bought plastic toys. You'll see two Bambu Lab P2S Combo 3D printers with hardened steel nozzles extruding carbon-fiber composites and high-flow elastomers to build our five modular drone platforms.</p>
+                <div class='sec-block'><h3>3.1 Meet the Five Core Osito Drone Platforms</h3><p>Every drone in the Osito fleet is engineered for a specific training or commercial mission—and every part can be 3D-printed and repaired in-house in under 15 minutes:</p><p>1. Osito MiniCub65 BNF (19.8g Dry / 27.6g AUW): Our flagship 65mm 1S brushless micro-drone. Powered by the custom OSITO_CUBBRAIN65_V1 flight controller and 0702 27,000KV motors, it is whisper-quiet, legal to fly indoors anywhere, and tough enough to bounce off gym walls.</p><p>2. CUB-75 MK-II (29.0g Dry / 39.5g AUW; 46.0g with SNAP-CODE Hat): Our 75mm ducted STEM workhorse featuring a 4-Pin Magnetic Pogo Snap-Deck on the roof. In two seconds, students can snap on the 6.5g SNAP-CODE Hat (an 8×8 VL53L5CX Time-of-Flight laser ranging matrix) to run Python autonomy code.</p><p>3. SHARD-75 / KODIAK-75 (38.0g Open / 45.5g Optical-Flow AUW): Our aerial bumper and physics combat platform featuring downward optical-flow hover lock and a 3-layer composite sandwich horn designed to teach momentum transfer and elastic collisions.</p><p>4. THERMO-95 (142.5g Dry / 192.5g AUW): Our sub-250g commercial HVAC and building-envelope inspection trainer, carrying a radiometric thermal camera inside a high-temperature carbon-nylon airframe rated for 140°F attic crawlspaces.</p><p>5. OSITO-INT-95 (74.9g Dry / 101.9g AUW): Our high-speed gym 'Cat & Mouse' AI interceptor platform for advanced teens studying computer vision target tracking.</p></div><div class='sec-block'><h3>3.2 The Osito Master 4-Tier 3D Printing Filament Standard</h3><p>Why don't we print every drone out of basic classroom PLA? Because standard PLA softens at just 130°F (55°C) inside a sunny car or hot attic, and shatters like glass in a high-speed gate impact! CTO Jesus Aceves standardized our 2× Bambu Lab P2S Combo print farm around four aerospace-grade polymer tiers (using 0.4mm hardened steel nozzles):</p><p>• Tier 1 — Bambu PETG-CF (Carbon-Fiber Reinforced PETG, P2S #1 AMS Slot 1): Infused with chopped carbon micro-fibers for high stiffness, zero warping, and light weight. Default for CUB-75 (39.5g) and MiniCub65 (27.6g) frames.</p><p>• Tier 2 — Bambu PAHT-CF / PA12-CF (High-Temp Carbon Nylon, P2S #1 AMS Slot 2, dried <12% RH): Withstands 140°F+ attic heat without creeping and absorbs extreme impacts. Default for THERMO-95 (192.5g), SHARD-75/KODIAK-75 (45.5g), and OSITO-INT-95 (101.9g) cores.</p><p>• Tier 3 — eSUN PLA+ / Bambu PLA Tough (P2S #1 AMS Slot 3): Used for Aero-Cub gliders, propeller press-fit alignment jigs, N52 magnet polarity wands, and Pelican case dividers.</p><p>• Tier 4 — Dual Elastomer Strategy (TPU 95A HF + TPU for AMS 68D): Soft TPU 95A HF is fed exclusively from P2S #2's external dryer port (never put soft TPU 95A inside an AMS or it will buckle!) and sliced at 2 walls + 15% gyroid infill to create shock-absorbing bumper rings. Semi-rigid TPU for AMS (68D) runs in P2S #1 AMS Slot 4 for multi-color canopies and composite horns.</p></div>
+                <div class='table-wrap'><table><thead><tr><th>Osito Platform</th><th>Wheelbase & Canonical Mass</th><th>Flight Controller & Propulsion</th><th>3D-Print Material (Bambu P2S Farm)</th><th>Teen Mission Role (Ages 12–16)</th></tr></thead><tbody><tr><td>Osito MiniCub65 BNF</td><td>65mm | 19.8g Dry / 27.6g AUW</td><td>OSITO_CUBBRAIN65_V1 (STM32F411, ICM-42688-P, 12A Bluejay) + 0702 27,000KV</td><td>Bambu PETG-CF Frame + TPU 95A HF Canopy/Bumpers</td><td>Indoor Precision Acrobatics, FPV Gate Racing & Avionics Bench Lab</td></tr>
+<tr><td>CUB-75 MK-II Trainer</td><td>75mm | 29.0g Dry / 39.5g AUW (46.0g w/ ToF Hat)</td><td>F411 1S ELRS AIO + 0802 22,000KV JST + 4-Pin Magnetic Pogo Snap-Deck</td><td>Bambu PETG-CF Ducted Frame + TPU for AMS (68D) Canopy</td><td>Primary STEM Trainer, Python SNAP-CODE 8x8 ToF Laser Autonomy</td></tr>
+<tr><td>SHARD-75 / KODIAK-75</td><td>75mm | 38.0g Open / 45.5g Optical-Flow AUW</td><td>F411 ELRS + PMW3901 Optical Flow + 1002 High-Torque Brushless</td><td>Bambu PAHT-CF Core + TPU 95A HF Bumper + TPU 68D Horn</td><td>Aerial Bumper Physics, Momentum Transfer & Optical-Flow Hold</td></tr>
+<tr><td>THERMO-95 Inspector</td><td>95mm | 142.5g Dry / 192.5g AUW (Sub-250g)</td><td>F722 HD AIO + Radiometric LWIR Thermal + 2S Ducted Propulsion</td><td>Bambu PAHT-CF (High-Temp Carbon Nylon, 140°F Attic HDT)</td><td>Commercial HVAC, Attic Heat-Loss (ΔT) & Roof Envelope Training</td></tr>
+<tr><td>OSITO-INT-95 Interceptor</td><td>95mm | 74.9g Dry / 101.9g AUW</td><td>F745 AIO + Edge AI Optical Target Lock + High-Thrust Tri-Blades</td><td>Bambu PAHT-CF Structural Cage + TPU 95A HF Impact Ring</td><td>Gym 'Cat & Mouse' Autonomous Tracking & Perimeter Security R&D</td></tr>
+</tbody></table></div><div class='table-wrap'><table><thead><tr><th>Tier & Material SKU</th><th>Bambu P2S Farm Assignment</th><th>Nozzle / Bed Temp</th><th>Engineering Properties</th><th>Osito Drone Applications</th></tr></thead><tbody><tr><td>Tier 1: Bambu PETG-CF (Carbon Fiber PETG)</td><td>P2S #1 — AMS Slot 1 (0.4mm Hardened Steel)</td><td>255°C / 70°C</td><td>High stiffness-to-weight, zero warping, clean matte carbon finish</td><td>CUB-75 (39.5g), MiniCub65 (27.6g), 4-Tablet Sim Pod stands, race gates</td></tr>
+<tr><td>Tier 2: Bambu PAHT-CF / PA12-CF (Carbon Nylon)</td><td>P2S #1 — AMS Slot 2 (Dried <12% RH)</td><td>290°C / 100°C</td><td>140°F+ Heat Deflection (HDT), extreme tensile & impact strength</td><td>THERMO-95 attic frames, SHARD-75/KODIAK-75 (45.5g) cores, OSITO-INT-95</td></tr>
+<tr><td>Tier 3: eSUN PLA+ / Bambu PLA Tough</td><td>P2S #1 — AMS Slot 3</td><td>215°C / 55°C</td><td>Fast cycle times, rigid dimensional tolerances for classroom tooling</td><td>Aero-Cub gliders, prop press jigs, N52 magnet polarity wands, dividers</td></tr>
+<tr><td>Tier 4A: Bambu TPU 95A HF (Soft Elastomer)</td><td>P2S #2 — External Dryer Port ONLY (Never in AMS!)</td><td>230°C / 45°C</td><td>Elastic shock absorption (sliced at 2 walls + 15% gyroid infill)</td><td>Impact bumper rings, camera isolation mounts, landing skids</td></tr>
+<tr><td>Tier 4B: Bambu TPU for AMS (68D Rigid Elastomer)</td><td>P2S #1 — AMS Slot 4</td><td>235°C / 50°C</td><td>AMS-compatible semi-rigid elastomer, zero buckling in PTFE tubes</td><td>Multi-color CUB-75 canopies & KODIAK-75 3-layer sandwich horns</td></tr>
+</tbody></table></div><figure class='book-fig'><img src='./assets/teen-book/fig2_osito_fleet_and_4tier_filament_matrix.png' alt='4-Tier Bambu P2S Standard'/><figcaption>Figure 3.1 — Osito 4-Tier Bambu Lab P2S Filament Engineering Standard.</figcaption></figure><figure class='book-fig'><img src='./assets/teen-book/OSITO_MINICUB65_BNF_Kit_Knolling.jpg' alt='Osito MiniCub65 Kit'/><figcaption>Figure 3.2 — Osito MiniCub65 BNF Modular Turnkey Kit Layout.</figcaption></figure>
+                <div class="callout-box">
+                  <h4>💡 SHOP RULE FOR TEEN CADETS: WHY NYLON MUST BE DRIED BELOW 12% RH</h4>
+                  <p>Polyamide (Nylon / PAHT-CF) is 'hygroscopic'—it absorbs water molecules straight out of humid San Francisco air! If you print wet PAHT-CF at 290°C, the trapped water flashes into steam bubbles inside the nozzle, destroying layer adhesion by up to 40%. Always verify the P2S AMS hygrometer reads <12% Relative Humidity before printing Tier 2 parts.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-4">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 04 • TARGET AGES 12–16</span>
+                <h2>Avionics, Flight Controllers, PID Loops & Aerospace Firmware Safety</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">At the center of every Osito drone sits a 25.5 × 25.5 mm green-and-gold printed circuit board (PCB) weighing less than two nickels. Yet this tiny All-In-One (AIO) board packs five aerospace subsystems that used to fill an entire rack in a full-scale airliner.</p>
+                <div class='sec-block'><h3>4.1 Anatomy of the OSITO_CUBBRAIN65_V1 AIO Flight Controller</h3><p>When you inspect an Osito flight controller under our bench magnifier, you'll identify five key chips:</p><p>1. Microcontroller Unit (MCU — STM32F411CEU6): A 32-bit ARM Cortex-M4 processor running at 100 MHz with a hardware Floating-Point Unit (FPU). It executes the Betaflight flight control loop 8,000 times per second.</p><p>2. Inertial Measurement Unit (IMU — TDK InvenSense ICM-42688-P): A 6-axis Micro-Electro-Mechanical System (MEMS) containing a 3-axis Gyroscope (measures angular rotation rate in degrees/sec) and a 3-axis Accelerometer (measures linear g-forces and gravity direction so the drone knows which way is 'level' in Angle Mode).</p><p>3. 4-in-1 Brushless Electronic Speed Controllers (ESCs — 12A Continuous, Bluejay 48kHz): Four pairs of half-bridge MOSFETs controlled by EFM8BB21 microcontrollers. Because brushed motors wear out after 6–10 hours, Osito uses 3-phase sensorless brushless motors driven via DShot300 digital telemetry and 48kHz PWM for extra flight efficiency.</p><p>4. ExpressLRS (ELRS) 2.4GHz Radio Receiver (Semtech SX1281): Receives stick commands from your Hall-gimbal radio at 250 packets per second (4ms latency) using LoRa spread-spectrum modulation that punches through gym Wi-Fi noise.</p><p>5. On-Screen Display (OSD — AT7456E) & 5.8GHz Video Transmitter (VTX): Overlays live battery voltage, flight timer, pilot callsign, and artificial horizon directly onto your FPV goggle video feed.</p></div><div class='sec-block'><h3>4.2 How the 8kHz PID Control Loop Keeps Your Drone Stable</h3><p>Every 125 microseconds (8,000 Hz), the flight controller compares your Desired Stick Rate (Setpoint) against the Actual Gyro Rate (Measurement). The difference is the Error: e(t) = Setpoint − Gyro. The PID controller calculates motor corrections using three terms:</p><p>• P — Proportional (Present Error): P_out = Kp × e(t). Pushes back immediately in proportion to how far off-target the drone is. Too little P feels mushy; too much P causes fast, high-pitched oscillations.</p><p>• I — Integral (Past Accumulated Error): I_out = Ki × ∫ e(t) dt. Remembers steady forces like a crosswind or an off-center battery and builds up steady motor trim until the drift disappears.</p><p>• D — Derivative (Future Rate of Change): D_out = Kd × de(t)/dt. Acts like a shock absorber! As the drone snaps toward its target angle, the D-term brakes the rotation smoothly right before it overshoots (eliminating prop-wash bounce).</p></div><div class='sec-block'><h3>4.3 The Three Golden Rules of Osito Firmware & Avionics Safety</h3><p>Across all 68 firmware checks in our workspace safety audit, every Osito script and flight controller enforces three non-negotiable aerospace safety protections:</p><p>• Rule 1 — Two-Stage Failsafe Watchdog: If the radio link drops or a companion computer hangs for >100 ms, Stage 1 auto-levels the drone at reduced descend throttle. If link loss exceeds 400–500 ms, Stage 2 disarms the ESCs immediately so a drone can never 'fly away.'</p><p>• Rule 2 — Pre-Arm Disarmed Safety Interlock: Flipping the Arm switch will NOT spin the propellers unless the throttle stick is simultaneously held all the way down (<1050 µs) and no boot-time switch fault is active.</p><p>• Rule 3 — 16-Bit Millisecond Integer Rollover Handling: Many microcontrollers track time using an unsigned 16-bit integer (uint16_t) counting milliseconds from 0 to 65,535 ms. At 65.536 seconds into a flight, the counter wraps around to 0! Naive code like `if (now_ms > timeout_target)` fails catastrophically at the 65.5-second mark. Proper aerospace code ALWAYS uses unsigned modular subtraction: `(uint16_t)(now_ms - last_ms) >= INTERVAL_MS`.</p></div>
+                <figure class='book-fig'><img src='./assets/teen-book/OSITO_CUBBRAIN65_AIO_PCB_Closeup.jpg' alt='OSITO_CUBBRAIN65_V1 PCB'/><figcaption>Figure 4.0 — OSITO_CUBBRAIN65_V1 STM32F411 + ICM-42688-P AIO Flight Controller.</figcaption></figure><figure class='book-fig'><img src='./assets/teen-book/fig3_pid_8khz_and_tof_laser_autonomy.png' alt='8kHz PID Loop and Safety'/><figcaption>Figure 4.1 — 8,000 Hz PID Control Loop & 3 Golden Firmware Safety Rules.</figcaption></figure>
+                <div class="callout-box">
+                  <h4>💡 TRY THE ROLLOVER MATH YOURSELF!</h4>
+                  <p>Suppose last_ms = 65500 and 80 milliseconds pass, so the 16-bit timer wraps past 65535 to now_ms = 44.<br/>In Python or C: `(44 - 65500) & 0xFFFF = (-65456) & 65535 = 80 ms`!<br/>Unsigned modular subtraction gives the exact 80 ms elapsed time across the wrap-around boundary with zero bugs.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-5">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 05 • TARGET AGES 12–16</span>
+                <h2>Mastering the 4-Station Flight Lab, LiPo Battery Science & Pit Crew Ops</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">Great pilots aren't born with magical thumbs—they follow a disciplined training progression and treat high-energy Lithium-Polymer batteries with scientific respect. Here is how Osito's 4-Station Flight Lab turns beginners into pros.</p>
+                <div class='sec-block'><h3>5.1 The Osito 4-Station Progressive Rotation</h3><p>When Osito Drone Services sets up at a school gymnasium or community center, our team runs four synchronized 15-minute stations so every student gets maximum stick time with zero downtime:</p><p>• Station 1 — The 4-Tablet Simulator & Coding Pod: Before risking hardware, you build muscle memory in our AcroBee65 / Osito SF Flight Simulator using real USB-C Hall-sensor radios, practicing throttle hover control and Python block/script missions.</p><p>• Station 2 — The Pop-Up Netted Hover Cage (Line-of-Sight): Inside a 10×10 ft enclosed mesh tent, you master Stationary Hover at eye level, the 4-Corner Box Drill, and 'Nose-In' orientation (where roll commands appear reversed when the drone faces you!).</p><p>• Station 3 — The Neon LED FPV Obstacle Course & Crew Resource Management (CRM): Every FPV pilot flying with goggles is paired with a dedicated Visual Observer (Spotter). Using real airline CRM protocol, the Spotter watches the airspace and calls out battery voltage, gate clearance, and landing cues.</p><p>• Station 4 — The Pit Crew & Battery Engineering Bench: Students inspect prop guards, swap tool-free 3-pin JST motors, and log battery storage voltages using ViFly Whoopstor V3 smart chargers inside steel Bat-Safe boxes.</p></div><div class='sec-block'><h3>5.2 1S LiHV Battery Chemistry, Voltage Thresholds & Energy Math</h3><p>Our micro-drones use 1-Cell High-Voltage Lithium-Polymer (1S LiHV) batteries (300mAh to 450mAh capacity with BT2.0 high-current connectors). Unlike AA batteries, LiHV cells require strict voltage discipline:</p><p>• 4.35 V per cell = 100% Full Charge (LiHV peak voltage).</p><p>• 3.80 V per cell = Official Storage Voltage! Always charge or discharge cells to 3.80V on the ViFly Whoopstor V3 at the end of the day. Leaving LiPos at 4.35V for days causes internal gas generation ('puffing') and degrades capacity.</p><p>• 3.50 V under load = 'Land Now!' OSD warning floor.</p><p>• < 3.30 V = Permanent chemical damage to the lithium-cobalt-oxide cathode layers.</p><p>• Energy & C-Rating Formulas:</p><p>  - Capacity in Amp-Hours (Ah) = mAh ÷ 1,000 (e.g., 300 mAh = 0.30 Ah).</p><p>  - Stored Energy in Watt-Hours (Wh) = Nominal Voltage (3.8V) × Ah = 3.8V × 0.30Ah = 1.14 Wh.</p><p>  - Max Safe Continuous Current (Amps) = Capacity (Ah) × C-Rating (e.g., 0.30 Ah × 75C = 22.5 Amps!).</p></div>
+                
+                <div class="callout-box">
+                  <h4>💡 GOLDEN PIT CREW RULE: NEVER UNPLUG BY THE WIRES & ALWAYS USE A BAT-SAFE</h4>
+                  <p>Always grip the solid plastic BT2.0 connector housing when unplugging a battery—pulling on the silicone wires can tear the solder joint and cause a dead short! Always charge LiPo/LiHV packs inside a double-walled steel Bat-Safe box with a fiberglass flame-arresting filter, and immediately quarantine any dented or swollen cell.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-6">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 06 • TARGET AGES 12–16</span>
+                <h2>Coding Autonomous Drones — Python, Optical Flow & Laser Matrix Avoidance</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">Manual FPV flying is thrilling, but the future of aerospace belongs to pilots who can also write code. With the CUB-75 MK-II's 4-Pin Magnetic Pogo Snap-Deck, you can snap on our SNAP-CODE Laser Hat and program real autonomous behaviors in Python.</p>
+                <div class='sec-block'><h3>6.1 How Optical Flow and 8×8 Time-of-Flight (ToF) Lasers Work</h3><p>Indoors, GPS satellites cannot penetrate gymnasium roofs. So how does an autonomous Osito drone know where it is and avoid walls without GPS?</p><p>1. Downward Optical Flow Sensor (PMW3901): Works like a high-speed optical gaming mouse pointed at the floor! It takes 100+ tiny grayscale snapshots per second and tracks how floor textures shift between frames (Δx, Δy) to lock the drone in place with zero horizontal drift.</p><p>2. Multi-Zone Time-of-Flight Laser Ranging (STMicroelectronics VL53L5CX): Instead of ultrasonic ping sensors that bounce unpredictably off angled curtains, the VL53L5CX fires invisible, eye-safe 940nm VCSEL laser pulses and measures the exact picoseconds it takes for photons to bounce back across an 8×8 grid (64 independent distance zones at 60 Hz!).</p></div><div class='sec-block'><h3>6.2 Annotated Python Autonomy Script (CUB-75 + SNAP-CODE Hat)</h3><p>Study the Python code listing below. Notice how it combines sensor fusion (reading the 8×8 laser matrix) with the exact aerospace safety rules you learned in Chapter 4 (Disarmed Guard, Pre-Arm Interlock, 2-Stage Watchdog Timeout, and 16-Bit Millisecond Rollover Math):</p><pre class='code-block'><code># ============================================================================
+# OSITO DRONE SERVICES — TEEN AUTONOMY LAB (AGES 12-16)
+# Platform: CUB-75 MK-II (39.5g AUW / 46.0g w/ SNAP-CODE 8x8 ToF Laser Hat)
+# Mission : Autonomous Hover, 8x8 Laser Obstacle Avoidance & Safe Auto-Land
+# Safety  : Enforces Pre-Arm Interlock, 2-Stage Watchdog & 16-Bit Rollover
+# ============================================================================
+
+UINT16_MASK = 0xFFFF            # 16-bit MCU timer mask (0..65535 ms)
+SOFT_WATCHDOG_MS = 100          # Stage 1 (>100ms): Auto-Level Descend (1150 us)
+HARD_WATCHDOG_MS = 500          # Stage 2 (>500ms): Hard Motor Cutoff (1000 us)
+MIN_SAFE_DISTANCE_MM = 450      # 450 mm (45 cm) obstacle repulsion threshold
+LAND_BATTERY_VOLTS = 3.50       # Auto-land floor for 1S LiHV battery
+
+
+def elapsed_u16_ms(now_ms: int, last_ms: int) -> int:
+    """
+    AEROSPACE SAFETY RULE #3: Safe 16-bit unsigned integer rollover math.
+    Even when now_ms wraps from 65535 back to 0, bitwise modular subtraction
+    (now_ms - last_ms) & 0xFFFF always returns the exact positive elapsed ms!
+    """
+    return (now_ms - last_ms) & UINT16_MASK
+
+
+class OsitoCub75AutonomousController:
+    def __init__(self):
+        self.armed = False
+        self.throttle_us = 1000
+        self.last_heartbeat_u16 = 0
+
+    def verify_pre_arm_interlock(
+        self, throttle_us: int, arm_switch_boot_high: bool, battery_v: float, now_u16_ms: int = 0
+    ) -> bool:
+        """AEROSPACE SAFETY RULE #2: Disarmed Pre-Arm Safety Interlock."""
+        self.armed = False
+        self.throttle_us = 1000
+        if arm_switch_boot_high:
+            print("[PRE-ARM BLOCKED] Arm switch was HIGH on boot! Cycle switch to DISARMED first.")
+            return False
+        if throttle_us > 1050:
+            print(f"[PRE-ARM BLOCKED] Throttle ({throttle_us} us) must be below 1050 us!")
+            return False
+        if battery_v < 3.85:
+            print(f"[PRE-ARM BLOCKED] Battery ({battery_v:.2f}V) too low for autonomous launch!")
+            return False
+        self.armed = True
+        self.last_heartbeat_u16 = now_u16_ms & UINT16_MASK
+        print("[PRE-ARM PASS] All safety interlocks verified. CUB-75 ARMED.")
+        return True
+
+    def compute_avoidance_vector(
+        self, tof_8x8_grid_mm: list[list[int]], now_u16_ms: int, battery_v: float
+    ) -> dict:
+        """
+        Reads the 8x8 VL53L5CX Time-of-Flight laser matrix (64 distance zones)
+        and computes pitch/roll avoidance commands in real time.
+        """
+        # 0. Disarmed Interlock Guard: Never spin motors if disarmed!
+        if not self.armed:
+            return {"mode": "DISARMED_SAFE_LOCK", "pitch_deg": 0.0, "roll_deg": 0.0, "throttle_us": 1000}
+
+        # 1. Two-Stage Rollover-Safe Watchdog Timer (100ms Soft / 500ms Hard)
+        dt_ms = elapsed_u16_ms(now_u16_ms, self.last_heartbeat_u16)
+        if dt_ms > HARD_WATCHDOG_MS:
+            self.armed = False
+            return {"mode": "FAILSAFE_STAGE2_HARD_DISARM", "pitch_deg": 0.0, "roll_deg": 0.0, "throttle_us": 1000}
+        if dt_ms > SOFT_WATCHDOG_MS:
+            return {"mode": "FAILSAFE_STAGE1_AUTO_DESCEND", "pitch_deg": 0.0, "roll_deg": 0.0, "throttle_us": 1150}
+
+        # 2. Low-Voltage Battery Auto-Land Floor (<= 3.50V)
+        if battery_v <= LAND_BATTERY_VOLTS:
+            self.last_heartbeat_u16 = now_u16_ms & UINT16_MASK
+            return {"mode": "LOW_BATTERY_AUTO_LAND", "pitch_deg": 0.0, "roll_deg": 0.0, "throttle_us": 1200}
+
+        # 3. Inspect Center 4x4 Forward Laser Zones for Obstacles
+        left_min = min(tof_8x8_grid_mm[r][c] for r in range(2, 6) for c in range(0, 4))
+        right_min = min(tof_8x8_grid_mm[r][c] for r in range(2, 6) for c in range(4, 8))
+        front_min = min(left_min, right_min)
+
+        pitch_cmd = 3.0   # Default gentle forward cruise (+3 degrees pitch)
+        roll_cmd = 0.0
+
+        if front_min < MIN_SAFE_DISTANCE_MM:
+            pitch_cmd = -5.0  # Pitch back to brake
+            roll_cmd = +6.0 if left_min < right_min else -6.0
+            mode = f"OBSTACLE_AVOID (Front={front_min}mm)"
+        else:
+            mode = "CRUISE_CLEAR"
+
+        self.last_heartbeat_u16 = now_u16_ms & UINT16_MASK
+        return {"mode": mode, "pitch_deg": pitch_cmd, "roll_deg": roll_cmd, "throttle_us": 1480}
+</code></pre></div><div class='sec-block'><h3>6.3 Five Essential Betaflight 4.5.1 CLI Diagnostics Commands</h3><p>When you connect an Osito drone to a laptop via USB-C and open the Betaflight Configurator CLI tab, these five commands let you diagnose any hardware issue in seconds:</p><p>• `status` — Displays MCU clock speed, CPU load %, gyro temperature, and active Arming Disable Flags (e.g., `THROTTLE`, `RXLOSS`, `CLI`—telling you why a drone refuses to arm).</p><p>• `tasks` — Shows real-time execution frequency (Hz) and microsecond jitter for the Gyro/PID loop (`8000 Hz`).</p><p>• `get small_angle` — Shows the maximum tilt angle allowed for arming (set `set small_angle = 180` on ducted whoops so you can use Turtle Mode / Flip-Over-After-Crash).</p><p>• `rxrange` — Verifies that your radio stick channels span cleanly from `1000` to `2000 µs` with center at `1500 µs`.</p><p>• `diff all` — Exports your customized configuration so you can back it up to a `.txt` file or flash 10 classroom drones identically.</p></div>
+                
+                <div class="callout-box">
+                  <h4>💡 PRO DEBUGGING TIP: READING 'ARMING DISABLE FLAGS'</h4>
+                  <p>Remember: while you are inside the Betaflight `CLI` tab or connected to Configurator over USB, Betaflight automatically activates the `CLI` or `MSP` Arming Disable Flag so the props cannot accidentally spin on the bench! Always type `exit`, unplug USB, and place the drone on a flat surface before arming.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-7">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 07 • TARGET AGES 12–16</span>
+                <h2>Real-World Commercial Missions at Osito Drone Services</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">How do drones actually make money and protect communities? At Osito Drone Services, COO Alan Musselman, CEO Miguel Flores, and CTO Jesus Aceves run five high-demand commercial service lines across Northern California—and teen apprentices aged 14–16 train on these exact workflows.</p>
+                <div class='sec-block'><h3>7.1 Commercial Roof, Solar & Building Envelope Inspections</h3><p>Traditionally, inspecting a 50,000 sq ft warehouse roof required two workers climbing tall ladders, walking across hot membranes, and risking falls. An Osito commercial drone maps the entire roof in 18 minutes:</p><p>• We fly an automated Nadir (90° straight-down) and Oblique (45° angled) lawnmower grid with 75% frontlap and 70% sidelap.</p><p>• Photogrammetry software stitches 250+ geotagged photos into a centimeter-accurate 2D Orthomosaic Map and 3D Digital Surface Model (DSM), pinpointing cracked tiles, hail impacts, clogged scuppers, and ponding water.</p></div><div class='sec-block'><h3>7.2 HVAC, Electrical & Attic Thermal Radiometry (ΔT Heat-Loss Analysis)</h3><p>Using our PAHT-CF THERMO-95 (192.5g AUW) indoor inspector and enterprise radiometric thermal drones, we see invisible Long-Wave Infrared (LWIR, 8–14 µm wavelength) heat radiation:</p><p>• Every pixel in a radiometric thermal image records an exact temperature in °F and °C. We look for Temperature Differentials (ΔT = T_anomaly − T_baseline).</p><p>• Why We Fly Roof Moisture Inspections Right After Sunset: During a sunny day, solar rays heat the entire roof. Where water has leaked underneath the roof membrane, that trapped water has high Specific Heat Capacity (it holds heat much longer than dry insulation). About 30–90 minutes after sunset, dry roof sections cool rapidly while wet, leaking sections glow bright warm orange on our thermal camera!</p><p>• On commercial solar arrays and electrical panels, a single defective solar cell or loose breaker shows up instantly as a +15°C to +40°C ΔT hotspot before it can spark a fire.</p></div><div class='sec-block'><h3>7.3 Luxury Real Estate & One-Take Indoor FPV Cinema Fly-Throughs</h3><p>Have you ever seen a continuous, single-take video that flies from the street, glides through the front door of a luxury home or stadium, weaves through rooms, and exits out a balcony? Osito flies these missions using sub-250g ducted cinewhoops:</p><p>• Ducted prop guards protect walls, chandeliers, and actors.</p><p>• Pilots use softened 'Expo' stick curves and constant-velocity coordinated turns, recording raw gyro data so post-production software (Gyroflow) can make the 4K60 footage look like it was shot on a floating magic carpet.</p></div>
+                <div class='table-wrap'><table><thead><tr><th>Osito Commercial Service Line</th><th>Problem We Solve for Clients</th><th>Sensors & Flight Technique</th><th>Deliverable to Client</th><th>Teen Apprentice Role (Ages 14–16)</th></tr></thead><tbody><tr><td>1. Commercial Roof & Building Envelope Inspection</td><td>Eliminates dangerous ladder climbs on 3-to-6 story warehouses, schools & HOAs</td><td>4K/48MP Nadir (90° down) + 45° Oblique grid patterns at 75% overlap</td><td>Annotated Orthomosaic Roof Map + Hail/Crack/Ponding Defect Report</td><td>Visual Observer (VO), Ground Control Check & Defect Tagging Assistant</td></tr>
+<tr><td>2. HVAC & Solar Thermal Radiometry (ΔT)</td><td>Detects hidden roof leaks, missing attic insulation, and failing solar cells</td><td>Radiometric LWIR Thermal Camera (8–14 µm) + THERMO-95 indoor duct checks</td><td>Calibrated Thermal Delta-T (ΔT) Report showing exact °F/°C hotspots</td><td>Post-Sunset Thermal Calibration Log & ΔT Anomaly Spreadsheet Analyst</td></tr>
+<tr><td>3. Luxury Real Estate & One-Take FPV Cinema</td><td>Creates viral, continuous single-take fly-throughs from street through interiors</td><td>Sub-250g Ducted Cinewhoop / MiniCub65 with Constant-Rate Expo turns</td><td>Color-graded 4K60 One-Take Reel + Stabilized Gyroflow Master</td><td>Room Staging Coordinator, Door-Cue Spotter & Gyroflow Stabilization Tech</td></tr>
+<tr><td>4. AgTech, Watershed & Vector Habitat Mapping</td><td>Finds standing-water mosquito breeding zones & measures crop vigor</td><td>Automated Waypoint Grid + Multispectral NDVI / High-Res RGB</td><td>GIS Geotagged Standing-Water Pin Map & Plant Health Index</td><td>Flight Path Waypoint Planner & Telemetry Data Logger</td></tr>
+<tr><td>5. Gamified FPV Arenas & Corporate/School Events</td><td>Brings live esports drone racing and STEM labs to schools & venues</td><td>4-Station Rotation: Sim Pod, Hover Cage, Neon LED FPV Track & Pit Bench</td><td>Turnkey Live Leaderboard Tournament + FAA TRUST Youth Certifications</td><td>Paid Junior Flight Coach, Sim Pod Mentor & Station 4 Pit Crew Tech</td></tr>
+</tbody></table></div><figure class='book-fig'><img src='./assets/teen-book/fig4_commercial_thermal_and_airspace_part107.png' alt='Thermal Radiometry and Part 107'/><figcaption>Figure 7.1 — Post-Sunset Commercial Roof Thermal Radiometry (ΔT) & Teen Part 107 Timeline.</figcaption></figure>
+                <div class="callout-box">
+                  <h4>💡 PHYSICS IN ACTION: THERMAL EMISSIVITY (ε)</h4>
+                  <p>Not all surfaces radiate infrared heat equally! Matte roof shingles and asphalt have high Emissivity (ε ≈ 0.92–0.95), giving very accurate thermal readings. Shiny unpainted aluminum HVAC ducts have low Emissivity (ε ≈ 0.05–0.10) and reflect the sky like a thermal mirror! Always check surface emissivity before logging a ΔT anomaly.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-8">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 08 • TARGET AGES 12–16</span>
+                <h2>Airspace Law, FAA TRUST (Ages 12–16) & Your Road to FAA Part 107 (Age 16)</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">The moment your drone's propellers lift off the grass outdoors, you are operating an aircraft inside the United States National Airspace System (NAS). Knowing the rules separates an amateur from a respected Osito Cadet—and sets you up to pass your FAA Part 107 exam.</p>
+                <div class='sec-block'><h3>8.1 Step 1 (Today, Ages 12–16): Pass Your Free FAA TRUST Exam</h3><p>Under 49 U.S.C. § 44809, EVERY recreational drone pilot in America—regardless of age or drone weight—must pass The Recreational UAS Safety Test (TRUST) before flying outdoors:</p><p>• Cost & Age Limit: 100% FREE, online, takes ~20 minutes, and has NO minimum age (12-to-16-year-olds take it at every Osito Academy camp!).</p><p>• Can You Fail? No! TRUST is an interactive learn-and-test module; if you miss a question, it explains the rule and lets you answer again immediately, issuing your official lifetime FAA TRUST Completion Certificate.</p></div><div class='sec-block'><h3>8.2 The 250-Gram (0.55 lb) Threshold, Registration & Standard Remote ID</h3><p>Why did Osito engineer the MiniCub65 at 27.6g, the CUB-75 at 39.5g, the SHARD-75 at 45.5g, the OSITO-INT-95 at 101.9g, and the THERMO-95 at 192.5g? Because 250 grams (0.55 lbs) is the most important weight boundary in FAA law:</p><p>• Recreational Flights Under 250g (< 0.55 lbs): Exempt from FAA drone registration and exempt from broadcasting Standard Remote ID!</p><p>• Drones Weighing 250g or More (≥ 0.55 lbs), OR Any Drone Flown Commercially Under Part 107 (Regardless of Weight!): Must be registered on FAADroneZone ($5 for 3 years, registration number labeled on the exterior of the hull) and must comply with FAA Standard Remote ID (a digital 'license plate' broadcasting the drone's serial number, GPS position, altitude, and take-off location over Wi-Fi/Bluetooth).</p></div><div class='sec-block'><h3>8.3 Core Airspace Rules & How to Prepare for FAA Part 107 at Ages 14–16</h3><p>Whether flying recreationally under TRUST or studying for your commercial Part 107 exam, memorize these core National Airspace System numbers:</p><p>• Maximum Altitude: 400 feet Above Ground Level (AGL) in uncontrolled Class G airspace. (Bonus Part 107 Rule: Commercial Part 107 pilots may fly higher than 400 ft AGL ONLY if within a 400-foot radius of a tall structure like a radio tower or building, up to 400 feet above that structure's top!).</p><p>• Maximum Groundspeed (Part 107): 87 knots (100 mph).</p><p>• Minimum Weather Visibility & Cloud Clearance (Part 107): At least 3 Statute Miles (3 SM) visibility from your control station, and stay at least 500 feet below clouds and 2,000 feet horizontally from clouds.</p><p>• Night Operations: Permitted only when your drone is equipped with lighted anti-collision strobes visible for at least 3 Statute Miles (flash rate sufficient to avoid a collision).</p><p>• Age 14 Exam / Age 16 Certificate Rule: At age 14 or 15, you can schedule and pass the 60-question FAA Part 107 Aeronautical Knowledge Test (`UAG`, minimum passing score 70% = 42/60) at an FAA testing center, and submit your IACRA application for your commercial Remote Pilot Certificate as soon as you turn 16!</p></div>
+                <div class='table-wrap'><table><thead><tr><th>Airspace Class</th><th>Real-World Bay Area Example</th><th>Altitude & Structure</th><th>Drone Authorization Needed?</th><th>Teen Pilot Rule of Thumb</th></tr></thead><tbody><tr><td>Class B (Busy Major Airports)</td><td>San Francisco Int'l (SFO)</td><td>Surface to 10,000 ft MSL ('Upside-Down Wedding Cake')</td><td>YES — FAA LAANC or DroneZone required before takeoff</td><td>Never fly near SFO corridors without explicit LAANC grid approval</td></tr>
+<tr><td>Class C (Mid-Sized Radar Airports)</td><td>Oakland (OAK) & San Jose (SJC)</td><td>Surface to 4,000 ft AGL (5 NM inner core + 10 NM outer shelf)</td><td>YES — Instant approval via FAA LAANC app up to grid ceiling</td><td>Check the FAA B4UFLY / AutoPylot / Aloft grid ceiling (e.g., 100 ft–400 ft)</td></tr>
+<tr><td>Class D (Towered Regional Airfields)</td><td>Hayward Executive (HWD), Palo Alto (PAO), Concord (CCR)</td><td>Surface to ~2,500 ft MSL cylinder around control tower</td><td>YES — LAANC required when the control tower is active</td><td>Watch for low-flying Cessna training aircraft on approach</td></tr>
+<tr><td>Class E (Controlled Transition Airspace)</td><td>Starts at 700 ft or 1,200 ft AGL in most areas (or Surface E)</td><td>Links Class G surface to high-altitude airways</td><td>NO if starting at 700/1200 ft AGL; YES if 'Surface Class E'</td><td>Since drones stay ≤400 ft AGL, normal Class E above 700 ft is clear</td></tr>
+<tr><td>Class G (Uncontrolled Airspace)</td><td>Most neighborhood parks, schoolyards & indoor gyms</td><td>Surface up to base of overlying Class E (typically 700/1200 ft AGL)</td><td>NO ATC authorization required (must still obey ≤400 ft AGL & TRUST)</td><td>Your primary outdoor training zone! Always yield to manned aircraft</td></tr>
+</tbody></table></div>
+                <div class="callout-box">
+                  <h4>💡 HOW TO DECODE AN AVIATION WEATHER REPORT (METAR) LIKE A PART 107 PILOT</h4>
+                  <p>Sample METAR: `KSFO 051856Z 28012G18KT 10SM FEW020 18/11 A3002`<br/>• `KSFO` = San Francisco International Airport station.<br/>• `051856Z` = 5th day of the month at 18:56 Zulu (UTC) time.<br/>• `28012G18KT` = Wind blowing from 280° (West) at 12 knots, gusting to 18 knots.<br/>• `10SM` = 10 Statute Miles visibility (exceeds the 3 SM Part 107 minimum!).<br/>• `FEW020` = Few clouds at 2,000 feet AGL (add two zeros to `020`).<br/>• `18/11` = Temperature 18°C, Dewpoint 11°C. `A3002` = Altimeter setting 30.02 inHg.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-9">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 09 • TARGET AGES 12–16</span>
+                <h2>The Osito Teen Career, Apprenticeship & Entrepreneurship Playbook</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">You don't have to wait until college to turn aerospace engineering and drone piloting into a standout resume or a paid summer job. Here is how 12-to-16-year-old cadets grow inside the Osito Drone Services ecosystem.</p>
+                <div class='sec-block'><h3>9.1 Three Ways Teens Build Real Experience with Osito Drone Services</h3><p>1. Middle & High School STEM Captain (Ages 12–14): Launch or co-lead an Osito Drone & Robotics Club at your school! Use our Classroom 10-Drone Turnkey STEM Box (`CUB-75` + `SNAP-CODE` ToF Laser Hats) to compete in aerial obstacle courses, science fairs, and Python autonomy challenges.</p><p>2. Osito Station 4 Pit Crew & 3D Print Lab Apprentice (Ages 14–15): Join CTO Jesus Aceves and our technical staff during weekend community pop-ups, school demos, and summer camps. You'll manage ViFly Whoopstor V3 battery rotations, perform tool-free JST motor swaps, inspect PETG-CF and PAHT-CF 3D prints, and serve as a certified CRM Visual Observer.</p><p>3. Paid Junior Flight Coach & Commercial Part 107 Co-Pilot (Age 16+): Once you hold your FAA TRUST + Part 107 Remote Pilot Certificate at age 16, you qualify for paid summer camp instruction and B2B commercial field apprenticeships—assisting COO Alan Musselman and CEO Miguel Flores on real roof inspections, thermal scans, and real estate FPV shoots.</p></div><div class='sec-block'><h3>9.2 Building Your Teen Aerospace Portfolio (For CTE, Internships & Universities)</h3><p>High school Career Technical Education (CTE) programs, summer fellowships, and engineering universities love applicants who can prove hands-on technical mastery. Start keeping a folder containing:</p><p>• Your Official FAA TRUST Certificate (and your Part 107 Knowledge Test score report at 14–16).</p><p>• Your Signed Osito Student Flight Logbook showing logged Simulator, Line-of-Sight, FPV, and Pit Crew hours.</p><p>• Photos or STL files of a custom drone canopy, bumper, or sensor mount you sliced in Bambu Studio.</p><p>• Your annotated Python autonomy script or Betaflight PID tuning log.</p></div>
+                
+                <div class="callout-box">
+                  <h4>💡 OSITO TEEN ENTREPRENEURSHIP SPOTLIGHT: HIGH-VALUE SKILLS</h4>
+                  <p>A single commercial roof inspection or thermal solar scan saves a property manager $1,500 to $5,000 in scaffolding and labor while preventing roof falls. By combining safe piloting, thermal physics, and clear client reporting, you are learning one of the highest-ROI technical trades of the 2020s and 2030s.</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="chapter-card" id="chapter-10">
+              <div class="chapter-banner">
+                <span class="ch-badge">CHAPTER 10 • TARGET AGES 12–16</span>
+                <h2>Engineering Challenges, Pre-Flight Checklists, Flight Log & Certification Exam</h2>
+              </div>
+              <div class="chapter-body">
+                <p class="lead-para">Put your aerospace knowledge to the test! Complete the three worked engineering challenges, practice the official Osito P.A.V.E. Pre-Flight Checklist before every takeoff, log your flights, and score at least 12/15 (80%) on the Teen Certification Exam to earn your Osito Teen Aerospace Cadet Wings.</p>
+                <div class='sec-block'><h3>10.1 Three Worked Teen Aerospace Math & Engineering Challenges</h3><p>CHALLENGE A — Thrust-to-Weight & Payload Budget (`CUB-75 MK-II` + `SNAP-CODE` Hat):</p><p>• Problem: An Osito CUB-75 MK-II weighs 29.0g dry and 39.5g All-Up Weight (AUW) with its standard 10.5g 1S LiHV battery. You snap on the 6.5g SNAP-CODE 8×8 ToF Laser Hat. Each of the four 0802 22,000KV motors generates 38.0g of maximum thrust. What is the new All-Up Weight (AUW), Total Thrust, Thrust-to-Weight Ratio (T/W), and approximate Hover Throttle %?</p><p>• Step-by-Step Solution:</p><p>  1. New All-Up Weight (AUW) = 39.5g (standard AUW) + 6.5g (SNAP-CODE ToF hat) = 46.0 grams.</p><p>  2. Total Max Thrust = 4 motors × 38.0g = 152.0 grams.</p><p>  3. Thrust-to-Weight Ratio (T/W) = 152.0g ÷ 46.0g = 3.30 : 1 (Well above the 2.0:1 safe agility minimum!).</p><p>  4. Approximate Hover Thrust % = 1 ÷ 3.30 ≈ 30.3% thrust.</p><p></p><p>CHALLENGE B — LiHV Battery Watt-Hours & Flight Endurance:</p><p>• Problem: Your CUB-75 hovers at an average current draw of 3.6 Amps using a 1S 450mAh (3.8V nominal) LiHV pack. To protect battery health, you use 80% of the pack's capacity before landing at 3.50V. How many Watt-Hours (Wh) does the battery store, and how many minutes of safe flight time do you get?</p><p>• Step-by-Step Solution:</p><p>  1. Capacity in Amp-Hours = 450 mAh ÷ 1000 = 0.45 Ah.</p><p>  2. Total Stored Energy = 3.8V × 0.45 Ah = 1.71 Wh.</p><p>  3. Usable Capacity (80% Rule) = 0.45 Ah × 0.80 = 0.36 Ah.</p><p>  4. Safe Flight Time = (0.36 Ah ÷ 3.6 Amps) × 60 min/hr = 0.10 hr × 60 = 6.0 minutes!</p><p></p><p>CHALLENGE C — Thermal Roof Inspection Timing & Delta-T (ΔT):</p><p>• Problem: During a post-sunset commercial warehouse inspection, the dry roof membrane measures 64°F (17.8°C), while a 12×12 ft section near an HVAC curb reads 79°F (26.1°C) on the THERMO-95 radiometric camera. Calculate ΔT and explain the physical cause.</p><p>• Step-by-Step Solution:</p><p>  1. ΔT = 79°F − 64°F = +15.0°F (+8.3°C).</p><p>  2. Physical Cause: Water has leaked under the membrane around the HVAC curb. Because water has a much higher specific heat capacity than dry rigid foam insulation, it retains daytime solar heat after sunset and radiates a +15°F warm thermal signature.</p></div><div class='sec-block'><h3>10.2 The Official Osito Pre-Flight P.A.V.E. Checklist</h3><p>Before every flight—whether inside our 10×10 netted cage or out on a commercial roof—run the FAA P.A.V.E. check:</p><p>• [ P ] PILOT (I.M.S.A.F.E.): Am I focused, rested, wearing my lanyard, with my Visual Observer (Spotter) in position?</p><p>• [ A ] AIRCRAFT: Are all 4 ducted prop guards intact? Are CW/CCW props tight and free of hair/grass? Is the 1S LiHV battery charged (4.30V–4.35V), un-puffed, and strapped securely through the frame slot?</p><p>• [ V ] ENVIRONMENT & AIRSPACE: Is the flying zone clear of bystanders and pets? If outdoors, have we verified Class G / LAANC airspace, wind < 15 knots, and ≥ 3 SM visibility?</p><p>• [ E ] EXTERNAL PRESSURES & INTERLOCKS: Is the Throttle stick at 0% (<1050 µs) and Arm switch DISARMED before plugging in the BT2.0 battery? Have we announced 'Clear Prop — Arming!' out loud?</p></div>
+                <div class='sec-block'><h3>10.3 OFFICIAL OSITO TEEN PILOT FLIGHT & PIT CREW LOGBOOK</h3><div class='table-wrap'><table><thead><tr><th>Date</th><th>Platform (MiniCub65 / CUB-75 / THERMO-95)</th><th>Station / Mission Mode</th><th>Battery Start/End V</th><th>Duration (Min)</th><th>Coach / Spotter Initials</th></tr></thead><tbody><tr><td>____/____/2026</td><td>Osito MiniCub65 BNF (27.6g AUW)</td><td>Station 1: Sim + Station 2: Hover Box</td><td>4.35V -> 3.80V</td><td>15 min</td><td>________</td></tr>
+<tr><td>____/____/2026</td><td>Osito CUB-75 MK-II (39.5g AUW)</td><td>Station 3: FPV LED Course + CRM Spotter</td><td>4.35V -> 3.78V</td><td>15 min</td><td>________</td></tr>
+<tr><td>____/____/2026</td><td>CUB-75 + SNAP-CODE Hat (46.0g AUW)</td><td>Python 8x8 Laser Obstacle Avoidance</td><td>4.35V -> 3.82V</td><td>20 min</td><td>________</td></tr>
+<tr><td>____/____/2026</td><td>SHARD-75 / KODIAK-75 (45.5g AUW)</td><td>Optical-Flow Hold & Bumper Momentum Lab</td><td>4.35V -> 3.80V</td><td>15 min</td><td>________</td></tr>
+<tr><td>____/____/2026</td><td>THERMO-95 Inspector (192.5g AUW)</td><td>Post-Sunset Delta-T Roof/HVAC Simulation</td><td>4.35V -> 3.80V</td><td>15 min</td><td>________</td></tr>
+<tr><td>____/____/2026</td><td>Station 4 Pit Crew Bench</td><td>Whoopstor V3 3.80V Storage & JST Check</td><td>Storage 3.80V</td><td>15 min</td><td>________</td></tr>
+</tbody></table></div></div>
+                <div class="callout-box">
+                  <h4>💡 READY FOR YOUR OSITO TEEN CERTIFICATION EXAM?</h4>
+                  <p>Complete your Flight Logbook in Section 10.3 and take the 15-Question Osito Teen Aerospace & Part 107 Prep Quiz in Section 10.4! Score 12 out of 15 (80%) or higher to have your Osito Flight Coach sign your Teen Cadet Certificate.</p>
+                </div>
+              </div>
+            </section>
+            
+
+    <!-- ================================================================= -->
+    <!-- KINETIC AEROSPACE CHALLENGES: FPV, eVTOL & URBAN FLYING CARS      -->
+    <!-- ================================================================= -->
+
+    <section class="interactive-lab" id="fpv-sprint-challenge">
+      <h2>🏎️ CHALLENGE 1: High-Speed FPV Drone Gate Sprint &amp; Physics Challenge</h2>
+      <p><strong>Callsign / Platform:</strong> <code>Osito SHARD-75 / MiniCub65 BNF</code> (T/W Ratio 4.2:1 | 4S LiHV Power)</p>
+      <p>Navigate a high-speed indoor neon FPV gate sprint featuring a 90° hairpin turn into an elevated power-loop gate. Balance Acro roll rates, centripetal G-forces, apex clipping margins, and battery voltage sag under full throttle punch!</p>
+      
+      <div class="canvas-responsive-wrap" style="width:100%; max-width:100%; overflow:hidden; position:relative;">
+        <canvas id="fpvTrackCanvas" width="800" height="450" style="width:100%; max-width:100%; height:auto; display:block; border-radius:0px;"></canvas>
+      </div>
+
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label>Flight Control Mode</label>
+          <div style="display:flex; gap:0.8rem; margin-top:0.4rem;">
+            <label style="font-weight:normal; cursor:pointer; display:flex; align-items:center; gap:0.35rem; color:var(--deep-indigo);">
+              <input type="radio" name="fpvMode" id="fpvModeAngle" value="angle" checked onchange="OsitoTeenLab.fpvChallenge.setMode('angle')" />
+              <span>Angle (50° limit)</span>
+            </label>
+            <label style="font-weight:normal; cursor:pointer; display:flex; align-items:center; gap:0.35rem; color:var(--deep-indigo);">
+              <input type="radio" name="fpvMode" id="fpvModeAcro" value="acro" onchange="OsitoTeenLab.fpvChallenge.setMode('acro')" />
+              <span>Acro (Manual Rate)</span>
+            </label>
+          </div>
+        </div>
+        <div class="calc-box">
+          <label for="fpvSpeedSlider">Entry Velocity: <span id="fpvSpeedVal">22</span> m/s (<span id="fpvSpeedKtVal">42.8</span> kt)</label>
+          <input type="range" id="fpvSpeedSlider" min="10" max="35" value="22" step="1" oninput="OsitoTeenLab.fpvChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="fpvBankSlider">Apex Roll Bank Angle: <span id="fpvBankVal">65</span>°</label>
+          <input type="range" id="fpvBankSlider" min="20" max="85" value="65" step="1" oninput="OsitoTeenLab.fpvChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="fpvPunchSelect">Throttle Punch Timing</label>
+          <select id="fpvPunchSelect" onchange="OsitoTeenLab.fpvChallenge.updateControls()">
+            <option value="early">Early (Before Apex — Drift Wide)</option>
+            <option value="apex" selected>Perfect Apex (Exit Straightaway Boost)</option>
+            <option value="late">Late (After Apex — Pancake/Clip)</option>
+          </select>
+        </div>
+        <div class="calc-box">
+          <label for="fpvCamTiltSlider">FPV Camera Uptilt: <span id="fpvCamTiltVal">35</span>°</label>
+          <input type="range" id="fpvCamTiltSlider" min="15" max="50" value="35" step="1" oninput="OsitoTeenLab.fpvChallenge.updateControls()" />
+        </div>
+      </div>
+
+      <div class="btn-group" style="margin-top:1.1rem;">
+        <button type="button" class="btn-primary" id="btnFpvLaunch" onclick="OsitoTeenLab.fpvChallenge.launchSprint()">🚀 LAUNCH FPV SPRINT</button>
+        <button type="button" class="btn-primary" id="btnFpvReset" style="background:#303885;" onclick="OsitoTeenLab.fpvChallenge.reset()">↺ RESET LINE</button>
+      </div>
+
+      <div class="kpi-strip" style="margin-top:1.25rem;">
+        <div class="kpi-card">
+          <div>Split Lap Time</div>
+          <div class="val" id="fpvKpiTime">0.00 s</div>
+        </div>
+        <div class="kpi-card">
+          <div>Peak G-Load</div>
+          <div class="val" id="fpvKpiG">1.00 G</div>
+        </div>
+        <div class="kpi-card">
+          <div>Apex Gate Clearance</div>
+          <div class="val" id="fpvKpiClearance">0 cm</div>
+        </div>
+        <div class="kpi-card">
+          <div>Battery Sag Voltage</div>
+          <div class="val" id="fpvKpiVolt">16.80 V</div>
+        </div>
+        <div class="kpi-card">
+          <div>Motor Current</div>
+          <div class="val" id="fpvKpiAmps">0.0 A</div>
+        </div>
+      </div>
+
+      <div class="challenge-badge-box" id="fpvBadgeBox">
+        <div class="badge-title" id="fpvScoreBadge">🏁 PILOT READY ON START LINE</div>
+        <div class="badge-desc" id="fpvFeedback">Select Acro or Angle mode, calibrate your entry velocity and apex bank angle, then launch the sprint down the neon LED track!</div>
+      </div>
+    </section>
+
+    <section class="interactive-lab" id="evtol-transition-challenge">
+      <h2>🏙️ CHALLENGE 2: City eVTOL Transition &amp; Vertiport Approach Challenge</h2>
+      <p><strong>Callsign / Platform:</strong> <code>Osito Aero-Taxi eVTOL-6</code> (Tilt-Rotor Commuter | AUW 1,800 kg | Wing Area 14.5 m²)</p>
+      <p>Pilot an electric passenger air taxi transitioning from 120-knot fixed-wing cruise flight at 1,200 ft down through the urban boundary layer to touch down on the rooftop vertiport at Salesforce Transit Center in downtown San Francisco. Avoid wing stall, Vortex Ring State (VRS), and crosswind pad excursions!</p>
+      
+      <div class="canvas-responsive-wrap" style="width:100%; max-width:100%; overflow:hidden; position:relative;">
+        <canvas id="evtolProfileCanvas" width="800" height="450" style="width:100%; max-width:100%; height:auto; display:block; border-radius:0px;"></canvas>
+      </div>
+
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label for="evtolSpeedSlider">Transition Conversion Airspeed: <span id="evtolSpeedVal">50</span> kt</label>
+          <input type="range" id="evtolSpeedSlider" min="35" max="75" value="50" step="1" oninput="OsitoTeenLab.evtolChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="evtolTiltSlider">Rotor Tilt Rate: <span id="evtolTiltVal">8</span>°/s</label>
+          <input type="range" id="evtolTiltSlider" min="2" max="15" value="8" step="1" oninput="OsitoTeenLab.evtolChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="evtolGlideSlider">Approach Glidepath Angle: <span id="evtolGlideVal">5.5</span>°</label>
+          <input type="range" id="evtolGlideSlider" min="3.0" max="8.0" value="5.5" step="0.1" oninput="OsitoTeenLab.evtolChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="evtolCrabSlider">Crosswind Crab Heading (West): <span id="evtolCrabVal">16</span>°</label>
+          <input type="range" id="evtolCrabSlider" min="0" max="25" value="16" step="1" oninput="OsitoTeenLab.evtolChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="evtolHoverSlider">Vertiport Flare &amp; Hover Hold: <span id="evtolHoverVal">12</span> s</label>
+          <input type="range" id="evtolHoverSlider" min="5" max="45" value="12" step="1" oninput="OsitoTeenLab.evtolChallenge.updateControls()" />
+        </div>
+      </div>
+
+      <div class="btn-group" style="margin-top:1.1rem;">
+        <button type="button" class="btn-primary" id="btnEvtolApproach" onclick="OsitoTeenLab.evtolChallenge.commenceApproach()">🏙️ COMMENCE VERTIPORT APPROACH</button>
+        <button type="button" class="btn-primary" id="btnEvtolWaveoff" style="background:#991B1B; border-color:#EF4444;" onclick="OsitoTeenLab.evtolChallenge.waveOff()">⚠️ WAVE-OFF / GO-AROUND</button>
+        <button type="button" class="btn-primary" id="btnEvtolReset" style="background:#303885;" onclick="OsitoTeenLab.evtolChallenge.reset()">↺ RESET APPROACH</button>
+      </div>
+
+      <div class="kpi-strip" style="margin-top:1.25rem;">
+        <div class="kpi-card">
+          <div>Conversion Airspeed</div>
+          <div class="val" id="evtolKpiSpeed">50.0 kt</div>
+        </div>
+        <div class="kpi-card">
+          <div>Rotor vs Wing Lift</div>
+          <div class="val" id="evtolKpiLift">0% / 100%</div>
+        </div>
+        <div class="kpi-card">
+          <div>Descent Rate</div>
+          <div class="val" id="evtolKpiDescent">0 FPM</div>
+        </div>
+        <div class="kpi-card">
+          <div>Pad Centerline Deviation</div>
+          <div class="val" id="evtolKpiDev">0.0 m</div>
+        </div>
+        <div class="kpi-card">
+          <div>Battery Reserve SoC</div>
+          <div class="val" id="evtolKpiBat">100.0%</div>
+        </div>
+      </div>
+
+      <div class="challenge-badge-box" id="evtolBadgeBox">
+        <div class="badge-title" id="evtolScoreBadge">🏙️ UAM AERO-TAXI IN INBOUND CRUISE</div>
+        <div class="badge-desc" id="evtolFeedback">Holding at 1,200 ft AGL over SF Bay. Set transition airspeed (48-56 kt safe corridor) and crab angle against 14-kt West crosswind, then commence vertiport approach.</div>
+      </div>
+    </section>
+
+    <section class="interactive-lab" id="flying-car-corridor-challenge">
+      <h2>🚗 CHALLENGE 3: Flying Car Urban Airspace Corridor &amp; Collision Avoidance Challenge</h2>
+      <p><strong>Callsign / Platform:</strong> <code>Osito Skyway-One Dual-Mode Hybrid</code> (Quad-tilt road/air commuter vehicle)</p>
+      <p>Navigate an autonomous commuter flight through a dense 3D urban airspace corridor (UTM "Skyway") along the San Francisco waterfront. Maintain ASTM F3442 DAA well-clear separation against emergency air ambulances, route around active stadium TFR geofences, and manage ballistic parachute failsafes.</p>
+      
+      <div class="canvas-responsive-wrap" style="width:100%; max-width:100%; overflow:hidden; position:relative;">
+        <canvas id="utmCorridorCanvas" width="800" height="450" style="width:100%; max-width:100%; height:auto; display:block; border-radius:0px;"></canvas>
+      </div>
+
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label for="corridorTierSelect">Corridor Cruising Altitude</label>
+          <select id="corridorTierSelect" onchange="OsitoTeenLab.flyingCarChallenge.selectTier(parseInt(this.value))">
+            <option value="600" selected>Tier 1: 600 ft AGL (Low-Speed Shuttles — Max 50 kt)</option>
+            <option value="900">Tier 2: 900 ft AGL (North/Eastbound Transit — Max 80 kt)</option>
+            <option value="1200">Tier 3: 1,200 ft AGL (High-Speed Express — Max 110 kt)</option>
+          </select>
+        </div>
+        <div class="calc-box">
+          <label for="corridorSpeedSlider">Skyway Airspeed: <span id="corridorSpeedVal">80</span> kt</label>
+          <input type="range" id="corridorSpeedSlider" min="50" max="110" value="80" step="5" oninput="OsitoTeenLab.flyingCarChallenge.updateControls()" />
+        </div>
+        <div class="calc-box">
+          <label for="corridorDaaSelect">DAA Conflict Resolution Maneuver</label>
+          <select id="corridorDaaSelect" onchange="OsitoTeenLab.flyingCarChallenge.updateControls()">
+            <option value="starboard" selected>Starboard Vector (+30° Right Dogleg)</option>
+            <option value="climb">Vertical Step-Climb (+250 ft)</option>
+            <option value="descend">Vertical Step-Descend (-250 ft)</option>
+            <option value="slow">Speed Reduction &amp; Trailing Hold (50 kt)</option>
+          </select>
+        </div>
+        <div class="calc-box">
+          <label for="tfrAvoidSelect">Oracle Park Stadium TFR Avoidance</label>
+          <select id="tfrAvoidSelect" onchange="OsitoTeenLab.flyingCarChallenge.updateControls()">
+            <option value="dogleg" selected>UTM Compliant Dogleg Around TFR Boundary</option>
+            <option value="direct">Direct Track (Risk Airspace Breach)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-group" style="margin-top:1.1rem;">
+        <button type="button" class="btn-primary" id="btnUtmExecute" onclick="OsitoTeenLab.flyingCarChallenge.executeFlightPlan()">🧭 EXECUTE SKYWAY FLIGHT PLAN</button>
+        <button type="button" class="btn-primary" id="btnUtmChute" style="background:#303885;" onclick="OsitoTeenLab.flyingCarChallenge.deployChute()">🪂 EMERGENCY BALLISTIC PARACHUTE / SAFE-HAVEN DIVERT</button>
+        <button type="button" class="btn-primary" id="btnUtmReset" style="background:#232A68;" onclick="OsitoTeenLab.flyingCarChallenge.reset()">↺ RESET SCENARIO</button>
+      </div>
+
+      <div class="kpi-strip" style="margin-top:1.25rem;">
+        <div class="kpi-card">
+          <div>Corridor Waypoint</div>
+          <div class="val" id="carKpiWp">WP 1 / 4</div>
+        </div>
+        <div class="kpi-card">
+          <div>Closest Traffic Separation</div>
+          <div class="val" id="carKpiSep">1,250 ft</div>
+        </div>
+        <div class="kpi-card">
+          <div>TFR Geofence Clearance</div>
+          <div class="val" id="carKpiTfr">1,800 ft</div>
+        </div>
+        <div class="kpi-card">
+          <div>Corridor Transit Time</div>
+          <div class="val" id="carKpiTime">0.0 min</div>
+        </div>
+        <div class="kpi-card">
+          <div>Passenger G-Comfort</div>
+          <div class="val" id="carKpiG">1.05 G</div>
+        </div>
+      </div>
+
+      <div class="challenge-badge-box" id="carBadgeBox">
+        <div class="badge-title" id="carScoreBadge">🧭 SKYWAY CORRIDOR FLIGHT PLAN STAGED</div>
+        <div class="badge-desc" id="carFeedback">Flight plan from Embarcadero to SFO Biotech Vertipad verified. Check altitude tier and DAA conflict resolution before executing corridor transit.</div>
+      </div>
+    </section>
+
+    <section class="interactive-lab" id="teen-exam">
+      <h2>🎓 10.4 Interactive 15-Question Osito Teen Aerospace, TRUST &amp; Part 107 Self-Grading Exam</h2>
+      <p>Select your answers below <span class="screen-only">and click <strong>Grade My Teen Pilot Exam</strong> to grade yourself instantly with detailed explanations</span> (Passing Score: 12 / 15 = 80%):</p>
+      <div class="kpi-strip screen-only" id="examSelfGradeStrip" style="margin-bottom:1.15rem;">
+        <div class="kpi-card">
+          <div>Questions Answered</div>
+          <div class="val" id="examKpiAnswered">0 / 15</div>
+        </div>
+        <div class="kpi-card">
+          <div>Exam Score</div>
+          <div class="val" id="examKpiScore">-- / 15</div>
+        </div>
+        <div class="kpi-card">
+          <div>Percentage</div>
+          <div class="val" id="examKpiPct">--%</div>
+        </div>
+        <div class="kpi-card">
+          <div>Self-Grade Rank</div>
+          <div class="val" id="examKpiGrade" style="font-size:1.15rem;">IN PROGRESS</div>
+        </div>
+      </div>
+      
+        <div class="quiz-card" data-answer="B" data-explain="Spinning two diagonal props CW and two CCW balances angular momentum (net torque = 0) during hover and climb.">
+          <p class="quiz-q">1. Why do two diagonal motors on a quadcopter spin Clockwise (CW) while the other two spin Counter-Clockwise (CCW)?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q0" value="A" onchange="updateExamProgress()" />
+              <span>A) To cool down the flight controller battery</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q0" value="B" onchange="updateExamProgress()" />
+              <span>B) To cancel out reactive torque (Newton's Third Law / Conservation of Angular Momentum) so the frame doesn't spin uncontrollably</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q0" value="C" onchange="updateExamProgress()" />
+              <span>C) Because brushless motors can only spin in one direction</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q0" value="D" onchange="updateExamProgress()" />
+              <span>D) To make the drone louder during takeoff</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-0"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="C" data-explain="116g max thrust ÷ 27.6g AUW = 4.20 : 1 Thrust-to-Weight ratio.">
+          <p class="quiz-q">2. An Osito MiniCub65 BNF weighs 27.6g All-Up Weight (AUW) and produces 116g of total maximum thrust. What is its Thrust-to-Weight Ratio?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q1" value="A" onchange="updateExamProgress()" />
+              <span>A) 1.0 : 1</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q1" value="B" onchange="updateExamProgress()" />
+              <span>B) 2.1 : 1</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q1" value="C" onchange="updateExamProgress()" />
+              <span>C) 4.20 : 1</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q1" value="D" onchange="updateExamProgress()" />
+              <span>D) 10.5 : 1</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-1"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="C" data-explain="Bambu PAHT-CF provides high heat deflection temperature (140°F+ attic HDT) and superior carbon-nylon impact strength.">
+          <p class="quiz-q">3. Which 3D printing filament from Osito's 4-Tier Bambu P2S standard is used for the THERMO-95 drone so it won't warp inside 140°F attics?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q2" value="A" onchange="updateExamProgress()" />
+              <span>A) Standard classroom PLA</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q2" value="B" onchange="updateExamProgress()" />
+              <span>B) Soft TPU 95A HF</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q2" value="C" onchange="updateExamProgress()" />
+              <span>C) Tier 2 Bambu PAHT-CF / PA12-CF (High-Temp Carbon Fiber Nylon, dried <12% RH)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q2" value="D" onchange="updateExamProgress()" />
+              <span>D) Wax support filament</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-2"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="A" data-explain="Soft TPU 95A HF feeds from P2S #2's external dryer port; only semi-rigid TPU for AMS (68D) goes inside P2S #1 AMS Slot 4.">
+          <p class="quiz-q">4. Why must soft Bambu TPU 95A HF NEVER be loaded inside the enclosed Bambu AMS unit?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q3" value="A" onchange="updateExamProgress()" />
+              <span>A) Soft 95A elastomer buckles and jams inside the motorized AMS PTFE feed rollers; it must feed from P2S #2's external dryer port</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q3" value="B" onchange="updateExamProgress()" />
+              <span>B) It changes color in the dark</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q3" value="C" onchange="updateExamProgress()" />
+              <span>C) It is magnetic</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q3" value="D" onchange="updateExamProgress()" />
+              <span>D) It melts at room temperature</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-3"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="C" data-explain="The Derivative (D) term opposes rapid rates of change, damping oscillations and preventing overshoot.">
+          <p class="quiz-q">5. In the flight controller's 8,000 Hz PID control loop, which term acts like a 'shock absorber' to brake fast rotations and prevent overshoot?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q4" value="A" onchange="updateExamProgress()" />
+              <span>A) The P-Term (Proportional)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q4" value="B" onchange="updateExamProgress()" />
+              <span>B) The I-Term (Integral)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q4" value="C" onchange="updateExamProgress()" />
+              <span>C) The D-Term (Derivative — rate of change of error)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q4" value="D" onchange="updateExamProgress()" />
+              <span>D) The VTX-Term</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-4"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="Unsigned 16-bit modular subtraction computes exact elapsed time even across the 65,535 -> 0 wrap-around boundary.">
+          <p class="quiz-q">6. Why do embedded avionics scripts use `(now_ms - last_ms) & 0xFFFF` when checking a 16-bit millisecond timer?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q5" value="A" onchange="updateExamProgress()" />
+              <span>A) To make the LEDs blink purple</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q5" value="B" onchange="updateExamProgress()" />
+              <span>B) Because a 16-bit unsigned integer wraps from 65,535 ms back to 0 at ~65.5 seconds, and modular subtraction prevents rollover lockups</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q5" value="C" onchange="updateExamProgress()" />
+              <span>C) To convert milliseconds into miles per hour</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q5" value="D" onchange="updateExamProgress()" />
+              <span>D) To disable the gyroscope</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-5"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="C" data-explain="3.80V per cell is the stable chemical storage voltage; storing packs full at 4.35V causes gas puffing and capacity loss.">
+          <p class="quiz-q">7. What is the ideal Storage Voltage per cell for Osito's 1S LiHV batteries on the ViFly Whoopstor V3 charger at the end of a flight day?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q6" value="A" onchange="updateExamProgress()" />
+              <span>A) 0.00 V</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q6" value="B" onchange="updateExamProgress()" />
+              <span>B) 2.50 V</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q6" value="C" onchange="updateExamProgress()" />
+              <span>C) 3.80 V per cell</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q6" value="D" onchange="updateExamProgress()" />
+              <span>D) 4.35 V per cell for weeks</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-6"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="The VL53L5CX is an 8×8 multizone Time-of-Flight laser ranging matrix measuring photon round-trip time across 64 zones.">
+          <p class="quiz-q">8. How does the CUB-75's SNAP-CODE VL53L5CX Time-of-Flight (ToF) sensor detect obstacles indoors?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q7" value="A" onchange="updateExamProgress()" />
+              <span>A) By bouncing loud sound waves off the floor</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q7" value="B" onchange="updateExamProgress()" />
+              <span>B) By timing invisible 940nm laser photon pulses across an 8×8 grid (64 independent distance zones)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q7" value="C" onchange="updateExamProgress()" />
+              <span>C) By connecting to GPS satellites through the roof</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q7" value="D" onchange="updateExamProgress()" />
+              <span>D) By measuring air barometric pressure</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-7"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="Trapped moisture acts as a thermal sink, retaining daytime solar heat longer than dry insulation after sunset.">
+          <p class="quiz-q">9. Why does Osito Drone Services perform commercial flat-roof thermal moisture inspections 30–90 minutes AFTER sunset?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q8" value="A" onchange="updateExamProgress()" />
+              <span>A) Because drones fly faster in the dark</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q8" value="B" onchange="updateExamProgress()" />
+              <span>B) Water trapped under a leaking roof membrane has high specific heat capacity and stays warm after the dry roof cools down, creating a clear +ΔT thermal signature</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q8" value="C" onchange="updateExamProgress()" />
+              <span>C) Because infrared cameras cannot turn on during the day</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q8" value="D" onchange="updateExamProgress()" />
+              <span>D) To avoid wind</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-8"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="Under 49 U.S.C. § 44809, all recreational flyers must pass the free online FAA TRUST test.">
+          <p class="quiz-q">10. Which FAA test is 100% free, online, has NO minimum age limit, and is legally required for all recreational youth drone pilots?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q9" value="A" onchange="updateExamProgress()" />
+              <span>A) The Airline Transport Pilot (ATP) exam</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q9" value="B" onchange="updateExamProgress()" />
+              <span>B) The FAA TRUST (The Recreational UAS Safety Test)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q9" value="C" onchange="updateExamProgress()" />
+              <span>C) The California DMV driving test</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q9" value="D" onchange="updateExamProgress()" />
+              <span>D) The NASA astronaut medical exam</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-9"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="A" data-explain="Drones weighing less than 250g (0.55 lbs) flown purely for recreation do not require registration or Remote ID.">
+          <p class="quiz-q">11. What is the maximum legal weight (including battery and prop guards) for a recreational drone to be exempt from FAA Registration and Remote ID?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q10" value="A" onchange="updateExamProgress()" />
+              <span>A) Under 250 grams (< 0.55 lbs)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q10" value="B" onchange="updateExamProgress()" />
+              <span>B) Under 55 pounds</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q10" value="C" onchange="updateExamProgress()" />
+              <span>C) Under 10 kilograms</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q10" value="D" onchange="updateExamProgress()" />
+              <span>D) Under 5 grams</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-10"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="The <250g registration exemption applies ONLY to recreational flights; Part 107 commercial drones must all be registered.">
+          <p class="quiz-q">12. If a 39.5g Osito CUB-75 is flown for a PAID commercial roof or real estate job under FAA Part 107, does it require FAA Registration ($5)?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q11" value="A" onchange="updateExamProgress()" />
+              <span>A) No, because it weighs under 250g</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q11" value="B" onchange="updateExamProgress()" />
+              <span>B) Yes! Every drone flown commercially under Part 107 must be registered, regardless of weight</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q11" value="C" onchange="updateExamProgress()" />
+              <span>C) Only on Tuesdays</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q11" value="D" onchange="updateExamProgress()" />
+              <span>D) Only if flown above 1,000 feet</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-11"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="A" data-explain="400 feet AGL is the standard ceiling in Class G airspace (unless within 400 ft of a structure under Part 107).">
+          <p class="quiz-q">13. What is the standard maximum altitude for drone operations in uncontrolled Class G airspace?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q12" value="A" onchange="updateExamProgress()" />
+              <span>A) 400 feet Above Ground Level (AGL)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q12" value="B" onchange="updateExamProgress()" />
+              <span>B) 1,200 feet AGL</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q12" value="C" onchange="updateExamProgress()" />
+              <span>C) 10,000 feet MSL</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q12" value="D" onchange="updateExamProgress()" />
+              <span>D) 50 feet AGL</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-12"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="Teens can sit for the UAG Knowledge Test starting at age 14 and apply for their Part 107 Remote Pilot Certificate at age 16.">
+          <p class="quiz-q">14. At what age can a teen take the FAA Part 107 Aeronautical Knowledge Exam, and at what age can they receive the official Remote Pilot Certificate?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q13" value="A" onchange="updateExamProgress()" />
+              <span>A) Exam at age 18, Certificate at age 21</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q13" value="B" onchange="updateExamProgress()" />
+              <span>B) Exam at age 14, Certificate on their 16th birthday!</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q13" value="C" onchange="updateExamProgress()" />
+              <span>C) Exam at age 10, Certificate at age 12</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q13" value="D" onchange="updateExamProgress()" />
+              <span>D) Exam at age 25</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-13"></div>
+        </div>
+        
+        <div class="quiz-card" data-answer="B" data-explain="10SM means 10 Statute Miles of surface visibility (Part 107 requires at least 3 SM).">
+          <p class="quiz-q">15. In the aviation weather report `KSFO 051856Z 28012KT 10SM FEW020`, what does `10SM` tell the drone pilot?</p>
+          <div class="quiz-opts">
+            <label class="quiz-opt">
+              <input type="radio" name="q14" value="A" onchange="updateExamProgress()" />
+              <span>A) Wind speed is 10 miles per hour</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q14" value="B" onchange="updateExamProgress()" />
+              <span>B) Visibility is 10 Statute Miles (well above the 3 SM minimum required for Part 107 flight)</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q14" value="C" onchange="updateExamProgress()" />
+              <span>C) There are 10 drones in the sky</span>
+            </label>
+            
+            <label class="quiz-opt">
+              <input type="radio" name="q14" value="D" onchange="updateExamProgress()" />
+              <span>D) Temperature is 10°F</span>
+            </label>
+            </div>
+          <div class="quiz-feedback" id="fb-14"></div>
+        </div>
+        
+      <div class="btn-group">
+        <button type="button" class="btn-primary" onclick="gradeQuiz()">Grade My Teen Pilot Exam</button>
+        <button type="button" class="btn-primary btn-secondary-indigo" onclick="resetQuiz()">↺ Reset Exam / Try Again</button>
+        <button type="button" class="btn-primary btn-secondary-indigo" onclick="window.print()">🖨️ Print Book / Save PDF Certificate</button>
+      </div>
+      <div id="quizScoreBanner" style="margin-top:1rem;font-family:'Fjalla One',sans-serif;font-size:1.3rem;color:#232A68;"></div>
+    </section>
+
+    <section class="interactive-lab" id="teen-cert">
+      <h2>🏅 10.5 Official Osito Teen Aerospace Cadet Certificate Generator (Ages 12–16)</h2>
+      <div class="calc-grid" style="margin-bottom:1rem;">
+        <div class="calc-box">
+          <label for="cadetNameInput">Cadet Full Name</label>
+          <input type="text" id="cadetNameInput" placeholder="e.g., Sofia Hernandez" oninput="updateCertName()" />
+        </div>
+        <div class="calc-box">
+          <label for="cadetCallsignInput">Pilot Callsign</label>
+          <input type="text" id="cadetCallsignInput" placeholder="e.g., FALCON-75" oninput="updateCertName()" />
+        </div>
+      </div>
+      <div class="cert-panel">
+        <div style="font-family:'Fjalla One',sans-serif;color:#FCD34D;letter-spacing:0.06em;">★ OFFICIAL GRADUATION CREDENTIAL • OSITO DRONE SERVICES (SAN FRANCISCO, CA) ★</div>
+        <h3 style="font-family:'Fjalla One',sans-serif;font-size:1.9rem;margin:0.5rem 0;letter-spacing:0.04em;">OSITO TEEN AEROSPACE CADET &amp; JUNIOR PILOT WINGS (AGES 12–16)</h3>
+        <p style="font-size:1.05rem;color:#EEF0FA;">This certifies that</p>
+        <div id="certCadetDisplay" style="font-family:'Fjalla One',sans-serif;font-size:1.75rem;color:#FFFFFF;margin:0.4rem 0;border-bottom:2px solid var(--primary);display:inline-block;padding:0 1.5rem 0.25rem;max-width:100%;word-break:break-word;overflow-wrap:break-word;">CADET PILOT [ENTER NAME ABOVE]</div>
+        <p style="max-width:780px;margin:0.8rem auto;font-size:0.96rem;color:#EEF0FA;">
+          has demonstrated mastery of Multirotor Flight Physics (4 Forces &amp; 6-DOF Torque Balance), 4-Tier Bambu Lab P2S Carbon 3D-Printed Airframes,
+          8,000 Hz PID Avionics &amp; 16-Bit Rollover-Safe Watchdogs, 1S LiHV Battery Storage Safety (3.80V), Python 8×8 ToF Laser Autonomy,
+          Commercial Thermal Radiometry (ΔT), and FAA TRUST / Part 107 Airspace Law.
+        </p>
+        <p style="margin-top:1.2rem;font-size:0.9rem;color:#EEF0FA;">
+          <strong>Signed:</strong> Miguel Flores (CEO) • Alan Musselman (COO) • Jesus Aceves (CTO) &nbsp;|&nbsp; <strong>Osito Drone LLC</strong>
+        </p>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <p><strong>OSITO DRONE SERVICES LLC</strong> • San Francisco &amp; Bay Area Youth STEM Academy &amp; Commercial Aerial Services</p>
+    <p>Miguel Flores (CEO, miguel@ositodrone.com) • Alan Musselman (COO, alan@ositodrone.com) • Jesus Aceves (CTO, jesus@ositodrone.com)</p>
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:0.88rem;">
+      <a href="./index.html" style="color:#EEF0FA; text-decoration:none;">Home</a>
+      <a href="./osito-drone-academy.html" style="color:#EEF0FA; text-decoration:none;">Drone, Flight &amp; STEM Academy</a>
+      <a href="./custom-aerial-solutions.html" style="color:#EEF0FA; text-decoration:none;">Aerial Solutions</a>
+      <a href="./flight-sim.html" style="color:#EEF0FA; text-decoration:none;">Flight Sim</a>
+      <a href="./toolbox.html" style="color:#EEF0FA; text-decoration:none;">Toolbox</a>
+      <a href="./interactive-book.html" style="color:#EEF0FA; text-decoration:none;">Interactive Book &amp; Exam</a>
+      <a href="./about.html" style="color:#EEF0FA; text-decoration:none;">About</a>
+      <a href="./privacy-policy.html" style="color:#EEF0FA; text-decoration:none;">Privacy Policy</a>
+    </div>
+  </footer>
+  <script>
+    
+    function applyPreset() {
+      const parts = document.getElementById('presetSelect').value.split(',');
+      document.getElementById('auwInput').value = parts[0];
+      document.getElementById('thrustInput').value = parts[1];
+      document.getElementById('mahInput').value = parts[2];
+      document.getElementById('ampsInput').value = parts[3];
+      recalcPhysics();
+    }
+    function recalcPhysics() {
+      const auw = parseFloat(document.getElementById('auwInput').value) || 1;
+      const thrust = parseFloat(document.getElementById('thrustInput').value) || 1;
+      const mah = parseFloat(document.getElementById('mahInput').value) || 300;
+      const amps = parseFloat(document.getElementById('ampsInput').value) || 3.2;
+      const tw = thrust / auw;
+      const hoverPct = Math.min(100, (100 / tw));
+      const ah = mah / 1000.0;
+      const wh = ah * 3.8;
+      const safeMin = ((ah * 0.80) / amps) * 60.0;
+      document.getElementById('kpiTW').textContent = tw.toFixed(2) + ' : 1';
+      document.getElementById('kpiHover').textContent = hoverPct.toFixed(1) + '%';
+      document.getElementById('kpiWh').textContent = wh.toFixed(2) + ' Wh';
+      document.getElementById('kpiTime').textContent = safeMin.toFixed(1) + ' min';
+      document.getElementById('kpiFAA').textContent = auw < 250 ? 'SUB-250g (' + auw.toFixed(1) + 'g)' : 'REG REQ (≥250g)';
+    }
+    function updateCertName() {
+      const n = document.getElementById('cadetNameInput');
+      const c = document.getElementById('cadetCallsignInput');
+      const out = document.getElementById('certCadetDisplay');
+      if (n && out) {
+        const nameVal = n.value.trim() || 'CADET PILOT [ENTER NAME ABOVE]';
+        const callVal = (c && c.value.trim()) ? ' ("' + c.value.trim().toUpperCase() + '")' : '';
+        out.textContent = nameVal.toUpperCase() + callVal;
+      }
+    }
+    function updateExamProgress() {
+      const cards = document.querySelectorAll('.quiz-card');
+      let answered = 0;
+      cards.forEach(card => {
+        if (card.querySelector('input[type=radio]:checked')) answered++;
+      });
+      const ansEl = document.getElementById('examKpiAnswered');
+      if (ansEl) ansEl.textContent = answered + ' / ' + cards.length;
+    }
+    function resetQuiz() {
+      const cards = document.querySelectorAll('.quiz-card');
+      cards.forEach((card, idx) => {
+        card.querySelectorAll('input[type=radio]').forEach(r => { r.checked = false; });
+        const fb = document.getElementById('fb-' + idx);
+        if (fb) {
+          fb.style.display = 'none';
+          fb.textContent = '';
+        }
+      });
+      const banner = document.getElementById('quizScoreBanner');
+      if (banner) banner.textContent = '';
+      const ansEl = document.getElementById('examKpiAnswered');
+      const scEl = document.getElementById('examKpiScore');
+      const pctEl = document.getElementById('examKpiPct');
+      const grEl = document.getElementById('examKpiGrade');
+      if (ansEl) ansEl.textContent = '0 / ' + cards.length;
+      if (scEl) scEl.textContent = '-- / ' + cards.length;
+      if (pctEl) pctEl.textContent = '--%';
+      if (grEl) {
+        grEl.textContent = 'IN PROGRESS';
+        grEl.style.color = '#FFFFFF';
+      }
+    }
+    function gradeQuiz() {
+      const cards = document.querySelectorAll('.quiz-card');
+      let correct = 0;
+      let answered = 0;
+      cards.forEach((card, idx) => {
+        const ans = card.getAttribute('data-answer');
+        const exp = card.getAttribute('data-explain');
+        const sel = card.querySelector('input[type=radio]:checked');
+        if (sel) answered++;
+        const fb = document.getElementById('fb-' + idx);
+        fb.style.display = 'block';
+        if (sel && sel.value === ans) {
+          correct++;
+          fb.style.background = '#DCFCE7';
+          fb.style.color = '#166534';
+          fb.textContent = '✅ Correct (' + ans + ')! ' + exp;
+        } else {
+          fb.style.background = '#FEE2E2';
+          fb.style.color = '#991B1B';
+          fb.textContent = '❌ Correct Answer: ' + ans + ' — ' + exp;
+        }
+      });
+      const pct = Math.round((correct / cards.length) * 100);
+      const ansEl = document.getElementById('examKpiAnswered');
+      const scEl = document.getElementById('examKpiScore');
+      const pctEl = document.getElementById('examKpiPct');
+      const grEl = document.getElementById('examKpiGrade');
+      if (ansEl) ansEl.textContent = answered + ' / ' + cards.length;
+      if (scEl) scEl.textContent = correct + ' / ' + cards.length;
+      if (pctEl) pctEl.textContent = pct + '%';
+      if (grEl) {
+        if (correct === 15) {
+          grEl.textContent = 'A+ MASTER CADET';
+          grEl.style.color = '#4ADE80';
+        } else if (correct >= 14) {
+          grEl.textContent = 'A SENIOR CADET';
+          grEl.style.color = '#4ADE80';
+        } else if (correct >= 12) {
+          grEl.textContent = 'B PASSED (80%+)';
+          grEl.style.color = '#4ADE80';
+        } else {
+          grEl.textContent = 'REVIEW (<80%)';
+          grEl.style.color = '#FACC15';
+        }
+      }
+      const banner = document.getElementById('quizScoreBanner');
+      if (correct >= 12) {
+        banner.style.color = '#15803D';
+        banner.textContent = '🏆 CONGRATULATIONS CADET! Score: ' + correct + ' / ' + cards.length + ' (' + pct + '%) — PASSED! Scroll down to print your Official Osito Teen Aerospace Cadet Wings Certificate!';
+      } else {
+        banner.style.color = '#B91C1C';
+        banner.textContent = 'Score: ' + correct + ' / ' + cards.length + ' (' + pct + '%) — Review the explanations above and click Grade again to reach 12/15 (80%)!';
+      }
+    }
+    
+    const tofState = Array.from({length: 8}, () => Array(8).fill(1200));
+    function renderTofGrid() {
+      const g = document.getElementById('tofGrid');
+      if (!g) return;
+      g.innerHTML = '';
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const cell = document.createElement('div');
+          const d = tofState[r][c];
+          cell.className = 'tof-cell' + (d < 450 ? ' obstacle' : '');
+          cell.textContent = d + 'mm';
+          cell.onclick = () => {
+            tofState[r][c] = tofState[r][c] === 1200 ? 280 : 1200;
+            renderTofGrid();
+            evaluateTofMatrix();
+          };
+          g.appendChild(cell);
+        }
+      }
+    }
+    function resetTofGrid() {
+      for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) tofState[r][c] = 1200;
+      renderTofGrid();
+      evaluateTofMatrix();
+    }
+    function evaluateTofMatrix() {
+      let leftMin = 9999, rightMin = 9999;
+      for (let r = 2; r < 6; r++) {
+        for (let c = 0; c < 4; c++) if (tofState[r][c] < leftMin) leftMin = tofState[r][c];
+        for (let c = 4; c < 8; c++) if (tofState[r][c] < rightMin) rightMin = tofState[r][c];
+      }
+      const frontMin = Math.min(leftMin, rightMin);
+      document.getElementById('tofMinDist').textContent = frontMin + ' mm';
+      if (frontMin < 450) {
+        const roll = leftMin < rightMin ? '+6.0° (Roll Right)' : '-6.0° (Roll Left)';
+        document.getElementById('tofMode').textContent = 'OBSTACLE_AVOID';
+        document.getElementById('tofPitch').textContent = '-5.0° (Brake)';
+        document.getElementById('tofRoll').textContent = roll;
+      } else {
+        document.getElementById('tofMode').textContent = 'CRUISE_CLEAR';
+        document.getElementById('tofPitch').textContent = '+3.0° (Forward)';
+        document.getElementById('tofRoll').textContent = '0.0° (Level)';
+      }
+    }
+    function recalcRollover() {
+      const last = (parseInt(document.getElementById('lastMsInput').value) || 0) & 0xFFFF;
+      const now = (parseInt(document.getElementById('nowMsInput').value) || 0) & 0xFFFF;
+      const naive = now - last;
+      const safe = (now - last) & 0xFFFF;
+      document.getElementById('naiveDiff').textContent = naive + ' ms' + (naive < 0 ? ' (ROLLOVER BUG!)' : '');
+      document.getElementById('safeDiff').textContent = safe + ' ms (EXACT)';
+      const st = document.getElementById('wdStatus');
+      if (safe > 500) {
+        st.textContent = 'STAGE 2: HARD DISARM (>500ms)';
+        st.style.color = '#F87171';
+      } else if (safe > 100) {
+        st.textContent = 'STAGE 1: AUTO-DESCEND (>100ms)';
+        st.style.color = '#FACC15';
+      } else {
+        st.textContent = 'NOMINAL (≤100ms)';
+        st.style.color = '#4ADE80';
+      }
+    }
+    renderTofGrid();
+    recalcPhysics();
+    recalcRollover();
+    window.OsitoTeenLab = (function() {
+      // Challenge 1: FPV Drone Gate Sprint & Physics Challenge
+      const fpv = {
+        canvas: null,
+        ctx: null,
+        animId: null,
+        progress: 0,
+        state: {
+          mode: 'angle',
+          throttle: 0,
+          bankAngle: 0,
+          speedKt: 0,
+          voltage: 16.8,
+          gForce: 1.0,
+          score: 0,
+          status: 'IDLE' // 'IDLE', 'RUNNING', 'COMPLETE', 'CRASH'
+        },
+        track: [
+          { x: 100, y: 225, label: 'START' },
+          { x: 260, y: 140, label: 'GATE 1 (DIVE)' },
+          { x: 530, y: 120, label: 'GATE 2 (APEX)' },
+          { x: 670, y: 310, label: 'GATE 3 (LOOP)' },
+          { x: 280, y: 360, label: 'FINISH' }
+        ],
+        init: function(canvasId) {
+          this.canvas = document.getElementById(canvasId || 'fpvTrackCanvas');
+          if (this.canvas) {
+            this.ctx = this.canvas.getContext('2d');
+            this.renderStatic();
+          }
+        },
+        updateControls: function() {
+          const spdEl = document.getElementById('fpvSpeedSlider');
+          const bnkEl = document.getElementById('fpvBankSlider');
+          const camEl = document.getElementById('fpvCamTiltSlider');
+          if (spdEl) {
+            const v = parseFloat(spdEl.value);
+            const valSpd = document.getElementById('fpvSpeedVal');
+            const valSpdKt = document.getElementById('fpvSpeedKtVal');
+            if (valSpd) valSpd.textContent = v;
+            if (valSpdKt) valSpdKt.textContent = (v * 1.94384).toFixed(1);
+          }
+          if (bnkEl) {
+            const valBnk = document.getElementById('fpvBankVal');
+            if (valBnk) valBnk.textContent = bnkEl.value;
+          }
+          if (camEl) {
+            const valCam = document.getElementById('fpvCamTiltVal');
+            if (valCam) valCam.textContent = camEl.value;
+          }
+          if (this.state.status === 'IDLE') {
+            this.renderStatic();
+          }
+        },
+        setMode: function(m) {
+          this.state.mode = m === 'acro' ? 'acro' : 'angle';
+          const bnkEl = document.getElementById('fpvBankSlider');
+          if (this.state.mode === 'angle' && bnkEl && parseFloat(bnkEl.value) > 50) {
+            bnkEl.value = '50';
+            const valBnk = document.getElementById('fpvBankVal');
+            if (valBnk) valBnk.textContent = '50';
+          }
+          this.renderStatic();
+        },
+        setThrottle: function(val) {
+          this.state.throttle = Math.max(0, Math.min(100, parseFloat(val) || 0));
+        },
+        punchThrottle: function() {
+          this.setThrottle(100);
+          this.state.voltage = 13.92;
+        },
+        reset: function() {
+          if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+          }
+          this.progress = 0;
+          this.state.throttle = 0;
+          this.state.bankAngle = 0;
+          this.state.speedKt = 0;
+          this.state.voltage = 16.8;
+          this.state.gForce = 1.0;
+          this.state.score = 0;
+          this.state.status = 'IDLE';
+
+          const t = document.getElementById('fpvKpiTime');
+          const g = document.getElementById('fpvKpiG');
+          const c = document.getElementById('fpvKpiClearance');
+          const v = document.getElementById('fpvKpiVolt');
+          const a = document.getElementById('fpvKpiAmps');
+          if (t) t.textContent = '0.00 s';
+          if (g) g.textContent = '1.00 G';
+          if (c) c.textContent = '0 cm';
+          if (v) v.textContent = '16.80 V';
+          if (a) a.textContent = '0.0 A';
+
+          const bTitle = document.getElementById('fpvScoreBadge');
+          const bDesc = document.getElementById('fpvFeedback');
+          if (bTitle) {
+            bTitle.textContent = '🏁 PILOT READY ON START LINE';
+            bTitle.style.color = '#232A68';
+          }
+          if (bDesc) bDesc.textContent = 'Select Acro or Angle mode, calibrate your entry velocity and apex bank angle, then launch the sprint down the neon LED track!';
+
+          this.renderStatic();
+        },
+        step: function(dt) {
+          this.progress = Math.min(1, this.progress + (dt || 0.05));
+        },
+        launchSprint: function() {
+          if (this.animId) cancelAnimationFrame(this.animId);
+          this.state.status = 'RUNNING';
+          this.progress = 0;
+
+          const mode = document.querySelector('input[name="fpvMode"]:checked')?.value || this.state.mode;
+          this.state.mode = mode;
+          const speedMs = parseFloat(document.getElementById('fpvSpeedSlider')?.value || 22);
+          let bankAngle = parseFloat(document.getElementById('fpvBankSlider')?.value || 65);
+          if (mode === 'angle' && bankAngle > 50) bankAngle = 50;
+          const punchTiming = document.getElementById('fpvPunchSelect')?.value || 'apex';
+
+          this.state.bankAngle = bankAngle;
+          this.state.speedKt = Math.round(speedMs * 1.94384);
+
+          // Centripetal G-force
+          const rad = (bankAngle * Math.PI) / 180;
+          const gLoad = Math.min(7.5, 1 / Math.cos(rad));
+          this.state.gForce = parseFloat(gLoad.toFixed(2));
+
+          // Clearance
+          let clearance = 34;
+          if (mode === 'angle') {
+            clearance += Math.max(0, (speedMs - 16) * 2.8);
+          }
+          if (punchTiming === 'early') clearance += 38;
+          else if (punchTiming === 'late') clearance -= 22;
+
+          if (bankAngle >= 80 && punchTiming === 'late') {
+            clearance = 8;
+          }
+          clearance = Math.max(5, Math.round(clearance));
+
+          // Lap Time
+          let lapTime = (120 / speedMs) * 0.72;
+          if (punchTiming === 'early') lapTime += 0.55;
+          else if (punchTiming === 'late') lapTime += 0.75;
+          if (mode === 'angle') lapTime += 0.82;
+          lapTime = parseFloat(lapTime.toFixed(2));
+
+          this.state.throttle = 100;
+          const amps = punchTiming === 'early' ? 17.8 : (punchTiming === 'apex' ? 16.4 : 14.8);
+          const sagVolt = parseFloat((16.8 - amps * 0.18).toFixed(2));
+          this.state.voltage = sagVolt;
+
+          // Scoring
+          let isCrash = clearance < 15;
+          let score = 0;
+          if (!isCrash) {
+            const timeScore = Math.max(0, Math.min(40, Math.round(40 - (lapTime - 3.40) * 22)));
+            const apexScore = (clearance >= 22 && clearance <= 45) ? 30 : (clearance < 22 ? 15 : 12);
+            const gScore = gLoad <= 6.0 ? 15 : 5;
+            const sagScore = sagVolt >= 13.5 ? 15 : 5;
+            score = Math.max(0, Math.min(100, timeScore + apexScore + gScore + sagScore));
+          } else {
+            score = 25;
+          }
+          this.state.score = score;
+
+          const durationMs = 2800;
+          const startTime = performance.now();
+          const self = this;
+
+          function animLoop(now) {
+            const elapsed = now - startTime;
+            self.progress = Math.min(1, elapsed / durationMs);
+
+            const curTime = (lapTime * self.progress).toFixed(2);
+            const curG = (1.0 + (gLoad - 1.0) * Math.sin(self.progress * Math.PI)).toFixed(2);
+            const curSag = (16.8 - (16.8 - sagVolt) * Math.sin(self.progress * Math.PI)).toFixed(2);
+            const curAmps = (amps * Math.sin(self.progress * Math.PI)).toFixed(1);
+
+            const kpiT = document.getElementById('fpvKpiTime');
+            const kpiG = document.getElementById('fpvKpiG');
+            const kpiC = document.getElementById('fpvKpiClearance');
+            const kpiV = document.getElementById('fpvKpiVolt');
+            const kpiA = document.getElementById('fpvKpiAmps');
+            if (kpiT) kpiT.textContent = curTime + ' s';
+            if (kpiG) kpiG.textContent = curG + ' G';
+            if (kpiC) kpiC.textContent = (clearance * self.progress).toFixed(0) + ' cm';
+            if (kpiV) kpiV.textContent = curSag + ' V';
+            if (kpiA) kpiA.textContent = curAmps + ' A';
+
+            self.drawFlightFrame(self.progress, bankAngle, curG, isCrash);
+
+            if (self.progress < 1) {
+              self.animId = requestAnimationFrame(animLoop);
+            } else {
+              self.state.status = isCrash ? 'CRASH' : 'COMPLETE';
+              if (kpiT) kpiT.textContent = lapTime.toFixed(2) + ' s';
+              if (kpiG) kpiG.textContent = gLoad.toFixed(2) + ' G';
+              if (kpiC) kpiC.textContent = clearance + ' cm';
+              if (kpiV) kpiV.textContent = sagVolt.toFixed(2) + ' V';
+              if (kpiA) kpiA.textContent = amps.toFixed(1) + ' A';
+              self.presentResults(score, lapTime, clearance, gLoad, sagVolt, isCrash, mode);
+            }
+          }
+          this.animId = requestAnimationFrame(animLoop);
+        },
+        presentResults: function(score, lapTime, clearance, gLoad, sagVolt, isCrash, mode) {
+          const bTitle = document.getElementById('fpvScoreBadge');
+          const bDesc = document.getElementById('fpvFeedback');
+          if (!bTitle || !bDesc) return;
+          if (isCrash) {
+            bTitle.innerHTML = '⚠️ DISQUALIFIED / GATE COLLISION! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'CRASH! Apex clearance fell to ' + clearance + ' cm with late throttle punch at ' + this.state.bankAngle + '° roll, clipping Gate 2 hairpin pylon. Throttle timing must lead the apex!';
+          } else if (score >= 90) {
+            bTitle.innerHTML = '🏆 GOLD APEX CHAMPION (Score: ' + score + '/100)';
+            bTitle.style.color = '#15803D';
+            bDesc.textContent = 'Flawless Acro line! Surgical apex clearance of ' + clearance + ' cm, ' + gLoad.toFixed(1) + 'G peak load, and split lap time of ' + lapTime + 's with healthy LiHV sag margin (' + sagVolt + 'V).';
+          } else if (score >= 75) {
+            bTitle.innerHTML = '🥈 PRO FPV RACER (Score: ' + score + '/100)';
+            bTitle.style.color = '#232A68';
+            bDesc.textContent = 'Competitive split of ' + lapTime + 's with clean gate passage (' + clearance + ' cm clearance). Tighten your apex roll rate to reach sub-3.8s championship times.';
+          } else {
+            bTitle.innerHTML = '🥉 JUNIOR CADET (Score: ' + score + '/100)';
+            bTitle.style.color = '#B45309';
+            bDesc.textContent = 'Safe flight line, but turn radius drifted wide (' + clearance + ' cm) or high drag reduced exit velocity. Try switching to Acro mode with perfect apex throttle punch.';
+          }
+        },
+        renderStatic: function() {
+          if (!this.ctx) return;
+          this.drawFlightFrame(0, 0, '1.00', false);
+        },
+        drawFlightFrame: function(t, bankDeg, gVal, isCrash) {
+          const ctx = this.ctx;
+          const w = this.canvas.width;
+          const h = this.canvas.height;
+
+          ctx.fillStyle = '#0B0E1E';
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid
+          ctx.strokeStyle = 'rgba(112, 119, 207, 0.12)';
+          ctx.lineWidth = 1;
+          for (let x = 0; x < w; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+          }
+          for (let y = 0; y < h; y += 40) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+          }
+
+          // Trajectory
+          const pts = this.track;
+          ctx.beginPath();
+          ctx.moveTo(pts[0].x, pts[0].y);
+          ctx.bezierCurveTo(pts[1].x - 20, pts[1].y + 40, pts[1].x, pts[1].y, pts[1].x, pts[1].y);
+          ctx.bezierCurveTo(380, 80, 480, 80, pts[2].x, pts[2].y);
+          ctx.bezierCurveTo(620, 160, 680, 240, pts[3].x, pts[3].y);
+          ctx.bezierCurveTo(600, 390, 420, 390, pts[4].x, pts[4].y);
+          ctx.strokeStyle = 'rgba(112, 119, 207, 0.35)';
+          ctx.lineWidth = 4;
+          ctx.stroke();
+
+          // Gates
+          pts.forEach((pt, idx) => {
+            const isStart = idx === 0;
+            const isFinish = idx === pts.length - 1;
+            const isApex = idx === 2;
+
+            ctx.strokeStyle = isApex ? '#EF4444' : (isStart ? '#10B981' : (isFinish ? '#F59E0B' : '#7077CF'));
+            ctx.fillStyle = isApex ? 'rgba(239, 68, 68, 0.2)' : 'rgba(112, 119, 207, 0.2)';
+            ctx.lineWidth = 3;
+
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y - 25, 6, 0, Math.PI * 2);
+            ctx.arc(pt.x, pt.y + 25, 6, 0, Math.PI * 2);
+            ctx.fill(); ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(pt.x, pt.y - 25);
+            ctx.lineTo(pt.x, pt.y + 25);
+            ctx.stroke();
+
+            ctx.font = 'bold 11px Roboto, sans-serif';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillText(pt.label, pt.x - 30, pt.y - 32);
+          });
+
+          // Drone Position
+          let droneX = pts[0].x;
+          let droneY = pts[0].y;
+          let angle = 0;
+
+          if (t > 0) {
+            if (t <= 0.25) {
+              const u = t / 0.25;
+              droneX = pts[0].x + (pts[1].x - pts[0].x) * u;
+              droneY = pts[0].y + (pts[1].y - pts[0].y) * u;
+              angle = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+            } else if (t <= 0.55) {
+              const u = (t - 0.25) / 0.30;
+              droneX = (1 - u) * (1 - u) * pts[1].x + 2 * (1 - u) * u * 400 + u * u * pts[2].x;
+              droneY = (1 - u) * (1 - u) * pts[1].y + 2 * (1 - u) * u * 80 + u * u * pts[2].y;
+              angle = Math.atan2(pts[2].y - pts[1].y, pts[2].x - pts[1].x);
+            } else if (t <= 0.80) {
+              const u = (t - 0.55) / 0.25;
+              droneX = (1 - u) * (1 - u) * pts[2].x + 2 * (1 - u) * u * 680 + u * u * pts[3].x;
+              droneY = (1 - u) * (1 - u) * pts[2].y + 2 * (1 - u) * u * 200 + u * u * pts[3].y;
+              angle = Math.atan2(pts[3].y - pts[2].y, pts[3].x - pts[2].x);
+            } else {
+              const u = (t - 0.80) / 0.20;
+              droneX = (1 - u) * pts[3].x + u * pts[4].x;
+              droneY = (1 - u) * pts[3].y + u * pts[4].y;
+              angle = Math.atan2(pts[4].y - pts[3].y, pts[4].x - pts[3].x);
+            }
+          }
+
+          // Drone Sprite
+          ctx.save();
+          ctx.translate(droneX, droneY);
+          ctx.rotate(angle);
+
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(-14, -14); ctx.lineTo(14, 14);
+          ctx.moveTo(-14, 14); ctx.lineTo(14, -14);
+          ctx.stroke();
+
+          ctx.fillStyle = 'rgba(112, 119, 207, 0.7)';
+          [[-14, -14], [14, -14], [-14, 14], [14, 14]].forEach(([px, py]) => {
+            ctx.beginPath();
+            ctx.arc(px, py, 7, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          ctx.fillStyle = isCrash && t >= 0.95 ? '#EF4444' : '#232A68';
+          ctx.strokeStyle = '#7077CF';
+          ctx.lineWidth = 2;
+          ctx.fillRect(-6, -8, 12, 16);
+          ctx.strokeRect(-6, -8, 12, 16);
+
+          ctx.fillStyle = '#10B981';
+          ctx.fillRect(4, -3, 6, 6);
+
+          ctx.restore();
+
+          // HUD
+          ctx.fillStyle = 'rgba(22, 22, 22, 0.82)';
+          ctx.fillRect(15, 15, 230, 85);
+          ctx.strokeStyle = '#7077CF';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(15, 15, 230, 85);
+
+          ctx.font = 'bold 12px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#7077CF';
+          ctx.fillText('OSITO FPV TELEMETRY HUD', 25, 32);
+
+          ctx.font = '11px Roboto, sans-serif';
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillText('STATUS: ' + this.state.status + (isCrash ? ' [COLLISION]' : ''), 25, 48);
+          ctx.fillText('G-METER: ' + gVal + ' G', 25, 64);
+          ctx.fillText('BANK: ' + (t > 0.3 && t < 0.7 ? bankDeg : '15') + '° | THROTTLE: ' + (t > 0.4 ? '100%' : '65%'), 25, 80);
+          ctx.fillText('CAM UPTILT: ' + (document.getElementById('fpvCamTiltSlider')?.value || 35) + '°', 25, 94);
+        }
+      };
+
+      // Challenge 2: City eVTOL Transition & Vertiport Approach Challenge
+      const evtol = {
+        canvas: null,
+        ctx: null,
+        animId: null,
+        progress: 0,
+        state: {
+          airspeedKt: 50,
+          rotorTiltDeg: 0,
+          descentFpm: 0,
+          crosswindKt: 14,
+          crabAngleDeg: 0,
+          batteryPct: 100,
+          score: 0,
+          status: 'HOVER' // 'HOVER', 'TRANSITION', 'WING_BORNE', 'LANDED', 'STALL', 'VRS'
+        },
+        init: function(canvasId) {
+          this.canvas = document.getElementById(canvasId || 'evtolProfileCanvas');
+          if (this.canvas) {
+            this.ctx = this.canvas.getContext('2d');
+            this.renderStatic();
+          }
+        },
+        updateControls: function() {
+          const spd = document.getElementById('evtolSpeedSlider');
+          const tilt = document.getElementById('evtolTiltSlider');
+          const glide = document.getElementById('evtolGlideSlider');
+          const crab = document.getElementById('evtolCrabSlider');
+          const hov = document.getElementById('evtolHoverSlider');
+
+          if (spd) {
+            const el = document.getElementById('evtolSpeedVal');
+            if (el) el.textContent = spd.value;
+            this.state.airspeedKt = parseFloat(spd.value);
+          }
+          if (tilt) {
+            const el = document.getElementById('evtolTiltVal');
+            if (el) el.textContent = tilt.value;
+          }
+          if (glide) {
+            const el = document.getElementById('evtolGlideVal');
+            if (el) el.textContent = parseFloat(glide.value).toFixed(1);
+          }
+          if (crab) {
+            const el = document.getElementById('evtolCrabVal');
+            if (el) el.textContent = crab.value;
+            this.state.crabAngleDeg = parseFloat(crab.value);
+          }
+          if (hov) {
+            const el = document.getElementById('evtolHoverVal');
+            if (el) el.textContent = hov.value;
+          }
+
+          if (this.state.status === 'HOVER') {
+            this.renderStatic();
+          }
+        },
+        setTilt: function(deg) {
+          this.state.rotorTiltDeg = Math.max(0, Math.min(90, parseFloat(deg) || 0));
+        },
+        setDescent: function(fpm) {
+          this.state.descentFpm = parseFloat(fpm) || 0;
+        },
+        setCrab: function(deg) {
+          this.state.crabAngleDeg = parseFloat(deg) || 0;
+        },
+        reset: function() {
+          if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+          }
+          this.progress = 0;
+          this.state.airspeedKt = 50;
+          this.state.rotorTiltDeg = 0;
+          this.state.descentFpm = 0;
+          this.state.crosswindKt = 14;
+          this.state.crabAngleDeg = 0;
+          this.state.batteryPct = 100;
+          this.state.score = 0;
+          this.state.status = 'HOVER';
+
+          const s = document.getElementById('evtolKpiSpeed');
+          const l = document.getElementById('evtolKpiLift');
+          const d = document.getElementById('evtolKpiDescent');
+          const dev = document.getElementById('evtolKpiDev');
+          const b = document.getElementById('evtolKpiBat');
+          if (s) s.textContent = '50.0 kt';
+          if (l) l.textContent = '0% / 100%';
+          if (d) d.textContent = '0 FPM';
+          if (dev) dev.textContent = '0.0 m';
+          if (b) b.textContent = '100.0%';
+
+          const bTitle = document.getElementById('evtolScoreBadge');
+          const bDesc = document.getElementById('evtolFeedback');
+          if (bTitle) {
+            bTitle.textContent = '🏙️ UAM AERO-TAXI IN INBOUND CRUISE';
+            bTitle.style.color = '#232A68';
+          }
+          if (bDesc) bDesc.textContent = 'Holding at 1,200 ft AGL over SF Bay. Set transition airspeed (48-56 kt safe corridor) and crab angle against 14-kt West crosswind, then commence vertiport approach.';
+
+          this.renderStatic();
+        },
+        commenceApproach: function() {
+          if (this.animId) cancelAnimationFrame(this.animId);
+          this.state.status = 'TRANSITION';
+          this.progress = 0;
+
+          const spd = parseFloat(document.getElementById('evtolSpeedSlider')?.value || 50);
+          const glide = parseFloat(document.getElementById('evtolGlideSlider')?.value || 5.5);
+          const crab = parseFloat(document.getElementById('evtolCrabSlider')?.value || 16);
+          const hoverTime = parseFloat(document.getElementById('evtolHoverSlider')?.value || 12);
+
+          const isWingStall = spd < 44;
+          const isActuatorStress = spd > 65;
+          const descentFpm = Math.round(spd * Math.sin((glide * Math.PI) / 180) * 101.27);
+          const isVRS = descentFpm > 500;
+
+          const idealCrab = (Math.asin(14 / Math.max(14, spd)) * 180) / Math.PI;
+          const crabDeviation = Math.abs(crab - idealCrab);
+          const padDeviationM = parseFloat((crabDeviation * 0.72).toFixed(1));
+          const isPadMiss = padDeviationM > 14.0;
+
+          const hoverConsumption = hoverTime * 0.42;
+          const reserveSoC = parseFloat(Math.max(12, 35.0 - hoverConsumption - (isActuatorStress ? 5 : 0)).toFixed(1));
+          this.state.batteryPct = reserveSoC;
+          this.state.descentFpm = descentFpm;
+
+          let isCrash = isWingStall || isVRS || isPadMiss;
+          let score = 0;
+          if (!isCrash) {
+            const transScore = (spd >= 48 && spd <= 56) ? 30 : (spd >= 45 && spd <= 62 ? 20 : 10);
+            const glideScore = descentFpm <= 480 ? 25 : 15;
+            const landingScore = padDeviationM <= 3.0 ? 25 : (padDeviationM <= 6.0 ? 18 : 10);
+            const batScore = reserveSoC >= 28.0 ? 20 : (reserveSoC >= 25.0 ? 14 : 5);
+            score = Math.max(0, Math.min(100, transScore + glideScore + landingScore + batScore));
+          } else {
+            score = isWingStall ? 15 : (isVRS ? 20 : 30);
+          }
+          this.state.score = score;
+
+          const durationMs = 3200;
+          const startTime = performance.now();
+          const self = this;
+
+          function animLoop(now) {
+            const elapsed = now - startTime;
+            self.progress = Math.min(1, elapsed / durationMs);
+
+            const curSpd = (spd * (1 - self.progress * 0.8)).toFixed(1);
+            const curTilt = Math.min(90, Math.round(self.progress * 90));
+            self.state.rotorTiltDeg = curTilt;
+            const curRotorLift = Math.round(self.progress * 100);
+            const curWingLift = 100 - curRotorLift;
+            const curDescent = Math.round(descentFpm * self.progress);
+            const curDev = (padDeviationM * self.progress).toFixed(1);
+            const curBat = (100 - (100 - reserveSoC) * self.progress).toFixed(1);
+
+            const kpiS = document.getElementById('evtolKpiSpeed');
+            const kpiL = document.getElementById('evtolKpiLift');
+            const kpiD = document.getElementById('evtolKpiDescent');
+            const kpiDev = document.getElementById('evtolKpiDev');
+            const kpiB = document.getElementById('evtolKpiBat');
+
+            if (kpiS) kpiS.textContent = curSpd + ' kt';
+            if (kpiL) kpiL.textContent = curRotorLift + '% / ' + curWingLift + '%';
+            if (kpiD) kpiD.textContent = curDescent + ' FPM';
+            if (kpiDev) kpiDev.textContent = curDev + ' m';
+            if (kpiB) kpiB.textContent = curBat + '%';
+
+            self.drawProfileFrame(self.progress, curTilt, curDescent, isCrash, isWingStall, isVRS, isPadMiss);
+
+            if (self.progress < 1) {
+              self.animId = requestAnimationFrame(animLoop);
+            } else {
+              if (isWingStall) self.state.status = 'STALL';
+              else if (isVRS) self.state.status = 'VRS';
+              else self.state.status = 'LANDED';
+
+              if (kpiS) kpiS.textContent = '0.0 kt';
+              if (kpiL) kpiL.textContent = '100% / 0%';
+              if (kpiD) kpiD.textContent = '0 FPM';
+              if (kpiDev) kpiDev.textContent = padDeviationM + ' m';
+              if (kpiB) kpiB.textContent = reserveSoC + '%';
+
+              self.presentResults(score, spd, descentFpm, padDeviationM, reserveSoC, isWingStall, isVRS, isPadMiss);
+            }
+          }
+          this.animId = requestAnimationFrame(animLoop);
+        },
+        waveOff: function() {
+          if (this.animId) cancelAnimationFrame(this.animId);
+          this.state.status = 'WING_BORNE';
+          this.state.rotorTiltDeg = 0;
+          this.state.descentFpm = 0;
+          const bTitle = document.getElementById('evtolScoreBadge');
+          const bDesc = document.getElementById('evtolFeedback');
+          if (bTitle) {
+            bTitle.innerHTML = '⚠️ GO-AROUND / WAVE-OFF EXECUTED';
+            bTitle.style.color = '#B45309';
+          }
+          if (bDesc) {
+            bDesc.textContent = 'Thrust vectored forward! Tilting rotors to cruise, climbing out of Salesforce Transit Center approach corridor to 1,500 ft holding pattern.';
+          }
+          this.renderStatic();
+        },
+        presentResults: function(score, spd, descentFpm, padDev, reserveSoC, isStall, isVRS, isMiss) {
+          const bTitle = document.getElementById('evtolScoreBadge');
+          const bDesc = document.getElementById('evtolFeedback');
+          if (!bTitle || !bDesc) return;
+
+          if (isStall) {
+            bTitle.innerHTML = '💥 UNRECOVERABLE WING STALL SINK! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'CRASH! Conversion airspeed (' + spd + ' kt) was below 44 kt wing stall speed before rotor thrust reached 100% vertical. Aircraft lost aerodynamic lift and plunged.';
+          } else if (isVRS) {
+            bTitle.innerHTML = '💥 VORTEX RING STATE (VRS) CRASH! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'CRASH! Hover descent rate (' + descentFpm + ' FPM) exceeded 500 FPM limit. Rotors settled into their own turbulent downwash vortex, causing catastrophic loss of lift.';
+          } else if (isMiss) {
+            bTitle.innerHTML = '⚠️ ROOFTOP PAD EXCURSION! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'Pad deviation of ' + padDev + ' m exceeded 14.0 m rooftop safety boundary due to insufficient Bay crosswind crab angle. Landed off-pad.';
+          } else if (score >= 90) {
+            bTitle.innerHTML = '🏅 MASTER UAM AIR TAXI CAPTAIN (Score: ' + score + '/100)';
+            bTitle.style.color = '#15803D';
+            bDesc.textContent = 'Textbook conversion at ' + spd + ' kt, zero VRS sink (' + descentFpm + ' FPM), pinpoint rooftop landing (' + padDev + ' m deviation), and ' + reserveSoC + '% reserve SoC!';
+          } else if (score >= 75) {
+            bTitle.innerHTML = '🥈 CERTIFIED VERTIPORT PILOT (Score: ' + score + '/100)';
+            bTitle.style.color = '#232A68';
+            bDesc.textContent = 'Safe stabilized transition and touchdown within legal vertiport limits (' + padDev + ' m deviation, ' + reserveSoC + '% reserve SoC).';
+          } else {
+            bTitle.innerHTML = '🥉 COMMERCIAL COPILOT (Score: ' + score + '/100)';
+            bTitle.style.color = '#B45309';
+            bDesc.textContent = 'Approach completed, but high hover hold burned excess battery reserves or crosswind crab drift required aggressive last-second pilot correction.';
+          }
+        },
+        renderStatic: function() {
+          if (!this.ctx) return;
+          this.drawProfileFrame(0, 0, 0, false, false, false, false);
+        },
+        drawProfileFrame: function(t, tiltDeg, descentRate, isCrash, isStall, isVRS, isMiss) {
+          const ctx = this.ctx;
+          const w = this.canvas.width;
+          const h = this.canvas.height;
+
+          ctx.fillStyle = '#080C1B';
+          ctx.fillRect(0, 0, w, h);
+
+          // SF Skyline
+          ctx.fillStyle = '#11172E';
+          ctx.fillRect(40, 260, 45, 190);
+          ctx.fillRect(95, 220, 60, 230);
+          ctx.fillRect(165, 280, 50, 170);
+          ctx.fillRect(225, 200, 70, 250);
+          ctx.fillRect(305, 240, 55, 210);
+
+          // Salesforce Tower / Vertiport
+          ctx.fillStyle = '#1A2142';
+          ctx.fillRect(520, 170, 90, 280);
+          ctx.fillStyle = '#232A68';
+          ctx.fillRect(620, 290, 150, 160);
+
+          // Pad
+          ctx.fillStyle = '#10B981';
+          ctx.fillRect(635, 285, 120, 6);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 10px "Fjalla One", sans-serif';
+          ctx.fillText('VERTIPORT PAD (H)', 645, 305);
+
+          // Glidepath corridor
+          ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([6, 6]);
+          ctx.beginPath();
+          ctx.moveTo(80, 80); ctx.lineTo(695, 285);
+          ctx.moveTo(80, 130); ctx.lineTo(695, 285);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Aircraft Position
+          const startX = 80, startY = 95;
+          const targetX = 695, targetY = 285;
+          const acX = startX + (targetX - startX) * t;
+          const acY = isStall && t > 0.6 ? startY + (targetY - startY) * t + 80 : (startY + (targetY - startY) * t);
+
+          ctx.save();
+          ctx.translate(acX, acY);
+
+          const rotorAngleRad = ((90 - tiltDeg) * Math.PI) / 180;
+
+          // Wing
+          ctx.fillStyle = '#7077CF';
+          ctx.fillRect(-22, -3, 44, 6);
+
+          // Fuselage
+          ctx.fillStyle = isCrash && t >= 0.95 ? '#EF4444' : '#FFFFFF';
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 26, 9, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#232A68';
+          ctx.beginPath();
+          ctx.ellipse(12, -2, 8, 4, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          [-16, 16].forEach(nx => {
+            ctx.save();
+            ctx.translate(nx, -5);
+            ctx.rotate(-rotorAngleRad);
+
+            ctx.fillStyle = '#232A68';
+            ctx.fillRect(-3, -7, 6, 14);
+
+            ctx.fillStyle = 'rgba(112, 119, 207, 0.7)';
+            ctx.beginPath();
+            ctx.ellipse(0, -7, 14, 2, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+          });
+
+          ctx.restore();
+
+          // Right inset: Approach Camera
+          ctx.fillStyle = 'rgba(14, 18, 38, 0.88)';
+          ctx.fillRect(w - 210, 15, 195, 130);
+          ctx.strokeStyle = '#7077CF';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(w - 210, 15, 195, 130);
+
+          ctx.font = 'bold 11px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#7077CF';
+          ctx.fillText('APPROACH CAMERA & CROSSWIND', w - 200, 32);
+
+          ctx.fillStyle = '#38BDF8';
+          ctx.font = '10px Roboto, sans-serif';
+          ctx.fillText('WIND: 14 kt [280° W]', w - 200, 48);
+          ctx.beginPath();
+          ctx.moveTo(w - 190, 56); ctx.lineTo(w - 150, 56);
+          ctx.lineTo(w - 155, 52); ctx.moveTo(w - 150, 56); ctx.lineTo(w - 155, 60);
+          ctx.strokeStyle = '#38BDF8'; ctx.stroke();
+
+          const cx = w - 110, cy = 98;
+          ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+          ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2); ctx.stroke();
+          ctx.strokeStyle = '#10B981';
+          ctx.beginPath(); ctx.moveTo(cx - 30, cy); ctx.lineTo(cx + 30, cy); ctx.moveTo(cx, cy - 30); ctx.lineTo(cx, cy + 30); ctx.stroke();
+
+          const crab = parseFloat(document.getElementById('evtolCrabSlider')?.value || 16);
+          const idealCrab = 16.3;
+          const offsetX = (crab - idealCrab) * 1.5;
+          ctx.fillStyle = isMiss && t >= 0.95 ? '#EF4444' : '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(cx + offsetX * t, cy, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Left HUD
+          ctx.fillStyle = 'rgba(22, 22, 22, 0.82)';
+          ctx.fillRect(15, 15, 230, 75);
+          ctx.strokeStyle = '#7077CF';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(15, 15, 230, 75);
+
+          ctx.font = 'bold 12px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#7077CF';
+          ctx.fillText('eVTOL AVIONICS FLIGHT PROFILE', 25, 32);
+
+          ctx.font = '11px Roboto, sans-serif';
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillText('ROTOR TILT: ' + tiltDeg + '° (' + (tiltDeg > 70 ? 'HOVER' : (tiltDeg < 20 ? 'CRUISE' : 'CONVERT')) + ')', 25, 48);
+          ctx.fillText('DESCENT: ' + descentRate + ' FPM ' + (descentRate > 500 ? '[VRS WARNING!]' : '[NOMINAL]'), 25, 64);
+          ctx.fillText('GLIDEPATH: ' + (document.getElementById('evtolGlideSlider')?.value || 5.5) + '° | BAY CRAB: ' + crab + '° W', 25, 78);
+        }
+      };
+
+      // Challenge 3: Flying Car Urban Airspace Corridor Challenge
+      const flyingCar = {
+        canvas: null,
+        ctx: null,
+        animId: null,
+        progress: 0,
+        state: {
+          tierAltFt: 600,
+          speedMph: 80,
+          sepDistanceFt: 1250,
+          tfrClear: true,
+          parachuteDeployed: false,
+          score: 0,
+          status: 'EN_ROUTE' // 'EN_ROUTE', 'DECONFLICTED', 'VIOLATION', 'RECOVERY'
+        },
+        waypoints: [
+          { x: 100, y: 340, label: 'WP1: EMBARCADERO' },
+          { x: 260, y: 250, label: 'WP2: MARKET ST' },
+          { x: 500, y: 200, label: 'WP3: MISSION CREEK' },
+          { x: 700, y: 120, label: 'WP4: BIOTECH HUB' }
+        ],
+        tfr: { x: 390, y: 280, radius: 65, label: 'ORACLE PARK TFR' },
+        traffic1: { x: 420, y: 120, targetX: 200, targetY: 320, alt: 900, label: 'MEDEVAC-1' },
+
+        init: function(canvasId) {
+          this.canvas = document.getElementById(canvasId || 'utmCorridorCanvas');
+          if (this.canvas) {
+            this.ctx = this.canvas.getContext('2d');
+            this.renderStatic();
+          }
+        },
+        selectTier: function(alt) {
+          this.state.tierAltFt = parseInt(alt) || 600;
+          const el = document.getElementById('corridorTierSelect');
+          if (el) el.value = String(this.state.tierAltFt);
+          this.renderStatic();
+        },
+        updateControls: function() {
+          const spd = document.getElementById('corridorSpeedSlider');
+          if (spd) {
+            const el = document.getElementById('corridorSpeedVal');
+            if (el) el.textContent = spd.value;
+            this.state.speedMph = parseInt(spd.value);
+          }
+          this.renderStatic();
+        },
+        execDogleg: function() {
+          const avoidSel = document.getElementById('tfrAvoidSelect');
+          if (avoidSel) avoidSel.value = 'dogleg';
+          this.state.tfrClear = true;
+          this.renderStatic();
+        },
+        deployChute: function() {
+          if (this.animId) cancelAnimationFrame(this.animId);
+          this.state.parachuteDeployed = true;
+          this.state.status = 'RECOVERY';
+          this.state.score = 75;
+
+          const bTitle = document.getElementById('carScoreBadge');
+          const bDesc = document.getElementById('carFeedback');
+          if (bTitle) {
+            bTitle.innerHTML = '🪂 BALLISTIC PARACHUTE DEPLOYED (CAPS ACTIVE)';
+            bTitle.style.color = '#B45309';
+          }
+          if (bDesc) {
+            bDesc.textContent = 'Solid-rocket parachute deployed in 1.8 seconds! Vertical rate stabilized to 17 ft/s with honeycomb landing gear primed for safe skyscraper rooftop recovery.';
+          }
+          this.drawParachuteFrame();
+        },
+        reset: function() {
+          if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+          }
+          this.progress = 0;
+          this.state.tierAltFt = 600;
+          this.state.speedMph = 80;
+          this.state.sepDistanceFt = 1250;
+          this.state.tfrClear = true;
+          this.state.parachuteDeployed = false;
+          this.state.score = 0;
+          this.state.status = 'EN_ROUTE';
+
+          const tierEl = document.getElementById('corridorTierSelect');
+          if (tierEl) tierEl.value = '600';
+          const wp = document.getElementById('carKpiWp');
+          const s = document.getElementById('carKpiSep');
+          const tfr = document.getElementById('carKpiTfr');
+          const time = document.getElementById('carKpiTime');
+          const g = document.getElementById('carKpiG');
+          if (wp) wp.textContent = 'WP 1 / 4';
+          if (s) s.textContent = '1,250 ft';
+          if (tfr) tfr.textContent = '1,800 ft';
+          if (time) time.textContent = '0.0 min';
+          if (g) g.textContent = '1.05 G';
+
+          const bTitle = document.getElementById('carScoreBadge');
+          const bDesc = document.getElementById('carFeedback');
+          if (bTitle) {
+            bTitle.textContent = '🧭 SKYWAY CORRIDOR FLIGHT PLAN STAGED';
+            bTitle.style.color = '#232A68';
+          }
+          if (bDesc) bDesc.textContent = 'Flight plan from Embarcadero to SFO Biotech Vertipad verified. Check altitude tier and DAA conflict resolution before executing corridor transit.';
+
+          this.renderStatic();
+        },
+        executeFlightPlan: function() {
+          if (this.animId) cancelAnimationFrame(this.animId);
+          this.state.status = 'EN_ROUTE';
+          this.state.parachuteDeployed = false;
+          this.progress = 0;
+
+          const tierAlt = parseInt(document.getElementById('corridorTierSelect')?.value || 600);
+          this.state.tierAltFt = tierAlt;
+          const speedKt = parseFloat(document.getElementById('corridorSpeedSlider')?.value || 80);
+          this.state.speedMph = speedKt;
+          const daaChoice = document.getElementById('corridorDaaSelect')?.value || 'starboard';
+          const tfrChoice = document.getElementById('tfrAvoidSelect')?.value || 'dogleg';
+
+          let separation = 1250;
+          let hasTrafficConflict = (tierAlt === 900);
+          if (hasTrafficConflict) {
+            if (daaChoice === 'starboard') separation = 1250;
+            else if (daaChoice === 'climb') separation = 850;
+            else if (daaChoice === 'descend') separation = 750;
+            else if (daaChoice === 'slow') separation = 680;
+            else separation = 95;
+          } else {
+            separation = Math.abs(tierAlt - 900) >= 300 ? 1800 : 1100;
+          }
+          this.state.sepDistanceFt = separation;
+
+          const penetratesTfr = (tfrChoice === 'direct' && tierAlt <= 1000);
+          const tfrClearance = penetratesTfr ? 0 : 1800;
+          this.state.tfrClear = !penetratesTfr;
+
+          const transitTime = parseFloat(((12.5 / speedKt) * 60).toFixed(1));
+          const gComfort = daaChoice === 'starboard' ? 1.08 : (daaChoice === 'climb' ? 1.25 : 1.05);
+
+          let isViolation = penetratesTfr || (separation < 150);
+          let score = 0;
+          if (!isViolation) {
+            const daaScore = separation >= 500 ? 40 : 20;
+            const tfrScore = 30;
+            const altScore = 15;
+            const comfortScore = gComfort <= 1.2 ? 15 : 8;
+            score = Math.max(0, Math.min(100, daaScore + tfrScore + altScore + comfortScore));
+          } else {
+            score = penetratesTfr ? 20 : 10;
+          }
+          this.state.score = score;
+
+          const durationMs = 3400;
+          const startTime = performance.now();
+          const self = this;
+
+          function animLoop(now) {
+            const elapsed = now - startTime;
+            self.progress = Math.min(1, elapsed / durationMs);
+
+            const wpIdx = Math.min(4, Math.floor(self.progress * 3.9) + 1);
+            const kpiWp = document.getElementById('carKpiWp');
+            const kpiSep = document.getElementById('carKpiSep');
+            const kpiTfr = document.getElementById('carKpiTfr');
+            const kpiTime = document.getElementById('carKpiTime');
+            const kpiG = document.getElementById('carKpiG');
+
+            if (kpiWp) kpiWp.textContent = 'WP ' + wpIdx + ' / 4';
+            const curSep = Math.round(separation + (1 - Math.sin(self.progress * Math.PI)) * 400);
+            if (kpiSep) kpiSep.textContent = curSep + ' ft';
+            if (kpiTfr) kpiTfr.textContent = (penetratesTfr && self.progress > 0.4 && self.progress < 0.7 ? 0 : tfrClearance) + ' ft';
+            if (kpiTime) kpiTime.textContent = (transitTime * self.progress).toFixed(1) + ' min';
+            if (kpiG) kpiG.textContent = gComfort + ' G';
+
+            self.drawTacticalFrame(self.progress, tierAlt, tfrChoice === 'dogleg', daaChoice, penetratesTfr, separation < 150);
+
+            if (self.progress < 1) {
+              self.animId = requestAnimationFrame(animLoop);
+            } else {
+              self.state.status = isViolation ? 'VIOLATION' : 'DECONFLICTED';
+              if (kpiWp) kpiWp.textContent = 'WP 4 / 4';
+              if (kpiSep) kpiSep.textContent = separation + ' ft';
+              if (kpiTfr) kpiTfr.textContent = tfrClearance + ' ft';
+              if (kpiTime) kpiTime.textContent = transitTime + ' min';
+              if (kpiG) kpiG.textContent = gComfort + ' G';
+
+              self.presentResults(score, separation, penetratesTfr, transitTime, gComfort, daaChoice);
+            }
+          }
+          this.animId = requestAnimationFrame(animLoop);
+        },
+        presentResults: function(score, separation, penetratesTfr, transitTime, gComfort, daaChoice) {
+          const bTitle = document.getElementById('carScoreBadge');
+          const bDesc = document.getElementById('carFeedback');
+          if (!bTitle || !bDesc) return;
+
+          if (penetratesTfr) {
+            bTitle.innerHTML = '🚨 FEDERAL AIRSPACE VIOLATION! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'CRITICAL FAULT: Flying car entered active Oracle Park Temporary Flight Restriction (TFR) geofence cylinder. UTM protocol requires automated perimeter dogleg.';
+          } else if (separation < 500) {
+            bTitle.innerHTML = '⚠️ LOSS OF WELL-CLEAR SEPARATION! (Score: ' + score + '/100)';
+            bTitle.style.color = '#B91C1C';
+            bDesc.textContent = 'ASTM F3442 breach: separation fell to ' + separation + ' ft against Medevac-1. Select Starboard Vector (+30°) or Vertical Step climb to maintain 500+ ft bubble.';
+          } else if (score >= 90) {
+            bTitle.innerHTML = '🛰️ OSITO SKYWAY URBAN AIR TRAFFIC COMMANDER (Score: ' + score + '/100)';
+            bTitle.style.color = '#15803D';
+            bDesc.textContent = 'Masterful corridor transit! Maintained ASTM F3442 well-clear (' + separation + ' ft separation), cleanly cleared Oracle Park TFR, and delivered maximum passenger comfort (' + gComfort + 'G).';
+          } else if (score >= 75) {
+            bTitle.innerHTML = '🥈 COMMUTER SKYWAY OPERATOR (Score: ' + score + '/100)';
+            bTitle.style.color = '#232A68';
+            bDesc.textContent = 'Corridor cleared safely. Traffic resolved cleanly with minor route delay. Ready for commercial skyway scheduling.';
+          } else {
+            bTitle.innerHTML = '🥉 TRAFFIC CLEARANCE CAUTION (Score: ' + score + '/100)';
+            bTitle.style.color = '#B45309';
+            bDesc.textContent = 'Flight arrived at Biotech Hub, but evasive maneuver caused passenger discomfort or approached minimum separation limits.';
+          }
+        },
+        renderStatic: function() {
+          if (!this.ctx) return;
+          this.drawTacticalFrame(0, this.state.tierAltFt, true, 'starboard', false, false);
+        },
+        drawParachuteFrame: function() {
+          if (!this.ctx) return;
+          this.drawTacticalFrame(0.5, this.state.tierAltFt, true, 'starboard', false, false);
+
+          const ctx = this.ctx;
+          ctx.fillStyle = 'rgba(217, 119, 6, 0.9)';
+          ctx.beginPath();
+          ctx.arc(380, 180, 36, Math.PI, 0);
+          ctx.fill();
+
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 1.5;
+          for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.moveTo(344 + i * 18, 180);
+            ctx.lineTo(380, 215);
+            ctx.stroke();
+          }
+
+          ctx.font = 'bold 12px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillText('CAPS ROCKET DEPLOYED • DESCENT RATE: 17 FT/S', 260, 235);
+        },
+        drawTacticalFrame: function(t, tierAlt, isDogleg, daaChoice, hasTfrBreach, isNmac) {
+          const ctx = this.ctx;
+          const w = this.canvas.width;
+          const h = this.canvas.height;
+
+          ctx.fillStyle = '#060A17';
+          ctx.fillRect(0, 0, w, h);
+
+          // Concentric radar rings
+          ctx.strokeStyle = 'rgba(112, 119, 207, 0.12)';
+          ctx.lineWidth = 1;
+          [100, 200, 300, 400].forEach(r => {
+            ctx.beginPath();
+            ctx.arc(w / 2, h / 2, r, 0, Math.PI * 2);
+            ctx.stroke();
+          });
+
+          // TFR
+          const tfr = this.tfr;
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+          ctx.strokeStyle = '#EF4444';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(tfr.x, tfr.y, tfr.radius, 0, Math.PI * 2);
+          ctx.fill(); ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+          ctx.beginPath();
+          ctx.arc(tfr.x, tfr.y, tfr.radius + 12 * Math.sin(Date.now() / 250), 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.font = 'bold 10px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#EF4444';
+          ctx.fillText(tfr.label + ' (SFC-1000 FT)', tfr.x - 55, tfr.y);
+
+          // Corridor
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([8, 8]);
+          ctx.beginPath();
+          ctx.moveTo(80, 360);
+          if (isDogleg) {
+            ctx.lineTo(240, 260); ctx.lineTo(370, 180); ctx.lineTo(520, 160); ctx.lineTo(720, 100);
+          } else {
+            ctx.lineTo(240, 260); ctx.lineTo(390, 280); ctx.lineTo(520, 220); ctx.lineTo(720, 100);
+          }
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Waypoints
+          this.waypoints.forEach((wp) => {
+            ctx.fillStyle = '#10B981';
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(wp.x, wp.y, 6, 0, Math.PI * 2);
+            ctx.fill(); ctx.stroke();
+
+            ctx.font = 'bold 10px Roboto, sans-serif';
+            ctx.fillStyle = '#E2E8F0';
+            ctx.fillText(wp.label, wp.x - 35, wp.y - 12);
+          });
+
+          // Medevac-1
+          const medX = this.traffic1.x + (this.traffic1.targetX - this.traffic1.x) * t;
+          const medY = this.traffic1.y + (this.traffic1.targetY - this.traffic1.y) * t;
+          ctx.fillStyle = '#F59E0B';
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(medX, medY, 7, 0, Math.PI * 2);
+          ctx.fill(); ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+          ctx.beginPath(); ctx.arc(medX, medY, 24, 0, Math.PI * 2); ctx.stroke();
+          ctx.font = '10px Roboto, sans-serif';
+          ctx.fillStyle = '#F59E0B';
+          ctx.fillText('MEDEVAC-1 [900 FT]', medX + 12, medY + 4);
+
+          // Player Car
+          let carX = this.waypoints[0].x;
+          let carY = this.waypoints[0].y;
+          if (t > 0) {
+            if (isDogleg) {
+              if (t <= 0.33) {
+                const u = t / 0.33;
+                carX = 100 + (260 - 100) * u;
+                carY = 340 + (250 - 340) * u;
+              } else if (t <= 0.66) {
+                const u = (t - 0.33) / 0.33;
+                carX = 260 + (500 - 260) * u;
+                carY = 250 + (170 - 250) * u;
+              } else {
+                const u = (t - 0.66) / 0.34;
+                carX = 500 + (700 - 500) * u;
+                carY = 170 + (120 - 170) * u;
+              }
+            } else {
+              if (t <= 0.5) {
+                const u = t / 0.5;
+                carX = 100 + (390 - 100) * u;
+                carY = 340 + (280 - 340) * u;
+              } else {
+                const u = (t - 0.5) / 0.5;
+                carX = 390 + (700 - 390) * u;
+                carY = 280 + (120 - 280) * u;
+              }
+            }
+          }
+
+          ctx.save();
+          ctx.translate(carX, carY);
+
+          ctx.strokeStyle = isNmac ? 'rgba(239, 68, 68, 0.8)' : 'rgba(56, 189, 248, 0.35)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(0, 0, 28, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.fillStyle = hasTfrBreach && t > 0.4 && t < 0.7 ? '#EF4444' : '#FFFFFF';
+          ctx.strokeStyle = '#232A68';
+          ctx.lineWidth = 2;
+          ctx.fillRect(-10, -14, 20, 28);
+          ctx.strokeRect(-10, -14, 20, 28);
+
+          ctx.fillStyle = '#7077CF';
+          [[-12, -12], [12, -12], [-12, 12], [12, 12]].forEach(([rx, ry]) => {
+            ctx.fillRect(rx - 3, ry - 3, 6, 6);
+          });
+
+          ctx.restore();
+
+          // Tactical HUD
+          ctx.fillStyle = 'rgba(22, 22, 22, 0.82)';
+          ctx.fillRect(15, 15, 250, 80);
+          ctx.strokeStyle = '#7077CF';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(15, 15, 250, 80);
+
+          ctx.font = 'bold 12px "Fjalla One", sans-serif';
+          ctx.fillStyle = '#7077CF';
+          ctx.fillText('UTM TACTICAL SKYWAY RADAR', 25, 32);
+
+          ctx.font = '11px Roboto, sans-serif';
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillText('ASSIGNED TIER: ' + tierAlt + ' FT AGL', 25, 48);
+          ctx.fillText('DAA VECTOR: ' + String(daaChoice).toUpperCase(), 25, 64);
+          ctx.fillText('TFR GEOFENCE: ' + (isDogleg ? 'DOGLEG ACTIVE' : 'DIRECT TRACK (RISK)'), 25, 78);
+        }
+      };
+
+      return {
+        fpvChallenge: fpv,
+        evtolChallenge: evtol,
+        flyingCarChallenge: flyingCar
+      };
+    })();
+
+    // Initialize all 3 challenges on page load
+    window.OsitoTeenLab.fpvChallenge.init('fpvTrackCanvas');
+    window.OsitoTeenLab.evtolChallenge.init('evtolProfileCanvas');
+    window.OsitoTeenLab.flyingCarChallenge.init('utmCorridorCanvas');
+  </script>
+</body>
+</html>
