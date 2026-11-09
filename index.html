@@ -1911,7 +1911,7 @@
       <!-- Direct Project Inquiry Form (Sends to info@ositodrone.com) -->
       <div style="background:#FFFFFF; color:#161616; border:2px solid #7077CF; padding:28px;">
         <h3 style="font-family:'Fjalla One',sans-serif; font-size:24px; color:#232A68; margin:0 0 6px; text-transform:uppercase;">SEND US A MESSAGE OR QUOTE INQUIRY</h3>
-        <p style="font-size:13.5px; color:#5E5E5E; margin:0 0 18px;">Fill out your project or event details below to send directly to our San Francisco team (<strong style="color:#232A68;">info@ositodrone.com</strong>):</p>
+        <p style="font-size:13.5px; color:#5E5E5E; margin:0 0 18px;">Fill out your project or event details below and our team will get right back to you.</p>
         <div id="ositoContactErrorAlert" role="alert" style="display:none; background:#FEE2E2; border-left:4px solid #EF4444; color:#991B1B; padding:10px 12px; font-size:13px; margin-bottom:14px;"></div>
         <form id="ositoContactForm" novalidate onsubmit="return false;">
           <label style="display:block; font-size:12px; font-weight:700; color:#232A68; text-transform:uppercase; margin-bottom:4px;">Your Name *</label>
@@ -1928,16 +1928,8 @@
 
           <button id="ositoContactSubmitBtn" type="submit" class="osito-action-btn" style="width:100%;">SEND MESSAGE</button>
         </form>
-        <div id="ositoContactThankYouBox" role="status" aria-live="polite" style="display:none; background:#EEF0FA; border:2px solid #10B981; padding:20px; margin-top:14px; color:#161616;">
-          <span style="display:inline-block; background:#10B981; color:#161616; font-family:'Fjalla One',sans-serif; font-size:11px; font-weight:700; padding:3px 9px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:8px;">SENT TO INFO@OSITODRONE.COM</span>
-          <h4 id="ositoContactThankYouTitle" style="font-family:'Fjalla One',sans-serif; font-size:21px; color:#232A68; margin:0 0 6px; text-transform:uppercase;">THANK YOU! YOUR MESSAGE HAS BEEN SENT.</h4>
-          <p id="ositoContactThankYouText" style="font-size:13.5px; color:#161616; margin:0 0 12px; line-height:1.5;"></p>
-          <div id="ositoContactThankYouSummary" style="background:#FFFFFF; border:1px solid #8E93DA; padding:10px 12px; font-size:12.5px; color:#333333; margin-bottom:12px; line-height:1.45;"></div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-            <button type="button" id="ositoContactResetBtn" class="osito-action-btn dark" style="padding:8px 14px; font-size:12.5px;">SEND ANOTHER MESSAGE</button>
-            <a id="ositoContactOpenMailBtn" href="mailto:info@ositodrone.com" class="osito-action-btn" style="padding:8px 14px; font-size:12.5px;">OPEN IN MAIL APP</a>
-            <button type="button" id="ositoContactDownloadEmlBtn" class="osito-action-btn dark" style="padding:8px 14px; font-size:12.5px; border-color:#232A68;">DOWNLOAD .EML</button>
-          </div>
+        <div id="ositoContactThankYouBox" role="status" aria-live="polite" style="display:none; background:#EEF0FA; border:2px solid #10B981; padding:16px 20px; margin-top:14px; color:#161616; text-align:center;">
+          <p id="ositoContactThankYouTitle" style="font-family:'Fjalla One',sans-serif; font-size:20px; color:#232A68; margin:0;">Your message has been sent.</p>
         </div>
       </div>
     </div>
@@ -3363,7 +3355,7 @@
 
         if (contactSubmitBtn) {
           contactSubmitBtn.disabled = true;
-          contactSubmitBtn.textContent = 'SENDING TO INFO@OSITODRONE.COM...';
+          contactSubmitBtn.textContent = 'SENDING...';
         }
 
         var inquiries = loadContactInquiries();
@@ -3421,21 +3413,12 @@
         if (msgEl) msgEl.value = '';
         if (contactSubmitBtn) {
           contactSubmitBtn.disabled = false;
-          contactSubmitBtn.textContent = 'MESSAGE SENT TO INFO@OSITODRONE.COM';
+          contactSubmitBtn.textContent = 'SEND MESSAGE';
         }
 
         if (contactThankYouBox) {
           if (contactThankYouTitle) {
-            contactThankYouTitle.textContent = 'THANK YOU, ' + n.toUpperCase() + '! YOUR MESSAGE HAS BEEN SENT.';
-          }
-          if (contactThankYouText) {
-            contactThankYouText.textContent = 'Your inquiry (' + inqId + ') has been sent in the backend directly to info@ositodrone.com (and copied to alan@ositodrone.com). Alan, Miguel, or Chuy will respond to ' + em + ' within 24 hours.';
-          }
-          if (contactThankYouSummary) {
-            contactThankYouSummary.innerHTML =
-              '<strong>Reference ID:</strong> ' + escapeHtmlPublic(inqId) + ' | <strong>Delivered To:</strong> <code>info@ositodrone.com</code> &amp; <code>alan@ositodrone.com</code><br/>' +
-              '<strong>From:</strong> ' + escapeHtmlPublic(n) + ' (' + escapeHtmlPublic(em) + (ph ? ' | ' + escapeHtmlPublic(ph) : '') + ')<br/>' +
-              '<strong>Project Details:</strong> ' + escapeHtmlPublic(msg);
+            contactThankYouTitle.textContent = 'Your message has been sent.';
           }
           contactThankYouBox.style.display = 'block';
         }

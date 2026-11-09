@@ -2987,7 +2987,7 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function normalizeLeadRow(raw) {
       var r = {};
-      for (var k in raw) r[k] = cleanDisplayText(raw[k]);
+      for (var k in raw) r[k] = String(raw[k] || '').replace(/\ufffd/g, '-');
       r.organization = r.organization || r.orgName || 'Prospective Partner';
       r.proposalUrl = r.proposalUrl || './downloads/admin-proposals/Osito_Academy_Proposal_Schools_SEGMENT_MASTER.docx';
 
