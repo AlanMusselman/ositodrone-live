@@ -1382,52 +1382,41 @@
        SECTION 1: STAFF AUTHENTICATION GATE (@OSITODRONE.COM WHITELIST)
        ===================================================================== -->
   <main id="admin-auth-gate" class="osito-parallax-dark">
-    <div class="auth-card">
-      <div class="auth-card-header">
-        <span class="auth-badge">RESTRICTED STAFF BACKEND | @OSITODRONE.COM</span>
-        <h1 style="font-family:'Fjalla One',sans-serif; font-size:26px; margin:0 0 6px; letter-spacing:0.04em; text-transform:uppercase; color:#FFFFFF;">
-          OSITO CO-FOUNDER &amp; STAFF PORTAL
+    <div class="auth-card" style="max-width:420px;">
+      <div class="auth-card-header" style="padding:20px 26px;">
+        <h1 style="font-family:'Fjalla One',sans-serif; font-size:24px; margin:0; letter-spacing:0.04em; text-transform:uppercase; color:#FFFFFF;">
+          SIGN IN
         </h1>
-        <p style="margin:0; font-size:13.5px; color:#EEF0FA; line-height:1.45;">
-          One-click 3D STL &amp; Bambu Lab P2S `.zip` project downloads for Chuy &amp; Miguel, plus Miguel's live Bay Area Sales Leads CRM &amp; `.docx` Proposal Hub.
-        </p>
       </div>
 
       <div class="auth-card-body">
         <div id="auth-alert-box" class="admin-alert" role="alert"></div>
 
-        <label class="form-label">QUICK-SELECT CO-FOUNDER ACCOUNT</label>
-        <div class="staff-pill-row">
-          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('miguel@ositodrone.com', this)">MIGUEL (CEO / SALES)</button>
-          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('jesus@ositodrone.com', this)">CHUY / JESUS (CTO / CAD)</button>
-          <button type="button" class="staff-pill-btn" onclick="selectCoFounderAccount('alan@ositodrone.com', this)">ALAN (COO / ADMIN)</button>
-        </div>
-
         <form id="ositoStaffLoginForm" novalidate onsubmit="handleStaffLogin(event)">
           <div class="form-group">
-            <label class="form-label" for="staffEmailInput">OSITO STAFF EMAIL (@OSITODRONE.COM ONLY)</label>
-            <input type="email" id="staffEmailInput" class="form-input" placeholder="miguel@ositodrone.com, jesus@ositodrone.com, or alan@ositodrone.com" required autocomplete="username" />
+            <label class="form-label" for="staffEmailInput">USERNAME</label>
+            <input type="text" id="staffEmailInput" class="form-input" placeholder="Username" required autocomplete="username" />
           </div>
 
           <div class="form-group">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <label class="form-label" for="staffPasswordInput" style="margin-bottom:0;">STAFF PASSWORD</label>
+              <label class="form-label" for="staffPasswordInput" style="margin-bottom:0;">PASSWORD</label>
               <button type="button" onclick="showPasswordToggle('staffPasswordInput', this)" style="background:none; border:none; color:#8E93DA; font-family:'Fjalla One',sans-serif; font-size:11.5px; cursor:pointer; text-transform:uppercase;">SHOW PASSWORD</button>
             </div>
-            <input type="password" id="staffPasswordInput" class="form-input" placeholder="Enter your Osito staff password" required autocomplete="current-password" />
+            <input type="password" id="staffPasswordInput" class="form-input" placeholder="Password" required autocomplete="current-password" />
           </div>
 
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
             <label style="font-size:13px; color:#EEF0FA; display:flex; align-items:center; gap:7px; cursor:pointer;">
-              <input type="checkbox" id="staffRememberCheck" checked /> Keep me signed in on this browser
+              <input type="checkbox" id="staffRememberCheck" checked /> Keep me signed in
             </label>
             <button type="button" onclick="openRecoveryModal()" style="background:none; border:none; color:#10B981; font-family:'Fjalla One',sans-serif; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-decoration:underline;">
-              FORGOT PASSWORD / RESET
+              FORGOT PASSWORD?
             </button>
           </div>
 
           <button type="submit" class="osito-action-btn emerald" style="width:100%; padding:13px; font-size:15.5px;">
-            SIGN IN TO STAFF BACKEND
+            SIGN IN
           </button>
         </form>
       </div>
@@ -2003,53 +1992,52 @@ Osito Drone Services | San Francisco, CA</textarea>
     <div class="osito-modal-box">
       <div class="osito-modal-header">
         <div>
-          <span style="font-family:'Fjalla One',sans-serif; font-size:11.5px; color:#10B981; text-transform:uppercase;">@OSITODRONE.COM STAFF SECURITY</span>
-          <h2 id="recovery-modal-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:2px 0 0; text-transform:uppercase;">
-            STAFF PASSWORD RECOVERY &amp; RESET
+          <h2 id="recovery-modal-title" style="font-family:'Fjalla One',sans-serif; font-size:20px; margin:0; text-transform:uppercase;">
+            FORGOT PASSWORD / RESET
           </h2>
         </div>
         <button type="button" class="osito-action-btn dark" style="padding:6px 12px; font-size:12px;" onclick="closeRecoveryModal()">CLOSE</button>
       </div>
       <div class="osito-modal-body">
         <div class="recovery-mode-tabs">
-          <button type="button" id="rec-tab-btn-key" class="recovery-tab-btn active" onclick="switchRecoveryMode('key')">1. CO-FOUNDER KEY RESET</button>
-          <button type="button" id="rec-tab-btn-otp" class="recovery-tab-btn" onclick="switchRecoveryMode('otp')">2. EMAIL 6-DIGIT CODE</button>
-          <button type="button" id="rec-tab-btn-admin" class="recovery-tab-btn" onclick="switchRecoveryMode('admin')">3. CONTACT ALAN (COO)</button>
+          <button type="button" id="rec-tab-btn-key" class="recovery-tab-btn active" onclick="switchRecoveryMode('key')">1. RECOVERY KEY</button>
+          <button type="button" id="rec-tab-btn-otp" class="recovery-tab-btn" onclick="switchRecoveryMode('otp')">2. EMAIL CODE</button>
+          <button type="button" id="rec-tab-btn-admin" class="recovery-tab-btn" onclick="switchRecoveryMode('admin')">3. REQUEST RESET</button>
         </div>
 
         <div id="recovery-alert-box" class="admin-alert"></div>
 
-        <!-- Mode 1: Co-Founder Recovery Key Reset -->
+        <!-- Mode 1: Recovery Key Reset -->
         <div id="rec-mode-key">
           <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
-            Enter your @ositodrone.com email and your private offline Co-Founder Recovery Key to set a new password immediately:
+            Enter your username and recovery key to set a new password:
           </p>
           <form onsubmit="handleKeyPasswordReset(event)" novalidate>
             <div class="form-group">
-              <label class="form-label">STAFF EMAIL (@OSITODRONE.COM)</label>
-              <input type="email" id="recKeyEmail" class="form-input" placeholder="miguel@ositodrone.com" required />
+              <label class="form-label">USERNAME</label>
+              <input type="text" id="recKeyEmail" class="form-input" placeholder="Username" required />
             </div>
             <div class="form-group">
-              <label class="form-label">CO-FOUNDER RECOVERY KEY</label>
-              <input type="text" id="recKeyCode" class="form-input" placeholder="e.g. OSITO-XXXXXX-XX" required />
+              <label class="form-label">RECOVERY KEY</label>
+              <input type="text" id="recKeyCode" class="form-input" placeholder="Recovery key" required />
             </div>
             <div class="form-group">
               <label class="form-label">NEW PASSWORD (8+ CHARACTERS)</label>
-              <input type="password" id="recKeyNewPass" class="form-input" placeholder="Enter your new password" minlength="8" required />
+              <input type="password" id="recKeyNewPass" class="form-input" placeholder="New password" minlength="8" required />
             </div>
-            <button type="submit" class="osito-action-btn emerald" style="width:100%;">RESET PASSWORD &amp; SIGN IN</button>
+            <button type="submit" class="osito-action-btn emerald" style="width:100%;">RESET PASSWORD</button>
           </form>
         </div>
 
         <!-- Mode 2: Email 6-Digit Verification Code -->
         <div id="rec-mode-otp" style="display:none;">
           <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
-            Send a 6-digit one-time reset code to your verified `@ositodrone.com` email address, then enter the code below to set a new password:
+            Send a 6-digit verification code to your account email, then enter the code below to set a new password:
           </p>
           <div class="form-group">
-            <label class="form-label">STAFF EMAIL (@OSITODRONE.COM)</label>
+            <label class="form-label">USERNAME</label>
             <div style="display:flex; gap:8px;">
-              <input type="email" id="recOtpEmail" class="form-input" placeholder="miguel@ositodrone.com" />
+              <input type="text" id="recOtpEmail" class="form-input" placeholder="Username" />
               <button type="button" class="osito-action-btn" style="white-space:nowrap;" onclick="sendStaffOtpCode()">SEND 6-DIGIT CODE</button>
             </div>
           </div>
@@ -2060,29 +2048,28 @@ Osito Drone Services | San Francisco, CA</textarea>
             </div>
             <div class="form-group">
               <label class="form-label">NEW PASSWORD (8+ CHARACTERS)</label>
-              <input type="password" id="recOtpNewPass" class="form-input" placeholder="Enter your new password" minlength="8" required />
+              <input type="password" id="recOtpNewPass" class="form-input" placeholder="New password" minlength="8" required />
             </div>
-            <button type="submit" class="osito-action-btn emerald" style="width:100%;">VERIFY CODE &amp; UPDATE PASSWORD</button>
+            <button type="submit" class="osito-action-btn emerald" style="width:100%;">VERIFY &amp; UPDATE PASSWORD</button>
           </form>
         </div>
 
-        <!-- Mode 3: Request Admin Reset from Alan -->
+        <!-- Mode 3: Request Admin Reset -->
         <div id="rec-mode-admin" style="display:none;">
           <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
-            Need Alan Musselman (`alan@ositodrone.com`) to issue a fresh credential reset for your workstation? Click below to open a pre-populated Outlook reset request:
+            Submit a password reset request for your account:
           </p>
           <div class="form-group">
-            <label class="form-label">YOUR @OSITODRONE.COM EMAIL</label>
-            <input type="email" id="recAdminReqEmail" class="form-input" placeholder="miguel@ositodrone.com or jesus@ositodrone.com" />
+            <label class="form-label">USERNAME</label>
+            <input type="text" id="recAdminReqEmail" class="form-input" placeholder="Username" />
           </div>
           <button type="button" class="osito-action-btn emerald" style="width:100%;" onclick="triggerAdminResetEmail()">
-            SEND PASSWORD RESET EMAIL TO ALAN@OSITODRONE.COM
+            SEND PASSWORD RESET REQUEST
           </button>
         </div>
       </div>
     </div>
   </div>
-
   <!-- =====================================================================
        MODAL 2: ADD NEW BAY AREA SALES LEAD
        ===================================================================== -->
@@ -2446,10 +2433,13 @@ Osito Drone Services | San Francisco, CA</textarea>
 
       var rawEmail = document.getElementById('staffEmailInput').value;
       var cleanEmail = String(rawEmail || '').trim().toLowerCase();
+      if (cleanEmail && cleanEmail.indexOf('@') === -1) {
+        cleanEmail = cleanEmail + '@ositodrone.com';
+      }
       var password = document.getElementById('staffPasswordInput').value;
 
       if (!cleanEmail.endsWith('@ositodrone.com') || !STAFF_ACCOUNTS[cleanEmail]) {
-        showAuthAlert('ACCESS RESTRICTED: Only verified @ositodrone.com co-founder accounts (miguel@ositodrone.com, jesus@ositodrone.com, chuy@ositodrone.com, alan@ositodrone.com) are authorized.', 'error');
+        showAuthAlert('Invalid username or password.', 'error');
         return;
       }
 
@@ -2460,7 +2450,7 @@ Osito Drone Services | San Francisco, CA</textarea>
           failedLoginCount = 0;
           showAuthAlert('5 failed password attempts detected. Account locked for 60 seconds, or click FORGOT PASSWORD / RESET.', 'error');
         } else {
-          showAuthAlert('Invalid password for ' + cleanEmail + '. Click FORGOT PASSWORD / RESET or contact administrative support.', 'error');
+          showAuthAlert('Invalid username or password.', 'error');
         }
         return;
       }
@@ -2700,16 +2690,16 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function handleKeyPasswordReset(ev) {
       if (ev) ev.preventDefault();
-      var email = document.getElementById('recKeyEmail').value.trim().toLowerCase();
+      var email = document.getElementById('recKeyEmail').value.trim().toLowerCase(); if (email && email.indexOf('@') === -1) email += '@ositodrone.com';
       var key = document.getElementById('recKeyCode').value.trim().toUpperCase();
       var newPass = document.getElementById('recKeyNewPass').value;
 
       if (!STAFF_ACCOUNTS[email]) {
-        showRecoveryAlert('Only verified @ositodrone.com staff emails are eligible for password reset.', 'error');
+        showRecoveryAlert('Please enter a valid username.', 'error');
         return;
       }
       if (!verifyStaffRecoveryKey(email, key)) {
-        showRecoveryAlert('Invalid Co-Founder Recovery Key for ' + email + '. Please verify your offline key or use Tab 2 (Email 6-Digit Code).', 'error');
+        showRecoveryAlert('Invalid recovery key.', 'error');
         return;
       }
       savePasswordOverride(email, newPass);
@@ -2718,9 +2708,9 @@ Osito Drone Services | San Francisco, CA</textarea>
     }
 
     function sendStaffOtpCode() {
-      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase();
+      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase(); if (email && email.indexOf('@') === -1) email += '@ositodrone.com';
       if (!STAFF_ACCOUNTS[email]) {
-        showRecoveryAlert('Please enter an authorized @ositodrone.com email (miguel@ositodrone.com, jesus@ositodrone.com, or alan@ositodrone.com).', 'error');
+        showRecoveryAlert('Please enter a valid username.', 'error');
         return;
       }
       var code = String(Math.floor(100000 + Math.random() * 900000));
@@ -2752,7 +2742,7 @@ Osito Drone Services | San Francisco, CA</textarea>
 
     function handleOtpPasswordReset(ev) {
       if (ev) ev.preventDefault();
-      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase();
+      var email = document.getElementById('recOtpEmail').value.trim().toLowerCase(); if (email && email.indexOf('@') === -1) email += '@ositodrone.com';
       var code = document.getElementById('recOtpCodeInput').value.trim();
       var newPass = document.getElementById('recOtpNewPass').value;
       try {
