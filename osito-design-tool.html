@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://generativelanguage.googleapis.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self';" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
     <title>Osito Design &amp; Flowchart Tool | Osito Studio 4.0 | Osito Drone Toolbox</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +38,7 @@
     .osito-action-btn.emerald { background: #059669; border: 1px solid #10B981; }
     .osito-action-btn.emerald:hover { background: #047857 !important; border-color: #FFFFFF !important; }
     #root > div.h-screen { height: calc(100vh - 48px) !important; }
+    * { border-radius: 0px !important; }
 </style>
   <style id="osito-mobile-ux-styles">
   /* ==========================================================================

@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://generativelanguage.googleapis.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
   <title>Osito In-House 3D STL Editor | Parametric 3D CAD, Custom STL Inspector &amp; Bambu Lab P2S Slicer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1486,7 +1490,7 @@
     </div>
     <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
       <label class="btn" for="stlFileInput" style="cursor:pointer;">IMPORT .STL</label>
-      <input id="stlFileInput" type="file" accept=".stl" style="display:none;" />
+      <input id="stlFileInput" type="file" accept=".stl" style="display:none;" aria-label="Import STL File" />
       <button class="btn btn-emerald" type="button" onclick="autoPackPlateSupportSafe()">AUTO-PACK (SUPPORT-SAFE)</button>
       <button class="btn" type="button" onclick="centerAndDropSelected()">DROP TO BED (Z=0)</button>
       <button class="btn" type="button" onclick="array2x2Selected()">2X2 ARRAY</button>
@@ -1597,7 +1601,7 @@
 
       <div>
         <h2 class="sec-head">4. BAMBU P2S 4-TIER FILAMENT</h2>
-        <select id="filamentSelect" onchange="updateStats()">
+        <select id="filamentSelect" onchange="updateStats()" aria-label="Bambu P2S 4-Tier Filament Selection">
           <option value="petgcf" data-density="1.29" data-rate="0.035">Slot 1: Bambu PETG-CF (Airframes &amp; Stands)</option>
           <option value="pahtcf" data-density="1.23" data-rate="0.065">Slot 2: Bambu PAHT-CF (High-Impact / Thermal)</option>
           <option value="plaplus" data-density="1.24" data-rate="0.022">Slot 3: eSUN PLA+ / PLA Tough (Kits &amp; Jigs)</option>
@@ -1640,18 +1644,18 @@
         </div>
         <div class="control-row">
           <span>Width (X)</span>
-          <input type="range" id="dimXRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" />
-          <input type="number" id="dimXNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" />
+          <input type="range" id="dimXRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" aria-label="Scale Width X Slider" />
+          <input type="number" id="dimXNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sx', this.value)" aria-label="Scale Width X Value in Millimeters" />
         </div>
         <div class="control-row">
           <span>Depth (Y)</span>
-          <input type="range" id="dimYRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" />
-          <input type="number" id="dimYNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" />
+          <input type="range" id="dimYRange" min="2" max="250" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" aria-label="Scale Depth Y Slider" />
+          <input type="number" id="dimYNum" min="2" max="256" step="0.5" value="80" oninput="updateTransformFromUI('sy', this.value)" aria-label="Scale Depth Y Value in Millimeters" />
         </div>
         <div class="control-row">
           <span>Height (Z)</span>
-          <input type="range" id="dimZRange" min="1" max="250" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" />
-          <input type="number" id="dimZNum" min="1" max="256" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" />
+          <input type="range" id="dimZRange" min="1" max="250" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" aria-label="Scale Height Z Slider" />
+          <input type="number" id="dimZNum" min="1" max="256" step="0.5" value="16" oninput="updateTransformFromUI('sz', this.value)" aria-label="Scale Height Z Value in Millimeters" />
         </div>
       </div>
 
@@ -1677,23 +1681,23 @@
         <h2 class="sec-head">POSITION &amp; YAW ON BUILD PLATE</h2>
         <div class="control-row">
           <span>Pos X (mm)</span>
-          <input type="range" id="posXRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" />
-          <input type="number" id="posXNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" />
+          <input type="range" id="posXRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" aria-label="Position X Slider" />
+          <input type="number" id="posXNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('px', this.value)" aria-label="Position X Value in Millimeters" />
         </div>
         <div class="control-row">
           <span>Pos Y (mm)</span>
-          <input type="range" id="posYRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" />
-          <input type="number" id="posYNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" />
+          <input type="range" id="posYRange" min="-110" max="110" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" aria-label="Position Y Slider" />
+          <input type="number" id="posYNum" min="-128" max="128" step="1" value="0" oninput="updateTransformFromUI('py', this.value)" aria-label="Position Y Value in Millimeters" />
         </div>
         <div class="control-row">
           <span>Lift Z (mm)</span>
-          <input type="range" id="posZRange" min="0" max="150" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" />
-          <input type="number" id="posZNum" min="0" max="200" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" />
+          <input type="range" id="posZRange" min="0" max="150" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" aria-label="Lift Position Z Slider" />
+          <input type="number" id="posZNum" min="0" max="200" step="0.5" value="0" oninput="updateTransformFromUI('pz', this.value)" aria-label="Lift Position Z Value in Millimeters" />
         </div>
         <div class="control-row">
           <span>Rot Z (Yaw)</span>
-          <input type="range" id="rotZRange" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" />
-          <input type="number" id="rotZNum" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" />
+          <input type="range" id="rotZRange" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" aria-label="Rotation Z Yaw Slider" />
+          <input type="number" id="rotZNum" min="-180" max="180" step="5" value="0" oninput="updateTransformFromUI('rz', this.value)" aria-label="Rotation Z Yaw Value in Degrees" />
         </div>
       </div>
 
@@ -1701,7 +1705,7 @@
         <h2 class="sec-head">SLICER &amp; BAMBU P2S TELEMETRY</h2>
         <div class="control-row">
           <span>Infill (%)</span>
-          <input type="range" id="infillRange" min="10" max="100" step="5" value="25" oninput="document.getElementById('infillVal').textContent=this.value+'%'; updateStats();" />
+          <input type="range" id="infillRange" min="10" max="100" step="5" value="25" oninput="document.getElementById('infillVal').textContent=this.value+'%'; updateStats();" aria-label="Infill Percentage Slider" />
           <span id="infillVal" style="font-family:monospace; text-align:right;">25%</span>
         </div>
         <div class="stat-box">
@@ -2250,8 +2254,10 @@
           alert('Could not parse triangles from STL file.');
           return;
         }
+        var rawName = (file && file.name) ? file.name.replace(/\.stl$/i, '') : 'unnamed_part';
+        var sanitizedName = rawName.replace(/[^\w\s\.\-]/g, '_').trim().slice(0, 80) || 'part';
         var newPart = {
-          name: file.name.replace(/\.stl$/i, ''),
+          name: sanitizedName,
           tris: [],
           fullTrisCount: tris.length,
           sx: 10, sy: 10, sz: 10,
@@ -2397,6 +2403,15 @@
       updateStats();
     }
 
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function renderPartList() {
       var listEl = document.getElementById('partList');
       if (parts.length === 0) {
@@ -2404,8 +2419,9 @@
         return;
       }
       listEl.innerHTML = parts.map(function(p, idx) {
+        var safeName = escapeHtml(p.name);
         return '<div class="part-item ' + (idx === selectedIdx ? 'active' : '') + '" onclick="selectPart(' + idx + ')">' +
-          '<span>' + (idx + 1) + '. ' + p.name + ' <span style="color:#34D399; font-size:10px;">(' + p.px + ',' + p.py + ')</span></span>' +
+          '<span>' + (idx + 1) + '. ' + safeName + ' <span style="color:#34D399; font-size:10px;">(' + p.px + ',' + p.py + ')</span></span>' +
           '<span style="font-family:monospace; color:#8E93DA;">' + p.sx + 'x' + p.sy + 'x' + p.sz + '</span>' +
         '</div>';
       }).join('');

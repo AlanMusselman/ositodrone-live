@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://generativelanguage.googleapis.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
   <title>Staff Admin &amp; Co-Founder Portal | Osito Drone Services</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1426,42 +1430,6 @@
             SIGN IN TO STAFF BACKEND
           </button>
         </form>
-
-        <!-- First-Time Co-Founder Setup & Recovery Key Drawer -->
-        <div style="margin-top:20px; border-top:1px solid #303885; padding-top:14px;">
-          <button type="button" onclick="toggleFirstTimeSetupDrawer()" style="width:100%; background:rgba(24, 34, 86, 0.88); border:1px solid #7077CF; color:#EEF0FA; padding:9px 12px; font-family:'Fjalla One',sans-serif; font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
-            <span>FIRST-TIME CO-FOUNDER LOGIN &amp; RECOVERY KEYS</span>
-            <span id="setup-drawer-indicator">VIEW CREDENTIALS</span>
-          </button>
-          <div id="first-time-setup-drawer" style="display:none; background:rgba(20, 28, 74, 0.92); border:1px solid #7077CF; border-top:none; padding:14px; font-size:12.5px; color:#EEF0FA; line-height:1.55;">
-            <p style="margin:0 0 10px; color:#34D399; font-weight:700;">
-              Click any row below to auto-fill your initial Co-Founder login, then change your custom password inside the Security tab:
-            </p>
-            <div style="display:grid; gap:8px;">
-              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #10B981; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <div>
-                  <strong>Miguel Flores (CEO)</strong>: <code>miguel@ositodrone.com</code><br/>
-                  Default Pass: <code>OsitoMiguel2026!</code> | Recovery Key: <code>OSITO-MIGUEL-75</code>
-                </div>
-                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('miguel@ositodrone.com', 'OsitoMiguel2026!')">AUTO-FILL MIGUEL</button>
-              </div>
-              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #7077CF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <div>
-                  <strong>Jesus &quot;Chuy&quot; Aceves (CTO)</strong>: <code>jesus@ositodrone.com</code> (or <code>chuy@ositodrone.com</code>)<br/>
-                  Default Pass: <code>OsitoChuy2026!</code> | Recovery Key: <code>OSITO-CHUY-75</code>
-                </div>
-                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('jesus@ositodrone.com', 'OsitoChuy2026!')">AUTO-FILL CHUY</button>
-              </div>
-              <div style="background:#232A68; padding:8px 10px; border-left:3px solid #8E93DA; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <div>
-                  <strong>Alan Musselman (COO)</strong>: <code>alan@ositodrone.com</code><br/>
-                  Default Pass: <code>OsitoAlan2026!</code> | Recovery Key: <code>OSITO-ALAN-75</code>
-                </div>
-                <button type="button" class="osito-action-btn emerald" style="padding:5px 10px; font-size:11.5px;" onclick="quickFillLogin('alan@ositodrone.com', 'OsitoAlan2026!')">AUTO-FILL ALAN</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </main>
@@ -1704,7 +1672,7 @@
                 <th>CO-FOUNDER</th>
                 <th>AUTHORIZED EMAIL</th>
                 <th>DEFAULT TAB</th>
-                <th>RECOVERY KEY</th>
+                <th>AUTHENTICATION STATUS</th>
               </tr>
             </thead>
             <tbody>
@@ -1712,19 +1680,19 @@
                 <td><strong>Miguel Flores</strong> (CEO)</td>
                 <td><code>miguel@ositodrone.com</code></td>
                 <td>Sales Leads &amp; CRM</td>
-                <td><code>OSITO-MIGUEL-75</code></td>
+                <td><span class="badge" style="background:#10B981; color:#FFFFFF; padding:2px 8px; font-size:11px;">SHA-256 PROTECTED</span></td>
               </tr>
               <tr>
                 <td><strong>Jesus &quot;Chuy&quot; Aceves</strong> (CTO)</td>
                 <td><code>jesus@ositodrone.com</code><br/><code>chuy@ositodrone.com</code></td>
                 <td>3D Print &amp; Bambu .Zips</td>
-                <td><code>OSITO-CHUY-75</code></td>
+                <td><span class="badge" style="background:#10B981; color:#FFFFFF; padding:2px 8px; font-size:11px;">SHA-256 PROTECTED</span></td>
               </tr>
               <tr>
                 <td><strong>Alan Musselman</strong> (COO)</td>
                 <td><code>alan@ositodrone.com</code></td>
                 <td>3D Print &amp; Full Admin</td>
-                <td><code>OSITO-ALAN-75</code></td>
+                <td><span class="badge" style="background:#10B981; color:#FFFFFF; padding:2px 8px; font-size:11px;">SHA-256 PROTECTED</span></td>
               </tr>
             </tbody>
           </table>
@@ -2054,7 +2022,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         <!-- Mode 1: Co-Founder Recovery Key Reset -->
         <div id="rec-mode-key">
           <p style="font-size:13px; color:#EEF0FA; margin:0 0 14px; line-height:1.45;">
-            Enter your `@ositodrone.com` email and your Co-Founder Recovery Key (<code>OSITO-MIGUEL-75</code>, <code>OSITO-CHUY-75</code>, or <code>OSITO-ALAN-75</code>) to set a new password immediately:
+            Enter your @ositodrone.com email and your private offline Co-Founder Recovery Key to set a new password immediately:
           </p>
           <form onsubmit="handleKeyPasswordReset(event)" novalidate>
             <div class="form-group">
@@ -2063,7 +2031,7 @@ Osito Drone Services | San Francisco, CA</textarea>
             </div>
             <div class="form-group">
               <label class="form-label">CO-FOUNDER RECOVERY KEY</label>
-              <input type="text" id="recKeyCode" class="form-input" placeholder="OSITO-MIGUEL-75" required />
+              <input type="text" id="recKeyCode" class="form-input" placeholder="e.g. OSITO-XXXXXX-XX" required />
             </div>
             <div class="form-group">
               <label class="form-label">NEW PASSWORD (8+ CHARACTERS)</label>
@@ -2455,12 +2423,6 @@ Osito Drone Services | San Francisco, CA</textarea>
       if (pwInput) pwInput.focus();
     }
 
-    function quickFillLogin(email, pass) {
-      document.getElementById('staffEmailInput').value = email;
-      document.getElementById('staffPasswordInput').value = pass;
-      showAuthAlert('Credentials filled for ' + email + '. Click SIGN IN TO STAFF BACKEND below.', 'success');
-    }
-
     function showPasswordToggle(inputId, btnEl) {
       var el = document.getElementById(inputId);
       if (!el) return;
@@ -2470,19 +2432,6 @@ Osito Drone Services | San Francisco, CA</textarea>
       } else {
         el.type = 'password';
         btnEl.textContent = 'SHOW PASSWORD';
-      }
-    }
-
-    function toggleFirstTimeSetupDrawer() {
-      var dr = document.getElementById('first-time-setup-drawer');
-      var ind = document.getElementById('setup-drawer-indicator');
-      if (!dr) return;
-      if (dr.style.display === 'none' || !dr.style.display) {
-        dr.style.display = 'block';
-        if (ind) ind.textContent = 'HIDE CREDENTIALS';
-      } else {
-        dr.style.display = 'none';
-        if (ind) ind.textContent = 'VIEW CREDENTIALS';
       }
     }
 
@@ -2511,7 +2460,7 @@ Osito Drone Services | San Francisco, CA</textarea>
           failedLoginCount = 0;
           showAuthAlert('5 failed password attempts detected. Account locked for 60 seconds, or click FORGOT PASSWORD / RESET.', 'error');
         } else {
-          showAuthAlert('Invalid password for ' + cleanEmail + '. Click FORGOT PASSWORD / RESET or open First-Time Co-Founder Login below.', 'error');
+          showAuthAlert('Invalid password for ' + cleanEmail + '. Click FORGOT PASSWORD / RESET or contact administrative support.', 'error');
         }
         return;
       }
@@ -2520,20 +2469,104 @@ Osito Drone Services | San Francisco, CA</textarea>
       completeStaffSignIn(cleanEmail);
     }
 
-    function completeStaffSignIn(cleanEmail) {
+    var STAFF_SESSION_MAX_AGE_MS = 8 * 60 * 60 * 1000; // 8 hours maximum lifetime
+    var STAFF_INACTIVITY_LIMIT_MS = 15 * 60 * 1000;     // 15 minutes inactivity timeout
+    var STAFF_ACTIVITY_THROTTLE_MS = 15 * 1000;         // 15 seconds activity throttle
+    var staffSessionWatchdogInterval = null;
+    var staffActivityListenersAttached = false;
+    var lastStaffActivityUpdate = 0;
+
+    function recordStaffActivity() {
+      var now = Date.now();
+      if (now - lastStaffActivityUpdate < STAFF_ACTIVITY_THROTTLE_MS) return;
+      lastStaffActivityUpdate = now;
+      try {
+        var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
+        if (raw) {
+          var sess = JSON.parse(raw);
+          if (sess && sess.email && sess.token) {
+            sess.lastActive = now;
+            var updated = JSON.stringify(sess);
+            if (sessionStorage.getItem(STORAGE_KEYS.SESSION)) {
+              sessionStorage.setItem(STORAGE_KEYS.SESSION, updated);
+            }
+            if (localStorage.getItem(STORAGE_KEYS.SESSION)) {
+              localStorage.setItem(STORAGE_KEYS.SESSION, updated);
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    function startStaffSessionWatchdog() {
+      lastStaffActivityUpdate = Date.now();
+      if (!staffActivityListenersAttached && typeof window !== 'undefined' && window.addEventListener) {
+        var events = ['mousemove', 'keydown', 'click', 'scroll'];
+        for (var i = 0; i < events.length; i++) {
+          window.addEventListener(events[i], recordStaffActivity, { passive: true });
+        }
+        staffActivityListenersAttached = true;
+      }
+      if (staffSessionWatchdogInterval) {
+        clearInterval(staffSessionWatchdogInterval);
+      }
+      staffSessionWatchdogInterval = setInterval(function() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
+          if (!raw) {
+            handleStaffLogout(false);
+            return;
+          }
+          var sess = JSON.parse(raw);
+          if (!sess || !sess.email || !sess.token || !STAFF_ACCOUNTS[sess.email]) {
+            handleStaffLogout(false);
+            return;
+          }
+          var now = Date.now();
+          var loginTs = sess.loginAt ? new Date(sess.loginAt).getTime() : 0;
+          if (!loginTs || (now - loginTs >= STAFF_SESSION_MAX_AGE_MS)) {
+            handleStaffLogout(true);
+            return;
+          }
+          var lastActiveTs = Number(sess.lastActive) || loginTs;
+          if (now - lastActiveTs > STAFF_INACTIVITY_LIMIT_MS) {
+            handleStaffLogout(true);
+            return;
+          }
+        } catch (e) {
+          handleStaffLogout(false);
+        }
+      }, 15000);
+    }
+
+    function stopStaffSessionWatchdog() {
+      if (staffSessionWatchdogInterval) {
+        clearInterval(staffSessionWatchdogInterval);
+        staffSessionWatchdogInterval = null;
+      }
+    }
+
+    function completeStaffSignIn(cleanEmail, existingSession) {
       var acct = STAFF_ACCOUNTS[cleanEmail];
       if (!acct) return;
       activeStaffEmail = cleanEmail;
       var remember = document.getElementById('staffRememberCheck') && document.getElementById('staffRememberCheck').checked;
-      var sessionPayload = JSON.stringify({
+      var nowIso = (existingSession && existingSession.loginAt) ? existingSession.loginAt : new Date().toISOString();
+      var sessionToken = (existingSession && existingSession.token) ? existingSession.token : sha256Hex(cleanEmail + '::' + nowIso + '::' + acct.passHash);
+      var sessionObj = {
         email: cleanEmail,
         name: acct.name,
         role: acct.role,
-        loginAt: new Date().toISOString()
-      });
+        loginAt: nowIso,
+        token: sessionToken,
+        lastActive: Date.now()
+      };
+      var sessionPayload = JSON.stringify(sessionObj);
       try {
         sessionStorage.setItem(STORAGE_KEYS.SESSION, sessionPayload);
-        if (remember) localStorage.setItem(STORAGE_KEYS.SESSION, sessionPayload);
+        if (remember || (existingSession && localStorage.getItem(STORAGE_KEYS.SESSION))) {
+          localStorage.setItem(STORAGE_KEYS.SESSION, sessionPayload);
+        }
       } catch (e) {}
 
       document.getElementById('admin-auth-gate').style.display = 'none';
@@ -2551,18 +2584,56 @@ Osito Drone Services | San Francisco, CA</textarea>
       renderAdminContactInboxTable();
       updateNewsletterLivePreview();
       switchAdminTab(acct.defaultTab || 'tab-zips');
+
+      startStaffSessionWatchdog();
     }
 
-    function handleStaffLogout() {
+    function handleStaffLogout(isTimeout) {
+      stopStaffSessionWatchdog();
       activeStaffEmail = null;
       try {
         sessionStorage.removeItem(STORAGE_KEYS.SESSION);
         localStorage.removeItem(STORAGE_KEYS.SESSION);
       } catch (e) {}
+
+      // Purge rendered DOM elements (CRM leads table, proposals grid, subscriber tables, etc.)
+      var purgeTargetIds = [
+        'crm-leads-tbody',
+        'proposals-grid',
+        'admin-subscribers-tbody',
+        'nl-campaigns-tbody',
+        'admin-contact-inbox-tbody',
+        'zip-packs-grid'
+      ];
+      for (var i = 0; i < purgeTargetIds.length; i++) {
+        var el = document.getElementById(purgeTargetIds[i]);
+        if (el) el.innerHTML = '';
+      }
+
+      // Clear password and recovery input fields
+      var clearInputIds = [
+        'staffPasswordInput',
+        'recKeyCode',
+        'recKeyNewPass',
+        'recOtpCodeInput',
+        'recOtpNewPass',
+        'secCurrentPassOrKey',
+        'secNewPassword',
+        'secConfirmPassword'
+      ];
+      for (var j = 0; j < clearInputIds.length; j++) {
+        var inp = document.getElementById(clearInputIds[j]);
+        if (inp) inp.value = '';
+      }
+
       document.getElementById('admin-dashboard-view').style.display = 'none';
       document.getElementById('admin-auth-gate').style.display = 'flex';
-      document.getElementById('staffPasswordInput').value = '';
-      showAuthAlert('You have been securely signed out of the Osito Staff Portal.', 'success');
+
+      if (isTimeout) {
+        showAuthAlert('SESSION EXPIRED: You have been automatically signed out due to inactivity (15 minutes). Please re-authenticate.', 'error');
+      } else {
+        showAuthAlert('You have been securely signed out of the Osito Staff Portal.', 'success');
+      }
     }
 
     function switchAdminTab(tabId) {
@@ -2638,7 +2709,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         return;
       }
       if (!verifyStaffRecoveryKey(email, key)) {
-        showRecoveryAlert('Invalid Co-Founder Recovery Key for ' + email + '. Expected OSITO-MIGUEL-75, OSITO-CHUY-75, or OSITO-ALAN-75.', 'error');
+        showRecoveryAlert('Invalid Co-Founder Recovery Key for ' + email + '. Please verify your offline key or use Tab 2 (Email 6-Digit Code).', 'error');
         return;
       }
       savePasswordOverride(email, newPass);
@@ -2675,8 +2746,8 @@ Osito Drone Services | San Francisco, CA</textarea>
         triggerAdminMailto(otpMailto);
       }
       var codeInput = document.getElementById('recOtpCodeInput');
-      if (codeInput) codeInput.value = code;
-      showRecoveryAlert('6-Digit Verification Code generated & dispatched for ' + email + ': ' + code + ' (Valid for 15 minutes). Enter it below to set your new password.', 'success');
+      if (codeInput) codeInput.value = '';
+      showRecoveryAlert('A 6-digit verification code has been dispatched to your authorized co-founder inbox for ' + email + ' (Valid for 15 minutes). Check your email or out-of-band admin support channel and enter the code below.', 'success');
     }
 
     function handleOtpPasswordReset(ev) {
@@ -2776,10 +2847,6 @@ Osito Drone Services | San Francisco, CA</textarea>
       el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
-    function cleanDisplayText(str) {
-      return String(str || '').replace(/\ufffd/g, '-');
-    }
-
     function escapeHtmlSafe(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
@@ -2787,6 +2854,19 @@ Osito Drone Services | San Francisco, CA</textarea>
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function cleanDisplayText(str) {
+      return escapeHtmlSafe(String(str || '').replace(/\ufffd/g, '-'));
+    }
+
+    function sanitizeUrl(url) {
+      var s = String(url || '').trim();
+      if (!s || s === '#') return '#';
+      if (/^(https?:|mailto:)/i.test(s) || s.startsWith('#') || s.startsWith('./') || s.startsWith('/')) {
+        return s;
+      }
+      return '#';
     }
 
     function generateUniqueAdminId(prefix, startNum, list) {
@@ -2857,7 +2937,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         html += '<article class="pack-card">'
           + '<div class="pack-card-top">'
           + '  <div class="pack-cat-row">'
-          + '    <span class="pack-cat-badge">' + p.id + ' | ' + cat + '</span>'
+          + '    <span class="pack-cat-badge">' + escapeHtmlSafe(p.id) + ' | ' + cat + '</span>'
           + '    <span class="pack-ver-badge">' + cleanDisplayText(p.version || 'v2026.11') + '</span>'
           + '  </div>'
           + '  <h3 class="pack-title">' + title + '</h3>'
@@ -4453,7 +4533,7 @@ Osito Drone Services | San Francisco, CA</textarea>
         + '</div>'
         + '<div style="padding:18px 20px; background:#FFFFFF;">'
         + bodyHtml
-        + (ctaText ? '<div style="margin:18px 0 10px;"><a href="' + escapeHtmlSafe(ctaUrl || '#') + '" target="_blank" rel="noopener" style="display:inline-block; background:#10B981; color:#161616; font-family:\'Fjalla One\',sans-serif; font-size:13.5px; font-weight:700; text-decoration:none; padding:10px 18px; border:2px solid #059669; text-transform:uppercase;">' + escapeHtmlSafe(ctaText) + '</a></div>' : '')
+        + (ctaText ? '<div style="margin:18px 0 10px;"><a href="' + escapeHtmlSafe(sanitizeUrl(ctaUrl)) + '" target="_blank" rel="noopener" style="display:inline-block; background:#10B981; color:#161616; font-family:\'Fjalla One\',sans-serif; font-size:13.5px; font-weight:700; text-decoration:none; padding:10px 18px; border:2px solid #059669; text-transform:uppercase;">' + escapeHtmlSafe(ctaText) + '</a></div>' : '')
         + '</div>'
         + '<div style="background:#1E2660; color:#E0E7FF; padding:12px 20px; font-size:11.5px; border-top:2px solid #7077CF;">'
         + '  Sent by Osito Drone Services (<code>info@ositodrone.com</code>) | San Francisco, CA | Verified Subscriber: ' + escapeHtmlSafe(recEmail)
@@ -4917,12 +4997,34 @@ Osito Drone Services | San Francisco, CA</textarea>
         var raw = sessionStorage.getItem(STORAGE_KEYS.SESSION) || localStorage.getItem(STORAGE_KEYS.SESSION);
         if (raw) {
           var sess = JSON.parse(raw);
-          if (sess && sess.email && STAFF_ACCOUNTS[sess.email]) {
-            completeStaffSignIn(sess.email);
+          if (!sess || !sess.email || !sess.token || !sess.loginAt || !STAFF_ACCOUNTS[sess.email]) {
+            sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+            localStorage.removeItem(STORAGE_KEYS.SESSION);
             return;
           }
+          var acct = STAFF_ACCOUNTS[sess.email];
+          var expectedToken = sha256Hex(sess.email + '::' + sess.loginAt + '::' + acct.passHash);
+          var sessionAge = Date.now() - new Date(sess.loginAt).getTime();
+          var MAX_LIFETIME = 8 * 60 * 60 * 1000; // 8 hours
+          var MAX_INACTIVITY = 15 * 60 * 1000;   // 15 minutes
+          var lastActive = Number(sess.lastActive) || new Date(sess.loginAt).getTime();
+          var inactiveTime = Date.now() - lastActive;
+
+          if (sess.token !== expectedToken || sessionAge < 0 || sessionAge >= MAX_LIFETIME || inactiveTime > MAX_INACTIVITY) {
+            sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+            localStorage.removeItem(STORAGE_KEYS.SESSION);
+            return;
+          }
+
+          completeStaffSignIn(sess.email, sess);
+          return;
         }
-      } catch (e) {}
+      } catch (e) {
+        try {
+          sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+          localStorage.removeItem(STORAGE_KEYS.SESSION);
+        } catch (err) {}
+      }
     })();
   </script>
   <script id="osito-mobile-ux-script">

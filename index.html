@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://generativelanguage.googleapis.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
   <title>Drone Training Programs for Kids and Businesses, after school programs, birthdays, and other events | Osito Drone Services</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -469,6 +473,7 @@
   /* Smooth Anchor Offset for Sticky Navigation Header */
   #osito-bookable-job-packages,
   #osito-live-sim-estimator-hub,
+  #osito-bay-area-competitor-table,
   #osito-contact-section,
   #drone-academy,
   #flight-academy,
@@ -480,7 +485,7 @@
   #teen-exam,
   #interactive-calc,
   #chapter-1 {
-    scroll-margin-top: 72px;
+    scroll-margin-top: 80px;
   }
 
   /* Touch & Keyboard Dropdown Support on Tablet/Desktop (> 900px) */
@@ -1614,7 +1619,7 @@
         <div>
           <span class="osito-editable" style="background:#232A68; color:#EEF0FA; border:1px solid #7077CF; padding:4px 12px; font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">MAKER FAIRE & COMMERCIAL AERIAL PORTFOLIO</span>
           <h2 class="osito-editable" style="font-family:'Fjalla One',sans-serif; font-size:32px; color:#FFFFFF; margin:10px 0 4px; letter-spacing:0.04em; text-transform:uppercase;">EXPLORE BREATHTAKING AERIAL VIEWS AND MOMENTS</h2>
-          <p class="osito-editable" style="font-size:14.5px; color:#B0B5C9; margin:0;">Featuring all photos from live ositodrone.com, our 3-tent Maker Faire Youth Flight Arena, and San Francisco DJI drone flights.</p>
+          <p class="osito-editable" style="font-size:14.5px; color:#B0B5C9; margin:0;">Featuring all photos from live ositodrone.com, our 3-tent Maker Faire Youth Flight Arena, and San Francisco FAA Part 107 commercial drone flights.</p>
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button type="button" class="osito-filter-btn active" data-filter="all">ALL (30)</button>
@@ -2063,7 +2068,7 @@
         cat: 'aerial',
         badge: 'OSITO AERIAL MISSION | PORT OF SAN FRANCISCO AT NIGHT',
         title: 'Port of San Francisco Ferry Building & Downtown Skyline',
-        desc: 'Nighttime commercial DJI aerial flight over the illuminated Port of San Francisco Ferry Building and Financial District towers.'
+        desc: 'Nighttime commercial aerial flight over the illuminated Port of San Francisco Ferry Building and Financial District towers.'
       },
       {
         src: './assets/d-sf-sutro-crimson-sunset.jpg',
@@ -2147,7 +2152,7 @@
         cat: 'aerial',
         badge: 'OSITO AERIAL FLIGHT | SAN FRANCISCO & SUTRO TOWER',
         title: 'Twilight Commercial Aerial Flight Over San Francisco',
-        desc: 'High-resolution DJI aerial mission capturing Sutro Tower, the crescent moon, and San Francisco neighborhoods.'
+        desc: 'High-resolution aerial mission capturing Sutro Tower, the crescent moon, and San Francisco neighborhoods.'
       },
       {
         src: './assets/dji-sf-bay-bridge-flight.jpg',
@@ -3845,6 +3850,95 @@
       initOsitoMobileNav();
     }
   } catch (err) {}
+})();
+</script>
+
+<!-- Osito No-Code Visual Editor Mode (Activated discretely via ?editor=1 or ?editor=true) -->
+<div id="osito-nocode-toolbar" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:999999; background:#232A68; border-top:2px solid #7077CF; border-radius:0px; padding:10px 24px; box-shadow:0 -4px 20px rgba(0,0,0,0.5); font-family:'Roboto',sans-serif; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <span style="font-family:'Fjalla One',sans-serif; background:#161E54; color:#FFFFFF; border:1px solid #7077CF; border-radius:0px; padding:5px 12px; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;">OSITO NO-CODE EDITOR (STAGING)</span>
+    <span style="font-size:12.5px; color:#EEF0FA;">Click directly on any text or pricing to edit. Click Export when done.</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <button type="button" id="ositoExportHtmlBtn" style="font-family:'Fjalla One',sans-serif; background:#059669; color:#FFFFFF; border:1px solid #10B981; border-radius:0px; padding:8px 16px; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">EXPORT EDITED HTML</button>
+    <button type="button" id="ositoExitEditorBtn" style="font-family:'Fjalla One',sans-serif; background:#161616; color:#FFFFFF; border:1px solid #7077CF; border-radius:0px; padding:8px 14px; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">EXIT EDITOR</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  function initNoCodeEditor() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var editorParam = params.get('editor');
+      var isEditor = (editorParam === '1' || editorParam === 'true');
+      var toolbar = document.getElementById('osito-nocode-toolbar');
+      var editables = document.querySelectorAll('.osito-editable');
+
+      if (isEditor) {
+        if (toolbar) {
+          toolbar.style.display = 'flex';
+        }
+        for (var i = 0; i < editables.length; i++) {
+          editables[i].contentEditable = 'true';
+          editables[i].setAttribute('spellcheck', 'false');
+        }
+
+        var exportBtn = document.getElementById('ositoExportHtmlBtn');
+        if (exportBtn) {
+          exportBtn.onclick = function() {
+            try {
+              var clone = document.documentElement.cloneNode(true);
+              var tb = clone.querySelector('#osito-nocode-toolbar');
+              if (tb) tb.parentNode.removeChild(tb);
+              var clonedEditables = clone.querySelectorAll('.osito-editable');
+              for (var j = 0; j < clonedEditables.length; j++) {
+                clonedEditables[j].removeAttribute('contenteditable');
+                clonedEditables[j].removeAttribute('spellcheck');
+              }
+              var htmlText = '<!DOCTYPE html>\n' + clone.outerHTML;
+              var blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+              var blobUrl = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = blobUrl;
+              a.download = 'index.html';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              setTimeout(function() {
+                URL.revokeObjectURL(blobUrl);
+              }, 1500);
+            } catch (exportErr) {
+              alert('Could not generate automatic download. Please check browser permissions.');
+            }
+          };
+        }
+
+        var exitBtn = document.getElementById('ositoExitEditorBtn');
+        if (exitBtn) {
+          exitBtn.onclick = function() {
+            var url = new URL(window.location.href);
+            url.searchParams.delete('editor');
+            var cleanUrl = url.pathname + (url.search ? url.search : '') + url.hash;
+            window.location.href = cleanUrl;
+          };
+        }
+      } else {
+        if (toolbar) {
+          toolbar.style.display = 'none';
+        }
+        for (var k = 0; k < editables.length; k++) {
+          editables[k].contentEditable = 'false';
+        }
+      }
+    } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNoCodeEditor);
+  } else {
+    initNoCodeEditor();
+  }
 })();
 </script>
 </body>
