@@ -1987,19 +1987,23 @@
       return (Math.abs(cx) + w * 0.5 <= limW + 0.5) && (Math.abs(cy) + d * 0.5 <= limD + 0.5);
     }
 
-    function hasSupportCollision(cx, cy, w, d, ignoreIdx) {
-      if (!isWithinPlateBounds(cx, cy, w, d)) return true;
+    function hasPartCollisionOnly(cx, cy, w, d, ignoreIdx) {
       for (var i = 0; i < parts.length; i++) {
         if (i === ignoreIdx) continue;
         var other = parts[i];
-        var fp = getEffectiveFootprint(other.sx, other.sy, other.rz);
-        var minSepX = (w + fp.w) * 0.5 + SUPPORT_CLEARANCE_MM;
-        var minSepY = (d + fp.d) * 0.5 + SUPPORT_CLEARANCE_MM;
-        if (Math.abs(cx - other.px) < minSepX - 0.1 && Math.abs(cy - other.py) < minSepY - 0.1) {
+        var ofp = getEffectiveFootprint(other.sx, other.sy, other.rz);
+        var minDX = (w + ofp.w) * 0.5 + SUPPORT_CLEARANCE_MM;
+        var minDY = (d + ofp.d) * 0.5 + SUPPORT_CLEARANCE_MM;
+        if (Math.abs(cx - other.px) < minDX - 0.1 && Math.abs(cy - other.py) < minDY - 0.1) {
           return true;
         }
       }
       return false;
+    }
+
+    function hasSupportCollision(cx, cy, w, d, ignoreIdx) {
+      if (!isWithinPlateBounds(cx, cy, w, d)) return true;
+      return hasPartCollisionOnly(cx, cy, w, d, ignoreIdx);
     }
 
     function findSupportSafeSpawnSlot(sx, sy, rz, ignoreIdx) {
@@ -2011,27 +2015,33 @@
       if (!hasSupportCollision(0, 0, w, d, ignoreIdx)) {
         return { px: 0, py: 0, pz: 0 };
       }
-      // 1. Check cardinal & diagonal adjacent slots around every existing part (with exact 8mm support gap)
+      // Generate candidate positions adjacent to existing parts (+X, -X, +Y, -Y) plus spiral grid
       var candidates = [];
       for (var i = 0; i < parts.length; i++) {
         if (i === ignoreIdx) continue;
-        var ref = parts[i];
-        var rfp = getEffectiveFootprint(ref.sx, ref.sy, ref.rz);
-        var stepX = Math.ceil((w + rfp.w) * 0.5 + SUPPORT_CLEARANCE_MM);
-        var stepY = Math.ceil((d + rfp.d) * 0.5 + SUPPORT_CLEARANCE_MM);
-        candidates.push([ref.px + stepX, ref.py]);
-        candidates.push([ref.px - stepX, ref.py]);
-        candidates.push([ref.px, ref.py + stepY]);
-        candidates.push([ref.px, ref.py - stepY]);
-        candidates.push([ref.px + stepX, ref.py + stepY]);
-        candidates.push([ref.px - stepX, ref.py + stepY]);
-        candidates.push([ref.px + stepX, ref.py - stepY]);
-        candidates.push([ref.px - stepX, ref.py - stepY]);
+        var o = parts[i];
+        var ofp = getEffectiveFootprint(o.sx, o.sy, o.rz);
+        var stepX = Math.ceil((w + ofp.w) * 0.5 + SUPPORT_CLEARANCE_MM + 2);
+        var stepY = Math.ceil((d + ofp.d) * 0.5 + SUPPORT_CLEARANCE_MM + 2);
+        candidates.push([o.px + stepX, o.py]);
+        candidates.push([o.px - stepX, o.py]);
+        candidates.push([o.px, o.py + stepY]);
+        candidates.push([o.px, o.py - stepY]);
+        candidates.push([o.px + stepX, o.py + stepY]);
+        candidates.push([o.px - stepX, o.py + stepY]);
+        candidates.push([o.px + stepX, o.py - stepY]);
+        candidates.push([o.px - stepX, o.py - stepY]);
       }
-      // Sort candidates by distance to center (0,0) so parts cluster neatly near the plate center
+      for (var r = 24; r <= 120; r += 16) {
+        for (var a = 0; a < 16; a++) {
+          var ang = (a / 16) * Math.PI * 2;
+          candidates.push([Math.round(Math.cos(ang) * r), Math.round(Math.sin(ang) * r)]);
+        }
+      }
       candidates.sort(function(a, b) {
         return (a[0]*a[0] + a[1]*a[1]) - (b[0]*b[0] + b[1]*b[1]);
       });
+      // Priority 1: Non-colliding slot that fits inside 256x256mm while keeping existing parts stationary
       for (var c = 0; c < candidates.length; c++) {
         var cx = Math.round(candidates[c][0]);
         var cy = Math.round(candidates[c][1]);
@@ -2039,19 +2049,23 @@
           return { px: cx, py: cy, pz: 0 };
         }
       }
-      // 2. Fine outward spiral search across the 256x256mm build plate (step = 4mm)
-      for (var rad = 4; rad <= 124; rad += 4) {
-        for (var dx = -rad; dx <= rad; dx += 4) {
-          var tryPts = [[dx, -rad], [dx, rad], [-rad, dx], [rad, dx]];
-          for (var t = 0; t < tryPts.length; t++) {
-            var tx = tryPts[t][0], ty = tryPts[t][1];
-            if (!hasSupportCollision(tx, ty, w, d, ignoreIdx)) {
-              return { px: tx, py: ty, pz: 0 };
-            }
+      // Fallback: scan full plate grid
+      for (var gy = -112; gy <= 112; gy += 8) {
+        for (var gx = -112; gx <= 112; gx += 8) {
+          if (!hasSupportCollision(gx, gy, w, d, ignoreIdx)) {
+            return { px: gx, py: gy, pz: 0 };
           }
         }
       }
-      return { px: clampToPlateBounds(40, w), py: clampToPlateBounds(40, d), pz: 0 };
+      // Priority 2: Closest 100% non-overlapping adjacent slot (even if existing parts need to be re-centered by autoPackPlateSupportSafe)
+      for (var c2 = 0; c2 < candidates.length; c2++) {
+        var cx2 = Math.round(candidates[c2][0]);
+        var cy2 = Math.round(candidates[c2][1]);
+        if (!hasPartCollisionOnly(cx2, cy2, w, d, ignoreIdx)) {
+          return { px: cx2, py: cy2, pz: 0, needsRepack: true };
+        }
+      }
+      return { px: 160, py: 0, pz: 0, needsRepack: true };
     }
 
     function enforceBedAndSupportSafety(idx) {
@@ -2060,16 +2074,67 @@
       // Never allow object to sink below print bed (Z_min = 0.000mm)
       p.pz = Math.max(0, Number((p.pz || 0).toFixed(1)));
       var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
-      p.px = Math.round(clampToPlateBounds(p.px, fp.w));
-      p.py = Math.round(clampToPlateBounds(p.py, fp.d));
-      if (parts.length > 1 && hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
+      if (parts.length === 1) {
+        p.px = Math.round(clampToPlateBounds(p.px, fp.w));
+        p.py = Math.round(clampToPlateBounds(p.py, fp.d));
+        return;
+      }
+      // When multiple parts are present, NEVER clamp onto another part!
+      if (hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
         var safe = findSupportSafeSpawnSlot(p.sx, p.sy, p.rz, idx);
         p.px = safe.px;
         p.py = safe.py;
-        if (hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
+        if (safe.needsRepack || hasSupportCollision(p.px, p.py, fp.w, fp.d, idx)) {
           autoPackPlateSupportSafe();
         }
       }
+    }
+
+    function computeShelfPackLayout(footprints, targetSpan, transpose) {
+      var shelves = [];
+      var curShelf = { items: [], span: 0, thickness: 0 };
+      for (var i = 0; i < footprints.length; i++) {
+        var fp = footprints[i];
+        var itemSpan = transpose ? fp.d : fp.w;
+        var itemThick = transpose ? fp.w : fp.d;
+        var gap = curShelf.items.length > 0 ? SUPPORT_CLEARANCE_MM : 0;
+        if (curShelf.items.length > 0 && curShelf.span + gap + itemSpan > targetSpan) {
+          shelves.push(curShelf);
+          curShelf = { items: [], span: 0, thickness: 0 };
+          gap = 0;
+        }
+        curShelf.items.push({ idx: i, span: itemSpan, thick: itemThick });
+        curShelf.span += gap + itemSpan;
+        if (itemThick > curShelf.thickness) curShelf.thickness = itemThick;
+      }
+      if (curShelf.items.length > 0) shelves.push(curShelf);
+
+      var maxShelfSpan = 0;
+      var totalThick = 0;
+      for (var s = 0; s < shelves.length; s++) {
+        if (shelves[s].span > maxShelfSpan) maxShelfSpan = shelves[s].span;
+        totalThick += shelves[s].thickness + (s > 0 ? SUPPORT_CLEARANCE_MM : 0);
+      }
+
+      var coords = new Array(footprints.length);
+      var curOrtho = -totalThick * 0.5;
+      for (var s2 = 0; s2 < shelves.length; s2++) {
+        var sh = shelves[s2];
+        var curAlong = -sh.span * 0.5;
+        var orthoCenter = curOrtho + sh.thickness * 0.5;
+        for (var k = 0; k < sh.items.length; k++) {
+          var it = sh.items[k];
+          var alongCenter = curAlong + it.span * 0.5;
+          coords[it.idx] = transpose
+            ? { px: Math.round(orthoCenter), py: Math.round(alongCenter) }
+            : { px: Math.round(alongCenter), py: Math.round(orthoCenter) };
+          curAlong += it.span + SUPPORT_CLEARANCE_MM;
+        }
+        curOrtho += sh.thickness + SUPPORT_CLEARANCE_MM;
+      }
+      var spanX = transpose ? totalThick : maxShelfSpan;
+      var spanY = transpose ? maxShelfSpan : totalThick;
+      return { coords: coords, spanX: spanX, spanY: spanY, maxDim: Math.max(spanX, spanY) };
     }
 
     function autoPackPlateSupportSafe() {
@@ -2080,44 +2145,29 @@
         updateStats();
         return;
       }
-      // 2D Shelf Bin-Packing centered on the 256x256mm Bambu P2S Plate with SUPPORT_CLEARANCE_MM (8mm) gap
-      var totalArea = 0;
+      // Evaluate both X-major (horizontal rows) and Y-major (vertical columns) shelf packings across candidate widths
+      // to find the most compact 100% non-overlapping centered layout with >= 8.0mm support clearance!
       var footprints = parts.map(function(p) {
-        var fp = getEffectiveFootprint(p.sx, p.sy, p.rz);
-        var w = fp.w + SUPPORT_CLEARANCE_MM;
-        var d = fp.d + SUPPORT_CLEARANCE_MM;
-        totalArea += w * d;
-        return { w: w, d: d, rawW: fp.w, rawD: fp.d };
+        return getEffectiveFootprint(p.sx, p.sy, p.rz);
       });
-      var targetRowWidth = Math.min(248, Math.max(140, Math.ceil(Math.sqrt(totalArea) * 1.15)));
-      var rows = [];
-      var curRow = { items: [], width: 0, depth: 0 };
-      parts.forEach(function(p, i) {
-        var fp = footprints[i];
-        if (curRow.items.length > 0 && curRow.width + fp.w > targetRowWidth) {
-          rows.push(curRow);
-          curRow = { items: [], width: 0, depth: 0 };
-        }
-        curRow.items.push({ idx: i, w: fp.w, d: fp.d, rawW: fp.rawW, rawD: fp.rawD });
-        curRow.width += fp.w;
-        if (fp.d > curRow.depth) curRow.depth = fp.d;
-      });
-      if (curRow.items.length > 0) rows.push(curRow);
-
-      var totalDepth = rows.reduce(function(acc, r) { return acc + r.depth; }, 0);
-      var curY = -totalDepth * 0.5;
-      rows.forEach(function(r) {
-        var curX = -r.width * 0.5;
-        var rowCenterY = curY + r.depth * 0.5;
-        r.items.forEach(function(item) {
-          var part = parts[item.idx];
-          part.px = Math.round(clampToPlateBounds(curX + item.w * 0.5, item.rawW));
-          part.py = Math.round(clampToPlateBounds(rowCenterY, item.rawD));
-          part.pz = 0;
-          curX += item.w;
-        });
-        curY += r.depth;
-      });
+      var bestLayout = null;
+      var testSpans = [180, 210, 236, 248, 280, 320, 380, 460];
+      for (var ti = 0; ti < testSpans.length; ti++) {
+        var sp = testSpans[ti];
+        var layRow = computeShelfPackLayout(footprints, sp, false);
+        if (!bestLayout || layRow.maxDim < bestLayout.maxDim) bestLayout = layRow;
+        var layCol = computeShelfPackLayout(footprints, sp, true);
+        if (!bestLayout || layCol.maxDim < bestLayout.maxDim) bestLayout = layCol;
+      }
+      // Apply exact non-overlapping coordinates WITHOUT destructive clamping
+      for (var i = 0; i < parts.length; i++) {
+        parts[i].px = bestLayout.coords[i].px;
+        parts[i].py = bestLayout.coords[i].py;
+        parts[i].pz = 0;
+      }
+      if (bestLayout.maxDim > 240) {
+        cam.dist = Math.max(cam.dist, Math.min(640, Math.round(bestLayout.maxDim * 1.38)));
+      }
       syncUIFromSelected();
       renderPartList();
       updateStats();

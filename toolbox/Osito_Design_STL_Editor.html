@@ -1925,10 +1925,10 @@
       for (var i = 0; i < parts.length; i++) {
         if (i === ignoreIdx) continue;
         var other = parts[i];
-        var fp = getEffectiveFootprint(other.sx, other.sy, other.rz);
-        var minSepX = (w + fp.w) * 0.5 + SUPPORT_CLEARANCE_MM;
-        var minSepY = (d + fp.d) * 0.5 + SUPPORT_CLEARANCE_MM;
-        if (Math.abs(cx - other.px) < minSepX - 0.1 && Math.abs(cy - other.py) < minSepY - 0.1) {
+        var ofp = getEffectiveFootprint(other.sx, other.sy, other.rz);
+        var minDX = (w + ofp.w) * 0.5 + SUPPORT_CLEARANCE_MM;
+        var minDY = (d + ofp.d) * 0.5 + SUPPORT_CLEARANCE_MM;
+        if (Math.abs(cx - other.px) < minDX - 0.1 && Math.abs(cy - other.py) < minDY - 0.1) {
           return true;
         }
       }
@@ -1949,24 +1949,29 @@
       if (!hasSupportCollision(0, 0, w, d, ignoreIdx)) {
         return { px: 0, py: 0, pz: 0 };
       }
-      // 1. Check cardinal & diagonal adjacent slots around every existing part (with exact 8mm support gap)
+      // Generate candidate positions adjacent to existing parts (+X, -X, +Y, -Y) plus spiral grid
       var candidates = [];
       for (var i = 0; i < parts.length; i++) {
         if (i === ignoreIdx) continue;
-        var ref = parts[i];
-        var rfp = getEffectiveFootprint(ref.sx, ref.sy, ref.rz);
-        var stepX = Math.ceil((w + rfp.w) * 0.5 + SUPPORT_CLEARANCE_MM);
-        var stepY = Math.ceil((d + rfp.d) * 0.5 + SUPPORT_CLEARANCE_MM);
-        candidates.push([ref.px + stepX, ref.py]);
-        candidates.push([ref.px - stepX, ref.py]);
-        candidates.push([ref.px, ref.py + stepY]);
-        candidates.push([ref.px, ref.py - stepY]);
-        candidates.push([ref.px + stepX, ref.py + stepY]);
-        candidates.push([ref.px - stepX, ref.py + stepY]);
-        candidates.push([ref.px + stepX, ref.py - stepY]);
-        candidates.push([ref.px - stepX, ref.py - stepY]);
+        var o = parts[i];
+        var ofp = getEffectiveFootprint(o.sx, o.sy, o.rz);
+        var stepX = Math.ceil((w + ofp.w) * 0.5 + SUPPORT_CLEARANCE_MM + 2);
+        var stepY = Math.ceil((d + ofp.d) * 0.5 + SUPPORT_CLEARANCE_MM + 2);
+        candidates.push([o.px + stepX, o.py]);
+        candidates.push([o.px - stepX, o.py]);
+        candidates.push([o.px, o.py + stepY]);
+        candidates.push([o.px, o.py - stepY]);
+        candidates.push([o.px + stepX, o.py + stepY]);
+        candidates.push([o.px - stepX, o.py + stepY]);
+        candidates.push([o.px + stepX, o.py - stepY]);
+        candidates.push([o.px - stepX, o.py - stepY]);
       }
-      // Sort candidates by distance to center (0,0) so parts cluster neatly near the plate center
+      for (var r = 24; r <= 120; r += 16) {
+        for (var a = 0; a < 16; a++) {
+          var ang = (a / 16) * Math.PI * 2;
+          candidates.push([Math.round(Math.cos(ang) * r), Math.round(Math.sin(ang) * r)]);
+        }
+      }
       candidates.sort(function(a, b) {
         return (a[0]*a[0] + a[1]*a[1]) - (b[0]*b[0] + b[1]*b[1]);
       });
@@ -1978,15 +1983,11 @@
           return { px: cx, py: cy, pz: 0 };
         }
       }
-      // 2. Fine outward spiral search across the 256x256mm build plate (step = 4mm)
-      for (var rad = 4; rad <= 124; rad += 4) {
-        for (var dx = -rad; dx <= rad; dx += 4) {
-          var tryPts = [[dx, -rad], [dx, rad], [-rad, dx], [rad, dx]];
-          for (var t = 0; t < tryPts.length; t++) {
-            var tx = tryPts[t][0], ty = tryPts[t][1];
-            if (!hasSupportCollision(tx, ty, w, d, ignoreIdx)) {
-              return { px: tx, py: ty, pz: 0 };
-            }
+      // Fallback: scan full plate grid
+      for (var gy = -112; gy <= 112; gy += 8) {
+        for (var gx = -112; gx <= 112; gx += 8) {
+          if (!hasSupportCollision(gx, gy, w, d, ignoreIdx)) {
+            return { px: gx, py: gy, pz: 0 };
           }
         }
       }
